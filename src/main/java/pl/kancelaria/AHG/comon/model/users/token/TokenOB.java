@@ -1,12 +1,9 @@
-package pl.kancelaria.AHG.comon.model.user.token;
+package pl.kancelaria.AHG.comon.model.users.token;
 
 import pl.kancelaria.AHG.comon.model.ModelConstants;
-import pl.kancelaria.AHG.comon.model.user.user.UserOB;
+import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Michal
@@ -22,8 +19,7 @@ public class TokenOB {
     @Column(name = ModelConstants.KOLUMNA_token)
     private String token;
 
-//    todo  - dodać powiązanie z tabelą UserOB >>
-    @Column(name = ModelConstants.KOLUMNA_fk_uzytkownik)
-    private String fk_uzytkownik;
+    @OneToOne(fetch = FetchType.LAZY)
+    private UserOB fk_uzytkownik;
 
 }

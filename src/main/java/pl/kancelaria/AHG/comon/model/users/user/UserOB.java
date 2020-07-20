@@ -1,7 +1,8 @@
-package pl.kancelaria.AHG.comon.model.user.user;
+package pl.kancelaria.AHG.comon.model.users.user;
 
 import com.sun.istack.internal.NotNull;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
+import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -41,10 +42,6 @@ public class UserOB {
     @Column(name = ModelConstants.KOLUMNA_telefon,length = 50)
     private String telefon;
 
-//    todo -  zrobić tokenOB i zrobić powiązanie z tabela token
-    @Column(name = ModelConstants.KOLUMNA_fk_token)
-    private String fk_token;
-
     @Column (name = ModelConstants.KOLUMNA_plec, length = 9)
     @Enumerated(value = EnumType.STRING)
     private UserSexEnum plec;
@@ -60,6 +57,10 @@ public class UserOB {
     @NotNull
     @Column (name = ModelConstants.KOLUMNA_data_rejestracji, nullable = false)
     private Date dataRejestracji;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private TokenOB fk_token;
+
 
 
 //    static public UserOB utworz(){

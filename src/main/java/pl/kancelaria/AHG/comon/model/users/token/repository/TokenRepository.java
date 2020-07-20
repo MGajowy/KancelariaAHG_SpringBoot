@@ -1,7 +1,7 @@
-package pl.kancelaria.AHG.comon.model.user.token.repository;
+package pl.kancelaria.AHG.comon.model.users.token.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.kancelaria.AHG.comon.model.user.token.TokenOB;
+import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 
 /**
  * @author Michal

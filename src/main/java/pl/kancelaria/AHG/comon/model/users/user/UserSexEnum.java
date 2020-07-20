@@ -1,4 +1,4 @@
-package pl.kancelaria.AHG.comon.model.user.user;
+package pl.kancelaria.AHG.comon.model.users.user;
 
 /**
  * @author Michal
