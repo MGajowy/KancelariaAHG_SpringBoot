@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.comon.model.users.token;
 
+import lombok.Data;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_Token)
+@Data
 public class TokenOB {
     @Id
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)

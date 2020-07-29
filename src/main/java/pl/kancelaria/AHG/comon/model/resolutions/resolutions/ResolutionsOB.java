@@ -1,11 +1,11 @@
 package pl.kancelaria.AHG.comon.model.resolutions.resolutions;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 
-import javax.annotation.sql.DataSourceDefinition;
 import javax.persistence.*;
 
 /**
@@ -14,6 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UCHWALY, name = ModelConstants.TABELA_uchwaly)
+@Data
 public class ResolutionsOB {
     @Id
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)

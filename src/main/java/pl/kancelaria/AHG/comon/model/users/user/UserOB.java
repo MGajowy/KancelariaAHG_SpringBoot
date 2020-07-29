@@ -1,6 +1,7 @@
 package pl.kancelaria.AHG.comon.model.users.user;
 
 import com.sun.istack.internal.NotNull;
+import lombok.Data;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 
@@ -11,8 +12,10 @@ import java.util.Date;
  * @author Michal
  * @created 10/07/2020
  */
+
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_uzytkownik)
+@Data
 public class UserOB {
 
     @Id
@@ -61,14 +64,12 @@ public class UserOB {
     @OneToOne(fetch = FetchType.LAZY)
     private TokenOB fk_token;
 
-
-
-//    static public UserOB utworz(){
-//        UserOB userOB = new UserOB();
-//        userOB.setStan(UserStateEnum.NIEAKTYWNY);
-//        userOB.setDataRejestracji(new Date());
-//        return userOB;
-//    }
+        static public UserOB utworz(){
+        UserOB userOB = new UserOB();
+        userOB.setStan(UserStateEnum.NIEAKTYWNY);
+        userOB.setDataRejestracji(new Date());
+        return userOB;
+    }
 
 
 }

@@ -1,13 +1,11 @@
 package pl.kancelaria.AHG.comon.model.resolutions.categories;
 
 import com.sun.istack.NotNull;
-import com.sun.javafx.beans.IDProperty;
+import lombok.Data;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
-import pl.kancelaria.AHG.comon.model.resolutions.resolutions.ResolutionsOB;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author Michal
@@ -15,6 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UCHWALY, name = ModelConstants.TABELA_kategorie)
+@Data
 public class CategoriesOB {
 
     @Id
