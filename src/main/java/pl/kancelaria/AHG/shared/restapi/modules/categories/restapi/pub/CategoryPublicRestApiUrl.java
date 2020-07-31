@@ -6,5 +6,9 @@ package pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.pub;
  */
 public class CategoryPublicRestApiUrl {
     public static final String KATEGORIE = "/kategorie";
+    public static final String WSZYSTKIE_KATEGORIE = "/wszystkieKategorie";
+    public static final String TEST = "/1";
+
+
 
 }

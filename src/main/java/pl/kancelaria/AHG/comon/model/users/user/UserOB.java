@@ -6,6 +6,7 @@ import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -50,7 +51,7 @@ public class UserOB {
     private UserSexEnum plec;
 
     @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
-    private String zdjecie_profilowe;
+    private Byte[] zdjecie_profilowe;
 
     @NotNull
     @Column(name = ModelConstants.KOLUMNA_stan, length = 32, nullable = false)
@@ -59,17 +60,17 @@ public class UserOB {
 
     @NotNull
     @Column (name = ModelConstants.KOLUMNA_data_rejestracji, nullable = false)
-    private Date dataRejestracji;
+    private LocalDate dataRejestracji;
 
     @OneToOne(fetch = FetchType.LAZY)
     private TokenOB fk_token;
 
-        static public UserOB utworz(){
-        UserOB userOB = new UserOB();
-        userOB.setStan(UserStateEnum.NIEAKTYWNY);
-        userOB.setDataRejestracji(new Date());
-        return userOB;
-    }
+//        static public UserOB utworz(){
+//        UserOB userOB = new UserOB();
+//        userOB.setStan(UserStateEnum.NIEAKTYWNY);
+//        userOB.setDataRejestracji(new LocalDate());
+//        return userOB;
+//    }
 
 
 }
