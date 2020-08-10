@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
+import pl.kancelaria.AHG.shared.restapi.RestApiUrlStale;
 
 
 import javax.ws.rs.GET;
@@ -15,8 +16,8 @@ import javax.ws.rs.Path;
  * @author Michal
  * @created 29/07/2020
  */
-@Path(value = CategoryPublicRestApiUrl.KATEGORIE)
-@RequestMapping(value = CategoryPublicRestApiUrl.KATEGORIE)
+@Path(value = CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
+@RequestMapping(value =CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
 public interface CategoryPublicRestApi {
 
     @GET

@@ -19,6 +19,9 @@ import java.util.Date;
 @Data
 public class UserOB {
 
+    public UserOB() {
+    }
+
     @Id
     @Column (name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
@@ -50,17 +53,17 @@ public class UserOB {
     @Enumerated(value = EnumType.STRING)
     private UserSexEnum plec;
 
-    @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
-    private Byte[] zdjecie_profilowe;
+//    @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
+//    private Byte[] zdjecie_profilowe;
 
     @NotNull
     @Column(name = ModelConstants.KOLUMNA_stan, length = 32, nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserStateEnum stan;
 
-    @NotNull
-    @Column (name = ModelConstants.KOLUMNA_data_rejestracji, nullable = false)
-    private LocalDate dataRejestracji;
+//    @NotNull
+//    @Column (name = ModelConstants.KOLUMNA_data_rejestracji, nullable = false)
+//    private LocalDate dataRejestracji;
 
     @OneToOne(fetch = FetchType.LAZY)
     private TokenOB fk_token;
