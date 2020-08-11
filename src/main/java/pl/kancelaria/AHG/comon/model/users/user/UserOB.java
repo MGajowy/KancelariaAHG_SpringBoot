@@ -6,8 +6,6 @@ import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * @author Michal
