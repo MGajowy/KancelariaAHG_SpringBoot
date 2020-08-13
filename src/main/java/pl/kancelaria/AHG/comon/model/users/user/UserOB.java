@@ -1,6 +1,6 @@
 package pl.kancelaria.AHG.comon.model.users.user;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.Nullable;
 import lombok.Data;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
@@ -39,7 +39,7 @@ public class UserOB {
     @Column (name = ModelConstants.KOLUMNA_czy_zaakceptowano_regulamin)
     private Boolean czy_zaakceptowano_regulamin;
 
-    @NotNull
+    @Nullable
     @Column(name = ModelConstants.KOLUMNA_typ_konta, length = 32, nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserAccountType typ_konta;
@@ -54,7 +54,7 @@ public class UserOB {
 //    @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
 //    private Byte[] zdjecie_profilowe;
 
-    @NotNull
+    @Nullable
     @Column(name = ModelConstants.KOLUMNA_stan, length = 32, nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserStateEnum stan;
