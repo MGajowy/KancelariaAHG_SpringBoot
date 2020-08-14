@@ -19,5 +19,6 @@ public interface UserSecuredRestApi {
 
     @GET
     @GetMapping(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
+    @Path(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
     UserListDTO pobierzListeUzytkownikowDto();
 }

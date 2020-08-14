@@ -22,10 +22,12 @@ public interface CategoryPublicRestApi {
 
     @GET
     @GetMapping(CategoryPublicRestApiUrl.TEST)
+    @Path(CategoryPublicRestApiUrl.TEST)
     String getStr();
 
     @GET
     @GetMapping(CategoryPublicRestApiUrl.WSZYSTKIE_KATEGORIE)
+    @Path(CategoryPublicRestApiUrl.WSZYSTKIE_KATEGORIE)
     CategoryListDTO pobierzListCategoryDto();
 
 }
