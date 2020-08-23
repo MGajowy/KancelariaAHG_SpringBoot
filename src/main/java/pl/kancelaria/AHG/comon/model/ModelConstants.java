@@ -18,6 +18,7 @@ public class ModelConstants {
     public static final String KOLUMNA_imie = "imie";
     public static final String KOLUMNA_nazwisko = "nazwisko";
     public static final String KOLUMNA_login = "login";
+    public static final String KOLUMNA_haslo = "haslo";
     public static final String KOLUMNA_email = "email";
     public static final String KOLUMNA_czy_zaakceptowano_regulamin = "czy_zaakceptowano_regulamin";
     public static final String KOLUMNA_typ_konta = "typ_konta";

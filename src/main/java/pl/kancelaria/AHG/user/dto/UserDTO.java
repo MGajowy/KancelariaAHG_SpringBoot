@@ -17,11 +17,13 @@ public class UserDTO {
     private String imie;
     private String nazwisko;
     private String login;
-    private UserAccountType typ_konta;
+    private  String haslo;
+    private UserStateEnum stan;
+    //private UserAccountType typ_konta;
     private String email;
-    private Boolean czy_zaakceptowano_regulamin;
+    //private Boolean czy_zaakceptowano_regulamin;
     private String telefon;
     private UserSexEnum plec;
     //private Byte[] zdjecie_profilowe;
-    private LocalDate dataRejestracji;
+    //private LocalDate dataRejestracji;
 }

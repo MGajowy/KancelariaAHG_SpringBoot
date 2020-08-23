@@ -10,10 +10,11 @@ import org.springframework.web.filter.CorsFilter;
  * @author Michal
  * @created 05/08/2020
  */
-@Configuration
+// Klasa tymczasowa do usuniécia !
+//@Configuration
 public class RestConfig {
 
-    @Bean
+    //@Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();

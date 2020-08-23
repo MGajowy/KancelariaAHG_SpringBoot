@@ -1,6 +1,7 @@
 package pl.kancelaria.AHG.comon.model.users.token;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 
@@ -14,7 +15,9 @@ import javax.persistence.*;
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_Token)
 @Data
 public class TokenOB {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 
@@ -23,5 +26,9 @@ public class TokenOB {
 
     @OneToOne(fetch = FetchType.LAZY)
     private UserOB fk_uzytkownik;
+
+    public TokenOB(UserOB user, String token) {
+        this.fk_uzytkownik = user;
+        this.token = token;}
 
 }
