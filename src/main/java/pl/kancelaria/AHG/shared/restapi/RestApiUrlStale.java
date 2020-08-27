@@ -5,13 +5,14 @@ package pl.kancelaria.AHG.shared.restapi;
  * @created 09/08/2020
  */
 public class RestApiUrlStale {
-//     dostępy
+    public static final String REST_PATH = "/rest";
+//     dostępy   rest/ ...../
     public static final String REST_PATH_SECURED = "/secured";
     public static final String REST_PATH_PUBLIC = "/pub";
 
-//   sciezki modululow
-    public static final String UZYTKOWNICY = "/uzytkownicy";
-    public static final String KATEGORIE = "/kategorie";
-    public static final String UCHWALY = "/uchwaly";
+//   sciezki modululow  rest/......
+    public static final String UZYTKOWNICY = REST_PATH + "/uzytkownicy";
+    public static final String KATEGORIE = REST_PATH + "/kategorie";
+    public static final String UCHWALY = REST_PATH + "/uchwaly";
 
 }
