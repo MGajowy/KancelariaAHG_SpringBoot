@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 @Service
 public class UserService {
-    private final  UserRepository userRepository;
+    private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSenderService;
@@ -33,16 +33,16 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
         this.mailSenderService = mailSenderService;
 
-        UserOB userOB = new UserOB();
-        userOB.setImie("Adam");
-        userOB.setEmail("mich@wp.pl");
-        userOB.setHaslo(passwordEncoder.encode("Adam123"));
-        userOB.setLogin("GAJOS");
-        userOB.setNazwisko("Kowalski");
-        userOB.setStan(UserStateEnum.NIEAKTYWNY);
-        userOB.setPlec(UserSexEnum.MEZCZYZNA);
-        userOB.setTelefon("543434343");
-        userRepository.save(userOB);
+//        UserOB userOB = new UserOB();
+//        userOB.setImie("Adam");
+//        userOB.setEmail("mich@wp.pl");
+//        userOB.setPassword(passwordEncoder.encode("Adam123"));
+//        userOB.setUserName("michal");
+//        userOB.setNazwisko("Kowalski");
+//        userOB.setStan(UserStateEnum.NIEAKTYWNY);
+//        userOB.setPlec(UserSexEnum.MEZCZYZNA);
+//        userOB.setTelefon("543434343");
+//        this.userRepository.save(userOB);
     }
 
     public String utworzToken(String token){
@@ -51,7 +51,7 @@ public class UserService {
     }
 
     public void utworzNowegoUzytkownika(UserOB user, HttpServletRequest request) {
-        user.setHaslo(passwordEncoder.encode(user.getHaslo()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         String token = "";
         utworzToken(token);
@@ -75,11 +75,11 @@ public class UserService {
 //            userOB.setStan(UserStateEnum.AKTYWNY);
 //            userRepository.save(userOB);
         }
-
+//todo do  dokonczenia
     public void rejestracjaNowegoUzytkownika(RegistrationDTO registrationDTO) {
         RegistrationDTO response = new RegistrationDTO();
         UserOB userOB = new UserOB();
-        userOB.setHaslo(passwordEncoder.encode(userOB.getHaslo()));
+        userOB.setPassword(passwordEncoder.encode(userOB.getPassword()));
         BeanUtils.copyProperties(response, userOB);
         userRepository.save(userOB);
         //return response;

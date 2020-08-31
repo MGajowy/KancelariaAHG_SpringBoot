@@ -7,4 +7,5 @@ import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 @Repository
 public interface UserRepository extends JpaRepository<UserOB, Long> {
 
+    UserOB findAllByUserName(String username);
 }

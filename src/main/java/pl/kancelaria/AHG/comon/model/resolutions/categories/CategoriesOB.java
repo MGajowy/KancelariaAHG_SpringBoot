@@ -17,6 +17,7 @@ import javax.persistence.*;
 public class CategoriesOB {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 

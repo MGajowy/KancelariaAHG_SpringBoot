@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class TokenOB {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 

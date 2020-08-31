@@ -13,8 +13,8 @@ public class RegistrationDTO {
 
         private String imie;
         private String nazwisko;
-        private String login;
-        private  String haslo;
+        private String username;
+        private  String password;
         private UserStateEnum stan;
         //private UserAccountType typ_konta;
         private String email;

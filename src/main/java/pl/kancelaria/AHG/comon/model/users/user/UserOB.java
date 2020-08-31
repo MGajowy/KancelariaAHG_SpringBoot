@@ -2,11 +2,16 @@ package pl.kancelaria.AHG.comon.model.users.user;
 
 import org.jetbrains.annotations.Nullable;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author Michal
@@ -16,13 +21,13 @@ import java.time.LocalDate;
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_uzytkownik)
 @Data
-public class UserOB {
+public class UserOB implements UserDetails {
 
     public UserOB() {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column (name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 
@@ -32,11 +37,11 @@ public class UserOB {
     @Column(name = ModelConstants.KOLUMNA_nazwisko, length = 250)
     private String nazwisko;
 
-    @Column(name = ModelConstants.KOLUMNA_login, length = 255)
-    private String login;
+    @Column(name = ModelConstants.KOLUMNA_username, length = 255)
+    private String userName;
 
-    @Column(name = ModelConstants.KOLUMNA_haslo, length = 255)
-    private String haslo;
+    @Column(name = ModelConstants.KOLUMNA_password, length = 255)
+    private String password;
 
 
     @Column(name = ModelConstants.KOLUMNA_email)
@@ -64,6 +69,37 @@ public class UserOB {
     @Column(name = ModelConstants.KOLUMNA_stan, length = 32, nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserStateEnum stan;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 
 //    @Nullable
 //    @Column (name = ModelConstants.KOLUMNA_data_rejestracji, nullable = false)
