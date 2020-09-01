@@ -6,6 +6,8 @@ package pl.kancelaria.AHG.shared.restapi;
  */
 public class RestApiUrlStale {
     public static final String REST_PATH = "/rest";
+    public static final String LOGIN = "/authenticate";
+    public static final String REJESTRACJA = "/register";
 //     dostępy   rest/ ...../
     public static final String REST_PATH_SECURED = "/secured";
     public static final String REST_PATH_PUBLIC = "/pub";

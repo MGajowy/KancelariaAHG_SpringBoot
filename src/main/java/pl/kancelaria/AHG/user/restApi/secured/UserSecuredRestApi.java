@@ -3,6 +3,7 @@ package pl.kancelaria.AHG.user.restApi.secured;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
+import pl.kancelaria.AHG.user.dto.LoginDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.dto.UserListDTO;
@@ -23,8 +24,8 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     private final AddUserService addUserService;
     private final DeleteUserService deleteUserService;
     private final ModifyUserService modifyUserService;
-    @Autowired
 
+    @Autowired
     public UserSecuredRestApi(UserListService userListService, UserService userService, AddUserService addUserService, DeleteUserService deleteUserService, ModifyUserService modifyUserService) {
         this.userListService = userListService;
         this.userService = userService;
@@ -32,7 +33,6 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
         this.deleteUserService = deleteUserService;
         this.modifyUserService = modifyUserService;
     }
-
 
     @Override
     public UserListDTO pobierzListeUzytkownikowDto() {
@@ -53,16 +53,5 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     @Override
     public UserDTO usunUzytkownika() {
         return null;
-    }
-
-    @Override
-    public String login() {
-        return null;
-    }
-
-    @Override
-    public Response rejestracjaNowegoUzytkownika(RegistrationDTO registrationDTO) {
-    userService.rejestracjaNowegoUzytkownika(registrationDTO);
-    return Response.status(200,"OK").build();
     }
 }

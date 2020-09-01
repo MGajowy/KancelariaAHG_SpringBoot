@@ -75,7 +75,7 @@ public class UserService {
 //            userOB.setStan(UserStateEnum.AKTYWNY);
 //            userRepository.save(userOB);
         }
-//todo do  dokonczenia
+        //todo do  dokonczenia -  aktulna rejestracja w AuthSerwices
     public void rejestracjaNowegoUzytkownika(RegistrationDTO registrationDTO) {
         RegistrationDTO response = new RegistrationDTO();
         UserOB userOB = new UserOB();
@@ -84,6 +84,7 @@ public class UserService {
         userRepository.save(userOB);
         //return response;
     }
+
 }
 
 

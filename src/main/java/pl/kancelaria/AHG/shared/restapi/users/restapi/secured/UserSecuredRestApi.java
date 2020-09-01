@@ -3,6 +3,7 @@ package pl.kancelaria.AHG.shared.restapi.users.restapi.secured;
 //import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
+import pl.kancelaria.AHG.user.dto.LoginDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.dto.UserListDTO;
@@ -43,15 +44,6 @@ public interface UserSecuredRestApi {
     @Path(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA)
     UserDTO usunUzytkownika();
 
-    @GET
-    @GetMapping(UserSecuredRestApiUrl.LOGIN)
-    @Path(UserSecuredRestApiUrl.LOGIN)
-    String login();
-
-    @POST
-    @PostMapping
-    @Path(UserSecuredRestApiUrl.REJESTRACJA)
-    Response rejestracjaNowegoUzytkownika(@RequestBody RegistrationDTO registrationDTO);
 
 
 
