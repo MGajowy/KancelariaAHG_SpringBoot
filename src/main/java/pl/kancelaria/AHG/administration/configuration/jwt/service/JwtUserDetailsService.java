@@ -2,7 +2,6 @@ package pl.kancelaria.AHG.administration.configuration.jwt.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,8 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
+import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
-import pl.kancelaria.AHG.user.dto.LoginDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 
 /**
@@ -39,19 +38,14 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 new ArrayList<>());
-//        if ("javainuse".equals(username)) {
-//            return new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
-//                    new ArrayList<>());
-//        } else {
-//            throw new UsernameNotFoundException("User not found with username: " + username);
-//        }
     }
 
     public UserOB save(RegistrationDTO user) {
         UserOB newUser = new UserOB();
         newUser.setImie(user.getImie());
         newUser.setNazwisko(user.getNazwisko());
-        newUser.setStan(user.getStan());
+        newUser.setStan(UserStateEnum.NIEAKTYWNY);
+        //newUser.setStan(user.getStan());
         newUser.setUserName(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());

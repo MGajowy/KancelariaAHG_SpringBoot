@@ -1,24 +1,19 @@
 package pl.kancelaria.AHG.user.dto;
 
 import lombok.Data;
-import pl.kancelaria.AHG.comon.model.users.user.UserAccountType;
 import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 /**
  * @author Michal
- * @created 27/07/2020
+ * @created 09/09/2020
  */
 @Data
-public class UserDTO {
-    private Long id;
+public class AddUserDTO {
     private String imie;
     private String nazwisko;
     private String username;
-    private  String password;
+    //private  String password;
     private UserStateEnum stan;
     //private UserAccountType typ_konta;
     private String email;

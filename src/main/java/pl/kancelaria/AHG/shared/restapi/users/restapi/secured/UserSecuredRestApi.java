@@ -1,19 +1,15 @@
 package pl.kancelaria.AHG.shared.restapi.users.restapi.secured;
 
 //import org.springframework.security.access.annotation.Secured;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
-import pl.kancelaria.AHG.user.dto.LoginDTO;
-import pl.kancelaria.AHG.user.dto.RegistrationDTO;
-import pl.kancelaria.AHG.user.dto.UserDTO;
-import pl.kancelaria.AHG.user.dto.UserListDTO;
+import pl.kancelaria.AHG.user.dto.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
 
 /**
  * @author Michal
@@ -32,7 +28,7 @@ public interface UserSecuredRestApi {
     @POST
     @PostMapping(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)
     @Path(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)
-    Response utworzUzytkownika(UserOB userOB, HttpServletRequest request);
+    ResponseEntity<HttpStatus> utworzUzytkownika(@RequestBody AddUserDTO addUserDTO);
 
     @POST
     @PostMapping(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA)
@@ -40,9 +36,9 @@ public interface UserSecuredRestApi {
     UserDTO modyfikujUzytkownika();
 
     @DELETE
-    @DeleteMapping(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA)
+    @DeleteMapping(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA)
-    UserDTO usunUzytkownika();
+    ResponseEntity<HttpStatus> usunUzytkownika(long id);
 
 
 

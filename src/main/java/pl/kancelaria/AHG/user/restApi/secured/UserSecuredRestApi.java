@@ -1,16 +1,12 @@
 package pl.kancelaria.AHG.user.restApi.secured;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
-import pl.kancelaria.AHG.user.dto.LoginDTO;
-import pl.kancelaria.AHG.user.dto.RegistrationDTO;
-import pl.kancelaria.AHG.user.dto.UserDTO;
-import pl.kancelaria.AHG.user.dto.UserListDTO;
+import pl.kancelaria.AHG.user.dto.*;
 import pl.kancelaria.AHG.user.services.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Response;
 
 /**
  * @author Michal
@@ -24,6 +20,7 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     private final AddUserService addUserService;
     private final DeleteUserService deleteUserService;
     private final ModifyUserService modifyUserService;
+
 
     @Autowired
     public UserSecuredRestApi(UserListService userListService, UserService userService, AddUserService addUserService, DeleteUserService deleteUserService, ModifyUserService modifyUserService) {
@@ -40,9 +37,9 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     }
 
     @Override
-    public Response utworzUzytkownika(UserOB user, HttpServletRequest request) {
-        userService.utworzNowegoUzytkownika(user, request);
-        return null;
+    public ResponseEntity<HttpStatus> utworzUzytkownika(AddUserDTO addUserDTO) {
+        userService.utworzNowegoUzytkownika(addUserDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
@@ -51,7 +48,8 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     }
 
     @Override
-    public UserDTO usunUzytkownika() {
-        return null;
+    public ResponseEntity<HttpStatus> usunUzytkownika(@PathVariable("id") long id) {
+        deleteUserService.usunUzytkownika(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -3,17 +3,15 @@ package pl.kancelaria.AHG.user.services;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 import pl.kancelaria.AHG.comon.model.users.token.repository.TokenRepository;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
-import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.comon.service.MailSenderService;
+import pl.kancelaria.AHG.user.dto.AddUserDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
+import pl.kancelaria.AHG.user.dto.UserDTO;
 
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 /**
@@ -26,8 +24,10 @@ public class UserService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSenderService;
+    private final PasswordEncoder bcryptEncoder;
 
-    public UserService(UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService) {
+
+    public UserService(UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder) {
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.passwordEncoder = passwordEncoder;
@@ -43,32 +43,44 @@ public class UserService {
 //        userOB.setPlec(UserSexEnum.MEZCZYZNA);
 //        userOB.setTelefon("543434343");
 //        this.userRepository.save(userOB);
+        this.bcryptEncoder = bcryptEncoder;
     }
 
     public String utworzToken(String token){
        token = UUID.randomUUID().toString();
         return token;
     }
-
-    public void utworzNowegoUzytkownika(UserOB user, HttpServletRequest request) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        String token = "";
-        utworzToken(token);
-        TokenOB tokenOB = new TokenOB(user, token);
-        tokenRepository.save(tokenOB);
-
-        String url = "http://" + request.getServerName()
-                + ":"
-                + request.getServerPort()
-                + request.getContextPath()
-                + "/verify-token?token=" + token;
-
-        try {
-            mailSenderService.sendMail(user.getEmail(), "Weryfikacja tokena", url, false);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+//    private  void wyslijEmailAktywacyjny (UserDTO user){
+//        String token = "";
+//        utworzToken(token);
+//        TokenOB tokenOB = new TokenOB(user, token);
+//        tokenRepository.save(tokenOB);
+//
+//        String url = "http://" + request.getServerName()
+//                + ":"
+//                + request.getServerPort()
+//                + request.getContextPath()
+//                + "/verify-token?token=" + token;
+//
+//        try {
+//            mailSenderService.sendMail(user.getEmail(), "Weryfikacja tokena", url, false);
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public boolean utworzNowegoUzytkownika(AddUserDTO user) {
+        UserOB userOB = new UserOB();
+        userOB.setImie(user.getImie());
+        userOB.setNazwisko(user.getNazwisko());
+        userOB.setUserName(user.getUsername());
+        //userOB.setPassword(bcryptEncoder.encode(user.getPassword()));
+        userOB.setEmail(user.getEmail());
+        userOB.setTelefon(user.getTelefon());
+        userOB.setPlec(user.getPlec());
+        //BeanUtils.copyProperties(user, userOB);
+        userOB.setStan(UserStateEnum.NIEAKTYWNY);
+    this.userRepository.save(userOB);
+    return true ;
     }
         public void veryfikacjaTokena (String token) {
             //UserOB userOB = tokenRepository.findByValue(token).getFk_uzytkownik();
