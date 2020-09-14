@@ -1,8 +1,10 @@
 package pl.kancelaria.AHG.user.services;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 import pl.kancelaria.AHG.comon.model.users.token.repository.TokenRepository;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
@@ -12,6 +14,8 @@ import pl.kancelaria.AHG.user.dto.AddUserDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 /**
@@ -24,7 +28,6 @@ public class UserService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSenderService;
-    private final PasswordEncoder bcryptEncoder;
 
 
     public UserService(UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder) {
@@ -32,69 +35,57 @@ public class UserService {
         this.tokenRepository = tokenRepository;
         this.passwordEncoder = passwordEncoder;
         this.mailSenderService = mailSenderService;
-
-//        UserOB userOB = new UserOB();
-//        userOB.setImie("Adam");
-//        userOB.setEmail("mich@wp.pl");
-//        userOB.setPassword(passwordEncoder.encode("Adam123"));
-//        userOB.setUserName("michal");
-//        userOB.setNazwisko("Kowalski");
-//        userOB.setStan(UserStateEnum.NIEAKTYWNY);
-//        userOB.setPlec(UserSexEnum.MEZCZYZNA);
-//        userOB.setTelefon("543434343");
-//        this.userRepository.save(userOB);
-        this.bcryptEncoder = bcryptEncoder;
     }
 
-    public String utworzToken(String token){
-       token = UUID.randomUUID().toString();
+    public String utworzToken(){
+        String token = "";
+        token = UUID.randomUUID().toString();
         return token;
     }
-//    private  void wyslijEmailAktywacyjny (UserDTO user){
-//        String token = "";
-//        utworzToken(token);
-//        TokenOB tokenOB = new TokenOB(user, token);
-//        tokenRepository.save(tokenOB);
-//
-//        String url = "http://" + request.getServerName()
-//                + ":"
-//                + request.getServerPort()
-//                + request.getContextPath()
-//                + "/verify-token?token=" + token;
-//
-//        try {
-//            mailSenderService.sendMail(user.getEmail(), "Weryfikacja tokena", url, false);
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-//    }
-    public boolean utworzNowegoUzytkownika(AddUserDTO user) {
+    private void wyslijEmailAktywacyjny (UserOB user, HttpServletRequest request){
+        String token = utworzToken();
+        TokenOB tokenOB = new TokenOB(user, token);
+        tokenRepository.save(tokenOB);
+
+        String url = "http://" + request.getServerName()
+                + ":"
+                + request.getServerPort()
+                + request.getContextPath()
+                + "/rest/uzytkownicy/secured/weryfikuj-token?token=" + token;
+
+        try {
+            mailSenderService.sendMail(user.getEmail(), "Weryfikacja tokena", url, false);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean utworzNowegoUzytkownika(AddUserDTO user, HttpServletRequest request) {
         UserOB userOB = new UserOB();
         userOB.setImie(user.getImie());
         userOB.setNazwisko(user.getNazwisko());
         userOB.setUserName(user.getUsername());
-        //userOB.setPassword(bcryptEncoder.encode(user.getPassword()));
         userOB.setEmail(user.getEmail());
         userOB.setTelefon(user.getTelefon());
         userOB.setPlec(user.getPlec());
-        //BeanUtils.copyProperties(user, userOB);
         userOB.setStan(UserStateEnum.NIEAKTYWNY);
     this.userRepository.save(userOB);
-    return true ;
+    //this.aktywujUzytkownika(user, request);
+    return true;
     }
-        public void veryfikacjaTokena (String token) {
-            //UserOB userOB = tokenRepository.findByValue(token).getFk_uzytkownik();
+        public void weryfikujToken(String token) {
+
+//        UserOB userOB = tokenRepository.findByValue(token).getFk_uzytkownik();
 //            userOB.setStan(UserStateEnum.AKTYWNY);
 //            userRepository.save(userOB);
         }
-        //todo do  dokonczenia -  aktulna rejestracja w AuthSerwices
-    public void rejestracjaNowegoUzytkownika(RegistrationDTO registrationDTO) {
-        RegistrationDTO response = new RegistrationDTO();
-        UserOB userOB = new UserOB();
-        userOB.setPassword(passwordEncoder.encode(userOB.getPassword()));
-        BeanUtils.copyProperties(response, userOB);
-        userRepository.save(userOB);
-        //return response;
+    //    public void aktywujUzytkownika (UserDTO user, HttpServletRequest request){
+//        UserOB userOB = new UserOB();
+//        BeanUtils.copyProperties(user, userOB);
+//        wyslijEmailAktywacyjny(userOB, request);
+//    }
+    public void aktywujUzytkownika (long id, HttpServletRequest request){
+         UserOB userOB = userRepository.getOne(id);
+        wyslijEmailAktywacyjny(userOB, request);
     }
 
 }

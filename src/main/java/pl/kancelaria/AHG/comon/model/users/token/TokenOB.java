@@ -1,7 +1,7 @@
 package pl.kancelaria.AHG.comon.model.users.token;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 
@@ -26,6 +26,7 @@ public class TokenOB {
 
     @OneToOne(fetch = FetchType.LAZY)
     private UserOB fk_uzytkownik;
+
 
     public TokenOB(UserOB user, String token) {
         this.fk_uzytkownik = user;

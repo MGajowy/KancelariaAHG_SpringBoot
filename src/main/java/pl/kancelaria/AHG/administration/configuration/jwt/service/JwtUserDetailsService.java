@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import pl.kancelaria.AHG.administration.configuration.jwt.config.JwtTokenUtil;
+import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtResponse;
+import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
@@ -23,12 +26,10 @@ public class JwtUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
     private  PasswordEncoder bcryptEncoder;
-//    @Autowired
-//    public JwtUserDetailsService(UserRepository userRepository, PasswordEncoder bcryptEncoder) {
-//        this.userRepository = userRepository;
-//        this.bcryptEncoder = bcryptEncoder;
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

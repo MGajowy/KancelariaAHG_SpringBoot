@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.user.dto.*;
 import pl.kancelaria.AHG.user.services.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Michal
  * @created 29/07/2020
@@ -37,8 +39,8 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     }
 
     @Override
-    public ResponseEntity<HttpStatus> utworzUzytkownika(AddUserDTO addUserDTO) {
-        userService.utworzNowegoUzytkownika(addUserDTO);
+    public ResponseEntity<HttpStatus> utworzUzytkownika(AddUserDTO addUserDTO, HttpServletRequest request) {
+        userService.utworzNowegoUzytkownika(addUserDTO, request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -51,5 +53,23 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     public ResponseEntity<HttpStatus> usunUzytkownika(@PathVariable("id") long id) {
         deleteUserService.usunUzytkownika(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    @Override
+//    public Boolean wyslijMailAktywacyjny(UserDTO user, HttpServletRequest request) {
+//       userService.aktywujUzytkownika(user, request);
+//        return true;
+//    }
+
+    @Override
+    public Boolean wyslijMailAktywacyjny(@PathVariable("id") long id, HttpServletRequest request) {
+        userService.aktywujUzytkownika(id, request);
+        return true;
+    }
+
+    @Override
+    public Boolean weryfikujToken(String token) {
+        userService.weryfikujToken(token);
+        return true;
     }
 }
