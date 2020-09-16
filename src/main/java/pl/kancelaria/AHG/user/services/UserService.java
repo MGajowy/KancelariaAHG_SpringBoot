@@ -88,6 +88,11 @@ public class UserService {
         wyslijEmailAktywacyjny(userOB, request);
     }
 
+    public void dezaktuwujUzytkownika(long id) {
+        UserOB userOB = userRepository.getOne(id);
+        userOB.setStan(UserStateEnum.NIEAKTYWNY);
+        userRepository.save(userOB);
+    }
 }
 
 

@@ -3,15 +3,13 @@ package pl.kancelaria.AHG.shared.restapi.users.restapi.secured;
 //import org.springframework.security.access.annotation.Secured;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 import pl.kancelaria.AHG.user.dto.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 
 /**
  * @author Michal
@@ -32,10 +30,10 @@ public interface UserSecuredRestApi {
     @Path(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)
     ResponseEntity<HttpStatus> utworzUzytkownika(@RequestBody AddUserDTO addUserDTO, HttpServletRequest request);
 
-    @POST
-    @PostMapping(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA)
+    @PUT
+    @PutMapping(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA)
-    UserDTO modyfikujUzytkownika();
+    UserDTO modyfikujUzytkownika( @PathVariable(value = "id")long id, @Validated @RequestBody UserDTO userDTO);
 
     @DELETE
     @DeleteMapping(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA + "/{id}")
@@ -56,6 +54,16 @@ public interface UserSecuredRestApi {
     @GetMapping(UserSecuredRestApiUrl.WERYFIKUJ_TOKEN)
     @Path(UserSecuredRestApiUrl.WERYFIKUJ_TOKEN)
     Boolean weryfikujToken(@RequestParam String token);
+
+    @POST
+    @PostMapping(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA + "/{id}")
+    @Path(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA)
+    Boolean dezaktywacjaUzytkownika(long id, HttpServletRequest request);
+
+    @GET
+    @GetMapping(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA + "/{id}")
+    @Path(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA)
+    UserDTO szczegolyUzytkownika(@PathVariable(value = "id")long id);
 
 
 

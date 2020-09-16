@@ -16,5 +16,8 @@ public class UserSecuredRestApiUrl {
     public static final String USUN_UZYTKOWNIKA = "/usun-uzytkownika";
     public static final String WYSLIJ_EMAIL_AKTYWACYJNY = "/wyslij-email-aktywacyjny";
     public static final String WERYFIKUJ_TOKEN = "/weryfikuj-token";
+    public static final String DEZAKTUWUJ_UZYTKOWNIKA = "/dezaktywuj-uzytkownika";
+    public static final String SZCZEGOLY_UZYTKOWNIKA = "/szczegoly-uzytkownika";
+
 
 }

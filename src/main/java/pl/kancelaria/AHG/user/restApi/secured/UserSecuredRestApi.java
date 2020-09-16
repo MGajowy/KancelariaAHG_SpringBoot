@@ -22,15 +22,18 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     private final AddUserService addUserService;
     private final DeleteUserService deleteUserService;
     private final ModifyUserService modifyUserService;
+    private final UserDetailsServiceImpl userDetailsService;
+
 
 
     @Autowired
-    public UserSecuredRestApi(UserListService userListService, UserService userService, AddUserService addUserService, DeleteUserService deleteUserService, ModifyUserService modifyUserService) {
+    public UserSecuredRestApi(UserListService userListService, UserService userService, AddUserService addUserService, DeleteUserService deleteUserService, ModifyUserService modifyUserService, UserDetailsServiceImpl userDetailsService) {
         this.userListService = userListService;
         this.userService = userService;
         this.addUserService = addUserService;
         this.deleteUserService = deleteUserService;
         this.modifyUserService = modifyUserService;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -45,8 +48,9 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     }
 
     @Override
-    public UserDTO modyfikujUzytkownika() {
-        return null;
+    public UserDTO modyfikujUzytkownika(long id, UserDTO userDTO) {
+        modifyUserService.modyfikujUzytkownika(id, userDTO );
+        return userDTO;
     }
 
     @Override
@@ -71,5 +75,17 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     public Boolean weryfikujToken(String token) {
         userService.weryfikujToken(token);
         return true;
+    }
+
+    @Override
+    public Boolean dezaktywacjaUzytkownika(@PathVariable("id") long id, HttpServletRequest request) {
+        userService.dezaktuwujUzytkownika(id);
+        return true;
+    }
+
+    @Override
+    public UserDTO szczegolyUzytkownika(long id) {
+       UserDTO userDTO = userDetailsService.szczegoly(id);
+        return userDTO;
     }
 }
