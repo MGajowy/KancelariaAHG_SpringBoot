@@ -3,6 +3,7 @@ package pl.kancelaria.AHG.shared.restapi.users.restapi.secured;
 //import org.springframework.security.access.annotation.Secured;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
@@ -53,7 +54,7 @@ public interface UserSecuredRestApi {
     @GET
     @GetMapping(UserSecuredRestApiUrl.WERYFIKUJ_TOKEN)
     @Path(UserSecuredRestApiUrl.WERYFIKUJ_TOKEN)
-    Boolean weryfikujToken(@RequestParam String token);
+    Boolean weryfikujToken(@RequestParam String token, UserDetails userDetails);
 
     @POST
     @PostMapping(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA + "/{id}")

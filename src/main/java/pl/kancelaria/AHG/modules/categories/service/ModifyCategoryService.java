@@ -25,16 +25,16 @@ public class ModifyCategoryService {
         this.categoriesRepository = categoriesRepository;
     }
 
-    public CategoryDTOresponse modyfikujKategorie(CategoryDTOrequest request) {
-        CategoryDTOresponse response = new CategoryDTOresponse();
-        Optional<CategoriesOB> dataCategory = this.categoriesRepository.findById(request.getId());
+    public CategoryDTOrequest modyfikujKategorie(long id, CategoryDTOrequest request) {
+//        Optional<CategoriesOB> dataCategory = this.categoriesRepository.findById(id);
         //if (data.isPresent()){
-            CategoriesOB categoriesOB = dataCategory.get();
-            categoriesOB.setCzyPubliczny(request.getCzyPubliczny());
-            categoriesOB.setRodzajKategorii(request.getRodzajKategorii());
-            response.setId(request.getId());
+        CategoriesOB categoriesOB = this.categoriesRepository.getOne(id);
+              categoriesOB.setCzyPubliczny(request.getCzyPubliczny());
+              categoriesOB.setRodzajKategorii(request.getRodzajKategorii());
+//            response.setId(request.getId());
             this.categoriesRepository.save(categoriesOB);
-            return response;
+            BeanUtils.copyProperties(categoriesOB, request);
+            return request;
       //  }
 
     }

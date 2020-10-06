@@ -6,6 +6,7 @@ import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
+import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
 import java.util.ArrayList;
@@ -41,4 +42,10 @@ public class CategoryListService {
         return response;
     }
 
+    public CategoryDTOrequest pobierzKategoriePoId(long id) {
+        CategoriesOB categoriesOB = categoriesRepository.getOne(id);
+        CategoryDTOrequest categoryDTOrequest = new CategoryDTOrequest();
+        BeanUtils.copyProperties(categoriesOB, categoryDTOrequest);
+        return categoryDTOrequest;
+    }
 }

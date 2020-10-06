@@ -10,6 +10,5 @@ import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
  */
 @Repository
 public interface TokenRepository extends JpaRepository<TokenOB, Long> {
-   //TokenOB findByValue(final String token);
-//TokenOB findByValue(String token);
+    TokenOB findByToken(String token);
 }

@@ -10,6 +10,6 @@ import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
 @Data
 public class CategoryDTO {
     private long id;
-    private OrPublic czyPubliczny;
+    private Boolean czyPubliczny;
     private  String rodzajKategorii;
 }

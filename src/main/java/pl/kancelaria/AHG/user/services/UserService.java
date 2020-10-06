@@ -1,18 +1,17 @@
 package pl.kancelaria.AHG.user.services;
 
-import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Example;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.kancelaria.AHG.administration.configuration.jwt.config.JwtTokenUtil;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 import pl.kancelaria.AHG.comon.model.users.token.repository.TokenRepository;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
+import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.comon.service.MailSenderService;
 import pl.kancelaria.AHG.user.dto.AddUserDTO;
-import pl.kancelaria.AHG.user.dto.RegistrationDTO;
-import pl.kancelaria.AHG.user.dto.UserDTO;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,22 +27,40 @@ public class UserService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSenderService;
+    private final JwtTokenUtil jwtTokenUtil;
 
 
-    public UserService(UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder) {
+    public UserService(UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder, JwtTokenUtil jwtTokenUtil) {
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.passwordEncoder = passwordEncoder;
         this.mailSenderService = mailSenderService;
+        this.jwtTokenUtil = jwtTokenUtil;
+
+        UserOB userOB = new UserOB();
+        userOB.setImie("admin");
+        userOB.setEmail("admin@wp.pl");
+        userOB.setPassword(passwordEncoder.encode("adminadmin"));
+        userOB.setUserName("admin");
+        userOB.setNazwisko("administrator");
+        userOB.setStan(UserStateEnum.AKTYWNY);
+        userOB.setPlec(UserSexEnum.MEZCZYZNA);
+        userOB.setTelefon("543434343");
+        userRepository.save(userOB);
     }
 
-    public String utworzToken(){
-        String token = "";
-        token = UUID.randomUUID().toString();
+    //nowa metoda do tworzenie tokena
+    public String utworzToken(UserDetails userDetails){
+        String token = jwtTokenUtil.generateToken(userDetails);
         return token;
     }
+//    public String utworzToken(){
+//        String token = "";
+//        token = UUID.randomUUID().toString();
+//        return token;
+//    }
     private void wyslijEmailAktywacyjny (UserOB user, HttpServletRequest request){
-        String token = utworzToken();
+        String token = utworzToken(user);
         TokenOB tokenOB = new TokenOB(user, token);
         tokenRepository.save(tokenOB);
 
@@ -72,17 +89,20 @@ public class UserService {
     //this.aktywujUzytkownika(user, request);
     return true;
     }
-        public void weryfikujToken(String token) {
-
-//        UserOB userOB = tokenRepository.findByValue(token).getFk_uzytkownik();
+//        public void weryfikujToken(String token) {
+//
+//        UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
 //            userOB.setStan(UserStateEnum.AKTYWNY);
 //            userRepository.save(userOB);
-        }
-    //    public void aktywujUzytkownika (UserDTO user, HttpServletRequest request){
-//        UserOB userOB = new UserOB();
-//        BeanUtils.copyProperties(user, userOB);
-//        wyslijEmailAktywacyjny(userOB, request);
-//    }
+//        }
+    //nowa metoda weryfikacji tokena
+             public void weryfikujToken(String token, UserDetails userDetails) {
+                jwtTokenUtil.validateToken(token, userDetails);
+                 UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
+                 userOB.setStan(UserStateEnum.AKTYWNY);
+                 userRepository.save(userOB);
+    }
+
     public void aktywujUzytkownika (long id, HttpServletRequest request){
          UserOB userOB = userRepository.getOne(id);
         wyslijEmailAktywacyjny(userOB, request);

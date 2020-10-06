@@ -25,7 +25,7 @@ public class CategoriesOB {
     private  String rodzajKategorii;
 
     @NotNull
-    @Column(name = ModelConstants.KOLUMNA_czy_publiczny, nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private OrPublic czyPubliczny;
+    @Column(name = ModelConstants.KOLUMNA_czy_publiczny)
+    //@Enumerated(value = EnumType.STRING)
+    private Boolean czyPubliczny;
 }
