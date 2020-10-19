@@ -67,14 +67,8 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 //    }
 
     @Override
-    public Boolean wyslijMailAktywacyjny(@PathVariable("id") long id, HttpServletRequest request) {
-        userService.aktywujUzytkownika(id, request);
-        return true;
-    }
-
-    @Override
-    public Boolean weryfikujToken(String token, UserDetails userDetails) {
-        userService.weryfikujToken(token, userDetails);
+    public Boolean wyslijMailAktywacyjny( LocationDTO locationDTO) {
+        userService.aktywujUzytkownika(locationDTO);
         return true;
     }
 

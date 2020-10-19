@@ -8,6 +8,8 @@ public class RestApiUrlStale {
     public static final String REST_PATH = "/rest";
     public static final String LOGIN = "/authenticate";
     public static final String REJESTRACJA = "/register";
+    public static final String USTAW_HASLO = "/ustaw-haslo";
+
 //     dostępy   rest/ ...../
     public static final String REST_PATH_SECURED = "/secured";
     public static final String REST_PATH_PUBLIC = "/pub";

@@ -3,10 +3,10 @@ package pl.kancelaria.AHG.shared.restapi.users.restapi.secured;
 //import org.springframework.security.access.annotation.Secured;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 import pl.kancelaria.AHG.user.dto.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,15 +46,18 @@ public interface UserSecuredRestApi {
 //    @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
 //    Boolean wyslijMailAktywacyjny(@RequestBody UserDTO user, HttpServletRequest request);
 
-    @GET
-    @GetMapping(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY + "/{id}")
+    @POST
+    @PostMapping (UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
     @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
-    Boolean wyslijMailAktywacyjny(long id, HttpServletRequest request);
+    Boolean wyslijMailAktywacyjny(@RequestBody LocationDTO locationDTO);
 
-    @GET
-    @GetMapping(UserSecuredRestApiUrl.WERYFIKUJ_TOKEN)
-    @Path(UserSecuredRestApiUrl.WERYFIKUJ_TOKEN)
-    Boolean weryfikujToken(@RequestParam String token, UserDetails userDetails);
+//    @GET
+//    @GetMapping (UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY + "/{id}")
+//    @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
+//    Boolean wyslijMailAktywacyjny(@PathVariable(value = "id") long id);
+
+
+
 
     @POST
     @PostMapping(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA + "/{id}")

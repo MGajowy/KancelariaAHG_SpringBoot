@@ -10,6 +10,7 @@ import pl.kancelaria.AHG.shared.restapi.RestApiUrlStale;
 import pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApiUrl;
 import pl.kancelaria.AHG.user.dto.LoginDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
+import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -31,5 +32,11 @@ public interface AuthPublicRestApi {
     @PostMapping(RestApiUrlStale.REJESTRACJA)
     @Path(RestApiUrlStale.REJESTRACJA)
     ResponseEntity<?> saveUser(@RequestBody RegistrationDTO user);
+
+    @POST
+    @PostMapping (RestApiUrlStale.USTAW_HASLO)
+    @Path(RestApiUrlStale.USTAW_HASLO)
+    Boolean aktywacjaHasla(@RequestBody UserPasswordDTO dto);
+
 
 }

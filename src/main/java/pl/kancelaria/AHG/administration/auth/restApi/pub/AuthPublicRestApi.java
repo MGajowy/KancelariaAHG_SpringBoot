@@ -8,6 +8,7 @@ import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtRequest;
 import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtResponse;
 import pl.kancelaria.AHG.user.dto.LoginDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
+import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
 /**
  * @author Michal
@@ -33,5 +34,11 @@ public class AuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth.
     public ResponseEntity<?> saveUser(RegistrationDTO user)  {
        String userNew = authServices.zapiszNowegoUzytkownika(user);
         return ResponseEntity.ok(userNew);
+    }
+
+    @Override
+    public Boolean aktywacjaHasla(UserPasswordDTO dto) {
+        authServices.weryfikujTokeniUstawHaslo(dto);
+        return true;
     }
 }

@@ -12,6 +12,9 @@ import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.comon.service.MailSenderService;
 import pl.kancelaria.AHG.user.dto.AddUserDTO;
+import pl.kancelaria.AHG.user.dto.LocationDTO;
+import pl.kancelaria.AHG.user.dto.UserDTO;
+import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -59,17 +62,13 @@ public class UserService {
 //        token = UUID.randomUUID().toString();
 //        return token;
 //    }
-    private void wyslijEmailAktywacyjny (UserOB user, HttpServletRequest request){
+    private void wyslijEmailAktywacyjny (UserOB user, LocationDTO locationDTO){
         String token = utworzToken(user);
         TokenOB tokenOB = new TokenOB(user, token);
         tokenRepository.save(tokenOB);
 
-        String url = "http://" + request.getServerName()
-                + ":"
-                + request.getServerPort()
-                + request.getContextPath()
-                + "/rest/uzytkownicy/secured/weryfikuj-token?token=" + token;
-
+        String url = locationDTO.getAppUrl()
+                + "/set-password?token=" + token;
         try {
             mailSenderService.sendMail(user.getEmail(), "Weryfikacja tokena", url, false);
         } catch (MessagingException e) {
@@ -89,29 +88,34 @@ public class UserService {
     //this.aktywujUzytkownika(user, request);
     return true;
     }
-//        public void weryfikujToken(String token) {
-//
-//        UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
-//            userOB.setStan(UserStateEnum.AKTYWNY);
-//            userRepository.save(userOB);
-//        }
-    //nowa metoda weryfikacji tokena
-             public void weryfikujToken(String token, UserDetails userDetails) {
-                jwtTokenUtil.validateToken(token, userDetails);
-                 UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
-                 userOB.setStan(UserStateEnum.AKTYWNY);
-                 userRepository.save(userOB);
-    }
 
-    public void aktywujUzytkownika (long id, HttpServletRequest request){
-         UserOB userOB = userRepository.getOne(id);
-        wyslijEmailAktywacyjny(userOB, request);
+    //nowa metoda weryfikacji tokena
+//             public void weryfikujToken(String token, UserDetails userDetails) {
+//                jwtTokenUtil.validateToken(token, userDetails);
+//                 UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
+//                 userOB.setStan(UserStateEnum.AKTYWNY);
+//                 userRepository.save(userOB);
+//    }
+
+    public void aktywujUzytkownika (LocationDTO locationDTO){
+         UserOB userOB = userRepository.getOne(locationDTO.getId());
+        wyslijEmailAktywacyjny(userOB, locationDTO);
     }
 
     public void dezaktuwujUzytkownika(long id) {
         UserOB userOB = userRepository.getOne(id);
         userOB.setStan(UserStateEnum.NIEAKTYWNY);
         userRepository.save(userOB);
+    }
+
+    public Boolean checkToken(String token) {
+        if (token == null){
+            return false;
+        }else {
+            UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
+            userOB.setStan(UserStateEnum.AKTYWNY);
+            return true;
+        }
     }
 }
 

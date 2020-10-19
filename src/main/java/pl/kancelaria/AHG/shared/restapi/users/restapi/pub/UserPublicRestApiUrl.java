@@ -10,5 +10,6 @@ public class UserPublicRestApiUrl {
     public static final String SCIEZKA_UZYTKOWNICY = UZYTKOWNICY + REST_PATH_PUBLIC;
     public static final String UZYTKOWNIK = "/uzytkownik";
     public static final String MOJE_DANE = "/mojeDane";
+    public static final String WERYFIKUJ_TOKEN = "/weryfikuj-token";
 
 }
