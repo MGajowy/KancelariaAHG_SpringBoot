@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
-                .authorizeRequests().antMatchers("/rest/authenticate", "/rest/register", "/rest/ustaw-haslo").permitAll().
+                .authorizeRequests().antMatchers("/rest/authenticate", "/rest/register", "/rest/ustaw-haslo", "/rest/reset-hasla").permitAll().
                 antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

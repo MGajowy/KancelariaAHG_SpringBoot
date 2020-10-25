@@ -61,11 +61,28 @@ public class AuthServices {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }
-    public void weryfikujTokeniUstawHaslo(UserPasswordDTO dto) {
+    public Boolean weryfikujTokeniUstawHaslo(UserPasswordDTO dto) {
         UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
-        userOB.setStan(UserStateEnum.AKTYWNY);
-        userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
-        userRepository.save(userOB);
+        if(userOB != null){
+            userOB.setStan(UserStateEnum.AKTYWNY);
+            userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
+            userRepository.save(userOB);
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
+    public Boolean resetujHaslo(UserPasswordDTO dto) {
+        UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
+        if(userOB != null){
+            userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
+            userRepository.save(userOB);
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }

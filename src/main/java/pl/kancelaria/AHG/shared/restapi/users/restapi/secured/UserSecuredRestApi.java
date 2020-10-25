@@ -41,11 +41,6 @@ public interface UserSecuredRestApi {
     @Path(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA)
     ResponseEntity<HttpStatus> usunUzytkownika(long id);
 
-//    @GET
-//    @GetMapping(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
-//    @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
-//    Boolean wyslijMailAktywacyjny(@RequestBody UserDTO user, HttpServletRequest request);
-
     @POST
     @PostMapping (UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
     @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)

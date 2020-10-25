@@ -9,6 +9,7 @@ public class RestApiUrlStale {
     public static final String LOGIN = "/authenticate";
     public static final String REJESTRACJA = "/register";
     public static final String USTAW_HASLO = "/ustaw-haslo";
+    public static final String RESET_HASLA = "/reset-hasla";
 
 //     dostępy   rest/ ...../
     public static final String REST_PATH_SECURED = "/secured";

@@ -11,14 +11,10 @@ import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.comon.service.MailSenderService;
-import pl.kancelaria.AHG.user.dto.AddUserDTO;
-import pl.kancelaria.AHG.user.dto.LocationDTO;
-import pl.kancelaria.AHG.user.dto.UserDTO;
-import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
+import pl.kancelaria.AHG.user.dto.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import java.util.UUID;
 
 /**
  * @author Michal
@@ -42,7 +38,7 @@ public class UserService {
 
         UserOB userOB = new UserOB();
         userOB.setImie("admin");
-        userOB.setEmail("admin@wp.pl");
+        userOB.setEmail("micgaj3@wp.pl");
         userOB.setPassword(passwordEncoder.encode("adminadmin"));
         userOB.setUserName("admin");
         userOB.setNazwisko("administrator");
@@ -51,7 +47,6 @@ public class UserService {
         userOB.setTelefon("543434343");
         userRepository.save(userOB);
     }
-
     //nowa metoda do tworzenie tokena
     public String utworzToken(UserDetails userDetails){
         String token = jwtTokenUtil.generateToken(userDetails);
@@ -117,6 +112,29 @@ public class UserService {
             return true;
         }
     }
+
+    public Boolean ResetHasla(ResetPasswordDTO dto) {
+        UserOB userOB = userRepository.findAllByUserName(dto.getUsername());
+        return wyslijEmailResetHasla(userOB, dto);
+    }
+
+    private Boolean wyslijEmailResetHasla(UserOB userOB, ResetPasswordDTO dto) {
+        String token = utworzToken(userOB);
+        TokenOB tokenOB = new TokenOB(userOB, token);
+        tokenRepository.save(tokenOB);
+
+        String url = dto.getAppUrl()
+                + "/reset-password?token=" + token;
+        try {
+            mailSenderService.sendMail(userOB.getEmail(), "Reset hasła użytkownika" , url, false);
+            return true;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
 }
 
 

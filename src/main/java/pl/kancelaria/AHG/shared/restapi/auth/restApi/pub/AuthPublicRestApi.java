@@ -38,5 +38,10 @@ public interface AuthPublicRestApi {
     @Path(RestApiUrlStale.USTAW_HASLO)
     Boolean aktywacjaHasla(@RequestBody UserPasswordDTO dto);
 
+    @POST
+    @PostMapping (RestApiUrlStale.RESET_HASLA)
+    @Path(RestApiUrlStale.RESET_HASLA)
+    Boolean resetHasla(@RequestBody UserPasswordDTO dto);
+
 
 }
