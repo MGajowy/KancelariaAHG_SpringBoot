@@ -1,9 +1,13 @@
 package pl.kancelaria.AHG.user.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.configuration.jwt.config.JwtTokenUtil;
+import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
+import pl.kancelaria.AHG.comon.model.users.roles.repository.RolesRepository;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
 import pl.kancelaria.AHG.comon.model.users.token.repository.TokenRepository;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
@@ -12,9 +16,14 @@ import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.comon.service.MailSenderService;
 import pl.kancelaria.AHG.user.dto.*;
+import pl.kancelaria.AHG.user.role.RolesName;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Array;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Michal
@@ -22,20 +31,31 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Service
 public class UserService {
+    private final RolesRepository rolesRepository;
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSenderService;
     private final JwtTokenUtil jwtTokenUtil;
+    Logger logger = LoggerFactory.getLogger(UserService.class);
 
 
-    public UserService(UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder, JwtTokenUtil jwtTokenUtil) {
+    public UserService(RolesRepository rolesRepository, UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder, JwtTokenUtil jwtTokenUtil) {
+        this.rolesRepository = rolesRepository;
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.passwordEncoder = passwordEncoder;
         this.mailSenderService = mailSenderService;
         this.jwtTokenUtil = jwtTokenUtil;
 
+        RolesOB roles_1 = new RolesOB();
+        roles_1.setNazwa(RolesName.ROLE_ADMIN);
+        RolesOB roles_2 = new RolesOB();
+        roles_2.setNazwa(RolesName.ROLE_USER);
+
+        List<RolesOB> list = new ArrayList<>();
+        list.add(roles_1);
+        list.add(roles_2);
         UserOB userOB = new UserOB();
         userOB.setImie("admin");
         userOB.setEmail("micgaj3@wp.pl");
@@ -45,7 +65,15 @@ public class UserService {
         userOB.setStan(UserStateEnum.AKTYWNY);
         userOB.setPlec(UserSexEnum.MEZCZYZNA);
         userOB.setTelefon("543434343");
+        userOB.setRolesOBSet(list);
+        List<UserOB> userOBS = new ArrayList<>();
+        userOBS.add(userOB);
+        roles_1.setUserOBSet(userOBS);
+//        roles_2.setUserOBSet(userOBS);
         userRepository.save(userOB);
+        rolesRepository.save(roles_1);
+        rolesRepository.save(roles_2);
+        logger.info("Dodano uzytkownika administracyjnego");
     }
     //nowa metoda do tworzenie tokena
     public String utworzToken(UserDetails userDetails){
@@ -66,11 +94,15 @@ public class UserService {
                 + "/set-password?token=" + token;
         try {
             mailSenderService.sendMail(user.getEmail(), "Weryfikacja tokena", url, false);
+            logger.info("Wyslano email aktywacyjny do uzytkownika o loginie: " + user.getUsername());
         } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
     public boolean utworzNowegoUzytkownika(AddUserDTO user, HttpServletRequest request) {
+        RolesOB role = rolesRepository.findAllByNazwa(RolesName.ROLE_USER);
+        List<RolesOB> list = new ArrayList<>();
+        list.add(role);
         UserOB userOB = new UserOB();
         userOB.setImie(user.getImie());
         userOB.setNazwisko(user.getNazwisko());
@@ -79,11 +111,15 @@ public class UserService {
         userOB.setTelefon(user.getTelefon());
         userOB.setPlec(user.getPlec());
         userOB.setStan(UserStateEnum.NIEAKTYWNY);
+        userOB.setRolesOBSet(list);
+        List<UserOB> userRoles = new ArrayList<>();
+        userRoles.add(userOB);
+        role.setUserOBSet(userRoles);
     this.userRepository.save(userOB);
-    //this.aktywujUzytkownika(user, request);
+    logger.info("Uzytkownik " + userOB.getUsername() + " zostal dodany do bazy danych.");
+
     return true;
     }
-
     //nowa metoda weryfikacji tokena
 //             public void weryfikujToken(String token, UserDetails userDetails) {
 //                jwtTokenUtil.validateToken(token, userDetails);
@@ -91,16 +127,26 @@ public class UserService {
 //                 userOB.setStan(UserStateEnum.AKTYWNY);
 //                 userRepository.save(userOB);
 //    }
-
-    public void aktywujUzytkownika (LocationDTO locationDTO){
+    public boolean aktywujUzytkownika (LocationDTO locationDTO){
          UserOB userOB = userRepository.getOne(locationDTO.getId());
-        wyslijEmailAktywacyjny(userOB, locationDTO);
+         if(userOB.getEmail().isEmpty() || userOB.getEmail() == null){
+             return false;
+         }else{
+             wyslijEmailAktywacyjny(userOB, locationDTO);
+             return true;
+         }
     }
 
-    public void dezaktuwujUzytkownika(long id) {
+    public boolean dezaktuwujUzytkownika(long id) {
         UserOB userOB = userRepository.getOne(id);
-        userOB.setStan(UserStateEnum.NIEAKTYWNY);
-        userRepository.save(userOB);
+        if(userOB.getStan() == UserStateEnum.AKTYWNY){
+            userOB.setStan(UserStateEnum.NIEAKTYWNY);
+            userRepository.save(userOB);
+            logger.info("Uzytkownik o id: "+ id +" zostal zdezaktywowany");
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public Boolean checkToken(String token) {
@@ -113,6 +159,7 @@ public class UserService {
         }
     }
 
+
     public Boolean ResetHasla(ResetPasswordDTO dto) {
         UserOB userOB = userRepository.findAllByUserName(dto.getUsername());
         return wyslijEmailResetHasla(userOB, dto);
@@ -122,11 +169,11 @@ public class UserService {
         String token = utworzToken(userOB);
         TokenOB tokenOB = new TokenOB(userOB, token);
         tokenRepository.save(tokenOB);
-
         String url = dto.getAppUrl()
                 + "/reset-password?token=" + token;
         try {
             mailSenderService.sendMail(userOB.getEmail(), "Reset hasła użytkownika" , url, false);
+            logger.info("Wyslano email resetu hasla dla uzytkownika o loginie: " + dto.getUsername());
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();

@@ -11,6 +11,7 @@ public class ModelConstants {
     public static final String TABELA_uchwaly = "uchwaly";
     public static final String TABELA_Token = "token";
     public static final String TABELA_kategorie = "kategorie";
+    public static final String TABELA_ROLE = "role";
     //KOLUMNY
     public static final String KOLUMNA_ID = "id";
     public static final String KOLUMNA_stan = "stan";
@@ -38,5 +39,8 @@ public class ModelConstants {
     //kategorie uchwał
     public static final String KOLUMNA_rodzaj_kategorii = "rodzaj_kategorii";
     public static final String KOLUMNA_fk_uchwały = "fk_uchwały";
+    //role
+    public static final String KOLUMNA_ROLE_ID = "rola_id";
+    public static final String KOLUMNA_ROLA_NAZWA = "nazwa";
 
 }

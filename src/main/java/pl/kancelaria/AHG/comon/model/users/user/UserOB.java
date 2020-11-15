@@ -6,12 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
+import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
-
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * @author Michal
@@ -70,9 +68,22 @@ public class UserOB implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private UserStateEnum stan;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = "roles_users",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "rola_id"))
+    private List<RolesOB> rolesOBSet;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        List<RolesOB> roles = getRolesOBSet();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for (RolesOB role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.toString()));
+        }
+        return authorities;
+//        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

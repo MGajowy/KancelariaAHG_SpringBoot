@@ -1,5 +1,8 @@
 package pl.kancelaria.AHG.user.services;
 
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,8 @@ public class ModifyUserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    Logger logger = LoggerFactory.getLogger(ModifyUserService.class);
+
 
     public ModifyUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -33,6 +38,7 @@ public class ModifyUserService {
          userOB.setEmail(userOB.getEmail());
         final UserOB updateUser = userRepository.save(userOB);
         BeanUtils.copyProperties(updateUser, userDTO);
+        logger.info("Zmodyfikowano uzytkownika o emailu: " + userOB.getEmail());
         return userDTO;
 
     }

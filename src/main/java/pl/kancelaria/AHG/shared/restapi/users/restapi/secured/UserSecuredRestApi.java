@@ -1,5 +1,4 @@
 package pl.kancelaria.AHG.shared.restapi.users.restapi.secured;
-
 //import org.springframework.security.access.annotation.Secured;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.user.dto.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 
@@ -51,9 +49,6 @@ public interface UserSecuredRestApi {
 //    @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
 //    Boolean wyslijMailAktywacyjny(@PathVariable(value = "id") long id);
 
-
-
-
     @POST
     @PostMapping(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA)
@@ -63,11 +58,5 @@ public interface UserSecuredRestApi {
     @GetMapping(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA)
     UserDTO szczegolyUzytkownika(@PathVariable(value = "id")long id);
-
-
-
-
-
-
 
 }
