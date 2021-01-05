@@ -18,7 +18,7 @@ import javax.ws.rs.Path;
 @Path(value = UserPublicRestApiUrl.SCIEZKA_UZYTKOWNICY)
 @RequestMapping(value = UserPublicRestApiUrl.SCIEZKA_UZYTKOWNICY)
 
-public interface UserPublicRestApi  {
+public interface UserPublicRestApi {
 
     @GET
     @GetMapping(UserPublicRestApiUrl.WERYFIKUJ_TOKEN + "/{token}")

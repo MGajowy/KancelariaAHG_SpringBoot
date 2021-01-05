@@ -49,9 +49,9 @@ public class UserService {
         this.jwtTokenUtil = jwtTokenUtil;
 
         RolesOB roles_1 = new RolesOB();
-        roles_1.setNazwa(RolesName.ROLE_ADMIN);
+        roles_1.setNazwa(RolesName.ADMIN);
         RolesOB roles_2 = new RolesOB();
-        roles_2.setNazwa(RolesName.ROLE_USER);
+        roles_2.setNazwa(RolesName.USER);
 
         List<RolesOB> list = new ArrayList<>();
         list.add(roles_1);
@@ -75,21 +75,22 @@ public class UserService {
         rolesRepository.save(roles_2);
         logger.info("Dodano uzytkownika administracyjnego");
     }
+
     //nowa metoda do tworzenie tokena
-    public String utworzToken(UserDetails userDetails){
+    public String utworzToken(UserDetails userDetails) {
         String token = jwtTokenUtil.generateToken(userDetails);
         return token;
     }
-//    public String utworzToken(){
+
+    //    public String utworzToken(){
 //        String token = "";
 //        token = UUID.randomUUID().toString();
 //        return token;
 //    }
-    private void wyslijEmailAktywacyjny (UserOB user, LocationDTO locationDTO){
+    private void wyslijEmailAktywacyjny(UserOB user, LocationDTO locationDTO) {
         String token = utworzToken(user);
         TokenOB tokenOB = new TokenOB(user, token);
         tokenRepository.save(tokenOB);
-
         String url = locationDTO.getAppUrl()
                 + "/set-password?token=" + token;
         try {
@@ -99,8 +100,9 @@ public class UserService {
             e.printStackTrace();
         }
     }
+
     public boolean utworzNowegoUzytkownika(AddUserDTO user, HttpServletRequest request) {
-        RolesOB role = rolesRepository.findAllByNazwa(RolesName.ROLE_USER);
+        RolesOB role = rolesRepository.findAllByNazwa(user.getRola());
         List<RolesOB> list = new ArrayList<>();
         list.add(role);
         UserOB userOB = new UserOB();
@@ -115,11 +117,11 @@ public class UserService {
         List<UserOB> userRoles = new ArrayList<>();
         userRoles.add(userOB);
         role.setUserOBSet(userRoles);
-    this.userRepository.save(userOB);
-    logger.info("Uzytkownik " + userOB.getUsername() + " zostal dodany do bazy danych.");
-
-    return true;
+        this.userRepository.save(userOB);
+        logger.info("Uzytkownik " + userOB.getUsername() + " zostal poprawnie dodany do bazy danych.");
+        return true;
     }
+
     //nowa metoda weryfikacji tokena
 //             public void weryfikujToken(String token, UserDetails userDetails) {
 //                jwtTokenUtil.validateToken(token, userDetails);
@@ -127,32 +129,32 @@ public class UserService {
 //                 userOB.setStan(UserStateEnum.AKTYWNY);
 //                 userRepository.save(userOB);
 //    }
-    public boolean aktywujUzytkownika (LocationDTO locationDTO){
-         UserOB userOB = userRepository.getOne(locationDTO.getId());
-         if(userOB.getEmail().isEmpty() || userOB.getEmail() == null){
-             return false;
-         }else{
-             wyslijEmailAktywacyjny(userOB, locationDTO);
-             return true;
-         }
+    public boolean aktywujUzytkownika(LocationDTO locationDTO) {
+        UserOB userOB = userRepository.getOne(locationDTO.getId());
+        if (userOB.getEmail().isEmpty() || userOB.getEmail() == null) {
+            return false;
+        } else {
+            wyslijEmailAktywacyjny(userOB, locationDTO);
+            return true;
+        }
     }
 
     public boolean dezaktuwujUzytkownika(long id) {
         UserOB userOB = userRepository.getOne(id);
-        if(userOB.getStan() == UserStateEnum.AKTYWNY){
+        if (userOB.getStan() == UserStateEnum.AKTYWNY) {
             userOB.setStan(UserStateEnum.NIEAKTYWNY);
             userRepository.save(userOB);
-            logger.info("Uzytkownik o id: "+ id +" zostal zdezaktywowany");
+            logger.info("Uzytkownik o id: " + id + " zostal zdezaktywowany");
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     public Boolean checkToken(String token) {
-        if (token == null){
+        if (token == null) {
             return false;
-        }else {
+        } else {
             UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
             userOB.setStan(UserStateEnum.AKTYWNY);
             return true;
@@ -172,7 +174,7 @@ public class UserService {
         String url = dto.getAppUrl()
                 + "/reset-password?token=" + token;
         try {
-            mailSenderService.sendMail(userOB.getEmail(), "Reset hasła użytkownika" , url, false);
+            mailSenderService.sendMail(userOB.getEmail(), "Reset hasła użytkownika", url, false);
             logger.info("Wyslano email resetu hasla dla uzytkownika o loginie: " + dto.getUsername());
             return true;
         } catch (MessagingException e) {

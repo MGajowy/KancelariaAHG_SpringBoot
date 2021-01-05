@@ -49,7 +49,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public UserOB save(RegistrationDTO user) {
-        RolesOB role=  rolesRepository.findAllByNazwa(RolesName.ROLE_USER);
+        RolesOB role=  rolesRepository.findAllByNazwa(RolesName.USER);
         List<RolesOB> lista = new ArrayList<>();
         lista.add(role);
         UserOB newUser = new UserOB();

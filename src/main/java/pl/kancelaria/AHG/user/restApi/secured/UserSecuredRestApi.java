@@ -26,7 +26,6 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     private final UserDetailsServiceImpl userDetailsService;
 
 
-
     @Autowired
     public UserSecuredRestApi(UserListService userListService, UserService userService, AddUserService addUserService, DeleteUserService deleteUserService, ModifyUserService modifyUserService, UserDetailsServiceImpl userDetailsService) {
         this.userListService = userListService;
@@ -50,7 +49,7 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public UserDTO modyfikujUzytkownika(long id, UserDTO userDTO) {
-        modifyUserService.modyfikujUzytkownika(id, userDTO );
+        modifyUserService.modyfikujUzytkownika(id, userDTO);
         return userDTO;
     }
 
@@ -67,20 +66,20 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 //    }
 
     @Override
-    public Boolean wyslijMailAktywacyjny( LocationDTO locationDTO) {
-       Boolean wynik = userService.aktywujUzytkownika(locationDTO);
+    public Boolean wyslijMailAktywacyjny(LocationDTO locationDTO) {
+        Boolean wynik = userService.aktywujUzytkownika(locationDTO);
         return wynik;
     }
 
     @Override
     public Boolean dezaktywacjaUzytkownika(@PathVariable("id") long id, HttpServletRequest request) {
-       Boolean wynik = userService.dezaktuwujUzytkownika(id);
+        Boolean wynik = userService.dezaktuwujUzytkownika(id);
         return wynik;
     }
 
     @Override
     public UserDTO szczegolyUzytkownika(long id) {
-       UserDTO userDTO = userDetailsService.szczegoly(id);
+        UserDTO userDTO = userDetailsService.szczegoly(id);
         return userDTO;
     }
 }

@@ -54,13 +54,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public PersistentTokenRepository persistentTokenRepository(){
+    public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
         return tokenRepository;
@@ -77,14 +78,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().and().csrf().disable()
+        httpSecurity.cors()
+                .and()
+                .csrf()
+                .disable()
                 .authorizeRequests()
                 .antMatchers("/rest/authenticate", "/rest/register", "/rest/ustaw-haslo", "/rest/reset-hasla").permitAll()
                 .antMatchers("/rest/uzytkownicy/pub/", "/rest/kategorie/pub/").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
@@ -94,9 +100,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .rememberMe()
-        .tokenRepository(persistentTokenRepository());
+                .and()
+                .rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
+
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

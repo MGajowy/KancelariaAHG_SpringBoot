@@ -196,6 +196,26 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>generate-Enum-Roles</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <jsonLibrary>jackson2</jsonLibrary>
+                            <mapEnum>asEnum</mapEnum>
+                            <nonConstEnums>true</nonConstEnums>
+                            <classes>
+                                <class>pl.kancelaria.AHG.user.role.RolesName</class>
+                            </classes>
+                            <outputKind>module</outputKind>
+                            <outputFileType>implementationFile</outputFileType>
+                            <outputFile>target/RolesName.ts</outputFile>
+                            <noFileComment>true</noFileComment>
+                            <mapClasses>asClasses</mapClasses>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>generate-Enum-StateUser</id>
                         <goals>
                             <goal>generate</goal>
@@ -240,6 +260,9 @@
                                         </include>
                                         <include>
                                             UserSexEnum.ts
+                                        </include>
+                                        <include>
+                                            RolesName.ts
                                         </include>
                                         <include>
                                             UserStateEnum.ts

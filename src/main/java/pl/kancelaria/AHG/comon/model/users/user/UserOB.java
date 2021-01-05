@@ -7,7 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
-import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -21,12 +21,14 @@ import java.util.*;
 @Data
 public class UserOB implements UserDetails {
 
+    private String WYSZUKAJ_ROLE = "wyszukaj role użytkownika";
+
     public UserOB() {
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = ModelConstants.KOLUMNA_ID, length = 36)
+    @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 
     @Column(name = ModelConstants.KOLUMNA_imie, length = 120)
@@ -45,7 +47,7 @@ public class UserOB implements UserDetails {
     @Column(name = ModelConstants.KOLUMNA_email)
     private String email;
 
-//    @Column (name = ModelConstants.KOLUMNA_czy_zaakceptowano_regulamin)
+    //    @Column (name = ModelConstants.KOLUMNA_czy_zaakceptowano_regulamin)
 //    private Boolean czy_zaakceptowano_regulamin;
 //
 //    @Nullable
@@ -53,10 +55,10 @@ public class UserOB implements UserDetails {
 //    @Enumerated(value = EnumType.STRING)
 //    private UserAccountType typ_konta;
 //
-    @Column(name = ModelConstants.KOLUMNA_telefon,length = 50)
+    @Column(name = ModelConstants.KOLUMNA_telefon, length = 50)
     private String telefon;
 
-    @Column (name = ModelConstants.KOLUMNA_plec, length = 9)
+    @Column(name = ModelConstants.KOLUMNA_plec, length = 9)
     @Enumerated(value = EnumType.STRING)
     private UserSexEnum plec;
 
@@ -78,7 +80,6 @@ public class UserOB implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<RolesOB> roles = getRolesOBSet();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
         for (RolesOB role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.toString()));
         }
@@ -111,20 +112,11 @@ public class UserOB implements UserDetails {
         return true;
     }
 
-
 //    @Nullable
 //    @Column (name = ModelConstants.KOLUMNA_data_rejestracji, nullable = false)
 //    private LocalDate dataRejestracji;
 
 //    @OneToOne(fetch = FetchType.LAZY)
 //    private TokenOB fk_token;
-
-//    public static UserOB utworz(){
-//        UserOB userOB = new UserOB();
-//        userOB.setStan(UserStateEnum.NIEAKTYWNY);
-////        userOB.setDataRejestracji(new LocalDate());
-//        return userOB;
-//    }
-
 
 }

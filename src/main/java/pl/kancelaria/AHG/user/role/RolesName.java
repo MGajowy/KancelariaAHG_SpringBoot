@@ -5,6 +5,6 @@ package pl.kancelaria.AHG.user.role;
  * @created 07/11/2020
  */
 public enum RolesName {
-    ROLE_USER,
-    ROLE_ADMIN
+    USER,
+    ADMIN
 }

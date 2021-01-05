@@ -1,12 +1,11 @@
 package pl.kancelaria.AHG.user.dto;
 
 import lombok.Data;
-import pl.kancelaria.AHG.comon.model.users.user.UserAccountType;
 import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
+import pl.kancelaria.AHG.user.role.RolesName;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author Michal
@@ -18,13 +17,14 @@ public class UserDTO {
     private String imie;
     private String nazwisko;
     private String username;
-    private  String password;
+    private String password;
     private UserStateEnum stan;
-    //private UserAccountType typ_konta;
     private String email;
-    //private Boolean czy_zaakceptowano_regulamin;
     private String telefon;
     private UserSexEnum plec;
+    private List<RolesName> role;
+    //private UserAccountType typ_konta;
+    //private Boolean czy_zaakceptowano_regulamin;
     //private Byte[] zdjecie_profilowe;
     //private LocalDate dataRejestracji;
 }
