@@ -24,21 +24,20 @@ public class UserListService {
         this.userRepository = userRepository;
     }
 
-    public UserListDTO pobierzListeUzytkownikow(){
+    public UserListDTO pobierzListeUzytkownikow() {
         UserListDTO response = new UserListDTO();
         List<UserOB> userOBList = this.userRepository.findAll();
         if (!CollectionUtils.isEmpty(userOBList)) {
             List<UserDTO> uzytkownik = new ArrayList<>();
-            userOBList.forEach(u -> {UserDTO daneDTO = new UserDTO();
+            userOBList.forEach(u -> {
+                UserDTO daneDTO = new UserDTO();
                 BeanUtils.copyProperties(u, daneDTO);
                 uzytkownik.add(daneDTO);
             });
             response.setListaUzytkownikow(uzytkownik);
-        }
-        else{
+        } else {
             response.setListaUzytkownikow(new ArrayList<>());
         }
-
         return response;
     }
 }

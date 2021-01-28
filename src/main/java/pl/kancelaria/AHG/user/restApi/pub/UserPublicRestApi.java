@@ -12,7 +12,6 @@ import pl.kancelaria.AHG.user.services.UserService;
 @RestController
 public class UserPublicRestApi implements pl.kancelaria.AHG.shared.restapi.users.restapi.pub.UserPublicRestApi {
 
-
     private final UserService userService;
 
     @Autowired

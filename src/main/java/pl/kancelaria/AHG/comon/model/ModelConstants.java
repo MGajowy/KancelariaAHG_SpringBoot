@@ -6,12 +6,14 @@ public class ModelConstants {
     public  static final String SCHEMA_UCHWALY = "uchwaly";
     public  static final String SCHEMA_UZYTKOWNIK = "uzytkownik";
     public static final String SCHEMA_WSPOLNE = "wspolne";
+
     //TABELE
     public static final String TABELA_uzytkownik = "uzytkownik";
     public static final String TABELA_uchwaly = "uchwaly";
     public static final String TABELA_Token = "token";
     public static final String TABELA_kategorie = "kategorie";
     public static final String TABELA_ROLE = "role";
+    public static final String TABELA_DZIENNIK_ZDARZEN = "dziennik_zdarzen";
     //KOLUMNY
     public static final String KOLUMNA_ID = "id";
     public static final String KOLUMNA_stan = "stan";
@@ -42,5 +44,10 @@ public class ModelConstants {
     //role
     public static final String KOLUMNA_ROLE_ID = "rola_id";
     public static final String KOLUMNA_ROLA_NAZWA = "nazwa";
+    //dziennik zdarzen
+    public static final String KOLUMNA_CZYNNOSC = "czynnosc";
+    public static final String KOLUMNA_DATA_CZYNNOSCI = "data_czynnosci";
+    public static final String KOLUMNA_UZYTKOWNIK = "uzytkownik";
+
 
 }

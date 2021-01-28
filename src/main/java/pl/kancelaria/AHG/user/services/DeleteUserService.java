@@ -5,6 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.kancelaria.AHG.administration.services.EventLogService;
+import pl.kancelaria.AHG.comon.model.administration.eventLog.EventLogConstants;
+import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
+import pl.kancelaria.AHG.comon.model.users.roles.repository.RolesRepository;
+import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 
 /**
@@ -14,17 +19,24 @@ import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 @Service
 public class DeleteUserService {
     private final UserRepository userRepository;
+    private final RolesRepository rolesRepository;
+    private final EventLogService eventLogService;
     Logger logger = LoggerFactory.getLogger(DeleteUserService.class);
 
-    public DeleteUserService(UserRepository userRepository) {
+    public DeleteUserService(UserRepository userRepository, RolesRepository rolesRepository, EventLogService eventLogService) {
         this.userRepository = userRepository;
+        this.rolesRepository = rolesRepository;
+        this.eventLogService = eventLogService;
     }
-    public ResponseEntity<HttpStatus> usunUzytkownika (long id) {
+
+    public ResponseEntity<HttpStatus> usunUzytkownika(long id) {
         try {
+            UserOB userOB = userRepository.getOne(id);
             userRepository.deleteById(id);
             logger.info("Uzytkowinik o id: " + id + " zostal usuniety.");
+            eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }

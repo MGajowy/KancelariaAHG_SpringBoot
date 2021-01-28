@@ -7,6 +7,7 @@ import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author Michal
@@ -17,22 +18,41 @@ import javax.persistence.*;
 @Data
 public class ResolutionsOB {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 
     @Column (name = ModelConstants.KOLUMNA_opis)
     private String opis;
 
-    //todo zastanowić sie nad trescia!!
     @Column (name = ModelConstants.KOLUMNA_tresc)
     private String tresc;
 
     @NotNull
-    @Column (name = ModelConstants.KOLUMNA_czy_publiczny, length = 9, nullable = false)
-    @Enumerated(value = EnumType.STRING )
-    private OrPublic czyPubliczny;
+//    @Column (name = ModelConstants.KOLUMNA_czy_publiczny, length = 9, nullable = false)
+//    @Enumerated(value = EnumType.STRING )
+    private Boolean czyPubliczny;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private CategoriesOB fk_kategorii;
+    @ManyToOne
+    @JoinColumn(name="fk_kategorii")
+    private CategoriesOB kategoria;
 
+    public ResolutionsOB() {
+    }
+
+    public ResolutionsOB(long id, String opis, String tresc, Boolean czyPubliczny, CategoriesOB kategoria) {
+        this.id = id;
+        this.opis = opis;
+        this.tresc = tresc;
+        this.czyPubliczny = czyPubliczny;
+        this.kategoria = kategoria;
+    }
+
+    public CategoriesOB getKategoria() {
+        return kategoria;
+    }
+
+    public void setKategoria(CategoriesOB kategoria) {
+        this.kategoria = kategoria;
+    }
 }

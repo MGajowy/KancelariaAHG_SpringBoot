@@ -19,5 +19,5 @@ public class RestApiUrlStale {
     public static final String UZYTKOWNICY = REST_PATH + "/uzytkownicy";
     public static final String KATEGORIE = REST_PATH + "/kategorie";
     public static final String UCHWALY = REST_PATH + "/uchwaly";
-
+    public static final String ADMINISTRACJA = REST_PATH + "/administracja";
 }

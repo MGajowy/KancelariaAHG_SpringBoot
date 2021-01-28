@@ -12,7 +12,8 @@ import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
  */
 @Service
 public class CreateCategoryService {
-private final CategoriesRepository categoriesRepository;
+
+    private final CategoriesRepository categoriesRepository;
 
     public CreateCategoryService(CategoriesRepository categoriesRepository) {
         this.categoriesRepository = categoriesRepository;

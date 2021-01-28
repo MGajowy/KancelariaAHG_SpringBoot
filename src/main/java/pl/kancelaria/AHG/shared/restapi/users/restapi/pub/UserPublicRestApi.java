@@ -6,7 +6,6 @@ import pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi
 import pl.kancelaria.AHG.user.dto.LocationDTO;
 import pl.kancelaria.AHG.user.dto.ResetPasswordDTO;
 import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

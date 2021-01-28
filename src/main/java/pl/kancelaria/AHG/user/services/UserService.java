@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.configuration.jwt.config.JwtTokenUtil;
+import pl.kancelaria.AHG.administration.services.EventLogService;
+import pl.kancelaria.AHG.comon.model.administration.eventLog.EventLogConstants;
 import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
 import pl.kancelaria.AHG.comon.model.users.roles.repository.RolesRepository;
 import pl.kancelaria.AHG.comon.model.users.token.TokenOB;
@@ -20,10 +22,7 @@ import pl.kancelaria.AHG.user.role.RolesName;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Array;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Michal
@@ -37,16 +36,18 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSenderService;
     private final JwtTokenUtil jwtTokenUtil;
+    private final EventLogService eventLogService;
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
 
-    public UserService(RolesRepository rolesRepository, UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder, JwtTokenUtil jwtTokenUtil) {
+    public UserService(RolesRepository rolesRepository, UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder, JwtTokenUtil jwtTokenUtil, EventLogService eventLogService) {
         this.rolesRepository = rolesRepository;
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.passwordEncoder = passwordEncoder;
         this.mailSenderService = mailSenderService;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.eventLogService = eventLogService;
 
         RolesOB roles_1 = new RolesOB();
         roles_1.setNazwa(RolesName.ADMIN);
@@ -119,6 +120,7 @@ public class UserService {
         role.setUserOBSet(userRoles);
         this.userRepository.save(userOB);
         logger.info("Uzytkownik " + userOB.getUsername() + " zostal poprawnie dodany do bazy danych.");
+        eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB);
         return true;
     }
 
@@ -135,6 +137,7 @@ public class UserService {
             return false;
         } else {
             wyslijEmailAktywacyjny(userOB, locationDTO);
+            eventLogService.dodajLog(EventLogConstants.AKTYWACJA_UZYTKOWNIKA, userOB);
             return true;
         }
     }
@@ -145,10 +148,12 @@ public class UserService {
             userOB.setStan(UserStateEnum.NIEAKTYWNY);
             userRepository.save(userOB);
             logger.info("Uzytkownik o id: " + id + " zostal zdezaktywowany");
+            eventLogService.dodajLog(EventLogConstants.DEZAKTYWACJA_UZYTKOWNIKA, userOB);
             return true;
         } else {
             return false;
         }
+
     }
 
     public Boolean checkToken(String token) {
@@ -176,6 +181,7 @@ public class UserService {
         try {
             mailSenderService.sendMail(userOB.getEmail(), "Reset hasła użytkownika", url, false);
             logger.info("Wyslano email resetu hasla dla uzytkownika o loginie: " + dto.getUsername());
+            eventLogService.dodajLog(EventLogConstants.WYSLANO_EMAIL_RESETU_HASLA, userOB);
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();

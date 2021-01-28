@@ -21,8 +21,6 @@ public class TokenOB {
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 
-
-
     @Column(name = ModelConstants.KOLUMNA_token)
     private String token;
 

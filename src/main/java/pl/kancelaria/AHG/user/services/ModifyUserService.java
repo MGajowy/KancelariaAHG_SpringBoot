@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.kancelaria.AHG.administration.services.EventLogService;
+import pl.kancelaria.AHG.comon.model.administration.eventLog.EventLogConstants;
 import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
 import pl.kancelaria.AHG.comon.model.users.roles.repository.RolesRepository;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
@@ -25,13 +27,15 @@ public class ModifyUserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RolesRepository rolesRepository;
+    private final EventLogService eventLogService;
     Logger logger = LoggerFactory.getLogger(ModifyUserService.class);
 
 
-    public ModifyUserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RolesRepository rolesRepository) {
+    public ModifyUserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RolesRepository rolesRepository, EventLogService eventLogService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.rolesRepository = rolesRepository;
+        this.eventLogService = eventLogService;
     }
 
     public UserDTO modyfikujUzytkownika(long id, UserDTO userDTO) {
@@ -48,7 +52,7 @@ public class ModifyUserService {
         userOB.setNazwisko(userDTO.getNazwisko());
         userOB.setPlec(userDTO.getPlec());
         userOB.setTelefon(userDTO.getTelefon());
-        userOB.setEmail(userOB.getEmail());
+        userOB.setEmail(userDTO.getEmail());
         userOB.setRolesOBSet(role);
 
         List<UserOB> userRoles = new ArrayList<>();
@@ -59,6 +63,7 @@ public class ModifyUserService {
         final UserOB updateUser = userRepository.save(userOB);
         BeanUtils.copyProperties(updateUser, userDTO);
         logger.info("Zmodyfikowano uzytkownika o emailu: " + userOB.getEmail());
+        eventLogService.dodajLog(EventLogConstants.MODYFIAKCJA_UZYTKOWNIKA, userOB);
         return userDTO;
 
     }

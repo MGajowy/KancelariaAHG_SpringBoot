@@ -4,8 +4,11 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
+import pl.kancelaria.AHG.comon.model.resolutions.resolutions.ResolutionsOB;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Michal
@@ -28,4 +31,7 @@ public class CategoriesOB {
     @Column(name = ModelConstants.KOLUMNA_czy_publiczny)
     //@Enumerated(value = EnumType.STRING)
     private Boolean czyPubliczny;
+
+    @OneToMany(mappedBy="kategoria",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ResolutionsOB> uchwała = new ArrayList<>();
 }
