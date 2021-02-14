@@ -30,7 +30,7 @@ public class EventLogService {
     }
 
 
-    public Boolean dodajLog (String czynnosc, UserOB user){
+    public Boolean dodajLog (String czynnosc, String user){
         EventLogOB logOB = new EventLogOB(czynnosc, user);
 //        if(!czynnosc.isEmpty()){}
         logOB.setCzynnosc(czynnosc);
@@ -50,7 +50,11 @@ public class EventLogService {
             listaZdarzenOB.forEach(eventLogOB ->{
                 EventLogDTO logDTO = new EventLogDTO();
                 BeanUtils.copyProperties(eventLogOB, logDTO);
-                logDTO.setUzytkownik(eventLogOB.getUzytkownik().getUsername());
+                if(eventLogOB.getUzytkownik().isEmpty() && eventLogOB.getUzytkownik() == null ){
+                    logDTO.setUzytkownik("nie odnaleziono");
+                }else{
+                    logDTO.setUzytkownik(eventLogOB.getUzytkownik());
+                }
                 dziennikZdarzen.add(logDTO);
             } );
             listDTO.setListaLogow(dziennikZdarzen);

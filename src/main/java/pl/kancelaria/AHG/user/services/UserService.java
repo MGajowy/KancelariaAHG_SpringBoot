@@ -120,7 +120,7 @@ public class UserService {
         role.setUserOBSet(userRoles);
         this.userRepository.save(userOB);
         logger.info("Uzytkownik " + userOB.getUsername() + " zostal poprawnie dodany do bazy danych.");
-        eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB);
+        eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
         return true;
     }
 
@@ -137,7 +137,7 @@ public class UserService {
             return false;
         } else {
             wyslijEmailAktywacyjny(userOB, locationDTO);
-            eventLogService.dodajLog(EventLogConstants.AKTYWACJA_UZYTKOWNIKA, userOB);
+            eventLogService.dodajLog(EventLogConstants.AKTYWACJA_UZYTKOWNIKA, userOB.getUsername());
             return true;
         }
     }
@@ -148,7 +148,7 @@ public class UserService {
             userOB.setStan(UserStateEnum.NIEAKTYWNY);
             userRepository.save(userOB);
             logger.info("Uzytkownik o id: " + id + " zostal zdezaktywowany");
-            eventLogService.dodajLog(EventLogConstants.DEZAKTYWACJA_UZYTKOWNIKA, userOB);
+            eventLogService.dodajLog(EventLogConstants.DEZAKTYWACJA_UZYTKOWNIKA, userOB.getUsername());
             return true;
         } else {
             return false;
@@ -181,7 +181,7 @@ public class UserService {
         try {
             mailSenderService.sendMail(userOB.getEmail(), "Reset hasła użytkownika", url, false);
             logger.info("Wyslano email resetu hasla dla uzytkownika o loginie: " + dto.getUsername());
-            eventLogService.dodajLog(EventLogConstants.WYSLANO_EMAIL_RESETU_HASLA, userOB);
+            eventLogService.dodajLog(EventLogConstants.WYSLANO_EMAIL_RESETU_HASLA, userOB.getUsername());
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();

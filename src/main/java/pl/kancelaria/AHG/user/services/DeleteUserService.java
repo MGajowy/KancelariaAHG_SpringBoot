@@ -34,7 +34,7 @@ public class DeleteUserService {
             UserOB userOB = userRepository.getOne(id);
             userRepository.deleteById(id);
             logger.info("Uzytkowinik o id: " + id + " zostal usuniety.");
-            eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB);
+            eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB.getUsername());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);

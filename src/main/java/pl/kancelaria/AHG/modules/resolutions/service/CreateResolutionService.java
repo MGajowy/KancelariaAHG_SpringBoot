@@ -43,7 +43,7 @@ public class CreateResolutionService {
         this.resolutionsRepository.save(resolutionsOB);
         logger.info("Uchwała " + resolutionsOB.getOpis() + "zostałą dodana do listy.");
 
-        eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, null);
+        eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, "" );
     }
 
 }

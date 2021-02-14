@@ -63,7 +63,7 @@ public class ModifyUserService {
         final UserOB updateUser = userRepository.save(userOB);
         BeanUtils.copyProperties(updateUser, userDTO);
         logger.info("Zmodyfikowano uzytkownika o emailu: " + userOB.getEmail());
-        eventLogService.dodajLog(EventLogConstants.MODYFIAKCJA_UZYTKOWNIKA, userOB);
+        eventLogService.dodajLog(EventLogConstants.MODYFIAKCJA_UZYTKOWNIKA, "");
         return userDTO;
 
     }
