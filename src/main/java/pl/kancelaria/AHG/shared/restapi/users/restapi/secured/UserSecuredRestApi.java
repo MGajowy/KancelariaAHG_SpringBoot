@@ -22,7 +22,7 @@ public interface UserSecuredRestApi {
     @GET
     @GetMapping(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
     @Path(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
-    UserListDTO pobierzListeUzytkownikowDto();
+    UserListDTO pobierzListeUzytkownikowDto(@QueryParam("term") String term);
 
     @POST
     @PostMapping(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)

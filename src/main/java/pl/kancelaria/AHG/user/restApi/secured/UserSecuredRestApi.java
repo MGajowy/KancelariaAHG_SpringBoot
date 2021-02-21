@@ -37,8 +37,8 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     }
 
     @Override
-    public UserListDTO pobierzListeUzytkownikowDto() {
-        return userListService.pobierzListeUzytkownikow();
+    public UserListDTO pobierzListeUzytkownikowDto(String term) {
+        return userListService.pobierzListeUzytkownikow(term);
     }
 
     @Override
