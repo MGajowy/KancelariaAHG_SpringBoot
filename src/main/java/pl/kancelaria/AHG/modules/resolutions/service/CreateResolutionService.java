@@ -12,9 +12,6 @@ import pl.kancelaria.AHG.comon.model.resolutions.resolutions.repository.Resoluti
 import pl.kancelaria.AHG.modules.resolutions.dto.CreateResotutionDTO;
 import pl.kancelaria.AHG.user.services.UserService;
 
-import java.util.List;
-import java.util.Optional;
-
 /**
  * @author Michal
  * @created 09/01/2021

@@ -10,12 +10,12 @@ import pl.kancelaria.AHG.administration.services.EventLogService;
  * @created 29/07/2020
  */
 @RestController
-public class AdministrationSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.administration.restapi.secured.AdministrationSecuredRestApi {
+public class IAdministrationSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.administration.restapi.secured.IAdministrationSecuredRestApi {
 
     private final EventLogService eventLogService;
 
     @Autowired
-    public AdministrationSecuredRestApi(EventLogService eventLogService) {
+    public IAdministrationSecuredRestApi(EventLogService eventLogService) {
         this.eventLogService = eventLogService;
     }
 

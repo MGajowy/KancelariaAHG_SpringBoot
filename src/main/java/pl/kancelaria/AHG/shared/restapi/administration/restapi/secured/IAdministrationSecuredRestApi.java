@@ -16,7 +16,7 @@ import javax.ws.rs.Path;
  */
 @Path(AdministrationSecuredRestApiUrl.SCIEZKA_ADMINISTRACJA)
 @RequestMapping(value = AdministrationSecuredRestApiUrl.SCIEZKA_ADMINISTRACJA)
-public interface AdministrationSecuredRestApi {
+public interface IAdministrationSecuredRestApi {
 
     @GET
     @GetMapping(AdministrationSecuredRestApiUrl.DZIENNIK_ZDARZEN)

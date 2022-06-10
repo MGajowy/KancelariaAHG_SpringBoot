@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.administration.auth.services.AuthServices;
 import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtRequest;
 import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtResponse;
-import pl.kancelaria.AHG.user.dto.LoginDTO;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
@@ -16,11 +15,11 @@ import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
  */
 @RestController
 @CrossOrigin
-public class AuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth.restApi.pub.AuthPublicRestApi {
+public class IAuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth.restApi.pub.IAuthPublicRestApi {
 
     private final AuthServices authServices;
 
-    public AuthPublicRestApi(AuthServices authServices) {
+    public IAuthPublicRestApi(AuthServices authServices) {
         this.authServices = authServices;
     }
 

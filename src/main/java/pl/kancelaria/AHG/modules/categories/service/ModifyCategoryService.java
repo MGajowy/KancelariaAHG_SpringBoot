@@ -1,16 +1,10 @@
 package pl.kancelaria.AHG.modules.categories.service;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
-import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOresponse;
-
-import javax.ws.rs.core.Response;
-import java.util.Optional;
 
 /**
  * @author Michal

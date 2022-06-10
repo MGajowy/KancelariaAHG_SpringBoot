@@ -10,5 +10,5 @@ import javax.ws.rs.Path;
  */
 //@Path()
 @RequestMapping (value = AdministrationPublicRestApiUrl.ADMINISTRACJA)
-public interface AdministrationPublicRestApi {
+public interface IAdministrationPublicRestApi {
 }

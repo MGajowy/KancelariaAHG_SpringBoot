@@ -6,6 +6,7 @@ public class ModelConstants {
     public  static final String SCHEMA_UCHWALY = "uchwaly";
     public  static final String SCHEMA_UZYTKOWNIK = "uzytkownik";
     public static final String SCHEMA_WSPOLNE = "wspolne";
+    public static final String SCHEMA_ROZPORZADZENIA = "rozporzadzenia";
 
     //TABELE
     public static final String TABELA_uzytkownik = "uzytkownik";
@@ -14,6 +15,7 @@ public class ModelConstants {
     public static final String TABELA_kategorie = "kategorie";
     public static final String TABELA_ROLE = "role";
     public static final String TABELA_DZIENNIK_ZDARZEN = "dziennik_zdarzen";
+    public static final String TABELA_ROZPORZADZENIA = "rozporzadzenia";
     //KOLUMNY
     public static final String KOLUMNA_ID = "id";
     public static final String KOLUMNA_stan = "stan";

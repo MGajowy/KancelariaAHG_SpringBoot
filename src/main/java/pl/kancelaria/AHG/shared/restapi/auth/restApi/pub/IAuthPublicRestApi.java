@@ -21,7 +21,7 @@ import javax.ws.rs.Path;
  */
 @Path(value = RestApiUrlStale.REST_PATH)
 @RequestMapping(value = RestApiUrlStale.REST_PATH )
-public interface AuthPublicRestApi {
+public interface IAuthPublicRestApi {
 
     @POST
     @PostMapping(RestApiUrlStale.LOGIN)

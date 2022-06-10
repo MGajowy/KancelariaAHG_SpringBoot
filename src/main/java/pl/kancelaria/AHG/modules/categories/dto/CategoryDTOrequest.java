@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.modules.categories.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
 
@@ -11,5 +12,5 @@ import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
 public class CategoryDTOrequest {
     private long id;
     private Boolean czyPubliczny;
-    private  String rodzajKategorii;
+    private String rodzajKategorii;
 }

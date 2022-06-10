@@ -9,7 +9,7 @@ import pl.kancelaria.AHG.comon.model.resolutions.OrPublic;
  */
 @Data
 public class CategoryDTO {
-    
+
     private long id;
     private Boolean czyPubliczny;
     private  String rodzajKategorii;
