@@ -31,7 +31,7 @@ public class UpdateResolutionService {
     }
 
     public ResolutionDTO modyfikujUchwale(long id, ResolutionDTO request) {
-        CategoriesOB categoriesOB = categoriesRepository.getOne(request.getKategoria());
+        CategoriesOB categoriesOB = categoriesRepository.getOne(request.getId());
         ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
         resolutionsOB.setOpis(request.getOpis());
         resolutionsOB.setTresc(request.getTresc());
@@ -42,4 +42,5 @@ public class UpdateResolutionService {
         eventLogService.dodajLog(EventLogConstants.MODYFIKACJA_UCHWALY, null);
         return request;
     }
+
 }

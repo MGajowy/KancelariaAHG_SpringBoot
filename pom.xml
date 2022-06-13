@@ -23,6 +23,9 @@
         <typeScriptGenerator.version>2.25.695</typeScriptGenerator.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <org.jetbrains.version>16.0.2</org.jetbrains.version>
+        <org.junit.jupiter.version>5.4.0</org.junit.jupiter.version>
+        <org.mockito.version>4.6.1</org.mockito.version>
     </properties>
 
     <dependencies>
@@ -95,7 +98,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations-java5</artifactId>
-            <version>16.0.2</version>
+            <version>${org.jetbrains.version}</version>
         </dependency>
 
         <dependency>
@@ -106,16 +109,15 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.4.0</version>
+            <version>${org.junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>4.6.1</version>
+            <version>${org.mockito.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
     <build>
         <plugins>

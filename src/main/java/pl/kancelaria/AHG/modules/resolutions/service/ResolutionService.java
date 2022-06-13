@@ -3,6 +3,7 @@ package pl.kancelaria.AHG.modules.resolutions.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.comon.model.resolutions.resolutions.ResolutionsOB;
 import pl.kancelaria.AHG.comon.model.resolutions.resolutions.repository.ResolutionsRepository;
@@ -36,9 +37,8 @@ public class ResolutionService {
             resolutionsOBS.forEach(e -> {
                 ResolutionDTO daneDTO = new ResolutionDTO();
                 BeanUtils.copyProperties(e, daneDTO);
-                //todo dokończyc obsluge kategorii do wyswietlania  listy uchwał.
-//                CategoriesOB categoriesOB = categoriesRepository.getOne();
-//                e.setFk_kategorii(categoriesOB);
+                CategoriesOB categoriesOB = this.categoriesRepository.getOne(e.getKategoria().getId());
+                daneDTO.setNazwaKategorii(categoriesOB.getRodzajKategorii());
                 listaUchwal.add(daneDTO);
             });
             resolutionListDTO.setListaUchwal(listaUchwal);

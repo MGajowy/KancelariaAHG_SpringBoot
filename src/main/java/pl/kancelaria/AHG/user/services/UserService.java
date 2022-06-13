@@ -30,7 +30,6 @@ import java.util.*;
  * @created 20/08/2020
  */
 @Service
-@RequiredArgsConstructor
 public class UserService {
     private final RolesRepository rolesRepository;
     private final UserRepository userRepository;
@@ -51,10 +50,6 @@ public class UserService {
         this.jwtTokenUtil = jwtTokenUtil;
         this.eventLogService = eventLogService;
 
-        utworzUzytkownikaAdministracyjnego();
-    }
-
-    private void utworzUzytkownikaAdministracyjnego() {
         RolesOB roles_1 = new RolesOB();
         roles_1.setNazwa(RolesName.ADMIN);
         RolesOB roles_2 = new RolesOB();
@@ -81,6 +76,11 @@ public class UserService {
         rolesRepository.save(roles_1);
         rolesRepository.save(roles_2);
         logger.info("Dodano uzytkownika administracyjnego");
+
+    }
+
+    private void utworzUzytkownikaAdministracyjnego() {
+
     }
 
     public String utworzToken(UserDetails userDetails) {

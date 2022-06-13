@@ -10,4 +10,5 @@ import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
  */
 @Repository
 public interface CategoriesRepository extends JpaRepository<CategoriesOB, Long> {
+
 }
