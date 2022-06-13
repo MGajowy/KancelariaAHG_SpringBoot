@@ -32,7 +32,6 @@ public class EventLogService {
 
     public Boolean dodajLog (String czynnosc, String user){
         EventLogOB logOB = new EventLogOB(czynnosc, user);
-//        if(!czynnosc.isEmpty()){}
         logOB.setCzynnosc(czynnosc);
         logOB.setUzytkownik(user);
         Calendar data_dodania = Calendar.getInstance();

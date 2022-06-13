@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.user.services;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,7 @@ import java.util.*;
  * @created 20/08/2020
  */
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final RolesRepository rolesRepository;
     private final UserRepository userRepository;
@@ -49,6 +51,10 @@ public class UserService {
         this.jwtTokenUtil = jwtTokenUtil;
         this.eventLogService = eventLogService;
 
+        utworzUzytkownikaAdministracyjnego();
+    }
+
+    private void utworzUzytkownikaAdministracyjnego() {
         RolesOB roles_1 = new RolesOB();
         roles_1.setNazwa(RolesName.ADMIN);
         RolesOB roles_2 = new RolesOB();
@@ -77,7 +83,6 @@ public class UserService {
         logger.info("Dodano uzytkownika administracyjnego");
     }
 
-    //nowa metoda do tworzenie tokena
     public String utworzToken(UserDetails userDetails) {
         String token = jwtTokenUtil.generateToken(userDetails);
         return token;
