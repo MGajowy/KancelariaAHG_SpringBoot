@@ -34,4 +34,14 @@ public class CategoriesOB {
 
     @OneToMany(mappedBy="kategoria",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ResolutionsOB> uchwała = new ArrayList<>();
+
+    public CategoriesOB(long id, String rodzjaKategorii, boolean czyPubliczny) {
+        this.id = id;
+        this.rodzajKategorii = rodzjaKategorii;
+        this.czyPubliczny = czyPubliczny;
+    }
+
+    public CategoriesOB() {
+
+    }
 }

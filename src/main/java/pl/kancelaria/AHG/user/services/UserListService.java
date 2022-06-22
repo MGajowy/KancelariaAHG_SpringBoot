@@ -20,17 +20,19 @@ import java.util.List;
 @Service
 public class UserListService {
 
-    public final UserRepository userRepository;
-    public  final EntityManager entityManager;
+//    public final UserRepository userRepository;
+    public final EntityManager entityManager;
 
-    public UserListService(UserRepository userRepository, EntityManager entityManager) {
-        this.userRepository = userRepository;
+    public UserListService(
+//            UserRepository userRepository,
+            EntityManager entityManager) {
+//        this.userRepository = userRepository;
         this.entityManager = entityManager;
     }
 
     public UserListDTO pobierzListeUzytkownikow(String term) {
         UserListDTO response = new UserListDTO();
-        List<UserOB> userOBList = this.podajListeWedlugKryteriow(term);
+        List<UserOB> userOBList = podajListeWedlugKryteriow(term);
 //        List<UserOB> userOBList = this.userRepository.findAll();
         if (!CollectionUtils.isEmpty(userOBList)) {
             List<UserDTO> uzytkownik = new ArrayList<>();

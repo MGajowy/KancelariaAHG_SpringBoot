@@ -43,7 +43,7 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public ResponseEntity<HttpStatus> utworzUzytkownika(AddUserDTO addUserDTO, HttpServletRequest request) {
-        userService.utworzNowegoUzytkownika(addUserDTO, request);
+        userService.utworzNowegoUzytkownika(addUserDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

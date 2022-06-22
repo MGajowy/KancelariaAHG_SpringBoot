@@ -30,6 +30,7 @@ import java.util.*;
  * @created 20/08/2020
  */
 @Service
+
 public class UserService {
     private final RolesRepository rolesRepository;
     private final UserRepository userRepository;
@@ -41,7 +42,13 @@ public class UserService {
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
 
-    public UserService(RolesRepository rolesRepository, UserRepository userRepository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, MailSenderService mailSenderService, PasswordEncoder bcryptEncoder, JwtTokenUtil jwtTokenUtil, EventLogService eventLogService) {
+    public UserService(RolesRepository rolesRepository,
+                       UserRepository userRepository,
+                       TokenRepository tokenRepository,
+                       PasswordEncoder passwordEncoder,
+                       MailSenderService mailSenderService,
+                       JwtTokenUtil jwtTokenUtil,
+                       EventLogService eventLogService) {
         this.rolesRepository = rolesRepository;
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
@@ -79,9 +86,6 @@ public class UserService {
 
     }
 
-    private void utworzUzytkownikaAdministracyjnego() {
-
-    }
 
     public String utworzToken(UserDetails userDetails) {
         String token = jwtTokenUtil.generateToken(userDetails);
@@ -107,7 +111,7 @@ public class UserService {
         }
     }
 
-    public boolean utworzNowegoUzytkownika(AddUserDTO user, HttpServletRequest request) {
+    public boolean utworzNowegoUzytkownika(AddUserDTO user) {
         RolesOB role = rolesRepository.findAllByNazwa(user.getRola());
         List<RolesOB> list = new ArrayList<>();
         list.add(role);
@@ -158,7 +162,6 @@ public class UserService {
         } else {
             return false;
         }
-
     }
 
     public Boolean checkToken(String token) {
