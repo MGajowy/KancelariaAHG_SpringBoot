@@ -11,14 +11,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-/**
- * @author Michal
- * @created 01/09/2020
- */
 @Component
 public class JwtTokenUtil implements Serializable{
     private static final long serialVersionUID = -2550185165626007488L;
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+
     @Value("${jwt.secret}")
     private String secret;
     //retrieve username from jwt token

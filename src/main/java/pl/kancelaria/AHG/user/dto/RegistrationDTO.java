@@ -4,10 +4,7 @@ import lombok.Data;
 import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 
-/**
- * @author Michal
- * @created 22/08/2020
- */
+
 @Data
 public class RegistrationDTO {
 

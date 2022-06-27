@@ -7,10 +7,7 @@ import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 
 import javax.persistence.*;
 
-/**
- * @author Michal
- * @created 10/07/2020
- */
+
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_Token)
 @Data

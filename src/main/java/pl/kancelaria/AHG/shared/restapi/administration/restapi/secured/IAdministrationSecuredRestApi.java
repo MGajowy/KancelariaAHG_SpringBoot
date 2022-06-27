@@ -10,10 +10,7 @@ import pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.pub.CategoryP
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 @Path(AdministrationSecuredRestApiUrl.SCIEZKA_ADMINISTRACJA)
 @RequestMapping(value = AdministrationSecuredRestApiUrl.SCIEZKA_ADMINISTRACJA)
 public interface IAdministrationSecuredRestApi {

@@ -11,10 +11,7 @@ import pl.kancelaria.AHG.modules.resolutions.service.DeleteResolutionService;
 import pl.kancelaria.AHG.modules.resolutions.service.DetailsResolutionService;
 import pl.kancelaria.AHG.modules.resolutions.service.UpdateResolutionService;
 
-/**
- * @author Michal
- * @created 09/01/2021
- */
+
 @RestController
 public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.secured.ResolutionSecuredRestApi {
     

@@ -35,11 +35,11 @@ class CategoryListServiceTest {
         CategoryListDTO categoryListDTO = categoryListService.pobierzListeKategorii();
         // then
         assertThat(categoryListDTO.getListaKategorii()).isNotNull();
-        assertThat(categoryListDTO.getListaKategorii()).hasSize(2);
+        assertThat(categoryListDTO.getListaKategorii()).hasSize(4);
     }
 
     @Test
-    void shouldReturnCategoriesListForId() {
+    void shouldReturnCategoriesListById() {
         // given
        when(categoriesRepository.getOne(ID)).thenReturn(createCategoryList().get(0));
         // when
@@ -49,9 +49,23 @@ class CategoryListServiceTest {
         assertThat(categoryDTOrequest.getId()).isEqualTo(ID);
     }
 
+    @Test
+    void shouldReturnCategoriesByName() {
+        // given
+        when(categoriesRepository.findCategoriesByRodzajKategoriiImpl("NOWA")).thenReturn(createCategoryList());
+        // when
+        List<String> actual = categoryListService.pobierzListeKategoriiPoNazwie("NOWA");
+        // then
+        assertThat(actual.get(0)).isEqualTo("NOWA");
+        assertThat(actual).hasSize(2);
+    }
+
     private List<CategoriesOB> createCategoryList() {
         return Arrays.asList(
                 new CategoriesOB(1L, "NOWA", true),
-                new CategoriesOB(2L, "NOWA2", true));
+                new CategoriesOB(2L, "Publiczna", false),
+                new CategoriesOB(3L, "Inna", true),
+                new CategoriesOB(4L, "NOWA", false)
+        );
     }
 }

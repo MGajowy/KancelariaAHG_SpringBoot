@@ -1,6 +1,5 @@
 package pl.kancelaria.AHG.user.services;
 
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,15 +21,10 @@ import pl.kancelaria.AHG.user.dto.*;
 import pl.kancelaria.AHG.user.role.RolesName;
 
 import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-/**
- * @author Michal
- * @created 20/08/2020
- */
-@Service
 
+@Service
 public class UserService {
     private final RolesRepository rolesRepository;
     private final UserRepository userRepository;
@@ -86,17 +80,10 @@ public class UserService {
 
     }
 
-
     public String utworzToken(UserDetails userDetails) {
-        String token = jwtTokenUtil.generateToken(userDetails);
-        return token;
+        return jwtTokenUtil.generateToken(userDetails);
     }
 
-    //    public String utworzToken(){
-//        String token = "";
-//        token = UUID.randomUUID().toString();
-//        return token;
-//    }
     private void wyslijEmailAktywacyjny(UserOB user, LocationDTO locationDTO) {
         String token = utworzToken(user);
         TokenOB tokenOB = new TokenOB(user, token);

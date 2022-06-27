@@ -15,10 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author Michal
- * @created 07/01/2021
- */
+
 @Service
 public class EventLogService {
 

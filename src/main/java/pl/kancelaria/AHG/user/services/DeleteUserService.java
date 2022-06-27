@@ -7,15 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.services.EventLogService;
 import pl.kancelaria.AHG.comon.model.administration.eventLog.EventLogConstants;
-import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
 import pl.kancelaria.AHG.comon.model.users.roles.repository.RolesRepository;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 
-/**
- * @author Michal
- * @created 28/08/2020
- */
+
 @Service
 public class DeleteUserService {
     private final UserRepository userRepository;

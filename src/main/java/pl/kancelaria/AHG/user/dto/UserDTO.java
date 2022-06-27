@@ -7,10 +7,7 @@ import pl.kancelaria.AHG.user.role.RolesName;
 
 import java.util.List;
 
-/**
- * @author Michal
- * @created 27/07/2020
- */
+
 @Data
 public class UserDTO {
     private Long id;

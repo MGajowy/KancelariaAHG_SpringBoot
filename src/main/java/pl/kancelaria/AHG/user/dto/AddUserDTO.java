@@ -5,12 +5,7 @@ import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
 import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
 import pl.kancelaria.AHG.user.role.RolesName;
 
-import java.util.List;
 
-/**
- * @author Michal
- * @created 09/09/2020
- */
 @Data
 public class AddUserDTO {
     private String imie;

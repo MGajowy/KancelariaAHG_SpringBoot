@@ -11,10 +11,7 @@ import pl.kancelaria.AHG.comon.model.resolutions.resolutions.ResolutionsOB;
 import pl.kancelaria.AHG.comon.model.resolutions.resolutions.repository.ResolutionsRepository;
 import pl.kancelaria.AHG.user.services.UserService;
 
-/**
- * @author Michal
- * @created 09/01/2021
- */
+
 @Service
 public class DeleteResolutionService {
 

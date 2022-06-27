@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 import pl.kancelaria.AHG.modules.categories.service.CategoryListService;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 @RestController
 public class CategoryPublicRestApi implements pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.pub.CategoryPublicRestApi {
 

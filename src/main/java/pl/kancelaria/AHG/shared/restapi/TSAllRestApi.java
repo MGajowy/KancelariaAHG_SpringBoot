@@ -16,10 +16,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**
- * @author Michal
- * @created 11/08/2020
- */
+
 public class TSAllRestApi extends Application {
     public TSAllRestApi() {
     }

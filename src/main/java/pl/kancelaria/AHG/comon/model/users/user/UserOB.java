@@ -11,10 +11,6 @@ import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
 import javax.persistence.*;
 import java.util.*;
 
-/**
- * @author Michal
- * @created 10/07/2020
- */
 
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_uzytkownik)

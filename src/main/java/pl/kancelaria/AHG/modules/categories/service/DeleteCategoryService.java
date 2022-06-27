@@ -5,10 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.repository.CategoriesRepository;
 
-/**
- * @author Michal
- * @created 28/08/2020
- */
+
 @Service
 public class DeleteCategoryService {
 

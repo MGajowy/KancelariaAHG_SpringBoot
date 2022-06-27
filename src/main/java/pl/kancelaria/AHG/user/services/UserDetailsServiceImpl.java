@@ -17,11 +17,7 @@ import pl.kancelaria.AHG.user.role.RolesName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Michal
- * @created 31/08/2020
- */
-//@Primary
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

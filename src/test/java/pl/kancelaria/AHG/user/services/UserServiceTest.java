@@ -30,13 +30,42 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 //@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
+    @Mock
+    PasswordEncoder passwordEncoder;
+
+    @Mock
+    RolesRepository rolesRepository;
+
+    @Mock
+    UserRepository userRepository;
+
+    @Mock
+    EventLogService eventLogService;
+
+    @InjectMocks
+    UserService userService;
 
     @Test
     void shouldCreateAccountAdmin() {
+
+    }
+
+    private AddUserDTO createUser() {
+        AddUserDTO userDTO = new AddUserDTO();
+        userDTO.setImie("Adam");
+        userDTO.setNazwisko("Adamowicz");
+        userDTO.setUsername("adam");
+        userDTO.setTelefon("1111111111");
+//        userDTO.setStan(UserStateEnum.NIEAKTYWNY);
+        userDTO.setRola(RolesName.USER);
+        userDTO.setEmail("m@hhh.pl");
+        userDTO.setPlec(UserSexEnum.MEZCZYZNA);
+        return userDTO;
     }
 
 }

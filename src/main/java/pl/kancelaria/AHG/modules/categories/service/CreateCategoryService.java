@@ -6,10 +6,7 @@ import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 
-/**
- * @author Michal
- * @created 28/08/2020
- */
+
 @Service
 public class CreateCategoryService {
 
@@ -19,11 +16,13 @@ public class CreateCategoryService {
         this.categoriesRepository = categoriesRepository;
     }
 
-    public CategoryDTO dodajNowaKategorie(CategoryDTO categoryDTO) {
-        CategoryDTO wynik = new CategoryDTO();
-        CategoriesOB categoriesOB = new CategoriesOB();
-        BeanUtils.copyProperties(categoryDTO, categoriesOB);
-        this.categoriesRepository.save(categoriesOB);
-        return wynik;
+    public Boolean dodajNowaKategorie(CategoryDTO categoryDTO) {
+        if (categoryDTO != null) {
+            CategoriesOB categoriesOB = new CategoriesOB();
+            BeanUtils.copyProperties(categoryDTO, categoriesOB);
+            categoriesRepository.save(categoriesOB);
+            return true;
+        }
+        return false;
     }
 }

@@ -9,10 +9,7 @@ import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * @author Michal
- * @created 20/07/2020
- */
+
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UCHWALY, name = ModelConstants.TABELA_uchwaly)
 @Data

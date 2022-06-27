@@ -9,10 +9,6 @@ import javax.ws.rs.Path;
 
 
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
 @Path(value = CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
 @RequestMapping(value =CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
 public interface CategoryPublicRestApi {

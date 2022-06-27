@@ -19,10 +19,6 @@ import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
-/**
- * @author Michal
- * @created 01/09/2020
- */
 @Service
 public class AuthServices {
 

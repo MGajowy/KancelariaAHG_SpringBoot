@@ -17,10 +17,7 @@ import pl.kancelaria.AHG.user.role.RolesName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Michal
- * @created 28/08/2020
- */
+
 @Service
 public class ModifyUserService {
 

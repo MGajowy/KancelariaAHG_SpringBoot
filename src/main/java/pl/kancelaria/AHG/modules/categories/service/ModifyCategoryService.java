@@ -6,10 +6,7 @@ import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.comon.model.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 
-/**
- * @author Michal
- * @created 28/08/2020
- */
+
 @Service
 public class ModifyCategoryService {
 

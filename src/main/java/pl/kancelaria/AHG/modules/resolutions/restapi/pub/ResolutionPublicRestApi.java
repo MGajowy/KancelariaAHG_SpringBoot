@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListDTO;
 import pl.kancelaria.AHG.modules.resolutions.service.ResolutionService;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 @RestController
 public class ResolutionPublicRestApi implements pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.pub.ResolutionPublicRestApi {
 

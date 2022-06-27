@@ -1,19 +1,14 @@
 package pl.kancelaria.AHG.shared.restapi.users.restapi.secured;
-//import org.springframework.security.access.annotation.Secured;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.user.dto.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 @Path(value = UserSecuredRestApiUrl.SCIEZKA_UZYTKOWNICY)
 @RequestMapping (value = UserSecuredRestApiUrl.SCIEZKA_UZYTKOWNICY )
 //@Secured()

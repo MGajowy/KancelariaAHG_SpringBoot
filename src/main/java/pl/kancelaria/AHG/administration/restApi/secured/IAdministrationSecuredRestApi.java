@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.administration.dto.EventLogListDTO;
 import pl.kancelaria.AHG.administration.services.EventLogService;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 @RestController
 public class IAdministrationSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.administration.restapi.secured.IAdministrationSecuredRestApi {
 

@@ -1,9 +1,6 @@
 package pl.kancelaria.AHG.shared.restapi;
 
-/**
- * @author Michal
- * @created 09/08/2020
- */
+
 public class RestApiUrlStale {
     public static final String REST_PATH = "/rest";
     public static final String LOGIN = "/authenticate";

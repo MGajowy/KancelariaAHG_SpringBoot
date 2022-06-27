@@ -1,9 +1,6 @@
 package pl.kancelaria.AHG.comon.model.administration.eventLog;
 
-/**
- * @author Michal
- * @created 07/01/2021
- */
+
 public class EventLogConstants {
 
     public static final String DODANO_NOWEGO_UZYTKOWNIKA = "Dodano nowego użytkownika do portalu.";

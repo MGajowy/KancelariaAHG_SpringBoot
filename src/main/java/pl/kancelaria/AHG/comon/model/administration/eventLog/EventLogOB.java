@@ -7,10 +7,7 @@ import pl.kancelaria.AHG.comon.model.ModelConstants;
 import javax.persistence.*;
 import java.util.Calendar;
 
-/**
- * @author Michal
- * @created 06/01/2021
- */
+
 @Entity
 @Table(schema = ModelConstants.SCHEMA_ADMINISTRACJA, name = ModelConstants.TABELA_DZIENNIK_ZDARZEN)
 @Data

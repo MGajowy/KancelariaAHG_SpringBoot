@@ -2,10 +2,7 @@ package pl.kancelaria.AHG.shared.restapi.administration.restapi.secured;
 
 import static pl.kancelaria.AHG.shared.restapi.RestApiUrlStale.*;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 public class AdministrationSecuredRestApiUrl {
     //todo sprawdzic sciezke czy jest obsluzona.
     public static final String USUN_UZYTKOWNIKA = "/usunUzytkownika";

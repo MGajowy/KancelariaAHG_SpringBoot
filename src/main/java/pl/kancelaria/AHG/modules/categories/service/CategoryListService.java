@@ -10,12 +10,11 @@ import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * @author Michal
- * @created 30/07/2020
- */
+
 @Service
 public class CategoryListService {
 
@@ -35,6 +34,7 @@ public class CategoryListService {
                 BeanUtils.copyProperties(e, daneDTO);
                 kategoria.add(daneDTO);
             });
+            kategoria.sort(Comparator.comparing(CategoryDTO::getRodzajKategorii).reversed());
             response.setListaKategorii(kategoria);
         } else {
             response.setListaKategorii(new ArrayList<>());
@@ -47,5 +47,12 @@ public class CategoryListService {
         CategoryDTOrequest categoryDTOrequest = new CategoryDTOrequest();
         BeanUtils.copyProperties(categoriesOB, categoryDTOrequest);
         return categoryDTOrequest;
+    }
+
+    public List<String> pobierzListeKategoriiPoNazwie(String nazwaKategorii) {
+        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesByRodzajKategoriiImpl(nazwaKategorii);
+        return categoriesOB.stream()
+                .map(CategoriesOB::getRodzajKategorii)
+                .filter(rodzajKategorii -> rodzajKategorii.equals(nazwaKategorii)).collect(Collectors.toList());
     }
 }

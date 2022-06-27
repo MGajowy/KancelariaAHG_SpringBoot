@@ -9,10 +9,6 @@ import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtResponse;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
-/**
- * @author Michal
- * @created 01/09/2020
- */
 @RestController
 @CrossOrigin
 public class IAuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth.restApi.pub.IAuthPublicRestApi {

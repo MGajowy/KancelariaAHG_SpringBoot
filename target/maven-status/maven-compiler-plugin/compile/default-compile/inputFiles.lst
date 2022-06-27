@@ -11,6 +11,7 @@ D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kance
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\categories\service\CategoryListService.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\AhgApplication.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\categories\service\CreateCategoryService.java
+D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\configuration\jwt\config\SwaggerConfig.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\service\CreateResolutionService.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\configuration\jwt\model\JwtRequest.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\user\dto\AddUserDTO.java
@@ -38,7 +39,6 @@ D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kance
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\configuration\jwt\config\WebSecurityConfig.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\modules\resolutions\restapi\pub\ResolutionPublicRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\user\dto\ResetPasswordDTO.java
-D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\configuration\security\MethodSecurityConfig.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\service\DeleteResolutionService.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\service\DetailsResolutionService.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\user\dto\RegistrationDTO.java

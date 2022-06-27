@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.user.dto.ResetPasswordDTO;
 import pl.kancelaria.AHG.user.services.UserService;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 @RestController
 public class UserPublicRestApi implements pl.kancelaria.AHG.shared.restapi.users.restapi.pub.UserPublicRestApi {
 

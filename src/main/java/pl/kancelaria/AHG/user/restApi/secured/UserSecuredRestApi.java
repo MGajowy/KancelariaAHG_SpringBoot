@@ -11,10 +11,7 @@ import pl.kancelaria.AHG.user.services.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @author Michal
- * @created 29/07/2020
- */
+
 @RestController
 public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi {
 

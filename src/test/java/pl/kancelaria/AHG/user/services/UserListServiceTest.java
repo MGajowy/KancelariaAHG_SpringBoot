@@ -17,6 +17,7 @@ import pl.kancelaria.AHG.user.dto.UserListDTO;
 import pl.kancelaria.AHG.user.role.RolesName;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,19 +31,18 @@ import static org.mockito.Mockito.when;
 //@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class UserListServiceTest {
-    private final static String NAME = "admin";
+    private final static String TERM = "admin";
 
-    @Mock
-    EntityManager entityManager;
-
-    @InjectMocks
-    private UserListService userListService;
+//    @Mock
+//    EntityManager entityManager;
+//
+//    @InjectMocks
+//    private UserListService userListService;
 
     @Test
     public void shouldReturnUsersList() {
     // given
-    // when
-    // then
+
     }
 
 }

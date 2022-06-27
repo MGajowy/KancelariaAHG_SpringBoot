@@ -5,16 +5,11 @@ import lombok.EqualsAndHashCode;
 import pl.kancelaria.AHG.comon.model.ModelConstants;
 import pl.kancelaria.AHG.comon.model.users.user.UserOB;
 import pl.kancelaria.AHG.user.role.RolesName;
-
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-/**
- * @author Michal
- * @created 02/11/2020
- */
+
+
 @Entity
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_ROLE)
 @Data

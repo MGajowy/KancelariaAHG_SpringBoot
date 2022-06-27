@@ -4,7 +4,6 @@ pl\kancelaria\AHG\comon\model\administration\eventLog\EventLogOB.class
 pl\kancelaria\AHG\shared\restapi\users\restapi\pub\UserPublicRestApiUrl.class
 pl\kancelaria\AHG\modules\categories\dto\CategoryDTOrequest.class
 pl\kancelaria\AHG\modules\categories\service\CategoryListService.class
-pl\kancelaria\AHG\administration\configuration\security\MethodSecurityConfig.class
 pl\kancelaria\AHG\shared\restapi\users\restapi\secured\UserSecuredRestApiUrl.class
 pl\kancelaria\AHG\modules\resolutions\service\DeleteResolutionService.class
 pl\kancelaria\AHG\modules\resolutions\service\UpdateResolutionService.class
@@ -50,6 +49,7 @@ pl\kancelaria\AHG\shared\restapi\modules\categories\restapi\pub\CategoryPublicRe
 pl\kancelaria\AHG\comon\model\regulations\category\repository\CategoryRegulationRepository.class
 pl\kancelaria\AHG\modules\categories\dto\CategoryDTOresponse.class
 pl\kancelaria\AHG\administration\auth\restApi\pub\IAuthPublicRestApi.class
+pl\kancelaria\AHG\administration\configuration\jwt\config\SwaggerConfig.class
 pl\kancelaria\AHG\administration\configuration\jwt\config\JwtAuthenticationEntryPoint.class
 pl\kancelaria\AHG\user\role\RolesName.class
 pl\kancelaria\AHG\shared\restapi\modules\resolutions\restapi\secured\ResolutionSecuredRestApi.class

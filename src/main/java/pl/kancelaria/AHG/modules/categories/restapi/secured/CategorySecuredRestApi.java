@@ -7,16 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
-import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOresponse;
 import pl.kancelaria.AHG.modules.categories.service.CategoryListService;
 import pl.kancelaria.AHG.modules.categories.service.CreateCategoryService;
 import pl.kancelaria.AHG.modules.categories.service.DeleteCategoryService;
 import pl.kancelaria.AHG.modules.categories.service.ModifyCategoryService;
 
-/**
- * @author Michal
- * @created 28/08/2020
- */
+
 @RestController
 public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.secured.CategorySecuredRestApi {
 

@@ -25,10 +25,6 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 
 
-/**
- * @author Michal
- * @created 20/08/2020
- */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -95,8 +91,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/authenticate", "/rest/register", "/rest/ustaw-haslo", "/rest/reset-hasla").permitAll()
                 .antMatchers("/rest/uzytkownicy/pub/", "/rest/kategorie/pub/").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/rest/uzytkownicy/secured/", "/rest/kategorie/secured/").hasAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.OPTIONS, "/**", "/swagger-ui.html").permitAll()
+//                .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

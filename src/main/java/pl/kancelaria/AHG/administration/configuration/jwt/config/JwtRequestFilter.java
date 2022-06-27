@@ -14,10 +14,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import pl.kancelaria.AHG.administration.configuration.jwt.service.JwtUserDetailsService;
 
-/**
- * @author Michal
- * @created 01/09/2020
- */
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
