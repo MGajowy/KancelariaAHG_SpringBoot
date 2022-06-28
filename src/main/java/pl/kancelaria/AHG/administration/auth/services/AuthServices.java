@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.configuration.jwt.config.JwtTokenUtil;
 import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtRequest;
 import pl.kancelaria.AHG.administration.configuration.jwt.service.JwtUserDetailsService;
-import pl.kancelaria.AHG.comon.model.users.token.repository.TokenRepository;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
-import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
-import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
+import pl.kancelaria.AHG.common.entityModel.users.token.repository.TokenRepository;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
+import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 

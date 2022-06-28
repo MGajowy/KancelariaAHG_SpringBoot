@@ -6,11 +6,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.services.EventLogService;
-import pl.kancelaria.AHG.comon.model.administration.eventLog.EventLogConstants;
-import pl.kancelaria.AHG.comon.model.users.roles.RolesOB;
-import pl.kancelaria.AHG.comon.model.users.roles.repository.RolesRepository;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
-import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
+import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
+import pl.kancelaria.AHG.common.entityModel.users.roles.RolesOB;
+import pl.kancelaria.AHG.common.entityModel.users.roles.repository.RolesRepository;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
+import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.role.RolesName;
 

@@ -1,8 +1,8 @@
 package pl.kancelaria.AHG.user.dto;
 
 import lombok.Data;
-import pl.kancelaria.AHG.comon.model.users.user.UserSexEnum;
-import pl.kancelaria.AHG.comon.model.users.user.UserStateEnum;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserSexEnum;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 
 
 @Data

@@ -6,7 +6,7 @@ import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-
+import javax.ws.rs.QueryParam;
 
 
 @Path(value = CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
@@ -22,5 +22,12 @@ public interface CategoryPublicRestApi {
     @GetMapping(CategoryPublicRestApiUrl.WSZYSTKIE_KATEGORIE)
     @Path(CategoryPublicRestApiUrl.WSZYSTKIE_KATEGORIE)
     CategoryListDTO pobierzListCategoryDto();
+
+    @GET
+    @GetMapping(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE)
+    @Path(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE)
+    CategoryListDTO wyszukajKategorie(@QueryParam("term") String term);
+
+
 
 }

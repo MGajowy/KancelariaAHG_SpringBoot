@@ -1,8 +1,6 @@
 package pl.kancelaria.AHG.administration.dto;
 
 import lombok.Data;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
-import pl.kancelaria.AHG.user.dto.UserDTO;
 
 import java.util.Calendar;
 

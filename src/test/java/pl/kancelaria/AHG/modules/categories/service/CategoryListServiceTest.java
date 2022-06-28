@@ -5,8 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.kancelaria.AHG.comon.model.resolutions.categories.CategoriesOB;
-import pl.kancelaria.AHG.comon.model.resolutions.categories.repository.CategoriesRepository;
+import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
+import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 

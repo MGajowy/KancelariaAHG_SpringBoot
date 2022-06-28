@@ -9,4 +9,5 @@ public class CategoryPublicRestApiUrl {
     public static final String WSZYSTKIE_KATEGORIE = "/wszystkieKategorie";
     public static final String TEST = "/1";
     public static final String SZCZEGOLY_UCHWALA = "/szczegoly";
+    public static final String WYSZUKAJ_KATEGORIE = "/wyszukajKategorie";
 }

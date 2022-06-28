@@ -6,13 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.administration.dto.EventLogDTO;
 import pl.kancelaria.AHG.administration.dto.EventLogListDTO;
-import pl.kancelaria.AHG.comon.model.administration.eventLog.EventLogOB;
-import pl.kancelaria.AHG.comon.model.administration.eventLog.repository.EventLogRepository;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
+import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogOB;
+import pl.kancelaria.AHG.common.entityModel.administration.eventLog.repository.EventLogRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 

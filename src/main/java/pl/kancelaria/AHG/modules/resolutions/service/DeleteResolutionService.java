@@ -2,13 +2,11 @@ package pl.kancelaria.AHG.modules.resolutions.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.services.EventLogService;
-import pl.kancelaria.AHG.comon.model.administration.eventLog.EventLogConstants;
-import pl.kancelaria.AHG.comon.model.resolutions.resolutions.ResolutionsOB;
-import pl.kancelaria.AHG.comon.model.resolutions.resolutions.repository.ResolutionsRepository;
+import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
+import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.ResolutionsOB;
+import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionsRepository;
 import pl.kancelaria.AHG.user.services.UserService;
 
 

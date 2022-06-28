@@ -26,4 +26,9 @@ public class CategoryPublicRestApi implements pl.kancelaria.AHG.shared.restapi.m
     public CategoryListDTO pobierzListCategoryDto() {
         return categoryListService.pobierzListeKategorii();
     }
+
+    @Override
+    public CategoryListDTO wyszukajKategorie(String term) {
+        return categoryListService.wyszukajKategorie(term);
+    }
 }

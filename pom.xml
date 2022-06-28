@@ -148,11 +148,12 @@
                             <generateJaxrsApplicationClient>true</generateJaxrsApplicationClient>
                             <classes>
                                 <class>pl.kancelaria.AHG.modules.categories.dto.CategoryDTO</class>
+                                <class>pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO</class>
+                                <class>pl.kancelaria.AHG.user.dto.UserListDTO</class>
                             </classes>
                             <classesFromJaxrsApplication>
                                 pl.kancelaria.AHG.shared.restapi.TSAllRestApi
                             </classesFromJaxrsApplication>
-
                             <outputKind>module</outputKind>
                             <outputFileType>implementationFile</outputFileType>
                             <outputFile>target/REST.ts</outputFile>
@@ -197,7 +198,7 @@
                             <mapEnum>asEnum</mapEnum>
                             <nonConstEnums>true</nonConstEnums>
                             <classes>
-                                <class>pl.kancelaria.AHG.comon.model.users.user.UserSexEnum</class>
+                                <class>pl.kancelaria.AHG.common.entityModel.users.user.UserSexEnum</class>
                             </classes>
                             <outputKind>module</outputKind>
                             <outputFileType>implementationFile</outputFileType>
@@ -237,7 +238,7 @@
                             <mapEnum>asEnum</mapEnum>
                             <nonConstEnums>true</nonConstEnums>
                             <classes>
-                                <class>pl.kancelaria.AHG.comon.model.users.user.UserStateEnum</class>
+                                <class>pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum</class>
                             </classes>
                             <outputKind>module</outputKind>
                             <outputFileType>implementationFile</outputFileType>

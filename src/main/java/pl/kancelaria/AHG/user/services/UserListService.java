@@ -3,8 +3,7 @@ package pl.kancelaria.AHG.user.services;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import pl.kancelaria.AHG.comon.model.users.user.UserOB;
-import pl.kancelaria.AHG.comon.model.users.user.repository.UserRepository;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.dto.UserListDTO;
 

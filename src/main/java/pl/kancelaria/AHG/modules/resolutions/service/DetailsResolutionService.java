@@ -1,7 +1,7 @@
 package pl.kancelaria.AHG.modules.resolutions.service;
 
 import org.springframework.stereotype.Service;
-import pl.kancelaria.AHG.comon.model.resolutions.resolutions.repository.ResolutionsRepository;
+import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionsRepository;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
 
 
