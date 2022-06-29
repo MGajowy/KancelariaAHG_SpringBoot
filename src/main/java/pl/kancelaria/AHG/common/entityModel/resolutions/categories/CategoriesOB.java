@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import pl.kancelaria.AHG.common.entityModel.ModelConstants;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.ResolutionsOB;
+import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
+import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,6 +40,13 @@ public class CategoriesOB {
     }
 
     public CategoriesOB() {
+    }
 
+    public CategoryDTO listKategoriiPoStatus() {
+        CategoryDTO dto = new CategoryDTO();
+        dto.setRodzajKategorii(rodzajKategorii);
+        dto.setCzyPubliczny(czyPubliczny);
+        dto.setId(id);
+        return dto;
     }
 }

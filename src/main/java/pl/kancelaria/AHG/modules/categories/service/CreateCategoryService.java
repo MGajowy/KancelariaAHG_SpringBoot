@@ -20,6 +20,8 @@ public class CreateCategoryService {
         if (categoryDTO != null) {
             CategoriesOB categoriesOB = new CategoriesOB();
             BeanUtils.copyProperties(categoryDTO, categoriesOB);
+            if (categoryDTO.getCzyPubliczny() == null)
+                categoriesOB.setCzyPubliczny(false);
             categoriesRepository.save(categoriesOB);
             return true;
         }

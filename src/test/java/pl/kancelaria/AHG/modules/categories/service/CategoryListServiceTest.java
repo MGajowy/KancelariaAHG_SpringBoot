@@ -10,6 +10,7 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.Ca
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
+import javax.persistence.EntityManager;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,9 @@ import static org.mockito.Mockito.when;
 class CategoryListServiceTest {
 
     public static final long ID = 1;
+
+    @Mock
+    public EntityManager entityManager;
 
     @Mock
     private CategoriesRepository categoriesRepository;
@@ -68,4 +72,5 @@ class CategoryListServiceTest {
                 new CategoriesOB(4L, "NOWA", false)
         );
     }
+
 }

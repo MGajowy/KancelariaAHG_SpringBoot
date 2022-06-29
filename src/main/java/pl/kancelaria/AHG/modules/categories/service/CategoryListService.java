@@ -92,4 +92,25 @@ public class CategoryListService {
         query.append(" ORDER BY c.rodzajKategorii DESC");
         return query.toString();
     }
+
+    public CategoryListDTO wyszukajKategoriePoStatusie(Boolean status) {
+        CategoryListDTO categoryListDTO = new CategoryListDTO();
+        List<CategoriesOB> listCategoryOB = podajListeWedlugStatusu(status);
+        List<CategoryDTO> collect = listCategoryOB.stream().map(CategoriesOB::listKategoriiPoStatus).collect(Collectors.toList());
+        categoryListDTO.setListaKategorii(collect);
+        return categoryListDTO;
+    }
+
+    private List<CategoriesOB> podajListeWedlugStatusu(Boolean status) {
+        TypedQuery<CategoriesOB> query = entityManager.createQuery(przygotujZapytanieStatusu(status), CategoriesOB.class);
+        query.setParameter("status", status);
+        return query.getResultList();
+    }
+
+    private String przygotujZapytanieStatusu(Boolean status) {
+        StringBuilder query = new StringBuilder("SELECT c FROM CategoriesOB c");
+            query.append(" WHERE c.czyPubliczny = :status");
+        query.append(" ORDER BY c.rodzajKategorii DESC");
+        return query.toString();
+    }
 }

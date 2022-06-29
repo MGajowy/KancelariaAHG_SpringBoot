@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
+import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 import pl.kancelaria.AHG.modules.categories.service.CategoryListService;
 import pl.kancelaria.AHG.modules.categories.service.CreateCategoryService;
 import pl.kancelaria.AHG.modules.categories.service.DeleteCategoryService;
 import pl.kancelaria.AHG.modules.categories.service.ModifyCategoryService;
+
+import java.util.List;
 
 
 @RestController
@@ -49,8 +52,12 @@ public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
 
     @Override
     public CategoryDTOrequest szczegolyKategorii(long id) {
-        CategoryDTOrequest categoryDTOrequest = categoryListService.pobierzKategoriePoId(id);
-        return categoryDTOrequest;
+        return categoryListService.pobierzKategoriePoId(id);
+    }
+
+    @Override
+    public CategoryListDTO listaKategoriiPoStatusie(Boolean status) {
+        return categoryListService.wyszukajKategoriePoStatusie(status);
     }
 
 }

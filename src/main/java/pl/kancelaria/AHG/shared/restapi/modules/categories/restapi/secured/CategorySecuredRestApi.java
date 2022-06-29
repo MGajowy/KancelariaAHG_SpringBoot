@@ -6,8 +6,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
+import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
 import javax.ws.rs.*;
+import java.util.List;
 
 
 @Path(value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
@@ -34,4 +36,8 @@ public interface CategorySecuredRestApi {
     @GetMapping(CategorySecuredRestApiUrl.SZCZEGOLY_KATEGORII + "/{id}")
     @Path(CategorySecuredRestApiUrl.SZCZEGOLY_KATEGORII)
     CategoryDTOrequest szczegolyKategorii(@PathVariable(value = "id") long id);
+
+    @GET
+    @GetMapping(CategorySecuredRestApiUrl.STATUS_KATEGORII)
+    CategoryListDTO listaKategoriiPoStatusie(@RequestBody Boolean status);
 }
