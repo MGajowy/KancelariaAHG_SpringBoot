@@ -9,9 +9,13 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.ResolutionsO
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionsRepository;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListDTO;
+import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListOfCategoryDTO;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -19,11 +23,13 @@ public class ResolutionService {
 
     private final ResolutionsRepository resolutionsRepository;
     private final CategoriesRepository categoriesRepository;
+    private final EntityManager entityManager;
 
 
-    public ResolutionService(ResolutionsRepository resolutionsRepository, CategoriesRepository categoriesRepository) {
+    public ResolutionService(ResolutionsRepository resolutionsRepository, CategoriesRepository categoriesRepository, EntityManager entityManager) {
         this.resolutionsRepository = resolutionsRepository;
         this.categoriesRepository = categoriesRepository;
+        this.entityManager = entityManager;
     }
 
     public ResolutionListDTO pobierzListeUchwal() {
@@ -42,7 +48,29 @@ public class ResolutionService {
         } else {
             resolutionListDTO.setListaUchwal(new ArrayList<>());
         }
-
         return resolutionListDTO;
+    }
+
+    // todo zrobic walidacje !!!!
+    public ResolutionListOfCategoryDTO pobierzListeUchwalPoKategorii(Long idKategorii) {
+        List<ResolutionsOB> resolutionsOBS = podajListeWedlugKategorii(idKategorii);
+        CategoriesOB categoriesOB = categoriesRepository.getOne(idKategorii);
+        return ResolutionListOfCategoryDTO.builder()
+                .nazwaKategorii(categoriesOB.getRodzajKategorii())
+                .listaUchwal(resolutionsOBS.stream().map(ResolutionsOB::getResolutionDTO).collect(Collectors.toList()))
+                .build();
+    }
+
+    private List<ResolutionsOB> podajListeWedlugKategorii(Long idKategorii) {
+        TypedQuery<ResolutionsOB> query = entityManager.createQuery(przygotujZapytanieListyUchwal(idKategorii), ResolutionsOB.class);
+        query.setParameter("idKategoria", idKategorii);
+        return query.getResultList();
+    }
+
+    private String przygotujZapytanieListyUchwal(Long idKategorii) {
+        StringBuilder query = new StringBuilder("SELECT r FROM ResolutionsOB r");
+        query.append(" WHERE r.kategoria.id = :idKategoria");
+        query.append(" ORDER BY r.opis DESC");
+        return query.toString();
     }
 }

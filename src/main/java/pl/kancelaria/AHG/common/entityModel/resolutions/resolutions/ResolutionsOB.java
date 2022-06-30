@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import pl.kancelaria.AHG.common.entityModel.ModelConstants;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
+import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
 
 import javax.persistence.*;
 
@@ -49,5 +50,15 @@ public class ResolutionsOB {
 
     public void setKategoria(CategoriesOB kategoria) {
         this.kategoria = kategoria;
+    }
+
+    public ResolutionDTO getResolutionDTO() {
+        ResolutionDTO resolutionDTO = new ResolutionDTO();
+        resolutionDTO.setId(id);
+        resolutionDTO.setCzyPubliczny(czyPubliczny);
+        resolutionDTO.setOpis(opis);
+        resolutionDTO.setTresc(tresc);
+        resolutionDTO.setNazwaKategorii(kategoria.getRodzajKategorii());
+        return resolutionDTO;
     }
 }

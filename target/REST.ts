@@ -65,6 +65,11 @@ export class ResolutionListDTO {
     listaUchwal: ResolutionDTO[];
 }
 
+export class ResolutionListOfCategoryDTO {
+    nazwaKategorii: string;
+    listaUchwal: ResolutionDTO[];
+}
+
 export class CreateResotutionDTO {
     id: number;
     opis: string;
@@ -235,6 +240,14 @@ export class TSAllRestApiClient {
      */
     resetHasla(dto: UserPasswordDTO): RestResponse<boolean> {
         return this.httpClient.request({ method: "POST", url: uriEncoding`rest/reset-hasla`, data: dto });
+    }
+
+    /**
+     * HTTP GET /rest/uchwaly/pub
+     * Java method: pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.pub.ResolutionPublicRestApi.pobierzListeUchwalPoKategorii
+     */
+    pobierzListeUchwalPoKategorii(id: number): RestResponse<ResolutionListOfCategoryDTO> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`rest/uchwaly/pub`, data: id });
     }
 
     /**

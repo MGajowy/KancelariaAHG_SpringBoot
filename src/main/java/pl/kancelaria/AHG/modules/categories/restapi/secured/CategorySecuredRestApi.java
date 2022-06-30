@@ -13,8 +13,6 @@ import pl.kancelaria.AHG.modules.categories.service.CreateCategoryService;
 import pl.kancelaria.AHG.modules.categories.service.DeleteCategoryService;
 import pl.kancelaria.AHG.modules.categories.service.ModifyCategoryService;
 
-import java.util.List;
-
 
 @RestController
 public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.secured.CategorySecuredRestApi {
@@ -35,18 +33,18 @@ public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
 
     @Override
     public ResponseEntity<HttpStatus> dodajKategorie(CategoryDTO categoryDTO) {
-    createCategoryService.dodajNowaKategorie(categoryDTO);
+        createCategoryService.dodajNowaKategorie(categoryDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
-    public CategoryDTOrequest modyfikujKategorie( long id, CategoryDTOrequest request) {
+    public CategoryDTOrequest modyfikujKategorie(long id, CategoryDTOrequest request) {
         return this.modifyCategoryService.modyfikujKategorie(id, request);
     }
 
     @Override
     public ResponseEntity<HttpStatus> usunKategorie(@PathVariable("id") long id) {
-    deleteCategoryService.usunKategorie(id);
+        deleteCategoryService.usunKategorie(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

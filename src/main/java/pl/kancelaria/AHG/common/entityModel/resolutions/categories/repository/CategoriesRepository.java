@@ -7,10 +7,13 @@ import org.springframework.stereotype.Repository;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface CategoriesRepository extends JpaRepository<CategoriesOB, Long> {
+
+    Optional<CategoriesOB> findById(Long id);
 
     @Query(value = "SELECT * FROM CategoriesOB c WHERE c.rodzajKategorii = :rodzaj", nativeQuery = true)
     List<CategoriesOB> findCategoriesByRodzajKategoriiImpl(@Param("rodzaj")String rodzajKategorii);

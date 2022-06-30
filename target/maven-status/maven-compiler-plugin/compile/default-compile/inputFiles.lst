@@ -74,6 +74,7 @@ D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kance
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\auth\restApi\pub\IAuthPublicRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\modules\categories\restapi\pub\CategoryPublicRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\dto\EventLogListDTO.java
+D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\dto\ResolutionListOfCategoryDTO.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\auth\restApi\pub\IAuthPublicRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\administration\restapi\pub\IAdministrationPublicRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\common\entityModel\regulations\category\repository\CategoryRegulationRepository.java

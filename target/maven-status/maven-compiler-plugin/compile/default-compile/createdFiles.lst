@@ -81,12 +81,14 @@ pl\kancelaria\AHG\shared\restapi\RestApiUrlStale.class
 pl\kancelaria\AHG\shared\restapi\users\restapi\secured\UserSecuredRestApi.class
 pl\kancelaria\AHG\modules\resolutions\dto\CreateResotutionDTO.class
 pl\kancelaria\AHG\modules\categories\restapi\pub\CategoryPublicRestApi.class
+pl\kancelaria\AHG\modules\resolutions\dto\ResolutionListOfCategoryDTO$ResolutionListOfCategoryDTOBuilder.class
 pl\kancelaria\AHG\common\entityModel\administration\eventLog\EventLogConstants.class
 pl\kancelaria\AHG\modules\resolutions\service\ResolutionService.class
 pl\kancelaria\AHG\shared\restapi\modules\resolutions\restapi\pub\ResolutionPublicRestApi.class
 pl\kancelaria\AHG\administration\restApi\pub\AdministrationPublicRestApi.class
 pl\kancelaria\AHG\administration\restApi\secured\IAdministrationSecuredRestApi.class
 pl\kancelaria\AHG\user\restApi\secured\UserSecuredRestApi.class
+pl\kancelaria\AHG\modules\resolutions\dto\ResolutionListOfCategoryDTO.class
 pl\kancelaria\AHG\shared\restapi\administration\restapi\secured\AdministrationSecuredRestApiUrl.class
 pl\kancelaria\AHG\user\dto\UserListDTO.class
 pl\kancelaria\AHG\user\dto\RegistrationDTO.class
