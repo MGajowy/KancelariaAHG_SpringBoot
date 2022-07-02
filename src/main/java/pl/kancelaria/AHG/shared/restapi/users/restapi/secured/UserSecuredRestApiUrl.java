@@ -16,4 +16,5 @@ public class UserSecuredRestApiUrl {
     public static final String SZCZEGOLY_UZYTKOWNIKA = "/szczegoly-uzytkownika";
 
 
+    public static final String UZYTKOWNICY_PO_STAN = "/listaUzytkownikowStan";
 }

@@ -10,4 +10,5 @@ public class CategoryPublicRestApiUrl {
     public static final String TEST = "/1";
     public static final String SZCZEGOLY_UCHWALA = "/szczegoly";
     public static final String WYSZUKAJ_KATEGORIE = "/wyszukajKategorie";
+    public static final String WYSZUKAJ_KATEGORIE_PO_NAZWA = "/wyszukajKategoiePoNazwa";
 }

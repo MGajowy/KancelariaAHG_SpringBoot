@@ -5,7 +5,6 @@ import lombok.Data;
 import pl.kancelaria.AHG.common.entityModel.ModelConstants;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.ResolutionsOB;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
-import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,14 +22,14 @@ public class CategoriesOB {
     private long id;
 
     @Column(name = ModelConstants.KOLUMNA_rodzaj_kategorii, length = 255)
-    private  String rodzajKategorii;
+    private String rodzajKategorii;
 
     @NotNull
     @Column(name = ModelConstants.KOLUMNA_czy_publiczny)
     //@Enumerated(value = EnumType.STRING)
     private Boolean czyPubliczny;
 
-    @OneToMany(mappedBy="kategoria",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "kategoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ResolutionsOB> uchwała = new ArrayList<>();
 
     public CategoriesOB(long id, String rodzajKategorii, boolean czyPubliczny) {

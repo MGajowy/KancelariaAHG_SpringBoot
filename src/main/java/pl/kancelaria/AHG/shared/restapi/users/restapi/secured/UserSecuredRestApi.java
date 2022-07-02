@@ -54,4 +54,8 @@ public interface UserSecuredRestApi {
     @Path(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA)
     UserDTO szczegolyUzytkownika(@PathVariable(value = "id")long id);
 
+    //todo rest niepodłączony
+    @GET
+    @GetMapping(UserSecuredRestApiUrl.UZYTKOWNICY_PO_STAN)
+    UserListDTO pobierzListeUzytkownikowPoStan(@QueryParam("stan")String stan);
 }

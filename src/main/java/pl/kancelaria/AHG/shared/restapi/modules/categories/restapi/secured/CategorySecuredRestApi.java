@@ -9,8 +9,6 @@ import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
 import javax.ws.rs.*;
-import java.util.List;
-
 
 @Path(value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
 @RequestMapping (value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
@@ -37,6 +35,7 @@ public interface CategorySecuredRestApi {
     @Path(CategorySecuredRestApiUrl.SZCZEGOLY_KATEGORII)
     CategoryDTOrequest szczegolyKategorii(@PathVariable(value = "id") long id);
 
+    //todo rest niepodłączony
     @GET
     @GetMapping(CategorySecuredRestApiUrl.STATUS_KATEGORII)
     CategoryListDTO listaKategoriiPoStatusie(@RequestBody Boolean status);

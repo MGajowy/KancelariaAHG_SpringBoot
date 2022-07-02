@@ -73,4 +73,14 @@ class CategoryListServiceTest {
         );
     }
 
+//    @Test
+//    void shouldReturnCategoriesByName2() {
+//        // given
+//        when(categoriesRepository.findCategoriesobsByRodzajKategorii("NOWA")).thenReturn(createCategoryList());
+//        // when
+//        List<String> actual = categoryListService.pobierzListeKategoriiPoNazwie2("NOWA");
+//        // then
+//        assertThat(actual.get(0)).isEqualTo("NOWA");
+//        assertThat(actual).hasSize(2);
+//    }
 }

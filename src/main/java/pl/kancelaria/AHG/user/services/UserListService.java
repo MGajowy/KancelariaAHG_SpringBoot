@@ -1,9 +1,12 @@
 package pl.kancelaria.AHG.user.services;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
+import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.dto.UserListDTO;
 
@@ -17,9 +20,11 @@ import java.util.List;
 public class UserListService {
 
     public final EntityManager entityManager;
+    public final UserRepository userRepository;
 
-    public UserListService(EntityManager entityManager) {
+    public UserListService(EntityManager entityManager, UserRepository userRepository) {
         this.entityManager = entityManager;
+        this.userRepository = userRepository;
     }
 
     public UserListDTO pobierzListeUzytkownikow(String term) {
@@ -54,5 +59,42 @@ public class UserListService {
         }
         query.append(" ORDER BY u.nazwisko DESC");
         return query.toString();
+    }
+
+    public UserListDTO pobierzListeUzytkownikowPoStan(String stan) {
+        UserListDTO response = new UserListDTO();
+        List<UserOB> listOB = userRepository.findUserobsByStan(sprawdzStan(stan));
+        if (!CollectionUtils.isEmpty(listOB)) {
+            List<UserDTO> dtoList = new ArrayList<>();
+            listOB.forEach(userOB -> {
+                UserDTO userDTO = new UserDTO();
+                BeanUtils.copyProperties(userOB, userDTO);
+                dtoList.add(userDTO);
+            });
+            response.setListaUzytkownikow(dtoList);
+        } else {
+            response.setListaUzytkownikow(new ArrayList<>());
+        }
+        return response;
+    }
+
+    private UserStateEnum sprawdzStan(String stan) {
+        UserStateEnum userStateEnum = null;
+        switch (stan) {
+            case "AKTYWNY":
+                userStateEnum = UserStateEnum.AKTYWNY;
+                break;
+            case "NIEAKTYWNY":
+                userStateEnum = UserStateEnum.NIEAKTYWNY;
+                break;
+            case "ZABLOKOWANY":
+                userStateEnum = UserStateEnum.ZABLOKOWANY;
+                break;
+            case "USUNIETY":
+                userStateEnum = UserStateEnum.USUNIETY;
+                break;
+            default:
+        }
+        return userStateEnum;
     }
 }

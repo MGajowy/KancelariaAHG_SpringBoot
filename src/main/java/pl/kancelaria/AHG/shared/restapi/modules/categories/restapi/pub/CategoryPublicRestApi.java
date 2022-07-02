@@ -7,12 +7,14 @@ import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import java.util.List;
 
 
 @Path(value = CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
 @RequestMapping(value =CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
 public interface CategoryPublicRestApi {
 
+    //todo metoda testowa
     @GET
     @GetMapping(CategoryPublicRestApiUrl.TEST)
     @Path(CategoryPublicRestApiUrl.TEST)
@@ -28,6 +30,11 @@ public interface CategoryPublicRestApi {
     @Path(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE)
     CategoryListDTO wyszukajKategorie(@QueryParam("term") String term);
 
+    //todo rest niepodłączony - metoda testowa
+    @GET
+    @GetMapping(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE_PO_NAZWA)
+    @Path(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE_PO_NAZWA)
+    List<String> wyszukajKategoriePoNazwa(@QueryParam("rodzajKategorii") String rodzajKategorii);
 
 
 }

@@ -1,5 +1,7 @@
 package pl.kancelaria.AHG.modules.categories.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -8,13 +10,13 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.Ca
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
+import pl.kancelaria.AHG.user.services.UserService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -23,6 +25,7 @@ public class CategoryListService {
 
     public final CategoriesRepository categoriesRepository;
     public final EntityManager entityManager;
+    Logger logger = LoggerFactory.getLogger(CategoryListService.class);
 
     public CategoryListService(CategoriesRepository categoriesRepository, EntityManager entityManager) {
         this.categoriesRepository = categoriesRepository;
@@ -52,13 +55,6 @@ public class CategoryListService {
         CategoryDTOrequest categoryDTOrequest = new CategoryDTOrequest();
         BeanUtils.copyProperties(categoriesOB, categoryDTOrequest);
         return categoryDTOrequest;
-    }
-
-    public List<String> pobierzListeKategoriiPoNazwie(String nazwaKategorii) {
-        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesByRodzajKategoriiImpl(nazwaKategorii);
-        return categoriesOB.stream()
-                .map(CategoriesOB::getRodzajKategorii)
-                .filter(rodzajKategorii -> rodzajKategorii.equals(nazwaKategorii)).collect(Collectors.toList());
     }
 
     public CategoryListDTO wyszukajKategorie(String term) {
@@ -110,8 +106,24 @@ public class CategoryListService {
 
     private String przygotujZapytanieStatusu(Boolean status) {
         StringBuilder query = new StringBuilder("SELECT c FROM CategoriesOB c");
-            query.append(" WHERE c.czyPubliczny = :status");
+        query.append(" WHERE c.czyPubliczny = :status");
         query.append(" ORDER BY c.rodzajKategorii DESC");
         return query.toString();
+    }
+
+    //todo metoda nieużywana - niepodłączona
+    public List<String> pobierzListeKategoriiPoNazwie2(String nazwaKaregorii) {
+        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesobsByRodzajKategorii(nazwaKaregorii);
+        return categoriesOB.stream()
+                .map(CategoriesOB::getRodzajKategorii)
+                .collect(Collectors.toList());
+    }
+
+    //todo metoda nieużywana
+    public List<String> pobierzListeKategoriiPoNazwie(String nazwaKategorii) {
+        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesByRodzajKategoriiImpl(nazwaKategorii);
+        return categoriesOB.stream()
+                .map(CategoriesOB::getRodzajKategorii)
+                .filter(rodzajKategorii -> rodzajKategorii.equals(nazwaKategorii)).collect(Collectors.toList());
     }
 }

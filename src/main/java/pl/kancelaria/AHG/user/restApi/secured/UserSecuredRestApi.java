@@ -79,4 +79,9 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
         UserDTO userDTO = userDetailsService.szczegoly(id);
         return userDTO;
     }
+
+    @Override
+    public UserListDTO pobierzListeUzytkownikowPoStan(String stan) {
+        return userListService.pobierzListeUzytkownikowPoStan(stan);
+    }
 }

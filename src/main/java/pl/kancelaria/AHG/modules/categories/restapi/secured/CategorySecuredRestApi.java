@@ -21,10 +21,12 @@ public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
     private final DeleteCategoryService deleteCategoryService;
     private final ModifyCategoryService modifyCategoryService;
     private final CategoryListService categoryListService;
-    private CategoryDTO categoryDTO;
 
     @Autowired
-    public CategorySecuredRestApi(CreateCategoryService createCategoryService, DeleteCategoryService deleteCategoryService, ModifyCategoryService modifyCategoryService, CategoryListService categoryListService) {
+    public CategorySecuredRestApi(CreateCategoryService createCategoryService,
+                                  DeleteCategoryService deleteCategoryService,
+                                  ModifyCategoryService modifyCategoryService,
+                                  CategoryListService categoryListService) {
         this.createCategoryService = createCategoryService;
         this.deleteCategoryService = deleteCategoryService;
         this.modifyCategoryService = modifyCategoryService;
@@ -57,5 +59,4 @@ public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
     public CategoryListDTO listaKategoriiPoStatusie(Boolean status) {
         return categoryListService.wyszukajKategoriePoStatusie(status);
     }
-
 }
