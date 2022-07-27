@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.user.dto.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 
 
 @Path(value = UserSecuredRestApiUrl.SCIEZKA_UZYTKOWNICY)

@@ -45,16 +45,16 @@ public class UserListService {
     }
 
     private List<UserOB> podajListeWedlugKryteriow(String term) {
-        TypedQuery<UserOB> query = entityManager.createQuery(przygotujZapytanieWyszukiwania(term),UserOB.class);
-        if (!term.isEmpty()){
-            query.setParameter("term","%" + term.toLowerCase() + "%");
+        TypedQuery<UserOB> query = entityManager.createQuery(przygotujZapytanieWyszukiwania(term), UserOB.class);
+        if (!term.isEmpty()) {
+            query.setParameter("term", "%" + term.toLowerCase() + "%");
         }
         return query.getResultList();
     }
 
     public String przygotujZapytanieWyszukiwania(String term) {
         StringBuilder query = new StringBuilder("SELECT u FROM UserOB u");
-        if (!term.isEmpty()){
+        if (!term.isEmpty()) {
             query.append(" WHERE LOWER(u.nazwisko) like :term");
         }
         query.append(" ORDER BY u.nazwisko DESC");

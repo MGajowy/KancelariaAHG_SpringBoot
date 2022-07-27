@@ -38,7 +38,8 @@ public class AuthServices {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
-    public String utworzTokenAutentykacji(JwtRequest authenticationRequest) throws Exception{
+
+    public String utworzTokenAutentykacji(JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
@@ -46,6 +47,7 @@ public class AuthServices {
         return token;
 
     }
+
     public String zapiszNowegoUzytkownika(RegistrationDTO user) {
         userDetailsService.save(user);
         return user.getUsername();
@@ -61,28 +63,27 @@ public class AuthServices {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }
+
     public Boolean weryfikujTokeniUstawHaslo(UserPasswordDTO dto) {
         UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
-        if(userOB != null){
+        if (userOB != null) {
             userOB.setStan(UserStateEnum.AKTYWNY);
             userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
             userRepository.save(userOB);
             return true;
-        }else{
+        } else {
             return false;
         }
-
     }
 
     public Boolean resetujHaslo(UserPasswordDTO dto) {
         UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
-        if(userOB != null){
-            userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
-            userRepository.save(userOB);
-            return true;
-        }else{
-            return false;
-        }
+        return userOB != null && extracted(dto, userOB);
+    }
 
+    private boolean extracted(UserPasswordDTO dto, UserOB userOB) {
+        userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
+        userRepository.save(userOB);
+        return true;
     }
 }

@@ -50,12 +50,12 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "AGH - kancelaria",
-                "Opis API.",
+                "Aplikacja kancelaria.",
                 "1.0",
                 "Terms of service",
                 new Contact("Michal Gajewski", "www.gajowy.pl", "michal.gajus@gmail.com"),
-                "License of API",
-                "API license URL",
+                "License of GAJOWY",
+                "API license GAJOWY",
                 Collections.emptyList());
     }
 

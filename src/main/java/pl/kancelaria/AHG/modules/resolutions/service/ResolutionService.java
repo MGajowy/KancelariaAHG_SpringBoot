@@ -13,15 +13,17 @@ import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListOfCategoryDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Service
 public class ResolutionService {
 
-    private final ResolutionsRepository resolutionsRepository;
+    private final  ResolutionsRepository resolutionsRepository;
     private final CategoriesRepository categoriesRepository;
     private final EntityManager entityManager;
 
@@ -55,6 +57,7 @@ public class ResolutionService {
     public ResolutionListOfCategoryDTO pobierzListeUchwalPoKategorii(Long idKategorii) {
         List<ResolutionsOB> resolutionsOBS = podajListeWedlugKategorii(idKategorii);
         CategoriesOB categoriesOB = categoriesRepository.getOne(idKategorii);
+
         return ResolutionListOfCategoryDTO.builder()
                 .nazwaKategorii(categoriesOB.getRodzajKategorii())
                 .listaUchwal(resolutionsOBS.stream().map(ResolutionsOB::getResolutionDTO).collect(Collectors.toList()))
@@ -73,4 +76,30 @@ public class ResolutionService {
         query.append(" ORDER BY r.opis DESC");
         return query.toString();
     }
+
+    public ResolutionListDTO pobierzListeUchwalCB() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ResolutionsOB> cq = cb.createQuery(ResolutionsOB.class);
+
+        Root<ResolutionsOB> resolutionsOBRoot = cq.from(ResolutionsOB.class);
+        cq.select(resolutionsOBRoot.get("tresc"));
+        cq.distinct(true);
+        cq.orderBy(cb.asc(resolutionsOBRoot.get("tresc")));
+        CriteriaQuery<ResolutionsOB> select = cq.select(resolutionsOBRoot);
+
+        TypedQuery<ResolutionsOB> query = entityManager.createQuery(select);
+        List<ResolutionsOB> resultList = query.getResultList();
+
+        List<ResolutionDTO> listaUchwal = new ArrayList<>();
+        resultList.forEach(r -> {
+            ResolutionDTO dto = new ResolutionDTO();
+            BeanUtils.copyProperties(r, dto);
+            listaUchwal.add(dto);
+        }
+        );
+        ResolutionListDTO resolutionListDTO = new ResolutionListDTO();
+        resolutionListDTO.setListaUchwal(listaUchwal);
+        return resolutionListDTO;
+    }
+
 }

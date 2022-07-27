@@ -26,8 +26,10 @@ class CreateCategoryServiceTest {
         category.setCzyPubliczny(true);
         category.setId(1L);
         category.setRodzajKategorii("nowa");
+
         // when
         Boolean actual = createCategoryService.dodajNowaKategorie(category);
+
         // then
         assertThat(actual).isNotNull();
         assertThat(actual).isTrue();

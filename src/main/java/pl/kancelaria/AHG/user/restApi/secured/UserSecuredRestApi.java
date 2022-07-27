@@ -24,7 +24,12 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
 
     @Autowired
-    public UserSecuredRestApi(UserListService userListService, UserService userService, AddUserService addUserService, DeleteUserService deleteUserService, ModifyUserService modifyUserService, UserDetailsServiceImpl userDetailsService) {
+    public UserSecuredRestApi(UserListService userListService,
+                              UserService userService,
+                              AddUserService addUserService,
+                              DeleteUserService deleteUserService,
+                              ModifyUserService modifyUserService,
+                              UserDetailsServiceImpl userDetailsService) {
         this.userListService = userListService;
         this.userService = userService;
         this.addUserService = addUserService;
@@ -64,8 +69,7 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public Boolean wyslijMailAktywacyjny(LocationDTO locationDTO) {
-        Boolean wynik = userService.aktywujUzytkownika(locationDTO);
-        return wynik;
+        return userService.aktywujUzytkownika(locationDTO);
     }
 
     @Override

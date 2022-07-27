@@ -77,6 +77,7 @@ public class UserService {
         rolesRepository.save(roles_1);
         rolesRepository.save(roles_2);
         logger.info("Dodano uzytkownika administracyjnego");
+        eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
 
     }
 
@@ -127,6 +128,7 @@ public class UserService {
 //                 userOB.setStan(UserStateEnum.AKTYWNY);
 //                 userRepository.save(userOB);
 //    }
+
     public boolean aktywujUzytkownika(LocationDTO locationDTO) {
         UserOB userOB = userRepository.getOne(locationDTO.getId());
         if (userOB.getEmail().isEmpty() || userOB.getEmail() == null) {
@@ -160,7 +162,6 @@ public class UserService {
             return true;
         }
     }
-
 
     public Boolean ResetHasla(ResetPasswordDTO dto) {
         UserOB userOB = userRepository.findAllByUserName(dto.getUsername());

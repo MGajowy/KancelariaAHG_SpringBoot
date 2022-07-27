@@ -22,4 +22,7 @@ public interface ResolutionPublicRestApi {
     @GET
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_KATEGORII + "/{id}")
     ResolutionListOfCategoryDTO pobierzListeUchwalPoKategorii(@PathVariable(value = "id")long id);
+
+    @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_CB)
+    ResolutionListDTO pobierzListeUchwalCB();
 }

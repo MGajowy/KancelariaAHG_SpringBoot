@@ -10,7 +10,6 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.Ca
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
-import pl.kancelaria.AHG.user.services.UserService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -93,6 +92,7 @@ public class CategoryListService {
     public CategoryListDTO wyszukajKategoriePoStatusie(Boolean status) {
         CategoryListDTO categoryListDTO = new CategoryListDTO();
         List<CategoriesOB> listCategoryOB = podajListeWedlugStatusu(status);
+
         List<CategoryDTO> collect = listCategoryOB.stream().map(CategoriesOB::listKategoriiPoStatus).collect(Collectors.toList());
         categoryListDTO.setListaKategorii(collect);
         return categoryListDTO;

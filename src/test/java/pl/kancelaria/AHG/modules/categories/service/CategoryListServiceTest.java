@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.CategoriesRepository;
+import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 
@@ -37,9 +38,11 @@ class CategoryListServiceTest {
         when(categoriesRepository.findAll()).thenReturn(createCategoryList());
         // when
         CategoryListDTO categoryListDTO = categoryListService.pobierzListeKategorii();
+        List<CategoryDTO> listaKategorii = categoryListDTO.getListaKategorii();
         // then
         assertThat(categoryListDTO.getListaKategorii()).isNotNull();
         assertThat(categoryListDTO.getListaKategorii()).hasSize(4);
+        assertThat(listaKategorii).extracting("czyPubliczny").contains(true);
     }
 
     @Test
@@ -64,15 +67,6 @@ class CategoryListServiceTest {
         assertThat(actual).hasSize(2);
     }
 
-    private List<CategoriesOB> createCategoryList() {
-        return Arrays.asList(
-                new CategoriesOB(1L, "NOWA", true),
-                new CategoriesOB(2L, "Publiczna", false),
-                new CategoriesOB(3L, "Inna", true),
-                new CategoriesOB(4L, "NOWA", false)
-        );
-    }
-
 //    @Test
 //    void shouldReturnCategoriesByName2() {
 //        // given
@@ -83,4 +77,13 @@ class CategoryListServiceTest {
 //        assertThat(actual.get(0)).isEqualTo("NOWA");
 //        assertThat(actual).hasSize(2);
 //    }
+
+    private List<CategoriesOB> createCategoryList() {
+        return Arrays.asList(
+                new CategoriesOB(1L, "NOWA", true),
+                new CategoriesOB(2L, "Publiczna", false),
+                new CategoriesOB(3L, "Inna", true),
+                new CategoriesOB(4L, "NOWA", false)
+        );
+    }
 }

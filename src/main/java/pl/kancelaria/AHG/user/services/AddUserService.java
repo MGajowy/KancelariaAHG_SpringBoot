@@ -11,10 +11,9 @@ public class AddUserService {
     private UserRepository userRepository;
 
     public AddUserService( UserRepository userRepository) {
-
         this.userRepository = userRepository;
     }
-
+    //todo metoda do dokończenia lub usuniecia
     public UserDTO utworzUzytkownikaZadministracji(){
         return null;
     }

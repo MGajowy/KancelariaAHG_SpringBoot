@@ -24,12 +24,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RolesRepository rolesRepository;
-@Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RolesRepository rolesRepository) {
+
+    @Autowired
+    public UserDetailsServiceImpl(UserRepository userRepository,
+                                  PasswordEncoder passwordEncoder,
+                                  RolesRepository rolesRepository) {
         this.userRepository = userRepository;
-    this.passwordEncoder = passwordEncoder;
-    this.rolesRepository = rolesRepository;
-}
+        this.passwordEncoder = passwordEncoder;
+        this.rolesRepository = rolesRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -41,8 +44,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<RolesOB> rolesNames = userOB.getRolesOBSet();
         UserDTO userDTO = new UserDTO();
         List<RolesName> rolesNameList = new ArrayList<>();
-        for (RolesOB rola: rolesNames) {
-           RolesName nowaRola =  rola.getNazwa();
+        for (RolesOB rola : rolesNames) {
+            RolesName nowaRola = rola.getNazwa();
             rolesNameList.add(nowaRola);
         }
         userDTO.setRole(rolesNameList);

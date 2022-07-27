@@ -13,7 +13,6 @@ public class UserPublicRestApi implements pl.kancelaria.AHG.shared.restapi.users
 
     @Autowired
     public UserPublicRestApi(UserService userService) {
-
         this.userService = userService;
     }
 
