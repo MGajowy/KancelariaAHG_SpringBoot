@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class ResolutionService {
 
-    private final  ResolutionsRepository resolutionsRepository;
+    private final ResolutionsRepository resolutionsRepository;
     private final CategoriesRepository categoriesRepository;
     private final EntityManager entityManager;
 
@@ -92,10 +92,10 @@ public class ResolutionService {
 
         List<ResolutionDTO> listaUchwal = new ArrayList<>();
         resultList.forEach(r -> {
-            ResolutionDTO dto = new ResolutionDTO();
-            BeanUtils.copyProperties(r, dto);
-            listaUchwal.add(dto);
-        }
+                    ResolutionDTO dto = new ResolutionDTO();
+                    BeanUtils.copyProperties(r, dto);
+                    listaUchwal.add(dto);
+                }
         );
         ResolutionListDTO resolutionListDTO = new ResolutionListDTO();
         resolutionListDTO.setListaUchwal(listaUchwal);

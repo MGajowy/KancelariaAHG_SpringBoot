@@ -123,8 +123,8 @@ export class HttpEntity<T> {
 }
 
 export class ResponseEntity<T> extends HttpEntity<T> {
-    statusCodeValue: number;
     statusCode: HttpStatus;
+    statusCodeValue: number;
 }
 
 export class Calendar implements Serializable, Cloneable, Comparable<Calendar> {

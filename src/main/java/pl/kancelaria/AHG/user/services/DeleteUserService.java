@@ -25,15 +25,17 @@ public class DeleteUserService {
         this.eventLogService = eventLogService;
     }
 
-    public ResponseEntity<HttpStatus> usunUzytkownika(long id) {
-        try {
+    public ResponseEntity<HttpStatus> usunUzytkownika(Long id) {
+        if (id != null) {
             UserOB userOB = userRepository.getOne(id);
             userRepository.deleteById(id);
             logger.info("Uzytkowinik o id: " + id + " zostal usuniety.");
             eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB.getUsername());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
+        } else {
+            logger.info("Uzytkowinik o id: " + id + " nie zostal poprawnie usuniety.");
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
+
 }

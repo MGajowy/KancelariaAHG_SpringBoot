@@ -15,8 +15,6 @@ ksrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/categories/restapi/pub/C
 Wsrc/main/java/pl/kancelaria/AHG/shared/restapi/users/restapi/pub/UserPublicRestApi.java,2\2\229c2fa727d2ef5f316323e4084426b462e2378a
 i
 9src/main/java/pl/kancelaria/AHG/user/dto/UserListDTO.java,0\a\0a9aceac9b11752f16eece8b8c50ac0b68a444fc
-|
-Lsrc/main/java/pl/kancelaria/AHG/administration/services/EventLogService.java,e\b\eb59c7f89bd4fe4c28ce3f224d24ea3979b1037a
 €
 Psrc/main/java/pl/kancelaria/AHG/common/entityModel/users/user/UserStateEnum.java,7\9\79995fdccd0ba3833a96237073a1d787dfb1190b
 
@@ -27,8 +25,6 @@ _src/main/java/pl/kancelaria/AHG/shared/restapi/users/restapi/secured/UserSecure
 ^src/main/java/pl/kancelaria/AHG/modules/categories/restapi/secured/CategorySecuredRestApi.java,e\c\ec5f9c83c2e9719e808f8ee49d5c0c78b0311881
 ‘
 asrc/main/java/pl/kancelaria/AHG/modules/resolutions/restapi/secured/ResolutionSecuredRestApi.java,b\3\b39f5fbd964cac9d077fbb82e2611462d4cd1dbc
-Ž
-^src/main/java/pl/kancelaria/AHG/common/entityModel/users/token/repository/TokenRepository.java,c\e\ce6505330bf7ef7c1c142fd4674a9a97226ce3aa
 ‰
 Ysrc/main/java/pl/kancelaria/AHG/modules/categories/restapi/pub/CategoryPublicRestApi.java,0\0\003dd1d05339c0dff456f78e60cd7e7b9026b9fe
 ˜
@@ -39,22 +35,14 @@ e
 5src/main/java/pl/kancelaria/AHG/user/dto/UserDTO.java,3\e\3ebdf0b07c896495757d3becde54147304b71c85
 t
 Dsrc/main/java/pl/kancelaria/AHG/user/services/ModifyUserService.java,e\a\ead44b4691219e263ad001236e64afb56f022bd7
-n
->src/main/java/pl/kancelaria/AHG/user/services/UserService.java,0\7\07264a560ae7642c2498765837b8562ce077a396
 z
 Jsrc/main/java/pl/kancelaria/AHG/shared/security/UzytkownikUprawnienia.java,4\5\45fc621be78ff39a19f51e15f1f07c1e4253caba
 w
 Gsrc/main/java/pl/kancelaria/AHG/user/restApi/pub/UserPublicRestApi.java,7\e\7e3549e7465bed53e486b9bce934a3a5e37c236c
 y
 Isrc/main/java/pl/kancelaria/AHG/user/services/UserDetailsServiceImpl.java,2\8\2810db4010e1ca76b804f68f6ae29b82137f9895
-q
-Asrc/main/java/pl/kancelaria/AHG/user/services/AddUserService.java,f\2\f2a801042d380327c9a03d3397919881be140f4b
-h
-8src/main/java/pl/kancelaria/AHG/user/role/RolesName.java,6\2\62d555b1963355e80ae2e4cd1db04cddb4e5caf8
 Ž
 ^src/main/java/pl/kancelaria/AHG/administration/configuration/jwt/config/WebSecurityConfig.java,e\8\e8a8ee06222e3a6290091ace20e35030cb714cfc
-t
-Dsrc/main/java/pl/kancelaria/AHG/user/services/DeleteUserService.java,d\4\d470d7ed8e97dc27befe81311f097ec0143d21a0
 Š
 Zsrc/main/java/pl/kancelaria/AHG/administration/configuration/jwt/config/SwaggerConfig.java,c\4\c4605822985f7d2581c9bf9a4fb77ff74674ab9e
 ‡
@@ -67,8 +55,6 @@ z
 Jsrc/main/java/pl/kancelaria/AHG/modules/resolutions/dto/ResolutionDTO.java,9\8\98b57ae6e172237cb15d5e72084ad16ac1389517
 ‰
 Ysrc/test/java/pl/kancelaria/AHG/modules/categories/service/CreateCategoryServiceTest.java,4\e\4e1383393e376fae6c528f7462ce7cdcb081d1b7
-r
-Bsrc/test/java/pl/kancelaria/AHG/user/services/UserServiceTest.java,f\0\f067f246fd05d79c18319720e56c9f604669e5a6
 v
 Fsrc/test/java/pl/kancelaria/AHG/user/services/UserListServiceTest.java,0\8\082219c7f9c248a644357d25604dfd2c0c71404d
 ~
@@ -81,7 +67,5 @@ w
 Gsrc/main/java/pl/kancelaria/AHG/modules/categories/dto/CategoryDTO.java,6\3\635ec592725906c787836801f163ce87b62c9530
 ˆ
 Xsrc/main/java/pl/kancelaria/AHG/modules/resolutions/dto/ResolutionListOfCategoryDTO.java,1\5\15a9cef9c3f065fe9ea36582a40bdd85516da960
-ƒ
-Ssrc/main/java/pl/kancelaria/AHG/modules/categories/service/CategoryListService.java,0\2\0286361530878d27ea7e9f3037afea00847e6612
 p
 @src/main/java/pl/kancelaria/AHG/shared/restapi/TSAllRestApi.java,e\6\e6bd6f9867c8f2858dcde5e3c3014bb464cb7b41

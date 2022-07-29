@@ -5,81 +5,61 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import pl.kancelaria.AHG.administration.services.EventLogService;
+import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
 import pl.kancelaria.AHG.common.entityModel.users.roles.RolesOB;
-import pl.kancelaria.AHG.common.entityModel.users.roles.repository.RolesRepository;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserSexEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
-import pl.kancelaria.AHG.user.dto.AddUserDTO;
 import pl.kancelaria.AHG.user.role.RolesName;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
-
+@MockitoSettings(strictness = Strictness.STRICT_STUBS)
 @ExtendWith(MockitoExtension.class)
-class UserServiceTest {
+class DeleteUserServiceTest {
     @Mock
-    PasswordEncoder passwordEncoder;
-
+    private UserRepository userRepository;
     @Mock
-    RolesRepository rolesRepository;
-
-    @Mock
-    UserRepository userRepository;
-
-    @Mock
-    EventLogService eventLogService;
-
+    private EventLogService eventLogService;
     @InjectMocks
-    UserService userService;
+    private DeleteUserService deleteUserService;
 
     @Test
-    void shouldCreateNewUser() {
-        // given
-        AddUserDTO userDTO = createUser();
-        RolesOB rolesOB = new RolesOB();
-        when(rolesRepository.findAllByNazwa(RolesName.USER)).thenReturn(rolesOB);
-
-        // when
-        boolean actual = userService.utworzNowegoUzytkownika(createUser());
-
-        // then
-        assertThat(actual).isTrue();
-    }
-
-    @Test
-    void shouldDeactivateUser() {
+    void shouldRemoveUser() {
         // given
         UserOB userOB = createUserOB();
         when(userRepository.getOne(1L)).thenReturn(userOB);
+        given(eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB.getUsername())).willReturn(true);
 
         // when
-        boolean actual = userService.dezaktuwujUzytkownika(1L);
+        ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.usunUzytkownika(1L);
 
         // then
-        assertThat(actual).isTrue();
+        assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 
-    private AddUserDTO createUser() {
-        AddUserDTO userDTO = new AddUserDTO();
-        userDTO.setImie("Adam");
-        userDTO.setNazwisko("Adamowicz");
-        userDTO.setUsername("adam");
-        userDTO.setTelefon("1111111111");
-//        userDTO.setStan(UserStateEnum.AKTYWNY);
-        userDTO.setRola(RolesName.USER);
-        userDTO.setEmail("m@hhh.pl");
-        userDTO.setPlec(UserSexEnum.MEZCZYZNA);
-        return userDTO;
+    @Test
+    void shouldNotRemoveUser() {
+        // given
+        UserOB userOB = createUserOB();
+
+        // when
+        ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.usunUzytkownika(null);
+
+        // then
+        assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.EXPECTATION_FAILED);
     }
 
     private UserOB createUserOB() {
@@ -99,5 +79,4 @@ class UserServiceTest {
         userOB.setPlec(UserSexEnum.MEZCZYZNA);
         return userOB;
     }
-
 }
