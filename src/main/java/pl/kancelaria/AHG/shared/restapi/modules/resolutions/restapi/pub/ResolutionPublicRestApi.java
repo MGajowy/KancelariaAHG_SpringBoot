@@ -8,6 +8,7 @@ import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListOfCategoryDTO;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 
 
 @Path(value = ResolutionPublicRestApiUrl.SCIEZKA_UCHWALY )
@@ -23,6 +24,11 @@ public interface ResolutionPublicRestApi {
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_KATEGORII + "/{id}")
     ResolutionListOfCategoryDTO pobierzListeUchwalPoKategorii(@PathVariable(value = "id")long id);
 
+    // todo niepodłaczony Rest
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_CB)
     ResolutionListDTO pobierzListeUchwalCB();
+
+    // todo niepodłaczony Rest
+    @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_OPISIE)
+    ResolutionListDTO pobierzListeUchwalPoOpisie(@QueryParam("opis") String opis);
 }

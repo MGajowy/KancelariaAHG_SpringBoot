@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -90,6 +91,30 @@ public class ResolutionService {
         TypedQuery<ResolutionsOB> query = entityManager.createQuery(select);
         List<ResolutionsOB> resultList = query.getResultList();
 
+        List<ResolutionDTO> listaUchwal = new ArrayList<>();
+        resultList.forEach(r -> {
+                    ResolutionDTO dto = new ResolutionDTO();
+                    BeanUtils.copyProperties(r, dto);
+                    listaUchwal.add(dto);
+                }
+        );
+        ResolutionListDTO resolutionListDTO = new ResolutionListDTO();
+        resolutionListDTO.setListaUchwal(listaUchwal);
+        return resolutionListDTO;
+    }
+
+    public ResolutionListDTO pobierzListeUchwalPoOpisieCB(String opis) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ResolutionsOB> cq = cb.createQuery(ResolutionsOB.class);
+
+        Root<ResolutionsOB> resolutionsOBRoot = cq.from(ResolutionsOB.class);
+        ParameterExpression<String> parameter = cb.parameter(String.class);
+        cq.where(cb.like(cb.lower(resolutionsOBRoot.get("opis")),  parameter));
+
+        TypedQuery<ResolutionsOB> query = entityManager.createQuery(cq);
+        query.setParameter(parameter,"%" + opis.toLowerCase() + "%");
+
+        List<ResolutionsOB> resultList = query.getResultList();
         List<ResolutionDTO> listaUchwal = new ArrayList<>();
         resultList.forEach(r -> {
                     ResolutionDTO dto = new ResolutionDTO();

@@ -25,10 +25,8 @@ class CategoryListServiceTest {
 
     @Mock
     public EntityManager entityManager;
-
     @Mock
     private CategoriesRepository categoriesRepository;
-
     @InjectMocks
     private CategoryListService categoryListService;
 

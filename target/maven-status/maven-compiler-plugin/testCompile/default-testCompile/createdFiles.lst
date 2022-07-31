@@ -1,4 +1,5 @@
 pl\kancelaria\AHG\modules\categories\service\CreateCategoryServiceTest.class
+pl\kancelaria\AHG\user\services\DeleteUserServiceTest.class
 pl\kancelaria\AHG\modules\resolutions\service\ResolutionServiceTest.class
 pl\kancelaria\AHG\modules\categories\service\CategoryListServiceTest.class
 pl\kancelaria\AHG\AhgApplicationTests.class

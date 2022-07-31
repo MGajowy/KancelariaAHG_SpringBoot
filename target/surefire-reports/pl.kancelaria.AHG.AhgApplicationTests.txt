@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: pl.kancelaria.AHG.AhgApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.378 s - in pl.kancelaria.AHG.AhgApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.336 s - in pl.kancelaria.AHG.AhgApplicationTests

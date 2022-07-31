@@ -17,12 +17,9 @@ import pl.kancelaria.AHG.common.entityModel.users.user.UserSexEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.user.role.RolesName;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 

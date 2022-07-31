@@ -31,4 +31,9 @@ public class ResolutionPublicRestApi implements pl.kancelaria.AHG.shared.restapi
     public ResolutionListDTO pobierzListeUchwalCB() {
         return resolutionService.pobierzListeUchwalCB();
     }
+
+    @Override
+    public ResolutionListDTO pobierzListeUchwalPoOpisie(String opis) {
+        return resolutionService.pobierzListeUchwalPoOpisieCB(opis);
+    }
 }

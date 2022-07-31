@@ -25,10 +25,6 @@ _src/main/java/pl/kancelaria/AHG/shared/restapi/users/restapi/secured/UserSecure
 ^src/main/java/pl/kancelaria/AHG/modules/categories/restapi/secured/CategorySecuredRestApi.java,e\c\ec5f9c83c2e9719e808f8ee49d5c0c78b0311881
 ‘
 asrc/main/java/pl/kancelaria/AHG/modules/resolutions/restapi/secured/ResolutionSecuredRestApi.java,b\3\b39f5fbd964cac9d077fbb82e2611462d4cd1dbc
-‰
-Ysrc/main/java/pl/kancelaria/AHG/modules/categories/restapi/pub/CategoryPublicRestApi.java,0\0\003dd1d05339c0dff456f78e60cd7e7b9026b9fe
-˜
-hsrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/categories/restapi/pub/CategoryPublicRestApi.java,e\8\e8e63432bc71769892ddb81d9a7d4bb823dcbc46
 }
 Msrc/main/java/pl/kancelaria/AHG/shared/security/AdministracjaUprawnienia.java,9\8\98265d6ce7a25b1b54b9d615e1f5da44266c283d
 e
