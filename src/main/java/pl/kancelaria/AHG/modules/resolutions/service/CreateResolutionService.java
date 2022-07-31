@@ -12,6 +12,8 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.R
 import pl.kancelaria.AHG.modules.resolutions.dto.CreateResotutionDTO;
 import pl.kancelaria.AHG.user.services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Service
 public class CreateResolutionService {
@@ -27,7 +29,7 @@ public class CreateResolutionService {
         this.eventLogService = eventLogService;
     }
 
-    public void dodajUchwale(CreateResotutionDTO resolutionDTO) {
+    public void dodajUchwale(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
         CategoriesOB categoriesOB = categoriesRepository.getOne(resolutionDTO.getKategoria());
         ResolutionsOB resolutionsOB =  new ResolutionsOB();
         resolutionsOB.setOpis(resolutionDTO.getOpis());
@@ -37,7 +39,7 @@ public class CreateResolutionService {
         this.resolutionsRepository.save(resolutionsOB);
         logger.info("Uchwała " + resolutionsOB.getOpis() + "zostałą dodana do listy.");
 
-        eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, "" );
+        eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, request.getRemoteUser() );
     }
 
 }

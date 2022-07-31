@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.modules.resolutions.dto.CreateResotutionDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 
 
@@ -18,7 +19,7 @@ public interface ResolutionSecuredRestApi {
     @POST
     @PostMapping(ResolutionSecuredRestApiUrl.DODAJ_UCHWALE)
     @Path(ResolutionSecuredRestApiUrl.DODAJ_UCHWALE)
-    ResponseEntity<HttpStatus> dodajUchale(@RequestBody CreateResotutionDTO resolutionDTO);
+    ResponseEntity<HttpStatus> dodajUchale(@RequestBody CreateResotutionDTO resolutionDTO, HttpServletRequest request);
 
     @PUT
     @PutMapping(ResolutionSecuredRestApiUrl.MODYFIKUJ_UCHWALE + "/{id}")

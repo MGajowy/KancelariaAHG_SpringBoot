@@ -4,8 +4,6 @@ Usrc/main/java/pl/kancelaria/AHG/modules/categories/service/CreateCategoryServic
 €
 Psrc/main/java/pl/kancelaria/AHG/modules/resolutions/dto/CreateResotutionDTO.java,6\5\65f61bcd8ff0f7fda745a5c229ae99311647e8d8
  
-psrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/resolutions/restapi/secured/ResolutionSecuredRestApi.java,f\e\fea684279ff1fda01129c69159a35e7f0109507b
- 
 psrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/categories/restapi/secured/CategorySecuredRestApiUrl.java,8\7\8714b0473e3c01c17ad0d57b6ed79e347190d5af
 ›
 ksrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/categories/restapi/pub/CategoryPublicRestApiUrl.java,0\1\0174c551e45f3b9e48e0dfd91402c9087352c027
@@ -23,8 +21,6 @@ msrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/categories/restapi/secur
 _src/main/java/pl/kancelaria/AHG/shared/restapi/users/restapi/secured/UserSecuredRestApiUrl.java,a\7\a77d9f778628baff51d5d70f551a372d2ef42705
 Ž
 ^src/main/java/pl/kancelaria/AHG/modules/categories/restapi/secured/CategorySecuredRestApi.java,e\c\ec5f9c83c2e9719e808f8ee49d5c0c78b0311881
-‘
-asrc/main/java/pl/kancelaria/AHG/modules/resolutions/restapi/secured/ResolutionSecuredRestApi.java,b\3\b39f5fbd964cac9d077fbb82e2611462d4cd1dbc
 }
 Msrc/main/java/pl/kancelaria/AHG/shared/security/AdministracjaUprawnienia.java,9\8\98265d6ce7a25b1b54b9d615e1f5da44266c283d
 e
@@ -43,10 +39,6 @@ Isrc/main/java/pl/kancelaria/AHG/user/services/UserDetailsServiceImpl.java,2\8\
 Zsrc/main/java/pl/kancelaria/AHG/administration/configuration/jwt/config/SwaggerConfig.java,c\4\c4605822985f7d2581c9bf9a4fb77ff74674ab9e
 ‡
 Wsrc/main/java/pl/kancelaria/AHG/administration/auth/restApi/pub/IAuthPublicRestApi.java,4\6\46691ff4a8bdbcbf15dca7522102b20bff25236d
-|
-Lsrc/main/java/pl/kancelaria/AHG/user/restApi/secured/UserSecuredRestApi.java,3\e\3ea4cc30a9a7e93505a9f4e318e98394a26e34c5
-Œ
-\src/main/java/pl/kancelaria/AHG/shared/restapi/users/restapi/secured/UserSecuredRestApi.java,6\e\6eab4cda14831e9bfd0acba9358c162fbda45432
 z
 Jsrc/main/java/pl/kancelaria/AHG/modules/resolutions/dto/ResolutionDTO.java,9\8\98b57ae6e172237cb15d5e72084ad16ac1389517
 ‰
