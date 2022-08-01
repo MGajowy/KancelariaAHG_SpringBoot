@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.administration.dto.EventLogListDTO;
 import pl.kancelaria.AHG.administration.services.EventLogService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 
 @RestController
 public class IAdministrationSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.administration.restapi.secured.IAdministrationSecuredRestApi {
@@ -19,5 +22,10 @@ public class IAdministrationSecuredRestApi implements pl.kancelaria.AHG.shared.r
     @Override
     public EventLogListDTO pobierzDziennikZdarzenDto() {
        return this.eventLogService.pobierzDziennikZdarzen();
+    }
+
+    @Override
+    public void exportToPDF(HttpServletResponse response) throws IOException {
+         eventLogService.exportToPDF(response);
     }
 }

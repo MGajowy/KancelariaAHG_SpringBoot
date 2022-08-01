@@ -51,6 +51,7 @@ pl\kancelaria\AHG\shared\restapi\users\restapi\pub\UserPublicRestApi.class
 pl\kancelaria\AHG\common\entityModel\regulations\category\repository\CategoryRegulationRepository.class
 pl\kancelaria\AHG\user\services\DeleteUserService.class
 pl\kancelaria\AHG\user\restApi\pub\UserPublicRestApi.class
+pl\kancelaria\AHG\administration\dto\ExportPDF.class
 pl\kancelaria\AHG\modules\categories\service\ModifyCategoryService.class
 pl\kancelaria\AHG\common\entityModel\administration\eventLog\EventLogOB.class
 pl\kancelaria\AHG\shared\restapi\modules\categories\restapi\pub\CategoryPublicRestApi.class
@@ -82,6 +83,7 @@ pl\kancelaria\AHG\shared\restapi\users\restapi\secured\UserSecuredRestApi.class
 pl\kancelaria\AHG\modules\resolutions\dto\CreateResotutionDTO.class
 pl\kancelaria\AHG\modules\categories\restapi\pub\CategoryPublicRestApi.class
 pl\kancelaria\AHG\modules\resolutions\dto\ResolutionListOfCategoryDTO$ResolutionListOfCategoryDTOBuilder.class
+pl\kancelaria\AHG\administration\dto\EventLogPDFExport.class
 pl\kancelaria\AHG\common\entityModel\administration\eventLog\EventLogConstants.class
 pl\kancelaria\AHG\modules\resolutions\service\ResolutionService.class
 pl\kancelaria\AHG\shared\restapi\modules\resolutions\restapi\pub\ResolutionPublicRestApi.class

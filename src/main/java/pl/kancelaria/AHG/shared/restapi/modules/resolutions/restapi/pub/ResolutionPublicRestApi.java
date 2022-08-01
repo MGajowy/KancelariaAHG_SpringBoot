@@ -28,7 +28,6 @@ public interface ResolutionPublicRestApi {
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_CB)
     ResolutionListDTO pobierzListeUchwalCB();
 
-    // todo niepodłaczony Rest
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_OPISIE)
     ResolutionListDTO pobierzListeUchwalPoOpisie(@QueryParam("opis") String opis);
 }

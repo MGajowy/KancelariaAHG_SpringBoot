@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.administration.dto.EventLogDTO;
 import pl.kancelaria.AHG.administration.dto.EventLogListDTO;
+import pl.kancelaria.AHG.administration.dto.EventLogPDFExport;
 import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogOB;
 import pl.kancelaria.AHG.common.entityModel.administration.eventLog.repository.EventLogRepository;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -54,6 +57,28 @@ public class EventLogService {
             listDTO.setListaLogow(dziennikZdarzen);
         } else {
             listDTO.setListaLogow(new ArrayList<>());
+        }
+        return listDTO;
+    }
+
+    public void exportToPDF(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=eventLog.pdf";
+
+        response.setHeader(headerKey, headerValue);
+        List<EventLogDTO> list = pobierzDziennikZdzrzenDTO();
+        EventLogPDFExport eventLogPDFExport = new EventLogPDFExport(list);
+        eventLogPDFExport.export(response);
+    }
+
+    private List<EventLogDTO> pobierzDziennikZdzrzenDTO() {
+        List<EventLogDTO> listDTO = new ArrayList<>();
+        List<EventLogOB> allOB = eventLogRepository.findAll();
+        for ( EventLogOB event : allOB ) {
+            EventLogDTO logDTO =  new EventLogDTO();
+            BeanUtils.copyProperties(event, logDTO);
+            listDTO.add(logDTO);
         }
         return listDTO;
     }
