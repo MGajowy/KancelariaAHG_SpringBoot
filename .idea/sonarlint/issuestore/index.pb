@@ -7,8 +7,6 @@ Psrc/main/java/pl/kancelaria/AHG/modules/resolutions/dto/CreateResotutionDTO.jav
 psrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/categories/restapi/secured/CategorySecuredRestApiUrl.java,8\7\8714b0473e3c01c17ad0d57b6ed79e347190d5af
 ›
 ksrc/main/java/pl/kancelaria/AHG/shared/restapi/modules/categories/restapi/pub/CategoryPublicRestApiUrl.java,0\1\0174c551e45f3b9e48e0dfd91402c9087352c027
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 ‡
 Wsrc/main/java/pl/kancelaria/AHG/shared/restapi/users/restapi/pub/UserPublicRestApi.java,2\2\229c2fa727d2ef5f316323e4084426b462e2378a
 i

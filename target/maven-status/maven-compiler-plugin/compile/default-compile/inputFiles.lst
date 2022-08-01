@@ -39,6 +39,7 @@ D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kance
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\users\restapi\pub\UserPublicRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\dto\CreateResotutionDTO.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\configuration\jwt\config\WebSecurityConfig.java
+D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\dto\ExportPDF.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\modules\resolutions\restapi\pub\ResolutionPublicRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\user\dto\ResetPasswordDTO.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\service\DeleteResolutionService.java
@@ -57,6 +58,7 @@ D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kance
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\categories\service\ModifyCategoryService.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\common\service\MailSenderService.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\service\ResolutionService.java
+D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\administration\dto\EventLogPDFExport.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\categories\dto\CategoryDTOrequest.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\administration\restapi\secured\AdministrationSecuredRestApiUrl.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\common\entityModel\resolutions\categories\CategoriesOB.java

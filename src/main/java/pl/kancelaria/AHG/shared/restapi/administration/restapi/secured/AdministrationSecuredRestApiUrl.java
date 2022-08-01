@@ -9,4 +9,5 @@ public class AdministrationSecuredRestApiUrl {
 
     public static final String SCIEZKA_ADMINISTRACJA = ADMINISTRACJA + REST_PATH_SECURED;
     public static final String DZIENNIK_ZDARZEN = "/dziennikZdarzen";
+    public static final String EXPORT_TO_PDF = "/exportPDF";
 }
