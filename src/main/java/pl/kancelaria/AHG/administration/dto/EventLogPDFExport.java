@@ -69,11 +69,9 @@ public class EventLogPDFExport implements ExportPDF {
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
         table.setWidths(new float[]{6.0f, 2.0f, 4.0f});
-
         writeTableHeader(table);
         writeTableData(table);
         document.add(table);
-
         document.close();
     }
 }

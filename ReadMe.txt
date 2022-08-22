@@ -3,3 +3,6 @@
 
 login: admin
 password: adminadmin
+
+@@ UWAGA  @@ - Wysyłka email nie działa, do poprawnego przetestowania funckji proszę o kontakt
+ ze mną w celu podania prawidłowego HASLA.

@@ -67,12 +67,12 @@ public class EventLogService {
         String headerValue = "attachment; filename=eventLog.pdf";
 
         response.setHeader(headerKey, headerValue);
-        List<EventLogDTO> list = pobierzDziennikZdzrzenDTO();
+        List<EventLogDTO> list = pobierzDziennikZdarzenDTO();
         EventLogPDFExport eventLogPDFExport = new EventLogPDFExport(list);
         eventLogPDFExport.export(response);
     }
 
-    private List<EventLogDTO> pobierzDziennikZdzrzenDTO() {
+    private List<EventLogDTO> pobierzDziennikZdarzenDTO() {
         List<EventLogDTO> listDTO = new ArrayList<>();
         List<EventLogOB> allOB = eventLogRepository.findAll();
         for ( EventLogOB event : allOB ) {

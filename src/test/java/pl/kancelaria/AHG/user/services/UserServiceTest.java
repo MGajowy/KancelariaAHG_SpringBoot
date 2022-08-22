@@ -29,16 +29,12 @@ import static org.mockito.Mockito.when;
 class UserServiceTest {
     @Mock
     PasswordEncoder passwordEncoder;
-
     @Mock
     RolesRepository rolesRepository;
-
     @Mock
     UserRepository userRepository;
-
     @Mock
     EventLogService eventLogService;
-
     @InjectMocks
     UserService userService;
 

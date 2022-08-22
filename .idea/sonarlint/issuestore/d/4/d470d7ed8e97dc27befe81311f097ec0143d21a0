@@ -1,0 +1,12 @@
+
+M
+java:S2629 "7Use the built-in formatting to construct this argument.(²«ϊ
+R
+java:S2629$"7Use the built-in formatting to construct this argument.(ίσ“­ώÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ƒ…±ώÿÿÿÿ
+W
+java:S3457 "AFormat specifiers should be used instead of string concatenation.(²«ϊ
+\
+java:S3457$"AFormat specifiers should be used instead of string concatenation.(ίσ“­ώÿÿÿÿ
+I
+java:S1068"3Remove this unused "rolesRepository" private field.(Δ®
