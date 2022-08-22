@@ -85,7 +85,7 @@ public class UserService {
         return jwtTokenUtil.generateToken(userDetails);
     }
 
-    private void wyslijEmailAktywacyjny(UserOB user, LocationDTO locationDTO) {
+    public void wyslijEmailAktywacyjny(UserOB user, LocationDTO locationDTO) {
         String token = utworzToken(user);
         TokenOB tokenOB = new TokenOB(user, token);
         tokenRepository.save(tokenOB);
@@ -157,7 +157,8 @@ public class UserService {
         if (token == null) {
             return false;
         } else {
-            UserOB userOB = tokenRepository.findByToken(token).getFk_uzytkownik();
+            TokenOB tokenOB = tokenRepository.findByToken(token);
+            UserOB userOB = tokenOB.getFk_uzytkownik();
             userOB.setStan(UserStateEnum.AKTYWNY);
             return true;
         }

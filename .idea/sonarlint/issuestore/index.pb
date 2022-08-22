@@ -65,8 +65,6 @@ Ysrc/main/java/pl/kancelaria/AHG/modules/categories/restapi/pub/CategoryPublicRe
 Lsrc/main/java/pl/kancelaria/AHG/administration/services/EventLogService.java,e\b\eb59c7f89bd4fe4c28ce3f224d24ea3979b1037a
 c
 3src/main/java/pl/kancelaria/AHG/AhgApplication.java,8\9\896238d1d2c6d6a6e34287f449ca9d6d2377d011
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 q
 Asrc/main/java/pl/kancelaria/AHG/user/services/AddUserService.java,f\2\f2a801042d380327c9a03d3397919881be140f4b
 t
