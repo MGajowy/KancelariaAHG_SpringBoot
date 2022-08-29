@@ -19,7 +19,7 @@ public class DeleteCategoryService {
         try {
             categoriesRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }

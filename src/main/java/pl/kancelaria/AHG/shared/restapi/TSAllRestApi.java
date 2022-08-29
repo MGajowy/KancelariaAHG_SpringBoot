@@ -5,6 +5,10 @@ import pl.kancelaria.AHG.shared.restapi.administration.restapi.secured.IAdminist
 import pl.kancelaria.AHG.shared.restapi.auth.restApi.pub.IAuthPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.pub.CategoryPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.secured.CategorySecuredRestApi;
+import pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.pub.CategoryRegulationPublicRestApi;
+import pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.secured.CategoryRegulationSecuredRestApi;
+import pl.kancelaria.AHG.shared.restapi.modules.regulations.restApi.pub.RegulationPublicRestApi;
+import pl.kancelaria.AHG.shared.restapi.modules.regulations.restApi.secured.RegulationSecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.pub.ResolutionPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.secured.ResolutionSecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.users.restapi.pub.UserPublicRestApi;
@@ -32,7 +36,11 @@ public class TSAllRestApi extends Application {
                 UserSecuredRestApi.class,
                 IAdministrationPublicRestApi.class,
                 IAdministrationSecuredRestApi.class,
-                IAuthPublicRestApi.class
+                IAuthPublicRestApi.class,
+                CategoryRegulationPublicRestApi.class,
+                CategoryRegulationSecuredRestApi.class,
+                RegulationPublicRestApi.class,
+                RegulationSecuredRestApi.class
                 ));
     }
 }
