@@ -8,13 +8,15 @@ public class RestApiUrlStale {
     public static final String USTAW_HASLO = "/ustaw-haslo";
     public static final String RESET_HASLA = "/reset-hasla";
 
-//     dostępy   rest/ ...../
+    //     dostępy   rest/ ...../
     public static final String REST_PATH_SECURED = "/secured";
     public static final String REST_PATH_PUBLIC = "/pub";
 
-//   sciezki modululow  rest/......
+    //   sciezki modululow  rest/......
     public static final String UZYTKOWNICY = REST_PATH + "/uzytkownicy";
     public static final String KATEGORIE = REST_PATH + "/kategorie";
     public static final String UCHWALY = REST_PATH + "/uchwaly";
+    public static final String ROZPORZADZENIA = REST_PATH + "/rozporzadzenia";
+    public static final String KATEGORIE_ROZPORZADZEN = REST_PATH + "/kategorieRozporzadzen";
     public static final String ADMINISTRACJA = REST_PATH + "/administracja";
 }
