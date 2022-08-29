@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
-@MockitoSettings(strictness = Strictness.STRICT_STUBS)
+//@MockitoSettings(strictness = Strictness.STRICT_STUBS)
 @ExtendWith(MockitoExtension.class)
 class DeleteUserServiceTest {
     @Mock

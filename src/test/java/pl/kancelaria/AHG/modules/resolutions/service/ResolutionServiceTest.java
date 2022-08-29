@@ -31,13 +31,13 @@ class ResolutionServiceTest {
 //    @Test
     void shouldReturnResolutionList() {
         // given
-//        when(cb).thenReturn(createResolutionList());
+
         // when
         ResolutionListDTO list = resolutionService.pobierzListeUchwalCB();
 
         // then
         assertThat(list).isNotNull();
-//        assertThat(list.get(0).getOpis()).isEqualTo("nowa1");
+
     }
 
     private List<ResolutionsOB> createResolutionList() {

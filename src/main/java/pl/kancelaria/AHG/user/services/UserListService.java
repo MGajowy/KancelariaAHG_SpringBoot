@@ -1,7 +1,6 @@
 package pl.kancelaria.AHG.user.services;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
@@ -31,13 +30,13 @@ public class UserListService {
         UserListDTO response = new UserListDTO();
         List<UserOB> userOBList = podajListeWedlugKryteriow(term);
         if (!CollectionUtils.isEmpty(userOBList)) {
-            List<UserDTO> uzytkownik = new ArrayList<>();
+            List<UserDTO> users = new ArrayList<>();
             userOBList.forEach(u -> {
                 UserDTO daneDTO = new UserDTO();
                 BeanUtils.copyProperties(u, daneDTO);
-                uzytkownik.add(daneDTO);
+                users.add(daneDTO);
             });
-            response.setListaUzytkownikow(uzytkownik);
+            response.setListaUzytkownikow(users);
         } else {
             response.setListaUzytkownikow(new ArrayList<>());
         }

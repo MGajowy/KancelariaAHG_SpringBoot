@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.modules.categories.service;
 
+import org.apache.logging.log4j.util.PropertySource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -58,6 +59,7 @@ public class CategoryListService {
 
     public CategoryListDTO wyszukajKategorie(String term) {
         CategoryListDTO respose = new CategoryListDTO();
+
         List<CategoriesOB> listOB = podajListeWedlugKryteriow(term);
         if (!CollectionUtils.isEmpty(listOB)) {
             List<CategoryDTO> listCategory = new ArrayList<>();
