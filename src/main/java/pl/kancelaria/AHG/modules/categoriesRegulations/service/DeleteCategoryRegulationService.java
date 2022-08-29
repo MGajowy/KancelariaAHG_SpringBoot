@@ -2,8 +2,10 @@ package pl.kancelaria.AHG.modules.categoriesRegulations.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.common.entityModel.regulations.category.repository.CategoryRegulationRepository;
 
+@Service
 public class DeleteCategoryRegulationService {
 
     private final CategoryRegulationRepository categoryRegulationRepository;

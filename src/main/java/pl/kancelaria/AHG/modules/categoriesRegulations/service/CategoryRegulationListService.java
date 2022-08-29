@@ -1,6 +1,7 @@
 package pl.kancelaria.AHG.modules.categoriesRegulations.service;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.common.entityModel.regulations.category.CategoryRegulationOB;
 import pl.kancelaria.AHG.common.entityModel.regulations.category.repository.CategoryRegulationRepository;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@Service
 public class CategoryRegulationListService {
 
     private final CategoryRegulationRepository categoryRegulationRepository;

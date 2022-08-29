@@ -2,12 +2,14 @@ package pl.kancelaria.AHG.modules.categoriesRegulations.restApi.secured;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categoriesRegulations.service.CategoryRegulationListService;
 import pl.kancelaria.AHG.modules.categoriesRegulations.service.CreateCategoryRegulationService;
 import pl.kancelaria.AHG.modules.categoriesRegulations.service.DeleteCategoryRegulationService;
 
+@RestController
 public class CategoryRegulationSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.secured.CategoryRegulationSecuredRestApi {
 
     private final CreateCategoryRegulationService createCategoryRegulationService;

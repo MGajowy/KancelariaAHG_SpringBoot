@@ -13,7 +13,7 @@ public interface CategoryRegulationSecuredRestApi {
     ResponseEntity<HttpStatus> dodajKategorie(@RequestBody CategoryDTO categoryDTO);
 
     @DeleteMapping(CategoryRegulationSecuredRestApiUrl.USUN_KATEGORIE + "/{id}")
-    ResponseEntity<HttpStatus> usunKategorie(long id);
+    ResponseEntity<HttpStatus> usunKategorie(@PathVariable(value = "id")long id);
 
     @GetMapping (CategoryRegulationSecuredRestApiUrl.SZCZEGOLY_KATEGORII + "/{id}")
     CategoryDTOrequest szczegolyKategorii(@PathVariable(value = "id") long id);
