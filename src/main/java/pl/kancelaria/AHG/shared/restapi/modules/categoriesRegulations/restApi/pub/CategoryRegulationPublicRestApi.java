@@ -3,11 +3,17 @@ package pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.p
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
-import pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.pub.ResolutionPublicRestApiUrl;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+
+@Path(value = CategoryRegulationPublicRestApiUrl.SCIEZKA_KATEGORIE_ROZPORZADZEN)
 @RequestMapping(value = CategoryRegulationPublicRestApiUrl.SCIEZKA_KATEGORIE_ROZPORZADZEN)
 public interface CategoryRegulationPublicRestApi {
 
-    @GetMapping (CategoryRegulationPublicRestApiUrl.WSZYSTKIE_KATEGORIE_ROZPORZADZEN)
+    @GET
+    @Path(CategoryRegulationPublicRestApiUrl.WSZYSTKIE_KATEGORIE_ROZPORZADZEN)
+    @GetMapping(CategoryRegulationPublicRestApiUrl.WSZYSTKIE_KATEGORIE_ROZPORZADZEN)
     CategoryListDTO pobierzListeKategorii();
 }

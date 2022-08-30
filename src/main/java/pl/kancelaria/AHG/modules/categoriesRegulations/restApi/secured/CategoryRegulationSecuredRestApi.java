@@ -25,19 +25,19 @@ public class CategoryRegulationSecuredRestApi implements pl.kancelaria.AHG.share
     }
 
     @Override
-    public ResponseEntity<HttpStatus> dodajKategorie(CategoryDTO categoryDTO) {
+    public ResponseEntity<HttpStatus> dodajKategorieRozporzadzenia(CategoryDTO categoryDTO) {
          createCategoryRegulationService.dodajNowaKategorie(categoryDTO);
          return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<HttpStatus> usunKategorie(long id) {
+    public ResponseEntity<HttpStatus> usunKategorieRozporzadzenia(long id) {
         deleteCategoryRegulationService.usunKategorie(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
-    public CategoryDTOrequest szczegolyKategorii(long id) {
+    public CategoryDTOrequest szczegolyKategoriiRozporzadzenia(long id) {
         return categoryRegulationListService.pobierzKategoriePoId(id);
     }
 }

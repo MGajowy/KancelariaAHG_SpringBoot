@@ -109,16 +109,17 @@ public class ResolutionService {
 
         Root<ResolutionsOB> resolutionsOBRoot = cq.from(ResolutionsOB.class);
         ParameterExpression<String> parameter = cb.parameter(String.class);
-        cq.where(cb.like(cb.lower(resolutionsOBRoot.get("opis")),  parameter));
+        cq.where(cb.like(cb.lower(resolutionsOBRoot.get("opis")), parameter));
 
         TypedQuery<ResolutionsOB> query = entityManager.createQuery(cq);
-        query.setParameter(parameter,"%" + opis.toLowerCase() + "%");
+        query.setParameter(parameter, "%" + opis.toLowerCase() + "%");
 
         List<ResolutionsOB> resultList = query.getResultList();
         List<ResolutionDTO> listaUchwal = new ArrayList<>();
         resultList.forEach(r -> {
                     ResolutionDTO dto = new ResolutionDTO();
                     BeanUtils.copyProperties(r, dto);
+                    dto.setNazwaKategorii(r.getKategoria().getRodzajKategorii());
                     listaUchwal.add(dto);
                 }
         );

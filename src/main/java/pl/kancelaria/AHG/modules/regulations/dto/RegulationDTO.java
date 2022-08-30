@@ -1,11 +1,11 @@
-package pl.kancelaria.AHG.modules.resolutions.dto;
+package pl.kancelaria.AHG.modules.regulations.dto;
 
 import lombok.Data;
 
 @Data
-public class ResolutionDTO {
+public class RegulationDTO {
     private long id;
-    private String opis;
+    private String nazwa;
     private String tresc;
     private Boolean czyPubliczny;
     private String nazwaKategorii;
