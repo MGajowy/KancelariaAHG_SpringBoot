@@ -2,14 +2,12 @@ package pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.s
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 
 @Path(value = CategoryRegulationSecuredRestApiUrl.SCIEZKA_KATEGORIE_ROZPORZADZEN)
 @RequestMapping(value = CategoryRegulationSecuredRestApiUrl.SCIEZKA_KATEGORIE_ROZPORZADZEN)
@@ -29,5 +27,10 @@ public interface CategoryRegulationSecuredRestApi {
     @Path(CategoryRegulationSecuredRestApiUrl.SZCZEGOLY_KATEGORII)
     @GetMapping(CategoryRegulationSecuredRestApiUrl.SZCZEGOLY_KATEGORII + "/{id}")
     CategoryDTOrequest szczegolyKategoriiRozporzadzenia(@PathVariable(value = "id") long id);
+
+    @PUT
+    @Path(CategoryRegulationSecuredRestApiUrl.MODYFIKUJ_KATEGORIE)
+    @PutMapping(CategoryRegulationSecuredRestApiUrl.MODYFIKUJ_KATEGORIE + "/{id}")
+    CategoryDTOrequest modyfikujKategorieRozporzadzenia(@PathVariable(value = "id") long id, @Validated @RequestBody CategoryDTOrequest request);
 
 }

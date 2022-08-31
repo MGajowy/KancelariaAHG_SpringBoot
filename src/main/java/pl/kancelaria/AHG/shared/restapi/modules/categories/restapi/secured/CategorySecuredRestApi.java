@@ -11,7 +11,7 @@ import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 import javax.ws.rs.*;
 
 @Path(value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
-@RequestMapping (value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
+@RequestMapping(value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
 //@Secured()
 public interface CategorySecuredRestApi {
 
@@ -21,9 +21,9 @@ public interface CategorySecuredRestApi {
     ResponseEntity<HttpStatus> dodajKategorie(@RequestBody CategoryDTO categoryDTO);
 
     @PUT
-    @PutMapping (CategorySecuredRestApiUrl.MODYFIKUJ_KATEGORIE  + "/{id}")
+    @PutMapping(CategorySecuredRestApiUrl.MODYFIKUJ_KATEGORIE + "/{id}")
     @Path(CategorySecuredRestApiUrl.MODYFIKUJ_KATEGORIE)
-    CategoryDTOrequest modyfikujKategorie( @PathVariable(value = "id")long id, @Validated @RequestBody CategoryDTOrequest request);
+    CategoryDTOrequest modyfikujKategorie(@PathVariable(value = "id") long id, @Validated @RequestBody CategoryDTOrequest request);
 
     @DELETE
     @DeleteMapping(CategorySecuredRestApiUrl.USUN_KATEGORIE + "/{id}")

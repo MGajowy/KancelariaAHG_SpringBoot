@@ -8,6 +8,7 @@ import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categoriesRegulations.service.CategoryRegulationListService;
 import pl.kancelaria.AHG.modules.categoriesRegulations.service.CreateCategoryRegulationService;
 import pl.kancelaria.AHG.modules.categoriesRegulations.service.DeleteCategoryRegulationService;
+import pl.kancelaria.AHG.modules.categoriesRegulations.service.ModifyCategoryRegulationService;
 
 @RestController
 public class CategoryRegulationSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.secured.CategoryRegulationSecuredRestApi {
@@ -15,19 +16,22 @@ public class CategoryRegulationSecuredRestApi implements pl.kancelaria.AHG.share
     private final CreateCategoryRegulationService createCategoryRegulationService;
     private final DeleteCategoryRegulationService deleteCategoryRegulationService;
     private final CategoryRegulationListService categoryRegulationListService;
+    private final ModifyCategoryRegulationService modifyCategoryRegulationService;
 
     public CategoryRegulationSecuredRestApi(CreateCategoryRegulationService createCategoryRegulationService,
                                             DeleteCategoryRegulationService deleteCategoryRegulationService,
-                                            CategoryRegulationListService categoryRegulationListService) {
+                                            CategoryRegulationListService categoryRegulationListService,
+                                            ModifyCategoryRegulationService modifyCategoryRegulationService) {
         this.createCategoryRegulationService = createCategoryRegulationService;
         this.deleteCategoryRegulationService = deleteCategoryRegulationService;
         this.categoryRegulationListService = categoryRegulationListService;
+        this.modifyCategoryRegulationService = modifyCategoryRegulationService;
     }
 
     @Override
     public ResponseEntity<HttpStatus> dodajKategorieRozporzadzenia(CategoryDTO categoryDTO) {
-         createCategoryRegulationService.dodajNowaKategorie(categoryDTO);
-         return new ResponseEntity<>(HttpStatus.OK);
+        createCategoryRegulationService.dodajNowaKategorie(categoryDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
@@ -39,5 +43,10 @@ public class CategoryRegulationSecuredRestApi implements pl.kancelaria.AHG.share
     @Override
     public CategoryDTOrequest szczegolyKategoriiRozporzadzenia(long id) {
         return categoryRegulationListService.pobierzKategoriePoId(id);
+    }
+
+    @Override
+    public CategoryDTOrequest modyfikujKategorieRozporzadzenia(long id, CategoryDTOrequest request) {
+        return modifyCategoryRegulationService.modyfikujKategorie(id, request);
     }
 }

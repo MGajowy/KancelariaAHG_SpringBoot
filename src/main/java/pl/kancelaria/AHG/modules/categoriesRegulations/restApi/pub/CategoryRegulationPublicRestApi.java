@@ -17,4 +17,9 @@ public class CategoryRegulationPublicRestApi implements pl.kancelaria.AHG.shared
     public CategoryListDTO pobierzListeKategorii() {
         return categoryRegulationListService.pobierzListeKategorii();
     }
+
+    @Override
+    public CategoryListDTO wyszukajKategorieRozporzadzenPoNazwie(String term) {
+        return categoryRegulationListService.pobierzListeKategoriiPoNazwie(term);
+    }
 }

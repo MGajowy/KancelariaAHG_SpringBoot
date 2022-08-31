@@ -8,5 +8,5 @@ public class CategoryRegulationPublicRestApiUrl {
     public static final String WSZYSTKIE_KATEGORIE_ROZPORZADZEN = "/wszystkieKategorieRozporzadzen";
     public static final String SZCZEGOLY_ROZPORZADZENIA = "/szczegoly";
     public static final String WYSZUKAJ_KATEGORIE_ROZPORZADZEN = "/wyszukajKategorieRozporzadzen";
-    public static final String WYSZUKAJ_KATEGORIE_ROZPORZADZENIA_PO_NAZWA = "/wyszukajKategoieRozporzadzeniaPoNazwa";
+    public static final String WYSZUKAJ_KATEGORIE_ROZPORZADZENIA_PO_NAZWA = "/wyszukajKategorieRozporzadzeniaPoNazwa";
 }
