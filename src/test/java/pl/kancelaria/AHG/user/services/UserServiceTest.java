@@ -5,6 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.kancelaria.AHG.administration.configuration.jwt.config.JwtTokenUtil;
 import pl.kancelaria.AHG.administration.services.EventLogService;
@@ -56,10 +58,10 @@ class UserServiceTest {
         when(rolesRepository.findAllByNazwa(RolesName.USER)).thenReturn(rolesOB);
 
         // when
-        boolean actual = userService.utworzNowegoUzytkownika(userDTO);
+        ResponseEntity<HttpStatus> actual = userService.utworzNowegoUzytkownika(userDTO);
 
         // then
-        assertThat(actual).isTrue();
+        assertThat(actual.getStatusCodeValue()).isEqualTo(201);
         assertThat(userDTO.getUsername()).isNotEmpty();
         assertThat(userDTO.getImie()).isEqualTo("Adam");
         assertThat(userDTO.getNazwisko()).isEqualTo("Adamowicz");

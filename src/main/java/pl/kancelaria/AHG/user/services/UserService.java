@@ -2,6 +2,8 @@ package pl.kancelaria.AHG.user.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -99,26 +101,30 @@ public class UserService {
         }
     }
 
-    public boolean utworzNowegoUzytkownika(AddUserDTO user) {
-        RolesOB role = rolesRepository.findAllByNazwa(user.getRola());
-        List<RolesOB> list = new ArrayList<>();
-        list.add(role);
-        UserOB userOB = new UserOB();
-        userOB.setImie(user.getImie());
-        userOB.setNazwisko(user.getNazwisko());
-        userOB.setUserName(user.getUsername());
-        userOB.setEmail(user.getEmail());
-        userOB.setTelefon(user.getTelefon());
-        userOB.setPlec(user.getPlec());
-        userOB.setStan(UserStateEnum.NIEAKTYWNY);
-        userOB.setRolesOBSet(list);
-        List<UserOB> userRoles = new ArrayList<>();
-        userRoles.add(userOB);
-        role.setUserOBSet(userRoles);
-        this.userRepository.save(userOB);
-        logger.info("Uzytkownik " + userOB.getUsername() + " zostal poprawnie dodany do bazy danych.");
-        eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
-        return true;
+    public ResponseEntity<HttpStatus> utworzNowegoUzytkownika(AddUserDTO user) {
+        try {
+            RolesOB role = rolesRepository.findAllByNazwa(user.getRola());
+            List<RolesOB> list = new ArrayList<>();
+            list.add(role);
+            UserOB userOB = new UserOB();
+            userOB.setImie(user.getImie());
+            userOB.setNazwisko(user.getNazwisko());
+            userOB.setUserName(user.getUsername());
+            userOB.setEmail(user.getEmail());
+            userOB.setTelefon(user.getTelefon());
+            userOB.setPlec(user.getPlec());
+            userOB.setStan(UserStateEnum.NIEAKTYWNY);
+            userOB.setRolesOBSet(list);
+            List<UserOB> userRoles = new ArrayList<>();
+            userRoles.add(userOB);
+            role.setUserOBSet(userRoles);
+            this.userRepository.save(userOB);
+            logger.info("Uzytkownik " + userOB.getUsername() + " zostal poprawnie dodany do bazy danych.");
+            eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
     //nowa metoda weryfikacji tokena

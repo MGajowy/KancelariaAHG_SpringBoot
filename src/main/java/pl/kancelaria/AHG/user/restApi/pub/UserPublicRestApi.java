@@ -18,13 +18,11 @@ public class UserPublicRestApi implements pl.kancelaria.AHG.shared.restapi.users
 
     @Override
     public Boolean weryfikujToken(String token) {
-        Boolean wynik = userService.checkToken(token);
-        return wynik;
+        return userService.checkToken(token);
     }
 
     @Override
     public Boolean ResetHasla(ResetPasswordDTO dto) {
-        Boolean wynik = userService.ResetHasla(dto);
-        return wynik;
+        return userService.ResetHasla(dto);
     }
 }

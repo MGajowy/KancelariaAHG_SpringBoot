@@ -44,7 +44,7 @@ class DeleteUserServiceTest {
         ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.usunUzytkownika(1L);
 
         // then
-        assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     @Test
@@ -56,7 +56,7 @@ class DeleteUserServiceTest {
         ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.usunUzytkownika(null);
 
         // then
-        assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.EXPECTATION_FAILED);
+        assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 
     private UserOB createUserOB() {

@@ -17,9 +17,9 @@ public class DeleteCategoryRegulationService {
     public ResponseEntity<HttpStatus> usunKategorie(long id) {
         try {
             categoryRegulationRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 }

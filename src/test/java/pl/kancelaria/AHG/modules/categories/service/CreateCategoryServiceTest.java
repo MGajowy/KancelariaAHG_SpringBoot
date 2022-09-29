@@ -5,6 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 
@@ -28,11 +30,11 @@ class CreateCategoryServiceTest {
         category.setRodzajKategorii("nowa");
 
         // when
-        Boolean actual = createCategoryService.dodajNowaKategorie(category);
+        ResponseEntity<HttpStatus> actual = createCategoryService.dodajNowaKategorie(category);
 
         // then
         assertThat(actual).isNotNull();
-        assertThat(actual).isTrue();
+        assertThat(actual.getStatusCodeValue()).isEqualTo(201);
 
     }
 

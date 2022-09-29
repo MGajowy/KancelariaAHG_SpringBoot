@@ -44,6 +44,6 @@ public class CreateRegulationService {
             eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEGO_ROZPORZADZENIA, request.getRemoteUser());
             return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

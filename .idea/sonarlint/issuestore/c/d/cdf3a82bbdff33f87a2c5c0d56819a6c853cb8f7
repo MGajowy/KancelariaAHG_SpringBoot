@@ -1,0 +1,5 @@
+
+P
+java:S1191"5Use classes from the Java API instead of Sun classes.(‡œ£ÿÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ú¨Şå
+m	java:S116!"SRename this field "uchwaÅ‚a" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì´©ûÿÿÿÿ

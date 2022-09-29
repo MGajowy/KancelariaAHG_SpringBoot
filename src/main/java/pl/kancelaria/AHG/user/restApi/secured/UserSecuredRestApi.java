@@ -45,8 +45,7 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public ResponseEntity<HttpStatus> utworzUzytkownika(AddUserDTO addUserDTO, HttpServletRequest request) {
-        userService.utworzNowegoUzytkownika(addUserDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return userService.utworzNowegoUzytkownika(addUserDTO);
     }
 
     @Override
@@ -57,8 +56,7 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public ResponseEntity<HttpStatus> usunUzytkownika(@PathVariable("id") long id) {
-        deleteUserService.usunUzytkownika(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return deleteUserService.usunUzytkownika(id);
     }
 
 //    @Override
@@ -74,14 +72,12 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public Boolean dezaktywacjaUzytkownika(@PathVariable("id") long id, HttpServletRequest request) {
-        Boolean wynik = userService.dezaktuwujUzytkownika(id);
-        return wynik;
+        return userService.dezaktuwujUzytkownika(id);
     }
 
     @Override
     public UserDTO szczegolyUzytkownika(long id) {
-        UserDTO userDTO = userDetailsService.szczegoly(id);
-        return userDTO;
+        return userDetailsService.szczegoly(id);
     }
 
     @Override

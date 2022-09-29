@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.secured.ResolutionSecuredRestApi {
-    
+
     private final CreateResolutionService createResolutionService;
     private final DeleteResolutionService deleteResolutionService;
     private final UpdateResolutionService updateResolutionService;
@@ -32,8 +32,7 @@ public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restap
 
     @Override
     public ResponseEntity<HttpStatus> dodajUchale(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
-        createResolutionService.dodajUchwale(resolutionDTO, request);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return createResolutionService.dodajUchwale(resolutionDTO, request);
     }
 
     @Override
@@ -43,8 +42,7 @@ public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restap
 
     @Override
     public ResponseEntity<HttpStatus> usunUchwale(long id) {
-        deleteResolutionService.usunUchwale(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return deleteResolutionService.usunUchwale(id);
     }
 
     //todo dokonczyc serwis szczegolow

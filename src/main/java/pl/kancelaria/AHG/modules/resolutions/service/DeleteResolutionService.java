@@ -2,6 +2,8 @@ package pl.kancelaria.AHG.modules.resolutions.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.services.EventLogService;
 import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
@@ -22,16 +24,16 @@ public class DeleteResolutionService {
         this.eventLogService = eventLogService;
     }
 
-    public Boolean usunUchwale(long id) {
+    public ResponseEntity<HttpStatus> usunUchwale(long id) {
         try {
             ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
             resolutionsRepository.deleteById(id);
             logger.info("Uchwala " + resolutionsOB.getOpis() + "została usunięta.");
             eventLogService.dodajLog(EventLogConstants.USUNIECIE_UCHWALY,null);
-            return true;
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
             logger.error("Niepoprawnie usunięto uchwałę", ex);
-            return false;
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 }
