@@ -118,7 +118,6 @@ class UserServiceTest {
         userDTO.setNazwisko("Adamowicz");
         userDTO.setUsername("adam");
         userDTO.setTelefon("1111111111");
-//        userDTO.setStan(UserStateEnum.AKTYWNY);
         userDTO.setRola(RolesName.USER);
         userDTO.setEmail("m@hhh.pl");
         userDTO.setPlec(UserSexEnum.MEZCZYZNA);

@@ -31,7 +31,6 @@ class ResolutionServiceTest {
 //    @Test
     void shouldReturnResolutionList() {
         // given
-
         // when
         ResolutionListDTO list = resolutionService.pobierzListeUchwalCB();
 
@@ -45,7 +44,6 @@ class ResolutionServiceTest {
                 new ResolutionsOB(1L, "nowa1", "nowa1", true, new CategoriesOB()),
                 new ResolutionsOB(2L, "nowa2", "nowa2", true, new CategoriesOB()),
                 new ResolutionsOB(3L, "nowa3", "nowa3", false, new CategoriesOB())
-
         );
     }
 }

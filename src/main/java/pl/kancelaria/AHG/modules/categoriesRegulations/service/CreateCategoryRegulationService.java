@@ -24,7 +24,7 @@ public class CreateCategoryRegulationService {
             if (categoryDTO.getCzyPubliczny() == null)
                 categoryRegulationOB.setCzyPubliczny(false);
             categoryRegulationRepository.save(categoryRegulationOB);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

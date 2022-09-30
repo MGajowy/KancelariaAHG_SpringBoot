@@ -65,17 +65,6 @@ class CategoryListServiceTest {
         assertThat(actual).hasSize(2);
     }
 
-//    @Test
-//    void shouldReturnCategoriesByName2() {
-//        // given
-//        when(categoriesRepository.findCategoriesobsByRodzajKategorii("NOWA")).thenReturn(createCategoryList());
-//        // when
-//        List<String> actual = categoryListService.pobierzListeKategoriiPoNazwie2("NOWA");
-//        // then
-//        assertThat(actual.get(0)).isEqualTo("NOWA");
-//        assertThat(actual).hasSize(2);
-//    }
-
     private List<CategoriesOB> createCategoryList() {
         return Arrays.asList(
                 new CategoriesOB(1L, "NOWA", true),

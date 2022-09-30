@@ -42,7 +42,7 @@ public class CreateRegulationService {
             this.regulationRepository.save(regulationOB);
             logger.info("Rozporzadzenie " + regulationDTO.getNazwa() + " zostało dodane do listy.");
             eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEGO_ROZPORZADZENIA, request.getRemoteUser());
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

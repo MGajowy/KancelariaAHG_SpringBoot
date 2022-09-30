@@ -35,7 +35,5 @@ class CreateCategoryServiceTest {
         // then
         assertThat(actual).isNotNull();
         assertThat(actual.getStatusCodeValue()).isEqualTo(201);
-
     }
-
 }

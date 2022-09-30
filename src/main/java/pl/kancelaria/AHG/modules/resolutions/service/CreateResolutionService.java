@@ -42,7 +42,7 @@ public class CreateResolutionService {
             this.resolutionsRepository.save(resolutionsOB);
             logger.info("Uchwała " + resolutionsOB.getOpis() + "została dodana do listy.");
             eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, request.getRemoteUser() );
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
