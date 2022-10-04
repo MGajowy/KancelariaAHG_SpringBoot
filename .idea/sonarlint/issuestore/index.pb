@@ -25,8 +25,6 @@ p
 @src/main/java/pl/kancelaria/AHG/shared/restapi/TSAllRestApi.java,e\6\e6bd6f9867c8f2858dcde5e3c3014bb464cb7b41
 Y
 )AHG-Web/AHG-app/src/app/generated/REST.ts,f\8\f89b1bd24ee78e6ea572725eee14a08759c6b7f1
-‘
-asrc/main/java/pl/kancelaria/AHG/common/entityModel/administration/eventLog/EventLogConstants.java,3\6\36ff66b311dff0375fad2caf1462c45d31d5007a
 ~
 Nsrc/main/java/pl/kancelaria/AHG/modules/resolutions/dto/ResolutionListDTO.java,2\8\289a1ee068183693c66e7d844cef5ba867878d69
 z
