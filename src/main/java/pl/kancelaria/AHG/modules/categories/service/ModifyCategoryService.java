@@ -17,15 +17,11 @@ public class ModifyCategoryService {
     }
 
     public CategoryDTOrequest modyfikujKategorie(long id, CategoryDTOrequest request) {
-//        Optional<CategoriesOB> dataCategory = this.categoriesRepository.findById(id);
-        //if (data.isPresent()){
         CategoriesOB categoriesOB = this.categoriesRepository.getOne(id);
         categoriesOB.setCzyPubliczny(request.getCzyPubliczny());
         categoriesOB.setRodzajKategorii(request.getRodzajKategorii());
-//            response.setId(request.getId());
         this.categoriesRepository.save(categoriesOB);
         BeanUtils.copyProperties(categoriesOB, request);
         return request;
-        //  }
     }
 }

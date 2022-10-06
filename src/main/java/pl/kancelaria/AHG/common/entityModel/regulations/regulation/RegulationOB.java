@@ -26,7 +26,7 @@ public class RegulationOB {
 
     @NonNull
     @Column(name = ModelConstants.KOLUMNA_czy_publiczny)
-    private Boolean czy_publiczny;
+    private Boolean czyPubliczny;
 
     @ManyToOne
     @JoinColumn(name = "kategoria_fk")

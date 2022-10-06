@@ -37,7 +37,7 @@ public class CreateRegulationService {
             RegulationOB regulationOB = new RegulationOB();
             regulationOB.setKategoria(categoryRegulationOB);
             regulationOB.setTresc(regulationDTO.getTresc());
-            regulationOB.setCzy_publiczny(regulationDTO.getCzyPubliczny());
+            regulationOB.setCzyPubliczny(regulationDTO.getCzyPubliczny());
             regulationOB.setNazwa(regulationDTO.getNazwa());
             this.regulationRepository.save(regulationOB);
             logger.info("Rozporzadzenie " + regulationDTO.getNazwa() + " zostało dodane do listy.");

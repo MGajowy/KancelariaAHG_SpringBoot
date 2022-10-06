@@ -10,5 +10,5 @@ public class CategorySecuredRestApiUrl {
     public static final String USUN_KATEGORIE = "/usun-kategorie";
     public static final String SZCZEGOLY_KATEGORII = "/szczegoly-kategorii";
 
-    public static final String STATUS_KATEGORII = "/statusKategorii" ;
+    public static final String STATUS_KATEGORII = "/statusKategorii";
 }
