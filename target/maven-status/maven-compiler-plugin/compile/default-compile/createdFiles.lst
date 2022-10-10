@@ -1,5 +1,6 @@
 pl\kancelaria\AHG\shared\restapi\modules\categoriesRegulations\restApi\secured\CategoryRegulationSecuredRestApiUrl.class
 pl\kancelaria\AHG\common\entityModel\users\user\UserAccountType.class
+pl\kancelaria\AHG\shared\restapi\modules\about\onlineHelp\pub\OnlineHelpPublicRestApiUrl.class
 pl\kancelaria\AHG\common\entityModel\ModelConstants.class
 pl\kancelaria\AHG\modules\resolutions\service\CreateResolutionService.class
 pl\kancelaria\AHG\common\entityModel\resolutions\resolutions\ResolutionsOB.class
@@ -13,11 +14,13 @@ pl\kancelaria\AHG\common\entityModel\users\token\repository\TokenRepository.clas
 pl\kancelaria\AHG\common\entityModel\resolutions\OrPublic.class
 pl\kancelaria\AHG\shared\restapi\users\restapi\secured\UserSecuredRestApiUrl.class
 pl\kancelaria\AHG\common\entityModel\users\user\UserStateEnum.class
+pl\kancelaria\AHG\modules\about\onlineHelp\restApi\OnlineHelpPublicRestApi.class
 pl\kancelaria\AHG\modules\resolutions\service\DeleteResolutionService.class
 pl\kancelaria\AHG\modules\categoriesRegulations\service\CategoryRegulationListService.class
 pl\kancelaria\AHG\modules\resolutions\service\UpdateResolutionService.class
 pl\kancelaria\AHG\common\entityModel\users\roles\RolesOB.class
 pl\kancelaria\AHG\shared\restapi\administration\restapi\pub\AdministrationPublicRestApiUrl.class
+pl\kancelaria\AHG\modules\about\onlineHelp\service\OnlineHelpService.class
 pl\kancelaria\AHG\administration\dto\EventLogDTO.class
 pl\kancelaria\AHG\shared\restapi\administration\restapi\secured\IAdministrationSecuredRestApi.class
 pl\kancelaria\AHG\shared\restapi\modules\regulations\restApi\secured\RegulationSecuredRestApiUrl.class
@@ -40,6 +43,7 @@ pl\kancelaria\AHG\common\entityModel\resolutions\categories\repository\Categorie
 pl\kancelaria\AHG\shared\restapi\TSAllRestApi.class
 pl\kancelaria\AHG\modules\regulations\service\DeleteRegulationService.class
 pl\kancelaria\AHG\common\entityModel\resolutions\categories\CategoriesOB.class
+pl\kancelaria\AHG\modules\about\onlineHelp\dto\OnlineHelpRequestDto.class
 pl\kancelaria\AHG\modules\categoriesRegulations\service\ModifyCategoryRegulationService.class
 pl\kancelaria\AHG\administration\configuration\jwt\config\WebSecurityConfig.class
 pl\kancelaria\AHG\modules\resolutions\restapi\pub\ResolutionPublicRestApi.class
@@ -121,4 +125,5 @@ pl\kancelaria\AHG\common\entityModel\users\token\TokenOB.class
 pl\kancelaria\AHG\shared\restapi\auth\restApi\pub\IAuthPublicRestApi.class
 pl\kancelaria\AHG\shared\security\UzytkownikUprawnienia.class
 pl\kancelaria\AHG\modules\resolutions\dto\ResolutionDTO.class
+pl\kancelaria\AHG\shared\restapi\modules\about\onlineHelp\pub\IOnlineHelpPublicRestApi.class
 pl\kancelaria\AHG\administration\configuration\jwt\service\JwtUserDetailsService.class
