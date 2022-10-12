@@ -9,11 +9,14 @@ import pl.kancelaria.AHG.administration.services.EventLogService;
 import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
 import pl.kancelaria.AHG.common.entityModel.users.roles.repository.RolesRepository;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
+import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
 
 
 @Service
 public class DeleteUserService {
+    public static final String DELETED = "deleted";
+
     private final UserRepository userRepository;
     private final RolesRepository rolesRepository;
     private final EventLogService eventLogService;
@@ -28,9 +31,16 @@ public class DeleteUserService {
     public ResponseEntity<HttpStatus> usunUzytkownika(Long id) {
         if (id != null) {
             UserOB userOB = userRepository.getOne(id);
-            userRepository.deleteById(id);
+            String userName = userOB.getUsername();
+            userOB.setUserName(DELETED);
+            userOB.setEmail(null);
+            userOB.setImie(DELETED);
+            userOB.setNazwisko(DELETED);
+            userOB.setTelefon(DELETED);
+            userOB.setPassword(DELETED);
+            userOB.setStan(null);
             logger.info("Uzytkowinik o id: " + id + " zostal usuniety.");
-            eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB.getUsername());
+            eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userName);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             logger.info("Uzytkowinik o id: " + id + " nie zostal poprawnie usuniety.");

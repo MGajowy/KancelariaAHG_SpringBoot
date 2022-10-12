@@ -1,6 +1,5 @@
 package pl.kancelaria.AHG.common.entityModel.users.user;
 
-import org.jetbrains.annotations.Nullable;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,8 +15,6 @@ import java.util.*;
 @Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_uzytkownik)
 @Data
 public class UserOB implements UserDetails {
-
-    private String WYSZUKAJ_ROLE = "wyszukaj role użytkownika";
 
     public UserOB() {
     }
@@ -61,8 +58,8 @@ public class UserOB implements UserDetails {
 //    @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
 //    private Byte[] zdjecie_profilowe;
 
-    @Nullable
-    @Column(name = ModelConstants.KOLUMNA_stan, length = 32, nullable = false)
+
+    @Column(name = ModelConstants.KOLUMNA_stan, length = 32)
     @Enumerated(value = EnumType.STRING)
     private UserStateEnum stan;
 

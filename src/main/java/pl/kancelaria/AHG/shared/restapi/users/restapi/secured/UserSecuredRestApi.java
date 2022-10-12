@@ -5,13 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.user.dto.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
 
 
 @Path(value = UserSecuredRestApiUrl.SCIEZKA_UZYTKOWNICY)
-@RequestMapping (value = UserSecuredRestApiUrl.SCIEZKA_UZYTKOWNICY )
+@RequestMapping(value = UserSecuredRestApiUrl.SCIEZKA_UZYTKOWNICY)
 //@Secured()
 public interface UserSecuredRestApi {
 
@@ -28,7 +28,7 @@ public interface UserSecuredRestApi {
     @PUT
     @PutMapping(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA)
-    UserDTO modyfikujUzytkownika( @PathVariable(value = "id")long id, @Validated @RequestBody UserDTO userDTO);
+    UserDTO modyfikujUzytkownika(@PathVariable(value = "id") long id, @Validated @RequestBody UserDTO userDTO);
 
     @DELETE
     @DeleteMapping(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA + "/{id}")
@@ -36,7 +36,7 @@ public interface UserSecuredRestApi {
     ResponseEntity<HttpStatus> usunUzytkownika(long id);
 
     @POST
-    @PostMapping (UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
+    @PostMapping(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
     @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
     Boolean wyslijMailAktywacyjny(@RequestBody LocationDTO locationDTO);
 
@@ -53,10 +53,10 @@ public interface UserSecuredRestApi {
     @GET
     @GetMapping(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA)
-    UserDTO szczegolyUzytkownika(@PathVariable(value = "id")long id);
+    UserDTO szczegolyUzytkownika(@PathVariable(value = "id") long id);
 
     //todo rest niepodłączony
     @GET
     @GetMapping(UserSecuredRestApiUrl.UZYTKOWNICY_PO_STAN)
-    UserListDTO pobierzListeUzytkownikowPoStan(@QueryParam("stan")String stan);
+    UserListDTO pobierzListeUzytkownikowPoStan(@QueryParam("stan") String stan);
 }

@@ -53,8 +53,9 @@ public class UserListService {
 
     public String przygotujZapytanieWyszukiwania(String term) {
         StringBuilder query = new StringBuilder("SELECT u FROM UserOB u");
+        query.append(" WHERE u.userName != 'deleted'");
         if (!term.isEmpty()) {
-            query.append(" WHERE LOWER(u.nazwisko) like :term");
+            query.append(" AND LOWER(u.nazwisko) like :term");
         }
         query.append(" ORDER BY u.nazwisko DESC");
         return query.toString();
