@@ -3,7 +3,6 @@ package pl.kancelaria.AHG.user.restApi.secured;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.user.dto.*;
@@ -40,23 +39,23 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public UserListDTO pobierzListeUzytkownikowDto(String term) {
-        return userListService.pobierzListeUzytkownikow(term);
+        return userListService.getUserList(term);
     }
 
     @Override
     public ResponseEntity<HttpStatus> utworzUzytkownika(AddUserDTO addUserDTO, HttpServletRequest request) {
-        return userService.utworzNowegoUzytkownika(addUserDTO);
+        return userService.createNewUser(addUserDTO);
     }
 
     @Override
     public UserDTO modyfikujUzytkownika(long id, UserDTO userDTO) {
-        modifyUserService.modyfikujUzytkownika(id, userDTO);
+        modifyUserService.modifyUser(id, userDTO);
         return userDTO;
     }
 
     @Override
     public ResponseEntity<HttpStatus> usunUzytkownika(@PathVariable("id") long id) {
-        return deleteUserService.usunUzytkownika(id);
+        return deleteUserService.deleteUser(id);
     }
 
 //    @Override
@@ -67,21 +66,21 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 
     @Override
     public Boolean wyslijMailAktywacyjny(LocationDTO locationDTO) {
-        return userService.aktywujUzytkownika(locationDTO);
+        return userService.userActivation(locationDTO);
     }
 
     @Override
     public Boolean dezaktywacjaUzytkownika(@PathVariable("id") long id, HttpServletRequest request) {
-        return userService.dezaktuwujUzytkownika(id);
+        return userService.userDeactivation(id);
     }
 
     @Override
     public UserDTO szczegolyUzytkownika(long id) {
-        return userDetailsService.szczegoly(id);
+        return userDetailsService.userDetails(id);
     }
 
     @Override
     public UserListDTO pobierzListeUzytkownikowPoStan(String stan) {
-        return userListService.pobierzListeUzytkownikowPoStan(stan);
+        return userListService.getUserListOfStatus(stan);
     }
 }

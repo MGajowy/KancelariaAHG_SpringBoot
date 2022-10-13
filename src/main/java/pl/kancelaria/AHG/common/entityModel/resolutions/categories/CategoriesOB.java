@@ -41,7 +41,7 @@ public class CategoriesOB {
     public CategoriesOB() {
     }
 
-    public CategoryDTO listKategoriiPoStatus() {
+    public CategoryDTO categoryListByStatus() {
         CategoryDTO dto = new CategoryDTO();
         dto.setRodzajKategorii(rodzajKategorii);
         dto.setCzyPubliczny(czyPubliczny);

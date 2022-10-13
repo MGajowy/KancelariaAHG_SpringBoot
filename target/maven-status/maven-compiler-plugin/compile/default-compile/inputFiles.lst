@@ -80,6 +80,7 @@ D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kance
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\administration\restapi\secured\AdministrationSecuredRestApiUrl.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\regulations\dto\CreateRegulationDTO.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\common\entityModel\resolutions\categories\CategoriesOB.java
+D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\about\onlineHelp\service\OnlineHelpConstant.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\categories\dto\CategoryListDTO.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\modules\resolutions\restapi\secured\ResolutionSecuredRestApi.java
 D:\Projekty_Michal\KancelariaAHG\KancelariaAHG_SpringBoot\src\main\java\pl\kancelaria\AHG\shared\restapi\modules\regulations\restApi\secured\RegulationSecuredRestApiUrl.java

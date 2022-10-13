@@ -15,7 +15,6 @@ import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.role.RolesName;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -36,7 +35,7 @@ public class ModifyUserService {
         this.eventLogService = eventLogService;
     }
 
-    public UserDTO modyfikujUzytkownika(long id, UserDTO userDTO) {
+    public UserDTO modifyUser(long id, UserDTO userDTO) {
         List<RolesName> rolesNames = userDTO.getRole();
         List<RolesOB> role = new ArrayList<>();
         for (RolesName rola : rolesNames) {
@@ -61,7 +60,7 @@ public class ModifyUserService {
         final UserOB updateUser = userRepository.save(userOB);
         BeanUtils.copyProperties(updateUser, userDTO);
         logger.info("Zmodyfikowano uzytkownika o emailu: " + userOB.getEmail());
-        eventLogService.dodajLog(EventLogConstants.MODYFIAKCJA_UZYTKOWNIKA, userDTO.getUsername());
+        eventLogService.createLog(EventLogConstants.MODYFIAKCJA_UZYTKOWNIKA, userDTO.getUsername());
         return userDTO;
     }
 }

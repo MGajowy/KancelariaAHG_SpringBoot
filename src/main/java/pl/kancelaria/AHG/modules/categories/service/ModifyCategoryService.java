@@ -16,7 +16,7 @@ public class ModifyCategoryService {
         this.categoriesRepository = categoriesRepository;
     }
 
-    public CategoryDTOrequest modyfikujKategorie(long id, CategoryDTOrequest request) {
+    public CategoryDTOrequest modifyCategories(long id, CategoryDTOrequest request) {
         CategoriesOB categoriesOB = this.categoriesRepository.getOne(id);
         categoriesOB.setCzyPubliczny(request.getCzyPubliczny());
         categoriesOB.setRodzajKategorii(request.getRodzajKategorii());

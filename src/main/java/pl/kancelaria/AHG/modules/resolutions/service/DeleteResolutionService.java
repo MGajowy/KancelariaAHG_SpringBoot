@@ -24,12 +24,12 @@ public class DeleteResolutionService {
         this.eventLogService = eventLogService;
     }
 
-    public ResponseEntity<HttpStatus> usunUchwale(long id) {
+    public ResponseEntity<HttpStatus> deleteResolution(long id) {
         try {
             ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
             resolutionsRepository.deleteById(id);
             logger.info("Uchwala " + resolutionsOB.getOpis() + "została usunięta.");
-            eventLogService.dodajLog(EventLogConstants.USUNIECIE_UCHWALY,null);
+            eventLogService.createLog(EventLogConstants.USUNIECIE_UCHWALY,null);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
             logger.error("Niepoprawnie usunięto uchwałę", ex);

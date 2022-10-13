@@ -14,7 +14,7 @@ public class DeleteCategoryRegulationService {
         this.categoryRegulationRepository = categoryRegulationRepository;
     }
 
-    public ResponseEntity<HttpStatus> usunKategorie(long id) {
+    public ResponseEntity<HttpStatus> deleteCategories(long id) {
         try {
             categoryRegulationRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);

@@ -18,6 +18,6 @@ public class OnlineHelpPublicRestApi implements IOnlineHelpPublicRestApi {
 
     @Override
     public ResponseEntity<HttpStatus> wyslijPowiadomienie(OnlineHelpRequestDto request) {
-        return onlineHelpService.wyslijPowidomienieEmail(request);
+        return onlineHelpService.sendEmailNotification(request);
     }
 }

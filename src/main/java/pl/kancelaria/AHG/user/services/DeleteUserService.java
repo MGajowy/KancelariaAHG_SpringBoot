@@ -9,7 +9,6 @@ import pl.kancelaria.AHG.administration.services.EventLogService;
 import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
 import pl.kancelaria.AHG.common.entityModel.users.roles.repository.RolesRepository;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
-import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
 
 
@@ -28,7 +27,7 @@ public class DeleteUserService {
         this.eventLogService = eventLogService;
     }
 
-    public ResponseEntity<HttpStatus> usunUzytkownika(Long id) {
+    public ResponseEntity<HttpStatus> deleteUser(Long id) {
         if (id != null) {
             UserOB userOB = userRepository.getOne(id);
             String userName = userOB.getUsername();
@@ -40,7 +39,7 @@ public class DeleteUserService {
             userOB.setPassword(DELETED);
             userOB.setStan(null);
             logger.info("Uzytkowinik o id: " + id + " zostal usuniety.");
-            eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userName);
+            eventLogService.createLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userName);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             logger.info("Uzytkowinik o id: " + id + " nie zostal poprawnie usuniety.");

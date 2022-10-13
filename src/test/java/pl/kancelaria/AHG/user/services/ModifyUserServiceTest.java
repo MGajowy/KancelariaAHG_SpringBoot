@@ -51,7 +51,7 @@ class ModifyUserServiceTest {
         when(userRepository.save(any())).thenReturn(modifyUserOB);
 
         // when
-        UserDTO userDTO = modifyUserService.modyfikujUzytkownika(1L, modifyUser);
+        UserDTO userDTO = modifyUserService.modifyUser(1L, modifyUser);
 
         // then
         assertThat(userDTO.getUsername()).isEqualTo(USERNAME);

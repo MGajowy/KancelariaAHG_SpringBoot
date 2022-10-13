@@ -10,7 +10,6 @@ import pl.kancelaria.AHG.common.entityModel.users.roles.RolesOB;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserSexEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
-import pl.kancelaria.AHG.user.dto.AddUserDTO;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.dto.UserListDTO;
 import pl.kancelaria.AHG.user.role.RolesName;
@@ -42,7 +41,7 @@ class UserListServiceTest {
         listaUzytkownikow.add(createUser());
         // when
 
-        UserListDTO userListDTO = userListService.pobierzListeUzytkownikow("adam");
+        UserListDTO userListDTO = userListService.getUserList("adam");
 
         // then
         assertThat(userListDTO.getListaUzytkownikow().get(0).getUsername()).isEqualTo("adam");

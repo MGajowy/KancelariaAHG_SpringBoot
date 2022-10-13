@@ -19,6 +19,6 @@ public class RegulationSecuredRestApi implements pl.kancelaria.AHG.shared.restap
 
     @Override
     public ResponseEntity<HttpStatus> dodajRozporzadzenie(CreateRegulationDTO regulationDTO, HttpServletRequest request) {
-        return createRegulationService.dodajNoweRozporzadzenie(regulationDTO, request);
+        return createRegulationService.addNewRegulation(regulationDTO, request);
     }
 }

@@ -26,9 +26,9 @@ public class UserListService {
         this.userRepository = userRepository;
     }
 
-    public UserListDTO pobierzListeUzytkownikow(String term) {
+    public UserListDTO getUserList(String term) {
         UserListDTO response = new UserListDTO();
-        List<UserOB> userOBList = podajListeWedlugKryteriow(term);
+        List<UserOB> userOBList = provideCriteriaList(term);
         if (!CollectionUtils.isEmpty(userOBList)) {
             List<UserDTO> users = new ArrayList<>();
             userOBList.forEach(u -> {
@@ -43,15 +43,15 @@ public class UserListService {
         return response;
     }
 
-    private List<UserOB> podajListeWedlugKryteriow(String term) {
-        TypedQuery<UserOB> query = entityManager.createQuery(przygotujZapytanieWyszukiwania(term), UserOB.class);
+    private List<UserOB> provideCriteriaList(String term) {
+        TypedQuery<UserOB> query = entityManager.createQuery(prepareSearchInquiry(term), UserOB.class);
         if (!term.isEmpty()) {
             query.setParameter("term", "%" + term.toLowerCase() + "%");
         }
         return query.getResultList();
     }
 
-    public String przygotujZapytanieWyszukiwania(String term) {
+    public String prepareSearchInquiry(String term) {
         StringBuilder query = new StringBuilder("SELECT u FROM UserOB u");
         query.append(" WHERE u.userName != 'deleted'");
         if (!term.isEmpty()) {
@@ -61,9 +61,9 @@ public class UserListService {
         return query.toString();
     }
 
-    public UserListDTO pobierzListeUzytkownikowPoStan(String stan) {
+    public UserListDTO getUserListOfStatus(String stan) {
         UserListDTO response = new UserListDTO();
-        List<UserOB> listOB = userRepository.findUserobsByStan(sprawdzStan(stan));
+        List<UserOB> listOB = userRepository.findUserobsByStan(checkStatus(stan));
         if (!CollectionUtils.isEmpty(listOB)) {
             List<UserDTO> dtoList = new ArrayList<>();
             listOB.forEach(userOB -> {
@@ -78,8 +78,9 @@ public class UserListService {
         return response;
     }
 
-    private UserStateEnum sprawdzStan(String stan) {
+    private UserStateEnum checkStatus(String stan) {
         UserStateEnum userStateEnum = null;
+
         switch (stan) {
             case "AKTYWNY":
                 userStateEnum = UserStateEnum.AKTYWNY;

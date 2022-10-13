@@ -21,7 +21,7 @@ public class IAdministrationSecuredRestApi implements pl.kancelaria.AHG.shared.r
 
     @Override
     public EventLogListDTO pobierzDziennikZdarzenDto() {
-       return this.eventLogService.pobierzDziennikZdarzen();
+       return this.eventLogService.downloadEventLog();
     }
 
     @Override

@@ -32,14 +32,14 @@ public class CategoryRegulationListService {
         this.entityManager = entityManager;
     }
 
-    public CategoryDTOrequest pobierzKategoriePoId(long id) {
+    public CategoryDTOrequest getCategoriesById(long id) {
         CategoryRegulationOB categoryRegulationOB = categoryRegulationRepository.getOne(id);
         CategoryDTOrequest categoryDTOrequest = new CategoryDTOrequest();
         BeanUtils.copyProperties(categoryRegulationOB, categoryDTOrequest);
         return categoryDTOrequest;
     }
 
-    public CategoryListDTO pobierzListeKategorii() {
+    public CategoryListDTO getCategoryList() {
         CategoryListDTO response = new CategoryListDTO();
         List<CategoryRegulationOB> categoryRegulationOB = categoryRegulationRepository.findAll();
         if (!CollectionUtils.isEmpty(categoryRegulationOB)) {
@@ -59,7 +59,7 @@ public class CategoryRegulationListService {
         return response;
     }
 
-    public CategoryListDTO pobierzListeKategoriiPoNazwie(String term) {
+    public CategoryListDTO getCategoryListByName(String term) {
         CategoryListDTO response = new CategoryListDTO();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<CategoryRegulationOB> cq = cb.createQuery(CategoryRegulationOB.class);

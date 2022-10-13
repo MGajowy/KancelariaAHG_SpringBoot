@@ -23,6 +23,6 @@ public class UserPublicRestApi implements pl.kancelaria.AHG.shared.restapi.users
 
     @Override
     public Boolean ResetHasla(ResetPasswordDTO dto) {
-        return userService.ResetHasla(dto);
+        return userService.passwordReset(dto);
     }
 }

@@ -35,28 +35,28 @@ public class ResolutionService {
         this.entityManager = entityManager;
     }
 
-    public ResolutionListDTO pobierzListeUchwal() {
-        ResolutionListDTO resolutionListDTO = new ResolutionListDTO();
+    public ResolutionListDTO getResolutionList() {
+        ResolutionListDTO response = new ResolutionListDTO();
         List<ResolutionsOB> resolutionsOBS = this.resolutionsRepository.findAll();
         if (!CollectionUtils.isEmpty(resolutionsOBS)) {
-            List<ResolutionDTO> listaUchwal = new ArrayList<>();
+            List<ResolutionDTO> resolutionList= new ArrayList<>();
             resolutionsOBS.forEach(e -> {
                 ResolutionDTO daneDTO = new ResolutionDTO();
                 BeanUtils.copyProperties(e, daneDTO);
                 CategoriesOB categoriesOB = this.categoriesRepository.getOne(e.getKategoria().getId());
                 daneDTO.setNazwaKategorii(categoriesOB.getRodzajKategorii());
-                listaUchwal.add(daneDTO);
+                resolutionList.add(daneDTO);
             });
-            resolutionListDTO.setListaUchwal(listaUchwal);
+            response.setListaUchwal(resolutionList);
         } else {
-            resolutionListDTO.setListaUchwal(new ArrayList<>());
+            response.setListaUchwal(new ArrayList<>());
         }
-        return resolutionListDTO;
+        return response;
     }
 
     // todo zrobic walidacje !!!!
-    public ResolutionListOfCategoryDTO pobierzListeUchwalPoKategorii(Long idKategorii) {
-        List<ResolutionsOB> resolutionsOBS = podajListeWedlugKategorii(idKategorii);
+    public ResolutionListOfCategoryDTO getResolutionListByCategories(Long idKategorii) {
+        List<ResolutionsOB> resolutionsOBS = getListByCategory(idKategorii);
         CategoriesOB categoriesOB = categoriesRepository.getOne(idKategorii);
 
         return ResolutionListOfCategoryDTO.builder()
@@ -65,20 +65,20 @@ public class ResolutionService {
                 .build();
     }
 
-    private List<ResolutionsOB> podajListeWedlugKategorii(Long idKategorii) {
-        TypedQuery<ResolutionsOB> query = entityManager.createQuery(przygotujZapytanieListyUchwal(idKategorii), ResolutionsOB.class);
+    private List<ResolutionsOB> getListByCategory(Long idKategorii) {
+        TypedQuery<ResolutionsOB> query = entityManager.createQuery(prepareResolutionListInquiry(idKategorii), ResolutionsOB.class);
         query.setParameter("idKategoria", idKategorii);
         return query.getResultList();
     }
 
-    private String przygotujZapytanieListyUchwal(Long idKategorii) {
+    private String prepareResolutionListInquiry(Long idKategorii) {
         StringBuilder query = new StringBuilder("SELECT r FROM ResolutionsOB r");
         query.append(" WHERE r.kategoria.id = :idKategoria");
         query.append(" ORDER BY r.opis DESC");
         return query.toString();
     }
 
-    public ResolutionListDTO pobierzListeUchwalCB() {
+    public ResolutionListDTO getResolutionListCB() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ResolutionsOB> cq = cb.createQuery(ResolutionsOB.class);
 
@@ -91,19 +91,19 @@ public class ResolutionService {
         TypedQuery<ResolutionsOB> query = entityManager.createQuery(select);
         List<ResolutionsOB> resultList = query.getResultList();
 
-        List<ResolutionDTO> listaUchwal = new ArrayList<>();
+        List<ResolutionDTO> resolutionList = new ArrayList<>();
         resultList.forEach(r -> {
                     ResolutionDTO dto = new ResolutionDTO();
                     BeanUtils.copyProperties(r, dto);
-                    listaUchwal.add(dto);
+            resolutionList.add(dto);
                 }
         );
-        ResolutionListDTO resolutionListDTO = new ResolutionListDTO();
-        resolutionListDTO.setListaUchwal(listaUchwal);
-        return resolutionListDTO;
+        ResolutionListDTO response = new ResolutionListDTO();
+        response.setListaUchwal(resolutionList);
+        return response;
     }
 
-    public ResolutionListDTO pobierzListeUchwalPoOpisieCB(String opis) {
+    public ResolutionListDTO getResolutionListByDescription(String opis) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ResolutionsOB> cq = cb.createQuery(ResolutionsOB.class);
 
@@ -115,17 +115,17 @@ public class ResolutionService {
         query.setParameter(parameter, "%" + opis.toLowerCase() + "%");
 
         List<ResolutionsOB> resultList = query.getResultList();
-        List<ResolutionDTO> listaUchwal = new ArrayList<>();
+        List<ResolutionDTO> resolutionList = new ArrayList<>();
         resultList.forEach(r -> {
                     ResolutionDTO dto = new ResolutionDTO();
                     BeanUtils.copyProperties(r, dto);
                     dto.setNazwaKategorii(r.getKategoria().getRodzajKategorii());
-                    listaUchwal.add(dto);
+            resolutionList.add(dto);
                 }
         );
-        ResolutionListDTO resolutionListDTO = new ResolutionListDTO();
-        resolutionListDTO.setListaUchwal(listaUchwal);
-        return resolutionListDTO;
+        ResolutionListDTO response = new ResolutionListDTO();
+        response.setListaUchwal(resolutionList);
+        return response;
     }
 
 }

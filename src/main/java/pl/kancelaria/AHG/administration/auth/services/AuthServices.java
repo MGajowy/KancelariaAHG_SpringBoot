@@ -39,7 +39,7 @@ public class AuthServices {
         this.userRepository = userRepository;
     }
 
-    public String utworzTokenAutentykacji(JwtRequest authenticationRequest) throws Exception {
+    public String createAuthenticationToken(JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
@@ -48,7 +48,7 @@ public class AuthServices {
 
     }
 
-    public String zapiszNowegoUzytkownika(RegistrationDTO user) {
+    public String saveNewUser(RegistrationDTO user) {
         userDetailsService.save(user);
         return user.getUsername();
     }
@@ -64,7 +64,7 @@ public class AuthServices {
         }
     }
 
-    public Boolean weryfikujTokeniUstawHaslo(UserPasswordDTO dto) {
+    public Boolean verifyTokenAndSetPassword(UserPasswordDTO dto) {
         UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
         if (userOB != null) {
             userOB.setStan(UserStateEnum.AKTYWNY);
@@ -76,7 +76,7 @@ public class AuthServices {
         }
     }
 
-    public Boolean resetujHaslo(UserPasswordDTO dto) {
+    public Boolean resetPassword(UserPasswordDTO dto) {
         UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
         return userOB != null && extracted(dto, userOB);
     }

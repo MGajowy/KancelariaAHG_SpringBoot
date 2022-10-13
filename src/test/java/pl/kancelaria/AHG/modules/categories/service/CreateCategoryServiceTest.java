@@ -30,7 +30,7 @@ class CreateCategoryServiceTest {
         category.setRodzajKategorii("nowa");
 
         // when
-        ResponseEntity<HttpStatus> actual = createCategoryService.dodajNowaKategorie(category);
+        ResponseEntity<HttpStatus> actual = createCategoryService.addNewCategories(category);
 
         // then
         assertThat(actual).isNotNull();

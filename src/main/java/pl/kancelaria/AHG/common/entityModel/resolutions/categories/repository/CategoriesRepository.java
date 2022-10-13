@@ -18,5 +18,5 @@ public interface CategoriesRepository extends JpaRepository<CategoriesOB, Long> 
     @Query(value = "SELECT * FROM CategoriesOB c WHERE c.rodzajKategorii = :rodzajKategorii", nativeQuery = true)
     List<CategoriesOB> findCategoriesByRodzajKategoriiImpl(@Param("rodzajKategorii")String rodzajKategorii);
 
-    List<CategoriesOB> findCategoriesobsByRodzajKategorii(String rodzajKategorii);
+    List<CategoriesOB> findCategoriesOBsByRodzajKategorii(String rodzajKategorii);
 }

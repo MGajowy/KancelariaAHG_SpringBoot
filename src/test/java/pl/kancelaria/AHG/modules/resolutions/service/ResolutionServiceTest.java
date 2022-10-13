@@ -32,7 +32,7 @@ class ResolutionServiceTest {
     void shouldReturnResolutionList() {
         // given
         // when
-        ResolutionListDTO list = resolutionService.pobierzListeUchwalCB();
+        ResolutionListDTO list = resolutionService.getResolutionListCB();
 
         // then
         assertThat(list).isNotNull();

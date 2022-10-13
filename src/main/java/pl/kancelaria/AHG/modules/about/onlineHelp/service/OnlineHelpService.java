@@ -20,8 +20,6 @@ public class OnlineHelpService {
 
     @Value("${onlineHelp.email}")
     String emailAdmin;
-    public static final String TEMAT_WIADOMOSCI_DO_PETENTA = "Potwierdzenie wysłania wiadomości do Kancelaria Adwokacka Angelika Holender-Gajewska";
-    public static final String TEMAT_WIADOMOSCI_DO_ADMINA = "Zapytanie dotyczące pomocy ONLINE";
 
     private final MailSenderService mailSenderService;
     private final EventLogService eventLogService;
@@ -32,7 +30,7 @@ public class OnlineHelpService {
         this.eventLogService = eventLogService;
     }
 
-    public ResponseEntity<HttpStatus> wyslijPowidomienieEmail(OnlineHelpRequestDto request) {
+    public ResponseEntity<HttpStatus> sendEmailNotification(OnlineHelpRequestDto request) {
         boolean resultValidation = validateMessage(request);
         if (resultValidation) {
             String message = request.getMessage()
@@ -40,11 +38,11 @@ public class OnlineHelpService {
                     .concat("\n" + "email: " + request.getEmail())
                     .concat("\n" + "telefon: " + request.getPhoneNumber());
             try {
-                mailSenderService.sendMail(request.getEmail(), TEMAT_WIADOMOSCI_DO_PETENTA, message, false);
+                mailSenderService.sendMail(request.getEmail(), OnlineHelpConstant.TEMAT_WIADOMOSCI_DO_PETENTA, message, false);
                 logger.info("Wysłano powiadomienie email od użytkownika: " + request.getEmail());
-                mailSenderService.sendMail(emailAdmin, TEMAT_WIADOMOSCI_DO_ADMINA, message, false);
+                mailSenderService.sendMail(emailAdmin, OnlineHelpConstant.TEMAT_WIADOMOSCI_DO_ADMINA, message, false);
                 logger.info("Wysłano powiadomienie emial do admina: " + emailAdmin);
-                eventLogService.dodajLog(EventLogConstants.ZAPYTANIE_EMAIL_OD_PETENTA, "petent");
+                eventLogService.createLog(EventLogConstants.ZAPYTANIE_EMAIL_OD_PETENTA, "petent");
                 return new ResponseEntity<>(HttpStatus.ACCEPTED);
             } catch (MessagingException messagingException) {
                 logger.info("Błąd podczas wysłania powiadomienia " + messagingException);

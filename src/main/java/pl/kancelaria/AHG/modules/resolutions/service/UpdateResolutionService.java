@@ -27,7 +27,7 @@ public class UpdateResolutionService {
         this.eventLogService = eventLogService;
     }
 
-    public ResolutionDTO modyfikujUchwale(long id, ResolutionDTO request) {
+    public ResolutionDTO modifyResolution(long id, ResolutionDTO request) {
         CategoriesOB categoriesOB = categoriesRepository.getOne(request.getId());
         ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
         resolutionsOB.setOpis(request.getOpis());
@@ -36,7 +36,7 @@ public class UpdateResolutionService {
         resolutionsOB.setKategoria(categoriesOB);
         resolutionsRepository.save(resolutionsOB);
         logger.info("Zmodyfikowano uchwałę " + request.getOpis());
-        eventLogService.dodajLog(EventLogConstants.MODYFIKACJA_UCHWALY, null);
+        eventLogService.createLog(EventLogConstants.MODYFIKACJA_UCHWALY, null);
         return request;
     }
 

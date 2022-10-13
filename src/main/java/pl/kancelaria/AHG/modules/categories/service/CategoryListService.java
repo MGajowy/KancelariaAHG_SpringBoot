@@ -1,6 +1,5 @@
 package pl.kancelaria.AHG.modules.categories.service;
 
-import org.apache.logging.log4j.util.PropertySource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -32,35 +31,35 @@ public class CategoryListService {
         this.entityManager = entityManager;
     }
 
-    public CategoryListDTO pobierzListeKategorii() {
+    public CategoryListDTO getCategoryList() {
         CategoryListDTO response = new CategoryListDTO();
         List<CategoriesOB> categoriesOBList = this.categoriesRepository.findAll();
         if (!CollectionUtils.isEmpty(categoriesOBList)) {
-            List<CategoryDTO> kategoria = new ArrayList<>();
+            List<CategoryDTO> categoryList = new ArrayList<>();
             categoriesOBList.forEach(e -> {
                 CategoryDTO daneDTO = new CategoryDTO();
                 BeanUtils.copyProperties(e, daneDTO);
-                kategoria.add(daneDTO);
+                categoryList.add(daneDTO);
             });
-            kategoria.sort(Comparator.comparing(CategoryDTO::getRodzajKategorii).reversed());
-            response.setListaKategorii(kategoria);
+            categoryList.sort(Comparator.comparing(CategoryDTO::getRodzajKategorii).reversed());
+            response.setListaKategorii(categoryList);
         } else {
             response.setListaKategorii(new ArrayList<>());
         }
         return response;
     }
 
-    public CategoryDTOrequest pobierzKategoriePoId(long id) {
+    public CategoryDTOrequest getCategoriesById(long id) {
         CategoriesOB categoriesOB = categoriesRepository.getOne(id);
         CategoryDTOrequest categoryDTOrequest = new CategoryDTOrequest();
         BeanUtils.copyProperties(categoriesOB, categoryDTOrequest);
         return categoryDTOrequest;
     }
 
-    public CategoryListDTO wyszukajKategorie(String term) {
-        CategoryListDTO respose = new CategoryListDTO();
+    public CategoryListDTO searchCategories(String term) {
+        CategoryListDTO response = new CategoryListDTO();
 
-        List<CategoriesOB> listOB = podajListeWedlugKryteriow(term);
+        List<CategoriesOB> listOB = provideListOfCriteria(term);
         if (!CollectionUtils.isEmpty(listOB)) {
             List<CategoryDTO> listCategory = new ArrayList<>();
             listOB.forEach(categoriesOB -> {
@@ -68,21 +67,21 @@ public class CategoryListService {
                 BeanUtils.copyProperties(categoriesOB, categoryDTO);
                 listCategory.add(categoryDTO);
             });
-            respose.setListaKategorii(listCategory);
+            response.setListaKategorii(listCategory);
         } else {
-            respose.setListaKategorii(new ArrayList<>());
+            response.setListaKategorii(new ArrayList<>());
         }
-        return respose;
+        return response;
     }
 
-    private List<CategoriesOB> podajListeWedlugKryteriow(String term) {
-        TypedQuery<CategoriesOB> query = entityManager.createQuery(przygotujZapytanie(term), CategoriesOB.class);
+    private List<CategoriesOB> provideListOfCriteria(String term) {
+        TypedQuery<CategoriesOB> query = entityManager.createQuery(prepareAnInquiry(term), CategoriesOB.class);
         if (!term.isEmpty())
             query.setParameter("term", "%" + term.toLowerCase() + "%");
         return query.getResultList();
     }
 
-    private String przygotujZapytanie(String term) {
+    private String prepareAnInquiry(String term) {
         StringBuilder query = new StringBuilder("SELECT c FROM CategoriesOB c");
         if (!term.isEmpty()) {
             query.append(" WHERE LOWER(c.rodzajKategorii) like :term");
@@ -91,22 +90,22 @@ public class CategoryListService {
         return query.toString();
     }
 
-    public CategoryListDTO wyszukajKategoriePoStatusie(Boolean status) {
+    public CategoryListDTO searchCategoriesByStatus(Boolean status) {
         CategoryListDTO categoryListDTO = new CategoryListDTO();
-        List<CategoriesOB> listCategoryOB = podajListeWedlugStatusu(status);
+        List<CategoriesOB> listCategoryOB = getListCategoriesByStatus(status);
 
-        List<CategoryDTO> collect = listCategoryOB.stream().map(CategoriesOB::listKategoriiPoStatus).collect(Collectors.toList());
+        List<CategoryDTO> collect = listCategoryOB.stream().map(CategoriesOB::categoryListByStatus).collect(Collectors.toList());
         categoryListDTO.setListaKategorii(collect);
         return categoryListDTO;
     }
 
-    private List<CategoriesOB> podajListeWedlugStatusu(Boolean status) {
-        TypedQuery<CategoriesOB> query = entityManager.createQuery(przygotujZapytanieStatusu(status), CategoriesOB.class);
+    private List<CategoriesOB> getListCategoriesByStatus(Boolean status) {
+        TypedQuery<CategoriesOB> query = entityManager.createQuery(prepareInquiryForStatus(status), CategoriesOB.class);
         query.setParameter("status", status);
         return query.getResultList();
     }
 
-    private String przygotujZapytanieStatusu(Boolean status) {
+    private String prepareInquiryForStatus(Boolean status) {
         StringBuilder query = new StringBuilder("SELECT c FROM CategoriesOB c");
         query.append(" WHERE c.czyPubliczny = :status");
         query.append(" ORDER BY c.rodzajKategorii DESC");
@@ -114,15 +113,15 @@ public class CategoryListService {
     }
 
     //todo metoda nieużywana - niepodłączona
-    public List<String> pobierzListeKategoriiPoNazwie2(String nazwaKaregorii) {
-        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesobsByRodzajKategorii(nazwaKaregorii);
+    public List<String> getCategoryListByName2(String nazwaKaregorii) {
+        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesOBsByRodzajKategorii(nazwaKaregorii);
         return categoriesOB.stream()
                 .map(CategoriesOB::getRodzajKategorii)
                 .collect(Collectors.toList());
     }
 
     //todo metoda nieużywana
-    public List<String> pobierzListeKategoriiPoNazwie(String nazwaKategorii) {
+    public List<String> getCategoryListByName(String nazwaKategorii) {
         List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesByRodzajKategoriiImpl(nazwaKategorii);
         return categoriesOB.stream()
                 .map(CategoriesOB::getRodzajKategorii)

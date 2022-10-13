@@ -28,33 +28,33 @@ public class EventLogService {
     }
 
 
-    public Boolean dodajLog (String czynnosc, String user){
+    public Boolean createLog(String czynnosc, String user) {
         EventLogOB logOB = new EventLogOB(czynnosc, user);
         logOB.setCzynnosc(czynnosc);
         logOB.setUzytkownik(user);
-        Calendar data_dodania = Calendar.getInstance();
-        data_dodania.getTime();
-        logOB.setData_czynnosci(data_dodania);
+        Calendar dateAdded = Calendar.getInstance();
+        dateAdded.getTime();
+        logOB.setData_czynnosci(dateAdded);
         this.eventLogRepository.save(logOB);
         return true;
     }
 
-    public EventLogListDTO pobierzDziennikZdarzen(){
+    public EventLogListDTO downloadEventLog() {
         EventLogListDTO listDTO = new EventLogListDTO();
-        List<EventLogOB> listaZdarzenOB = this.eventLogRepository.findAll();
-        if (!CollectionUtils.isEmpty(listaZdarzenOB)){
-            List<EventLogDTO> dziennikZdarzen = new ArrayList<>();
-            listaZdarzenOB.forEach(eventLogOB ->{
+        List<EventLogOB> eventLogListOB = this.eventLogRepository.findAll();
+        if (!CollectionUtils.isEmpty(eventLogListOB)) {
+            List<EventLogDTO> eventLogList = new ArrayList<>();
+            eventLogListOB.forEach(eventLogOB -> {
                 EventLogDTO logDTO = new EventLogDTO();
                 BeanUtils.copyProperties(eventLogOB, logDTO);
-                if(eventLogOB.getUzytkownik().isEmpty() && eventLogOB.getUzytkownik() == null ){
+                if (eventLogOB.getUzytkownik().isEmpty() && eventLogOB.getUzytkownik() == null) {
                     logDTO.setUzytkownik("nie odnaleziono");
-                }else{
+                } else {
                     logDTO.setUzytkownik(eventLogOB.getUzytkownik());
                 }
-                dziennikZdarzen.add(logDTO);
-            } );
-            listDTO.setListaLogow(dziennikZdarzen);
+                eventLogList.add(logDTO);
+            });
+            listDTO.setListaLogow(eventLogList);
         } else {
             listDTO.setListaLogow(new ArrayList<>());
         }
@@ -67,19 +67,19 @@ public class EventLogService {
         String headerValue = "attachment; filename=eventLog.pdf";
 
         response.setHeader(headerKey, headerValue);
-        List<EventLogDTO> list = pobierzDziennikZdarzenDTO();
-        EventLogPDFExport eventLogPDFExport = new EventLogPDFExport(list);
+        List<EventLogDTO> eventLogList = getEventLogDTO();
+        EventLogPDFExport eventLogPDFExport = new EventLogPDFExport(eventLogList);
         eventLogPDFExport.export(response);
     }
 
-    private List<EventLogDTO> pobierzDziennikZdarzenDTO() {
-        List<EventLogDTO> listDTO = new ArrayList<>();
-        List<EventLogOB> allOB = eventLogRepository.findAll();
-        for ( EventLogOB event : allOB ) {
-            EventLogDTO logDTO =  new EventLogDTO();
+    private List<EventLogDTO> getEventLogDTO() {
+        List<EventLogDTO> eventLogList = new ArrayList<>();
+        List<EventLogOB> eventLogListOB = eventLogRepository.findAll();
+        for (EventLogOB event : eventLogListOB) {
+            EventLogDTO logDTO = new EventLogDTO();
             BeanUtils.copyProperties(event, logDTO);
-            listDTO.add(logDTO);
+            eventLogList.add(logDTO);
         }
-        return listDTO;
+        return eventLogList;
     }
 }

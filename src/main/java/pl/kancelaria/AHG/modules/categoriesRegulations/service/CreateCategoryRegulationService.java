@@ -17,7 +17,7 @@ public class CreateCategoryRegulationService {
         this.categoryRegulationRepository = categoryRegulationRepository;
     }
 
-    public ResponseEntity<HttpStatus> dodajNowaKategorie(CategoryDTO categoryDTO) {
+    public ResponseEntity<HttpStatus> addNewCategories(CategoryDTO categoryDTO) {
         if (categoryDTO.getRodzajKategorii() != null) {
             CategoryRegulationOB categoryRegulationOB = new CategoryRegulationOB();
             BeanUtils.copyProperties(categoryDTO, categoryRegulationOB);

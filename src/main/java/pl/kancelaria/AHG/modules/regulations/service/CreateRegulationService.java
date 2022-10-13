@@ -31,7 +31,7 @@ public class CreateRegulationService {
         this.eventLogService = eventLogService;
     }
 
-    public ResponseEntity<HttpStatus> dodajNoweRozporzadzenie(CreateRegulationDTO regulationDTO, HttpServletRequest request) {
+    public ResponseEntity<HttpStatus> addNewRegulation(CreateRegulationDTO regulationDTO, HttpServletRequest request) {
         CategoryRegulationOB categoryRegulationOB = categoryRegulationRepository.getOne(regulationDTO.getKategoria());
         if (categoryRegulationOB != null) {
             RegulationOB regulationOB = new RegulationOB();
@@ -41,7 +41,7 @@ public class CreateRegulationService {
             regulationOB.setNazwa(regulationDTO.getNazwa());
             this.regulationRepository.save(regulationOB);
             logger.info("Rozporzadzenie " + regulationDTO.getNazwa() + " zostało dodane do listy.");
-            eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEGO_ROZPORZADZENIA, request.getRemoteUser());
+            eventLogService.createLog(EventLogConstants.DODANIE_NOWEGO_ROZPORZADZENIA, request.getRemoteUser());
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

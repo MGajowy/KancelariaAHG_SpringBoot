@@ -58,7 +58,7 @@ class UserServiceTest {
         when(rolesRepository.findAllByNazwa(RolesName.USER)).thenReturn(rolesOB);
 
         // when
-        ResponseEntity<HttpStatus> actual = userService.utworzNowegoUzytkownika(userDTO);
+        ResponseEntity<HttpStatus> actual = userService.createNewUser(userDTO);
 
         // then
         assertThat(actual.getStatusCodeValue()).isEqualTo(201);
@@ -78,7 +78,7 @@ class UserServiceTest {
         // when
         when(userRepository.getOne(locationDTO.getId())).thenReturn(userOB);
 
-        boolean actual = userService.aktywujUzytkownika(locationDTO);
+        boolean actual = userService.userActivation(locationDTO);
         // then
         assertThat(actual).isTrue();
         assertThat(userOB.getStan()).isEqualTo(UserStateEnum.AKTYWNY);
@@ -91,7 +91,7 @@ class UserServiceTest {
         when(userRepository.getOne(1L)).thenReturn(userOB);
 
         // when
-        boolean actual = userService.dezaktuwujUzytkownika(1L);
+        boolean actual = userService.userDeactivation(1L);
 
         // then
         assertThat(actual).isTrue();

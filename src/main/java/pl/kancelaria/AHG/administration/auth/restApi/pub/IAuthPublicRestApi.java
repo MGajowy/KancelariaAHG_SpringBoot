@@ -21,25 +21,25 @@ public class IAuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth
 
     @Override
     public ResponseEntity<?> createAuthenticationToken(JwtRequest authenticationRequest) throws Exception  {
-        String token = authServices.utworzTokenAutentykacji(authenticationRequest);
+        String token = authServices.createAuthenticationToken(authenticationRequest);
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
     @Override
     public ResponseEntity<?> saveUser(RegistrationDTO user)  {
-       String userNew = authServices.zapiszNowegoUzytkownika(user);
+       String userNew = authServices.saveNewUser(user);
         return ResponseEntity.ok(userNew);
     }
 
     @Override
     public Boolean aktywacjaHasla(UserPasswordDTO dto) {
-       Boolean wynik =  authServices.weryfikujTokeniUstawHaslo(dto);
+       Boolean wynik =  authServices.verifyTokenAndSetPassword(dto);
         return wynik;
     }
 
     @Override
     public Boolean resetHasla(UserPasswordDTO dto) {
-        Boolean wynik = authServices.resetujHaslo(dto);
+        Boolean wynik = authServices.resetPassword(dto);
         return wynik;
     }
 }

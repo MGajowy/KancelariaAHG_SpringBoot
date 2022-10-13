@@ -15,11 +15,11 @@ public class CategoryRegulationPublicRestApi implements pl.kancelaria.AHG.shared
 
     @Override
     public CategoryListDTO pobierzListeKategorii() {
-        return categoryRegulationListService.pobierzListeKategorii();
+        return categoryRegulationListService.getCategoryList();
     }
 
     @Override
     public CategoryListDTO wyszukajKategorieRozporzadzenPoNazwie(String term) {
-        return categoryRegulationListService.pobierzListeKategoriiPoNazwie(term);
+        return categoryRegulationListService.getCategoryListByName(term);
     }
 }

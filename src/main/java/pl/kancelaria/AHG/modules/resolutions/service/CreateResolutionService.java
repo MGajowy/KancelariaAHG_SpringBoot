@@ -31,7 +31,7 @@ public class CreateResolutionService {
         this.eventLogService = eventLogService;
     }
 
-    public ResponseEntity<HttpStatus> dodajUchwale(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
+    public ResponseEntity<HttpStatus> addNewResolution(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
         CategoriesOB categoriesOB = categoriesRepository.getOne(resolutionDTO.getKategoria());
         if (categoriesOB != null) {
             ResolutionsOB resolutionsOB =  new ResolutionsOB();
@@ -41,7 +41,7 @@ public class CreateResolutionService {
             resolutionsOB.setCzyPubliczny(resolutionDTO.getCzyPubliczny());
             this.resolutionsRepository.save(resolutionsOB);
             logger.info("Uchwała " + resolutionsOB.getOpis() + "została dodana do listy.");
-            eventLogService.dodajLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, request.getRemoteUser() );
+            eventLogService.createLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, request.getRemoteUser() );
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

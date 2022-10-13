@@ -75,6 +75,7 @@ pl\kancelaria\AHG\common\entityModel\administration\eventLog\EventLogOB.class
 pl\kancelaria\AHG\shared\restapi\modules\categories\restapi\pub\CategoryPublicRestApi.class
 pl\kancelaria\AHG\modules\regulations\dto\CreateRegulationDTO.class
 pl\kancelaria\AHG\modules\regulations\restApi\secured\RegulationSecuredRestApi.class
+pl\kancelaria\AHG\modules\about\onlineHelp\service\OnlineHelpConstant.class
 pl\kancelaria\AHG\modules\categories\dto\CategoryDTOresponse.class
 pl\kancelaria\AHG\administration\auth\restApi\pub\IAuthPublicRestApi.class
 pl\kancelaria\AHG\administration\configuration\jwt\config\SwaggerConfig.class

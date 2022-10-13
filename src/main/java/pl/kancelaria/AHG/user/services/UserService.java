@@ -79,16 +79,16 @@ public class UserService {
         rolesRepository.save(roles_1);
         rolesRepository.save(roles_2);
         logger.info("Dodano uzytkownika administracyjnego");
-        eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
+        eventLogService.createLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
 
     }
 
-    public String utworzToken(UserDetails userDetails) {
+    public String createToken(UserDetails userDetails) {
         return jwtTokenUtil.generateToken(userDetails);
     }
 
-    public void wyslijEmailAktywacyjny(UserOB user, LocationDTO locationDTO) {
-        String token = utworzToken(user);
+    public void sendActivationEmail(UserOB user, LocationDTO locationDTO) {
+        String token = createToken(user);
         TokenOB tokenOB = new TokenOB(user, token);
         tokenRepository.save(tokenOB);
         String url = locationDTO.getAppUrl()
@@ -101,7 +101,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<HttpStatus> utworzNowegoUzytkownika(AddUserDTO user) {
+    public ResponseEntity<HttpStatus> createNewUser(AddUserDTO user) {
         try {
             RolesOB role = rolesRepository.findAllByNazwa(user.getRola());
             List<RolesOB> list = new ArrayList<>();
@@ -120,7 +120,7 @@ public class UserService {
             role.setUserOBSet(userRoles);
             this.userRepository.save(userOB);
             logger.info("Uzytkownik " + userOB.getUsername() + " zostal poprawnie dodany do bazy danych.");
-            eventLogService.dodajLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
+            eventLogService.createLog(EventLogConstants.DODANO_NOWEGO_UZYTKOWNIKA, userOB.getUsername());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -135,24 +135,24 @@ public class UserService {
 //                 userRepository.save(userOB);
 //    }
 
-    public boolean aktywujUzytkownika(LocationDTO locationDTO) {
+    public boolean userActivation(LocationDTO locationDTO) {
         UserOB userOB = userRepository.getOne(locationDTO.getId());
         if (userOB.getEmail().isEmpty() || userOB.getEmail() == null) {
             return false;
         } else {
-            wyslijEmailAktywacyjny(userOB, locationDTO);
-            eventLogService.dodajLog(EventLogConstants.AKTYWACJA_UZYTKOWNIKA, userOB.getUsername());
+            sendActivationEmail(userOB, locationDTO);
+            eventLogService.createLog(EventLogConstants.AKTYWACJA_UZYTKOWNIKA, userOB.getUsername());
             return true;
         }
     }
 
-    public boolean dezaktuwujUzytkownika(long id) {
+    public boolean userDeactivation(long id) {
         UserOB userOB = userRepository.getOne(id);
         if (userOB.getStan() == UserStateEnum.AKTYWNY) {
             userOB.setStan(UserStateEnum.NIEAKTYWNY);
             userRepository.save(userOB);
             logger.info("Uzytkownik o id: " + id + " zostal zdezaktywowany");
-            eventLogService.dodajLog(EventLogConstants.DEZAKTYWACJA_UZYTKOWNIKA, userOB.getUsername());
+            eventLogService.createLog(EventLogConstants.DEZAKTYWACJA_UZYTKOWNIKA, userOB.getUsername());
             return true;
         } else {
             return false;
@@ -170,13 +170,13 @@ public class UserService {
         }
     }
 
-    public Boolean ResetHasla(ResetPasswordDTO dto) {
+    public Boolean passwordReset(ResetPasswordDTO dto) {
         UserOB userOB = userRepository.findAllByUserName(dto.getUsername());
-        return wyslijEmailResetHasla(userOB, dto);
+        return sendEmailPasswordReset(userOB, dto);
     }
 
-    private Boolean wyslijEmailResetHasla(UserOB userOB, ResetPasswordDTO dto) {
-        String token = utworzToken(userOB);
+    private Boolean sendEmailPasswordReset(UserOB userOB, ResetPasswordDTO dto) {
+        String token = createToken(userOB);
         TokenOB tokenOB = new TokenOB(userOB, token);
         tokenRepository.save(tokenOB);
         String url = dto.getAppUrl()
@@ -184,7 +184,7 @@ public class UserService {
         try {
             mailSenderService.sendMail(userOB.getEmail(), "Reset hasła użytkownika", url, false);
             logger.info("Wyslano email resetu hasla dla uzytkownika o loginie: " + dto.getUsername());
-            eventLogService.dodajLog(EventLogConstants.WYSLANO_EMAIL_RESETU_HASLA, userOB.getUsername());
+            eventLogService.createLog(EventLogConstants.WYSLANO_EMAIL_RESETU_HASLA, userOB.getUsername());
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();

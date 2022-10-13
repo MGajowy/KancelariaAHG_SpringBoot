@@ -5,8 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import pl.kancelaria.AHG.administration.services.EventLogService;
@@ -38,10 +36,10 @@ class DeleteUserServiceTest {
         // given
         UserOB userOB = createUserOB();
         when(userRepository.getOne(1L)).thenReturn(userOB);
-        given(eventLogService.dodajLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB.getUsername())).willReturn(true);
+        given(eventLogService.createLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userOB.getUsername())).willReturn(true);
 
         // when
-        ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.usunUzytkownika(1L);
+        ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.deleteUser(1L);
 
         // then
         assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -53,7 +51,7 @@ class DeleteUserServiceTest {
         UserOB userOB = createUserOB();
 
         // when
-        ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.usunUzytkownika(null);
+        ResponseEntity<HttpStatus> httpStatusResponseEntity = deleteUserService.deleteUser(null);
 
         // then
         assertThat(httpStatusResponseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);

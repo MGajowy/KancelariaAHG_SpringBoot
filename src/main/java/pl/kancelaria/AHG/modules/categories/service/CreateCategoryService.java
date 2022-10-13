@@ -22,7 +22,7 @@ public class CreateCategoryService {
         this.categoriesRepository = categoriesRepository;
     }
 
-    public ResponseEntity <HttpStatus> dodajNowaKategorie(CategoryDTO categoryDTO) {
+    public ResponseEntity <HttpStatus> addNewCategories(CategoryDTO categoryDTO) {
         if (categoryDTO.getRodzajKategorii() != null) {
             CategoriesOB categoriesOB = new CategoriesOB();
             BeanUtils.copyProperties(categoryDTO, categoriesOB);

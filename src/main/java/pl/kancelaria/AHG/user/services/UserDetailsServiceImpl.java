@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.findAllByUserName(s);
     }
 
-    public UserDTO szczegoly(long id) {
+    public UserDTO userDetails(long id) {
         UserOB userOB = userRepository.getOne(id);
         List<RolesOB> rolesNames = userOB.getRolesOBSet();
         UserDTO userDTO = new UserDTO();

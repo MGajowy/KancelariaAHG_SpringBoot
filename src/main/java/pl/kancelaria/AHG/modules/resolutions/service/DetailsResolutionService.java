@@ -14,7 +14,7 @@ public class DetailsResolutionService {
         this.resolutionsRepository = resolutionsRepository;
     }
 
-    public ResolutionDTO szczegolyUchwaly(long id) {
+    public ResolutionDTO detailsResolution(long id) {
         return null;
     }
 }

@@ -15,7 +15,7 @@ public class DeleteCategoryService {
         this.categoriesRepository = categoriesRepository;
     }
 
-    public ResponseEntity<HttpStatus> usunKategorie(long id) {
+    public ResponseEntity<HttpStatus> deleteCategories(long id) {
         try {
             categoriesRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);

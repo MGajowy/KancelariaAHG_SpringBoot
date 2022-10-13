@@ -35,7 +35,7 @@ class CategoryListServiceTest {
         // given
         when(categoriesRepository.findAll()).thenReturn(createCategoryList());
         // when
-        CategoryListDTO categoryListDTO = categoryListService.pobierzListeKategorii();
+        CategoryListDTO categoryListDTO = categoryListService.getCategoryList();
         List<CategoryDTO> listaKategorii = categoryListDTO.getListaKategorii();
         // then
         assertThat(categoryListDTO.getListaKategorii()).isNotNull();
@@ -48,7 +48,7 @@ class CategoryListServiceTest {
         // given
        when(categoriesRepository.getOne(ID)).thenReturn(createCategoryList().get(0));
         // when
-        CategoryDTOrequest categoryDTOrequest = categoryListService.pobierzKategoriePoId(ID);
+        CategoryDTOrequest categoryDTOrequest = categoryListService.getCategoriesById(ID);
         // then
         assertThat(categoryDTOrequest).isNotNull();
         assertThat(categoryDTOrequest.getId()).isEqualTo(ID);
@@ -59,7 +59,7 @@ class CategoryListServiceTest {
         // given
         when(categoriesRepository.findCategoriesByRodzajKategoriiImpl("NOWA")).thenReturn(createCategoryList());
         // when
-        List<String> actual = categoryListService.pobierzListeKategoriiPoNazwie("NOWA");
+        List<String> actual = categoryListService.getCategoryListByName("NOWA");
         // then
         assertThat(actual.get(0)).isEqualTo("NOWA");
         assertThat(actual).hasSize(2);

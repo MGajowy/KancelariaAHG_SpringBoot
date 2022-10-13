@@ -23,7 +23,7 @@ public class RegulationService {
         this.entityManager = entityManager;
     }
 
-    public RegulationListDTO pobierzListeRozporzadzenPoNazwie(String nazwa) {
+    public RegulationListDTO getRegulationsListByName(String nazwa) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<RegulationOB> cq = cb.createQuery(RegulationOB.class);
 
