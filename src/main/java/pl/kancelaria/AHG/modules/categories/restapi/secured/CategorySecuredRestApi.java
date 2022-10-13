@@ -34,27 +34,27 @@ public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
     }
 
     @Override
-    public ResponseEntity<HttpStatus> dodajKategorie(CategoryDTO categoryDTO) {
+    public ResponseEntity<HttpStatus> addNewCategories(CategoryDTO categoryDTO) {
        return createCategoryService.addNewCategories(categoryDTO);
     }
 
     @Override
-    public CategoryDTOrequest modyfikujKategorie(long id, CategoryDTOrequest request) {
+    public CategoryDTOrequest modifyCategories(long id, CategoryDTOrequest request) {
         return this.modifyCategoryService.modifyCategories(id, request);
     }
 
     @Override
-    public ResponseEntity<HttpStatus> usunKategorie(@PathVariable("id") long id) {
+    public ResponseEntity<HttpStatus> deleteCategories(@PathVariable("id") long id) {
        return deleteCategoryService.deleteCategories(id);
     }
 
     @Override
-    public CategoryDTOrequest szczegolyKategorii(long id) {
+    public CategoryDTOrequest getCategoriesById(long id) {
         return categoryListService.getCategoriesById(id);
     }
 
     @Override
-    public CategoryListDTO listaKategoriiPoStatusie(Boolean status) {
+    public CategoryListDTO searchCategoriesByStatus(Boolean status) {
         return categoryListService.searchCategoriesByStatus(status);
     }
 }

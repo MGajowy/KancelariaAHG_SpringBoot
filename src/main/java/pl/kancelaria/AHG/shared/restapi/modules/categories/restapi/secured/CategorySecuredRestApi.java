@@ -18,25 +18,25 @@ public interface CategorySecuredRestApi {
     @POST
     @PostMapping(CategorySecuredRestApiUrl.DODAJ_KATEGORIE)
     @Path(CategorySecuredRestApiUrl.DODAJ_KATEGORIE)
-    ResponseEntity<HttpStatus> dodajKategorie(@RequestBody CategoryDTO categoryDTO);
+    ResponseEntity<HttpStatus> addNewCategories(@RequestBody CategoryDTO categoryDTO);
 
     @PUT
     @PutMapping(CategorySecuredRestApiUrl.MODYFIKUJ_KATEGORIE + "/{id}")
     @Path(CategorySecuredRestApiUrl.MODYFIKUJ_KATEGORIE)
-    CategoryDTOrequest modyfikujKategorie(@PathVariable(value = "id") long id, @Validated @RequestBody CategoryDTOrequest request);
+    CategoryDTOrequest modifyCategories(@PathVariable(value = "id") long id, @Validated @RequestBody CategoryDTOrequest request);
 
     @DELETE
     @DeleteMapping(CategorySecuredRestApiUrl.USUN_KATEGORIE + "/{id}")
     @Path(CategorySecuredRestApiUrl.USUN_KATEGORIE)
-    ResponseEntity<HttpStatus> usunKategorie(long id);
+    ResponseEntity<HttpStatus> deleteCategories(long id);
 
     @GET
     @GetMapping(CategorySecuredRestApiUrl.SZCZEGOLY_KATEGORII + "/{id}")
     @Path(CategorySecuredRestApiUrl.SZCZEGOLY_KATEGORII)
-    CategoryDTOrequest szczegolyKategorii(@PathVariable(value = "id") long id);
+    CategoryDTOrequest getCategoriesById(@PathVariable(value = "id") long id);
 
     //todo rest niepodłączony
     @GET
     @GetMapping(CategorySecuredRestApiUrl.STATUS_KATEGORII)
-    CategoryListDTO listaKategoriiPoStatusie(@RequestBody Boolean status);
+    CategoryListDTO searchCategoriesByStatus(@RequestBody Boolean status);
 }

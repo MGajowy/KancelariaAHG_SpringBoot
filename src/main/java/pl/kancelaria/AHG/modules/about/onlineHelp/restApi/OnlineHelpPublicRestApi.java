@@ -17,7 +17,7 @@ public class OnlineHelpPublicRestApi implements IOnlineHelpPublicRestApi {
     }
 
     @Override
-    public ResponseEntity<HttpStatus> wyslijPowiadomienie(OnlineHelpRequestDto request) {
+    public ResponseEntity<HttpStatus> sendEmailNotification(OnlineHelpRequestDto request) {
         return onlineHelpService.sendEmailNotification(request);
     }
 }

@@ -15,5 +15,5 @@ public interface RegulationPublicRestApi {
     @GET
     @Path(RegulationPublicRestApiUrl.ROZPORZADZENIA_LISTA_PO_OPISIE)
     @GetMapping(RegulationPublicRestApiUrl.ROZPORZADZENIA_LISTA_PO_OPISIE)
-    RegulationListDTO pobierzListeRozporzadzenPoNazwie(@QueryParam("nazwa") String nazwa);
+    RegulationListDTO getRegulationsListByName(@QueryParam("nazwa") String nazwa);
 }

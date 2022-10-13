@@ -32,14 +32,12 @@ public class IAuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth
     }
 
     @Override
-    public Boolean aktywacjaHasla(UserPasswordDTO dto) {
-       Boolean wynik =  authServices.verifyTokenAndSetPassword(dto);
-        return wynik;
+    public Boolean verifyTokenAndSetPassword(UserPasswordDTO dto) {
+        return authServices.verifyTokenAndSetPassword(dto);
     }
 
     @Override
-    public Boolean resetHasla(UserPasswordDTO dto) {
-        Boolean wynik = authServices.resetPassword(dto);
-        return wynik;
+    public Boolean resetPassword(UserPasswordDTO dto) {
+        return authServices.resetPassword(dto);
     }
 }

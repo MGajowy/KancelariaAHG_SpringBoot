@@ -16,10 +16,10 @@ public interface CategoryRegulationPublicRestApi {
     @GET
     @Path(CategoryRegulationPublicRestApiUrl.WSZYSTKIE_KATEGORIE_ROZPORZADZEN)
     @GetMapping(CategoryRegulationPublicRestApiUrl.WSZYSTKIE_KATEGORIE_ROZPORZADZEN)
-    CategoryListDTO pobierzListeKategorii();
+    CategoryListDTO getCategoryList();
 
     @GET
     @Path(CategoryRegulationPublicRestApiUrl.WYSZUKAJ_KATEGORIE_ROZPORZADZENIA_PO_NAZWA)
     @GetMapping(CategoryRegulationPublicRestApiUrl.WYSZUKAJ_KATEGORIE_ROZPORZADZENIA_PO_NAZWA)
-    CategoryListDTO wyszukajKategorieRozporzadzenPoNazwie(@QueryParam("term") String term);
+    CategoryListDTO getCategoryListByName(@QueryParam("term") String term);
 }

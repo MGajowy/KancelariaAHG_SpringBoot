@@ -38,7 +38,7 @@ public interface UserSecuredRestApi {
     @POST
     @PostMapping(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
     @Path(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)
-    Boolean wyslijMailAktywacyjny(@RequestBody LocationDTO locationDTO);
+    Boolean userActivation(@RequestBody LocationDTO locationDTO);
 
 //    @GET
 //    @GetMapping (UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY + "/{id}")
@@ -48,15 +48,15 @@ public interface UserSecuredRestApi {
     @POST
     @PostMapping(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.DEZAKTUWUJ_UZYTKOWNIKA)
-    Boolean dezaktywacjaUzytkownika(long id, HttpServletRequest request);
+    Boolean userDeactivation(long id, HttpServletRequest request);
 
     @GET
     @GetMapping(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.SZCZEGOLY_UZYTKOWNIKA)
-    UserDTO szczegolyUzytkownika(@PathVariable(value = "id") long id);
+    UserDTO userDetails(@PathVariable(value = "id") long id);
 
     //todo rest niepodłączony
     @GET
     @GetMapping(UserSecuredRestApiUrl.UZYTKOWNICY_PO_STAN)
-    UserListDTO pobierzListeUzytkownikowPoStan(@QueryParam("stan") String stan);
+    UserListDTO getUserListOfStatus(@QueryParam("stan") String stan);
 }

@@ -31,23 +31,23 @@ public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restap
     }
 
     @Override
-    public ResponseEntity<HttpStatus> dodajUchale(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
+    public ResponseEntity<HttpStatus> addNewResolution(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
         return createResolutionService.addNewResolution(resolutionDTO, request);
     }
 
     @Override
-    public ResolutionDTO modyfikujUchwale(long id, ResolutionDTO request) {
+    public ResolutionDTO modifyResolution(long id, ResolutionDTO request) {
         return this.updateResolutionService.modifyResolution(id, request);
     }
 
     @Override
-    public ResponseEntity<HttpStatus> usunUchwale(long id) {
+    public ResponseEntity<HttpStatus> deleteResolution(long id) {
         return deleteResolutionService.deleteResolution(id);
     }
 
     //todo dokonczyc serwis szczegolow
     @Override
-    public ResolutionDTO szczegolyUchwaly(long id) {
+    public ResolutionDTO detailsResolution(long id) {
         return this.detailsResolutionService.detailsResolution(id);
     }
 }

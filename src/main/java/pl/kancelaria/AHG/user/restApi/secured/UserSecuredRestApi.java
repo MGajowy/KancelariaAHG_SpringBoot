@@ -65,22 +65,22 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
 //    }
 
     @Override
-    public Boolean wyslijMailAktywacyjny(LocationDTO locationDTO) {
+    public Boolean userActivation(LocationDTO locationDTO) {
         return userService.userActivation(locationDTO);
     }
 
     @Override
-    public Boolean dezaktywacjaUzytkownika(@PathVariable("id") long id, HttpServletRequest request) {
+    public Boolean userDeactivation(@PathVariable("id") long id, HttpServletRequest request) {
         return userService.userDeactivation(id);
     }
 
     @Override
-    public UserDTO szczegolyUzytkownika(long id) {
+    public UserDTO userDetails(long id) {
         return userDetailsService.userDetails(id);
     }
 
     @Override
-    public UserListDTO pobierzListeUzytkownikowPoStan(String stan) {
+    public UserListDTO getUserListOfStatus(String stan) {
         return userListService.getUserListOfStatus(stan);
     }
 }

@@ -16,21 +16,21 @@ public interface CategoryRegulationSecuredRestApi {
     @POST
     @Path(CategoryRegulationSecuredRestApiUrl.DODAJ_KATEGORIE)
     @PostMapping(CategoryRegulationSecuredRestApiUrl.DODAJ_KATEGORIE)
-    ResponseEntity<HttpStatus> dodajKategorieRozporzadzenia(@RequestBody CategoryDTO categoryDTO);
+    ResponseEntity<HttpStatus> addNewCategories(@RequestBody CategoryDTO categoryDTO);
 
     @DELETE
     @Path(CategoryRegulationSecuredRestApiUrl.USUN_KATEGORIE)
     @DeleteMapping(CategoryRegulationSecuredRestApiUrl.USUN_KATEGORIE + "/{id}")
-    ResponseEntity<HttpStatus> usunKategorieRozporzadzenia(@PathVariable(value = "id") long id);
+    ResponseEntity<HttpStatus> deleteCategories(@PathVariable(value = "id") long id);
 
     @GET
     @Path(CategoryRegulationSecuredRestApiUrl.SZCZEGOLY_KATEGORII)
     @GetMapping(CategoryRegulationSecuredRestApiUrl.SZCZEGOLY_KATEGORII + "/{id}")
-    CategoryDTOrequest szczegolyKategoriiRozporzadzenia(@PathVariable(value = "id") long id);
+    CategoryDTOrequest getCategoriesById(@PathVariable(value = "id") long id);
 
     @PUT
     @Path(CategoryRegulationSecuredRestApiUrl.MODYFIKUJ_KATEGORIE)
     @PutMapping(CategoryRegulationSecuredRestApiUrl.MODYFIKUJ_KATEGORIE + "/{id}")
-    CategoryDTOrequest modyfikujKategorieRozporzadzenia(@PathVariable(value = "id") long id, @Validated @RequestBody CategoryDTOrequest request);
+    CategoryDTOrequest modifyCategories(@PathVariable(value = "id") long id, @Validated @RequestBody CategoryDTOrequest request);
 
 }

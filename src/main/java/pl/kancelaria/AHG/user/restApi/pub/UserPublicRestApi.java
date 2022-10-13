@@ -17,12 +17,12 @@ public class UserPublicRestApi implements pl.kancelaria.AHG.shared.restapi.users
     }
 
     @Override
-    public Boolean weryfikujToken(String token) {
+    public Boolean checkToken(String token) {
         return userService.checkToken(token);
     }
 
     @Override
-    public Boolean ResetHasla(ResetPasswordDTO dto) {
+    public Boolean passwordReset(ResetPasswordDTO dto) {
         return userService.passwordReset(dto);
     }
 }

@@ -19,20 +19,20 @@ public interface ResolutionSecuredRestApi {
     @POST
     @PostMapping(ResolutionSecuredRestApiUrl.DODAJ_UCHWALE)
     @Path(ResolutionSecuredRestApiUrl.DODAJ_UCHWALE)
-    ResponseEntity<HttpStatus> dodajUchale(@RequestBody CreateResotutionDTO resolutionDTO, HttpServletRequest request);
+    ResponseEntity<HttpStatus> addNewResolution(@RequestBody CreateResotutionDTO resolutionDTO, HttpServletRequest request);
 
     @PUT
     @PutMapping(ResolutionSecuredRestApiUrl.MODYFIKUJ_UCHWALE + "/{id}")
     @Path(ResolutionSecuredRestApiUrl.MODYFIKUJ_UCHWALE)
-    ResolutionDTO modyfikujUchwale(@PathVariable(value = "id") long id, @Validated @RequestBody ResolutionDTO request);
+    ResolutionDTO modifyResolution(@PathVariable(value = "id") long id, @Validated @RequestBody ResolutionDTO request);
 
     @DELETE
     @DeleteMapping(ResolutionSecuredRestApiUrl.USUN_UCHWALE + "/{id}")
     @Path(ResolutionSecuredRestApiUrl.USUN_UCHWALE)
-    ResponseEntity<HttpStatus> usunUchwale(long id);
+    ResponseEntity<HttpStatus> deleteResolution(long id);
 
     @GET
     @GetMapping(ResolutionSecuredRestApiUrl.SZCZEGOLY_UCHWALY + "/{id}")
     @Path(ResolutionSecuredRestApiUrl.SZCZEGOLY_UCHWALY)
-    ResolutionDTO szczegolyUchwaly(@PathVariable(value = "id") long id);
+    ResolutionDTO detailsResolution(@PathVariable(value = "id") long id);
 }

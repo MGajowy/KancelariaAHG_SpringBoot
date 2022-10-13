@@ -18,16 +18,16 @@ public interface ResolutionPublicRestApi {
     @GET
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA)
     @Path(ResolutionPublicRestApiUrl.UCHWALY_LISTA)
-    ResolutionListDTO pobierzListeUchwalDto();
+    ResolutionListDTO getResolutionList();
 
     @GET
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_KATEGORII + "/{id}")
-    ResolutionListOfCategoryDTO pobierzListeUchwalPoKategorii(@PathVariable(value = "id")long id);
+    ResolutionListOfCategoryDTO getResolutionListByCategories(@PathVariable(value = "id")long id);
 
     // todo niepodłaczony Rest
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_CB)
-    ResolutionListDTO pobierzListeUchwalCB();
+    ResolutionListDTO getResolutionListCB();
 
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_OPISIE)
-    ResolutionListDTO pobierzListeUchwalPoOpisie(@QueryParam("opis") String opis);
+    ResolutionListDTO getResolutionListByDescription(@QueryParam("opis") String opis);
 }

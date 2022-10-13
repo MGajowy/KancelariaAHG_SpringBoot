@@ -15,12 +15,12 @@ public interface UserPublicRestApi {
     @GET
     @GetMapping(UserPublicRestApiUrl.WERYFIKUJ_TOKEN + "/{token}")
     @Path(UserPublicRestApiUrl.WERYFIKUJ_TOKEN)
-    Boolean weryfikujToken(@PathVariable(value = "token") String token);
+    Boolean checkToken(@PathVariable(value = "token") String token);
 
     @POST
     @PostMapping(UserPublicRestApiUrl.WYSLIJ_EMAIL_RESET_HASLA)
     @Path(UserPublicRestApiUrl.WYSLIJ_EMAIL_RESET_HASLA)
-    Boolean ResetHasla(@RequestBody ResetPasswordDTO dto);
+    Boolean passwordReset(@RequestBody ResetPasswordDTO dto);
 }
 
 

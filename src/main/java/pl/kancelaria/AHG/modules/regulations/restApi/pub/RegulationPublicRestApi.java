@@ -14,7 +14,7 @@ public class RegulationPublicRestApi implements pl.kancelaria.AHG.shared.restapi
     }
 
     @Override
-    public RegulationListDTO pobierzListeRozporzadzenPoNazwie(String nazwa) {
+    public RegulationListDTO getRegulationsListByName(String nazwa) {
         return regulationService.getRegulationsListByName(nazwa);
     }
 }

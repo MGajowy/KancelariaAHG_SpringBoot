@@ -18,5 +18,5 @@ public interface RegulationSecuredRestApi {
     @POST
     @Path(RegulationSecuredRestApiUrl.DODAJ_ROZPORZADZENIE)
     @PostMapping(RegulationSecuredRestApiUrl.DODAJ_ROZPORZADZENIE)
-    ResponseEntity<HttpStatus> dodajRozporzadzenie(@RequestBody CreateRegulationDTO regulationDTO, HttpServletRequest request);
+    ResponseEntity<HttpStatus> addNewRegulation(@RequestBody CreateRegulationDTO regulationDTO, HttpServletRequest request);
 }

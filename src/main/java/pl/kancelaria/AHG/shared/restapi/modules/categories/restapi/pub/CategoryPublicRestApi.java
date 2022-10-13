@@ -23,18 +23,18 @@ public interface CategoryPublicRestApi {
     @GET
     @GetMapping(CategoryPublicRestApiUrl.WSZYSTKIE_KATEGORIE)
     @Path(CategoryPublicRestApiUrl.WSZYSTKIE_KATEGORIE)
-    CategoryListDTO pobierzListCategoryDto();
+    CategoryListDTO getCategoryList();
 
     @GET
     @GetMapping(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE)
     @Path(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE)
-    CategoryListDTO wyszukajKategorie(@QueryParam("term") String term);
+    CategoryListDTO searchCategories(@QueryParam("term") String term);
 
     //todo rest niepodłączony - metoda testowa
     @GET
     @GetMapping(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE_PO_NAZWA)
     @Path(CategoryPublicRestApiUrl.WYSZUKAJ_KATEGORIE_PO_NAZWA)
-    List<String> wyszukajKategoriePoNazwa(@QueryParam("rodzajKategorii") String rodzajKategorii);
+    List<String> getCategoryListByName2(@QueryParam("rodzajKategorii") String rodzajKategorii);
 
 
 }

@@ -30,12 +30,12 @@ public interface IAuthPublicRestApi {
     @POST
     @PostMapping (RestApiUrlStale.USTAW_HASLO)
     @Path(RestApiUrlStale.USTAW_HASLO)
-    Boolean aktywacjaHasla(@RequestBody UserPasswordDTO dto);
+    Boolean verifyTokenAndSetPassword(@RequestBody UserPasswordDTO dto);
 
     @POST
     @PostMapping (RestApiUrlStale.RESET_HASLA)
     @Path(RestApiUrlStale.RESET_HASLA)
-    Boolean resetHasla(@RequestBody UserPasswordDTO dto);
+    Boolean resetPassword(@RequestBody UserPasswordDTO dto);
 
 
 }

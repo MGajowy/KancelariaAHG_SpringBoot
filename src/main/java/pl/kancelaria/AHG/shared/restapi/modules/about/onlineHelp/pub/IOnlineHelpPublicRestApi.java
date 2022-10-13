@@ -17,5 +17,5 @@ public interface IOnlineHelpPublicRestApi {
     @POST
     @PostMapping(OnlineHelpPublicRestApiUrl.WYSLIJ_POWIADOMIENIE)
     @Path(OnlineHelpPublicRestApiUrl.WYSLIJ_POWIADOMIENIE)
-    ResponseEntity<HttpStatus> wyslijPowiadomienie(@RequestBody OnlineHelpRequestDto request);
+    ResponseEntity<HttpStatus> sendEmailNotification(@RequestBody OnlineHelpRequestDto request);
 }
