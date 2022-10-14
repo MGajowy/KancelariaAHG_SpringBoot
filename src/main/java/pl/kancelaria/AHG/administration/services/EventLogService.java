@@ -47,7 +47,7 @@ public class EventLogService {
             eventLogListOB.forEach(eventLogOB -> {
                 EventLogDTO logDTO = new EventLogDTO();
                 BeanUtils.copyProperties(eventLogOB, logDTO);
-                if (eventLogOB.getUzytkownik().isEmpty() && eventLogOB.getUzytkownik() == null) {
+                if (eventLogOB.getUzytkownik().isEmpty() || eventLogOB.getUzytkownik() == null) {
                     logDTO.setUzytkownik("nie odnaleziono");
                 } else {
                     logDTO.setUzytkownik(eventLogOB.getUzytkownik());

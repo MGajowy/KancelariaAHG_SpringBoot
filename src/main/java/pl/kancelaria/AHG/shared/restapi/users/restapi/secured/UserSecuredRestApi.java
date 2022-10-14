@@ -18,22 +18,22 @@ public interface UserSecuredRestApi {
     @GET
     @GetMapping(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
     @Path(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
-    UserListDTO pobierzListeUzytkownikowDto(@QueryParam("term") String term);
+    UserListDTO getUserList(@QueryParam("term") String term);
 
     @POST
     @PostMapping(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)
     @Path(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)
-    ResponseEntity<HttpStatus> utworzUzytkownika(@RequestBody AddUserDTO addUserDTO, HttpServletRequest request);
+    ResponseEntity<HttpStatus> createNewUser(@RequestBody AddUserDTO addUserDTO, HttpServletRequest request);
 
     @PUT
     @PutMapping(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.MODYFIKUJ_UZYTKOWNIKA)
-    UserDTO modyfikujUzytkownika(@PathVariable(value = "id") long id, @Validated @RequestBody UserDTO userDTO);
+    UserDTO modifyUser(@PathVariable(value = "id") long id, @Validated @RequestBody UserDTO userDTO);
 
     @DELETE
     @DeleteMapping(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA + "/{id}")
     @Path(UserSecuredRestApiUrl.USUN_UZYTKOWNIKA)
-    ResponseEntity<HttpStatus> usunUzytkownika(long id);
+    ResponseEntity<HttpStatus> deleteUser(long id);
 
     @POST
     @PostMapping(UserSecuredRestApiUrl.WYSLIJ_EMAIL_AKTYWACYJNY)

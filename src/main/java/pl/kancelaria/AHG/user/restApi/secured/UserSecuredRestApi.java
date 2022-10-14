@@ -38,23 +38,23 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     }
 
     @Override
-    public UserListDTO pobierzListeUzytkownikowDto(String term) {
+    public UserListDTO getUserList(String term) {
         return userListService.getUserList(term);
     }
 
     @Override
-    public ResponseEntity<HttpStatus> utworzUzytkownika(AddUserDTO addUserDTO, HttpServletRequest request) {
+    public ResponseEntity<HttpStatus> createNewUser(AddUserDTO addUserDTO, HttpServletRequest request) {
         return userService.createNewUser(addUserDTO);
     }
 
     @Override
-    public UserDTO modyfikujUzytkownika(long id, UserDTO userDTO) {
+    public UserDTO modifyUser(long id, UserDTO userDTO) {
         modifyUserService.modifyUser(id, userDTO);
         return userDTO;
     }
 
     @Override
-    public ResponseEntity<HttpStatus> usunUzytkownika(@PathVariable("id") long id) {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         return deleteUserService.deleteUser(id);
     }
 

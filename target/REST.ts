@@ -110,11 +110,6 @@ export class ResetPasswordDTO {
     appUrl: string;
 }
 
-export class LocationDTO {
-    id: number;
-    appUrl: string;
-}
-
 export class AddUserDTO {
     imie: string;
     nazwisko: string;
@@ -124,6 +119,11 @@ export class AddUserDTO {
     telefon: string;
     plec: UserSexEnum;
     rola: RolesName;
+}
+
+export class LocationDTO {
+    id: number;
+    appUrl: string;
 }
 
 export class EventLogDTO {
@@ -439,25 +439,25 @@ export class TSAllRestApiClient {
 
     /**
      * HTTP POST /rest/uzytkownicy/secured/dodaj-uzytkownika
-     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.utworzUzytkownika
+     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.createNewUser
      */
-    utworzUzytkownika(addUserDTO: AddUserDTO): RestResponse<ResponseEntity<HttpStatus>> {
+    createNewUser(addUserDTO: AddUserDTO): RestResponse<ResponseEntity<HttpStatus>> {
         return this.httpClient.request({ method: "POST", url: uriEncoding`rest/uzytkownicy/secured/dodaj-uzytkownika`, data: addUserDTO });
     }
 
     /**
      * HTTP GET /rest/uzytkownicy/secured/listaUzytkownikow
-     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.pobierzListeUzytkownikowDto
+     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.getUserList
      */
-    pobierzListeUzytkownikowDto(queryParams?: { term?: string; }): RestResponse<UserListDTO> {
+    getUserList(queryParams?: { term?: string; }): RestResponse<UserListDTO> {
         return this.httpClient.request({ method: "GET", url: uriEncoding`rest/uzytkownicy/secured/listaUzytkownikow`, queryParams: queryParams });
     }
 
     /**
      * HTTP PUT /rest/uzytkownicy/secured/modyfikuj-uzytkownika
-     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.modyfikujUzytkownika
+     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.modifyUser
      */
-    modyfikujUzytkownika(id: number): RestResponse<UserDTO> {
+    modifyUser(id: number): RestResponse<UserDTO> {
         return this.httpClient.request({ method: "PUT", url: uriEncoding`rest/uzytkownicy/secured/modyfikuj-uzytkownika`, data: id });
     }
 
@@ -471,9 +471,9 @@ export class TSAllRestApiClient {
 
     /**
      * HTTP DELETE /rest/uzytkownicy/secured/usun-uzytkownika
-     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.usunUzytkownika
+     * Java method: pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi.deleteUser
      */
-    usunUzytkownika(id: number): RestResponse<ResponseEntity<HttpStatus>> {
+    deleteUser(id: number): RestResponse<ResponseEntity<HttpStatus>> {
         return this.httpClient.request({ method: "DELETE", url: uriEncoding`rest/uzytkownicy/secured/usun-uzytkownika`, data: id });
     }
 
