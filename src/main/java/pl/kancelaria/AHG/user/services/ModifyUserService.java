@@ -44,6 +44,7 @@ public class ModifyUserService {
         }
         UserOB userOB = userRepository.getOne(id);
         userOB.setUserName(userDTO.getUsername());
+        if (userDTO.getPassword() != null)
         userOB.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userOB.setImie(userDTO.getImie());
         userOB.setNazwisko(userDTO.getNazwisko());
