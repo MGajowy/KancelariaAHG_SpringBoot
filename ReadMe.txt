@@ -18,7 +18,7 @@
          3. W terminalu ze ścieżki repozytorium ...\KancelariaAHG_SpringBoot\ wykonaj budowę poleceniem :
          mvn clean install -DskipTest
          (do zbudowania aplikacji z testami jest niezbędne utworzenie lokalnej bazy danych zgodnie
-         z ustawieniami dla tesów)
+         z ustawieniami dla testów)
 
 3. Otwórz terminal w katalogu...\KancelariaAHG_SpringBoot\AHG-Web\AHG-app
      wykonaj budowę obrazu docker dla frontend:

@@ -2,6 +2,8 @@ package pl.kancelaria.AHG.administration.auth.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -48,9 +50,16 @@ public class AuthServices {
 
     }
 
-    public String saveNewUser(RegistrationDTO user) {
-        userDetailsService.save(user);
-        return user.getUsername();
+    public ResponseEntity<HttpStatus> saveNewUser(RegistrationDTO user) {
+        try {
+            userDetailsService.save(user);
+            logger.info("Rejestracja użytkownika o adresie email: " + user.getEmail());
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            logger.error("Bład podczas rejestarcji. " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+//        return user.getUsername();
     }
 
     private void authenticate(String username, String password) throws Exception {

@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.shared.restapi.auth.restApi.pub;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public interface IAuthPublicRestApi {
     @POST
     @PostMapping(RestApiUrlStale.REJESTRACJA)
     @Path(RestApiUrlStale.REJESTRACJA)
-    ResponseEntity<?> saveUser(@RequestBody RegistrationDTO user);
+    ResponseEntity<HttpStatus> saveUser(@RequestBody RegistrationDTO user);
 
     @POST
     @PostMapping (RestApiUrlStale.USTAW_HASLO)

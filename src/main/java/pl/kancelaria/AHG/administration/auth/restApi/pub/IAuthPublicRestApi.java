@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.administration.auth.restApi.pub;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +27,8 @@ public class IAuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth
     }
 
     @Override
-    public ResponseEntity<?> saveUser(RegistrationDTO user)  {
-       String userNew = authServices.saveNewUser(user);
-        return ResponseEntity.ok(userNew);
+    public ResponseEntity<HttpStatus> saveUser(RegistrationDTO user)  {
+        return authServices.saveNewUser(user);
     }
 
     @Override

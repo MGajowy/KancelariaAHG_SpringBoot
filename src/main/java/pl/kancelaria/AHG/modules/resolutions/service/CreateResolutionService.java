@@ -40,7 +40,7 @@ public class CreateResolutionService {
             resolutionsOB.setKategoria(categoriesOB);
             resolutionsOB.setCzyPubliczny(resolutionDTO.getCzyPubliczny());
             this.resolutionsRepository.save(resolutionsOB);
-            logger.info("Uchwała " + resolutionsOB.getOpis() + "została dodana do listy.");
+            logger.info("Uchwała " + resolutionsOB.getOpis() + " została dodana do listy.");
             eventLogService.createLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, request.getRemoteUser() );
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
