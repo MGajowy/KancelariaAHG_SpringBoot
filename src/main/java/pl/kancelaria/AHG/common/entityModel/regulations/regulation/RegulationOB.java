@@ -18,10 +18,10 @@ public class RegulationOB {
     @Column(name = ModelConstants.KOLUMNA_ID,  length =36)
     private Long id;
 
-    @Column (name = ModelConstants.KOLUMNA_ROLA_NAZWA)
+    @Column (name = ModelConstants.KOLUMNA_ROLA_NAZWA, length = 300)
     private String nazwa;
 
-    @Column(name = ModelConstants.KOLUMNA_tresc)
+    @Column(name = ModelConstants.KOLUMNA_tresc, length = 5000)
     private String tresc;
 
     @NonNull

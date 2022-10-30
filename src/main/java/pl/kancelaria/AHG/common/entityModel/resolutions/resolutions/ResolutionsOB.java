@@ -18,10 +18,10 @@ public class ResolutionsOB {
     @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
     private long id;
 
-    @Column (name = ModelConstants.KOLUMNA_opis)
+    @Column (name = ModelConstants.KOLUMNA_opis, length = 300)
     private String opis;
 
-    @Column (name = ModelConstants.KOLUMNA_tresc)
+    @Column (name = ModelConstants.KOLUMNA_tresc, length = 5000)
     private String tresc;
 
     @NotNull
