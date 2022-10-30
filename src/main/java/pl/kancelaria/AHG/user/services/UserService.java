@@ -193,6 +193,15 @@ public class UserService {
 
     }
 
+    public List<RolesName> getRoles(String remoteUser) {
+        UserOB userOB = userRepository.findAllByUserName(remoteUser);
+        List<RolesOB> rolesOBSet = userOB.getRolesOBSet();
+        List<RolesName> rolesNames = new ArrayList<>();
+        for (RolesOB role : rolesOBSet) {
+         rolesNames.add(role.getNazwa());
+        }
+        return rolesNames;
+    }
 }
 
 

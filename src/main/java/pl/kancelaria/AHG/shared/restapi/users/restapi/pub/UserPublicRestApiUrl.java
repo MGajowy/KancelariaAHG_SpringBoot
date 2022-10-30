@@ -10,4 +10,5 @@ public class UserPublicRestApiUrl {
     public static final String WERYFIKUJ_TOKEN = "/weryfikuj-token";
     public static final String WYSLIJ_EMAIL_RESET_HASLA = "/reset-hasla";
 
+    public static final String ROLE = "/role";
 }
