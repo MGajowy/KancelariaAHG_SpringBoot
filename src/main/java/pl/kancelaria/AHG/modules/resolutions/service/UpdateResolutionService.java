@@ -10,6 +10,7 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.Ca
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.ResolutionsOB;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionsRepository;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
+import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionRequestDTO;
 import pl.kancelaria.AHG.user.services.UserService;
 
 
@@ -27,8 +28,8 @@ public class UpdateResolutionService {
         this.eventLogService = eventLogService;
     }
 
-    public ResolutionDTO modifyResolution(long id, ResolutionDTO request) {
-        CategoriesOB categoriesOB = categoriesRepository.getOne(request.getId());
+    public ResolutionRequestDTO modifyResolution(long id, ResolutionRequestDTO request) {
+        CategoriesOB categoriesOB = categoriesRepository.getOne(request.getIdKategorii());
         ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
         resolutionsOB.setOpis(request.getOpis());
         resolutionsOB.setTresc(request.getTresc());
@@ -36,7 +37,7 @@ public class UpdateResolutionService {
         resolutionsOB.setKategoria(categoriesOB);
         resolutionsRepository.save(resolutionsOB);
         logger.info("Zmodyfikowano uchwałę " + request.getOpis());
-        eventLogService.createLog(EventLogConstants.MODYFIKACJA_UCHWALY, null);
+        eventLogService.createLog(EventLogConstants.MODYFIKACJA_UCHWALY, "");
         return request;
     }
 

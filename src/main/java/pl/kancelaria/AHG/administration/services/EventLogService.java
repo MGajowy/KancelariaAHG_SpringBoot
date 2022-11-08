@@ -48,7 +48,7 @@ public class EventLogService {
                 EventLogDTO logDTO = new EventLogDTO();
                 BeanUtils.copyProperties(eventLogOB, logDTO);
                 if (eventLogOB.getUzytkownik().isEmpty() || eventLogOB.getUzytkownik() == null) {
-                    logDTO.setUzytkownik("nie odnaleziono");
+                    logDTO.setUzytkownik("Administrator");
                 } else {
                     logDTO.setUzytkownik(eventLogOB.getUzytkownik());
                 }

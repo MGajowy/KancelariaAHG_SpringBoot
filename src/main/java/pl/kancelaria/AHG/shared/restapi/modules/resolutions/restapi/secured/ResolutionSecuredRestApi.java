@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.modules.resolutions.dto.CreateResotutionDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
+import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionRequestDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
@@ -24,12 +25,12 @@ public interface ResolutionSecuredRestApi {
     @PUT
     @PutMapping(ResolutionSecuredRestApiUrl.MODYFIKUJ_UCHWALE + "/{id}")
     @Path(ResolutionSecuredRestApiUrl.MODYFIKUJ_UCHWALE)
-    ResolutionDTO modifyResolution(@PathVariable(value = "id") long id, @Validated @RequestBody ResolutionDTO request);
+    ResolutionRequestDTO modifyResolution(@PathVariable(value = "id") long id, @Validated @RequestBody ResolutionRequestDTO request);
 
     @DELETE
     @DeleteMapping(ResolutionSecuredRestApiUrl.USUN_UCHWALE + "/{id}")
     @Path(ResolutionSecuredRestApiUrl.USUN_UCHWALE)
-    ResponseEntity<HttpStatus> deleteResolution(long id);
+    ResponseEntity<HttpStatus> deleteResolution(@PathVariable(value = "id") long id);
 
     @GET
     @GetMapping(ResolutionSecuredRestApiUrl.SZCZEGOLY_UCHWALY + "/{id}")

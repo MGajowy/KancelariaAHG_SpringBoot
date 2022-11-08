@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.modules.resolutions.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionsRepository;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
@@ -15,6 +16,8 @@ public class DetailsResolutionService {
     }
 
     public ResolutionDTO detailsResolution(long id) {
-        return null;
+        ResolutionDTO resolutionDTO = new ResolutionDTO();
+        BeanUtils.copyProperties(resolutionsRepository.getOne(id), resolutionDTO);
+        return resolutionDTO;
     }
 }

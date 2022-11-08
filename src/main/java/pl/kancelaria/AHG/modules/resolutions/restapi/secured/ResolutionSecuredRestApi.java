@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.resolutions.dto.CreateResotutionDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
+import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionRequestDTO;
 import pl.kancelaria.AHG.modules.resolutions.service.CreateResolutionService;
 import pl.kancelaria.AHG.modules.resolutions.service.DeleteResolutionService;
 import pl.kancelaria.AHG.modules.resolutions.service.DetailsResolutionService;
@@ -36,7 +37,7 @@ public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restap
     }
 
     @Override
-    public ResolutionDTO modifyResolution(long id, ResolutionDTO request) {
+    public ResolutionRequestDTO modifyResolution(long id, ResolutionRequestDTO request) {
         return this.updateResolutionService.modifyResolution(id, request);
     }
 
@@ -45,7 +46,6 @@ public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restap
         return deleteResolutionService.deleteResolution(id);
     }
 
-    //todo dokonczyc serwis szczegolow
     @Override
     public ResolutionDTO detailsResolution(long id) {
         return this.detailsResolutionService.detailsResolution(id);

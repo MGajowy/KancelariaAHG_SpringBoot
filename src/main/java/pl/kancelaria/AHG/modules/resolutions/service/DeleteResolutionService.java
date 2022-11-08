@@ -29,7 +29,7 @@ public class DeleteResolutionService {
             ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
             resolutionsRepository.deleteById(id);
             logger.info("Uchwala " + resolutionsOB.getOpis() + "została usunięta.");
-            eventLogService.createLog(EventLogConstants.USUNIECIE_UCHWALY,null);
+            eventLogService.createLog(EventLogConstants.USUNIECIE_UCHWALY,"");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
             logger.error("Niepoprawnie usunięto uchwałę", ex);
