@@ -14,4 +14,6 @@ public class EventLogConstants {
     public static final String MODYFIKACJA_UCHWALY = "Zmodyfikowano uchwałę";
     public static final String DODANIE_NOWEGO_ROZPORZADZENIA = "Dodano nowe rozporzadzenie";
     public static final String ZAPYTANIE_EMAIL_OD_PETENTA = "Wysłano zapytanie email od petenta";
+    public static final String USUNIECIE_ROZPORZADZENIA = "Usunięto rozporządzenie";
+    public static final String MODYFIKACJA_ROZPORZADZENIA = "Zmodyfikowano rozporządzenie";
 }

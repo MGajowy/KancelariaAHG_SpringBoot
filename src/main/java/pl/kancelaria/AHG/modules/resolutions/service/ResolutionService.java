@@ -54,7 +54,6 @@ public class ResolutionService {
         return response;
     }
 
-    // todo zrobic walidacje !!!!
     public ResolutionListOfCategoryDTO getResolutionListByCategories(Long idKategorii) {
         List<ResolutionsOB> resolutionsOBS = getListByCategory(idKategorii);
         CategoriesOB categoriesOB = categoriesRepository.getOne(idKategorii);

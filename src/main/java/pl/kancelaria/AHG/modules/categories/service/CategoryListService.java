@@ -93,7 +93,6 @@ public class CategoryListService {
     public CategoryListDTO searchCategoriesByStatus(Boolean status) {
         CategoryListDTO categoryListDTO = new CategoryListDTO();
         List<CategoriesOB> listCategoryOB = getListCategoriesByStatus(status);
-
         List<CategoryDTO> collect = listCategoryOB.stream().map(CategoriesOB::categoryListByStatus).collect(Collectors.toList());
         categoryListDTO.setListaKategorii(collect);
         return categoryListDTO;
@@ -125,6 +124,7 @@ public class CategoryListService {
         List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesByRodzajKategoriiImpl(nazwaKategorii);
         return categoriesOB.stream()
                 .map(CategoriesOB::getRodzajKategorii)
-                .filter(rodzajKategorii -> rodzajKategorii.equals(nazwaKategorii)).collect(Collectors.toList());
+                .filter(rodzajKategorii -> rodzajKategorii.equals(nazwaKategorii))
+                .collect(Collectors.toList());
     }
-}
+    }

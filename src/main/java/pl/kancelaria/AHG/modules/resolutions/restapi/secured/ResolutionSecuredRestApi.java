@@ -37,7 +37,7 @@ public class ResolutionSecuredRestApi implements pl.kancelaria.AHG.shared.restap
     }
 
     @Override
-    public ResolutionRequestDTO modifyResolution(long id, ResolutionRequestDTO request) {
+    public ResponseEntity<HttpStatus> modifyResolution(long id, ResolutionRequestDTO request) {
         return this.updateResolutionService.modifyResolution(id, request);
     }
 

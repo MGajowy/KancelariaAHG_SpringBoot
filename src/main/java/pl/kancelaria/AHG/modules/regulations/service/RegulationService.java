@@ -3,6 +3,7 @@ package pl.kancelaria.AHG.modules.regulations.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.common.entityModel.regulations.regulation.RegulationOB;
+import pl.kancelaria.AHG.common.entityModel.regulations.regulation.repository.RegulationRepository;
 import pl.kancelaria.AHG.modules.regulations.dto.RegulationDTO;
 import pl.kancelaria.AHG.modules.regulations.dto.RegulationListDTO;
 
@@ -18,9 +19,17 @@ import java.util.List;
 @Service
 public class RegulationService {
     private final EntityManager entityManager;
+    private final RegulationRepository regulationRepository;
 
-    public RegulationService(EntityManager entityManager) {
+    public RegulationService(EntityManager entityManager, RegulationRepository regulationRepository) {
         this.entityManager = entityManager;
+        this.regulationRepository = regulationRepository;
+    }
+
+    public RegulationDTO detailsRegulation(long id) {
+        RegulationDTO regulationDTO = new RegulationDTO();
+        BeanUtils.copyProperties(regulationRepository.getOne(id), regulationDTO);
+        return regulationDTO;
     }
 
     public RegulationListDTO getRegulationsListByName(String nazwa) {

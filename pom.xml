@@ -204,6 +204,42 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>generate-ResolutionRequestDTO</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <jsonLibrary>jackson2</jsonLibrary>
+                            <classes>
+                                <class>pl.kancelaria.AHG.modules.resolutions.dto.ResolutionRequestDTO</class>
+                            </classes>
+                            <outputKind>module</outputKind>
+                            <outputFileType>implementationFile</outputFileType>
+                            <outputFile>target/ResolutionRequestDTO.ts</outputFile>
+                            <noFileComment>true</noFileComment>
+                            <mapClasses>asClasses</mapClasses>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-UpdateRegulationDTO</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <jsonLibrary>jackson2</jsonLibrary>
+                            <classes>
+                                <class>pl.kancelaria.AHG.modules.regulations.dto.UpdateRegulationDTO</class>
+                            </classes>
+                            <outputKind>module</outputKind>
+                            <outputFileType>implementationFile</outputFileType>
+                            <outputFile>target/UpdateRegulationDTO.ts</outputFile>
+                            <noFileComment>true</noFileComment>
+                            <mapClasses>asClasses</mapClasses>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>generate-Enum-Sex</id>
                         <goals>
                             <goal>generate</goal>
@@ -282,6 +318,12 @@
                                     <includes>
                                         <include>
                                             REST.ts
+                                        </include>
+                                        <include>
+                                            ResolutionRequestDTO.ts
+                                        </include>
+                                        <include>
+                                            UpdateRegulationDTO.ts
                                         </include>
                                         <include>
                                             UserDTO.ts

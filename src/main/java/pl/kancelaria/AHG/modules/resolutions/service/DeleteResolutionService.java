@@ -32,7 +32,7 @@ public class DeleteResolutionService {
             eventLogService.createLog(EventLogConstants.USUNIECIE_UCHWALY,"");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
-            logger.error("Niepoprawnie usunięto uchwałę", ex);
+            logger.error("Nieudana próba usunięcia uchwały", ex);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }

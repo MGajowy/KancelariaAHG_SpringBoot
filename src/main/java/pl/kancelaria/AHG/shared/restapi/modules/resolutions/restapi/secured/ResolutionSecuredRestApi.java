@@ -3,7 +3,6 @@ package pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.secured;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.modules.resolutions.dto.CreateResotutionDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
@@ -25,7 +24,7 @@ public interface ResolutionSecuredRestApi {
     @PUT
     @PutMapping(ResolutionSecuredRestApiUrl.MODYFIKUJ_UCHWALE + "/{id}")
     @Path(ResolutionSecuredRestApiUrl.MODYFIKUJ_UCHWALE)
-    ResolutionRequestDTO modifyResolution(@PathVariable(value = "id") long id, @Validated @RequestBody ResolutionRequestDTO request);
+    ResponseEntity<HttpStatus> modifyResolution(@PathVariable(value = "id") long id, @RequestBody ResolutionRequestDTO request);
 
     @DELETE
     @DeleteMapping(ResolutionSecuredRestApiUrl.USUN_UCHWALE + "/{id}")
