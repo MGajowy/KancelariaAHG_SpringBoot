@@ -45,14 +45,13 @@ public class EventLogService {
         if (!CollectionUtils.isEmpty(eventLogListOB)) {
             List<EventLogDTO> eventLogList = new ArrayList<>();
             eventLogListOB.forEach(eventLogOB -> {
-                EventLogDTO logDTO = new EventLogDTO();
-                BeanUtils.copyProperties(eventLogOB, logDTO);
-                if (eventLogOB.getUzytkownik().isEmpty() || eventLogOB.getUzytkownik() == null) {
-                    logDTO.setUzytkownik("Administrator");
-                } else {
-                    logDTO.setUzytkownik(eventLogOB.getUzytkownik());
-                }
-                eventLogList.add(logDTO);
+                EventLogDTO eventLog = EventLogDTO.builder()
+                        .id(eventLogOB.getId())
+                        .czynnosc(eventLogOB.getCzynnosc())
+                        .dataCzynnosci(eventLogOB.getData_czynnosci())
+                        .uzytkownik(eventLogOB.getUzytkownik().isEmpty() || eventLogOB.getUzytkownik() == null ? "Administrator" : eventLogOB.getUzytkownik())
+                        .build();
+                eventLogList.add(eventLog);
             });
             listDTO.setListaLogow(eventLogList);
         } else {
@@ -75,10 +74,16 @@ public class EventLogService {
     private List<EventLogDTO> getEventLogDTO() {
         List<EventLogDTO> eventLogList = new ArrayList<>();
         List<EventLogOB> eventLogListOB = eventLogRepository.findAll();
-        for (EventLogOB event : eventLogListOB) {
-            EventLogDTO logDTO = new EventLogDTO();
-            BeanUtils.copyProperties(event, logDTO);
-            eventLogList.add(logDTO);
+        if (!CollectionUtils.isEmpty(eventLogListOB)) {
+            eventLogListOB.forEach(eventLogOB -> {
+                EventLogDTO eventLog = EventLogDTO.builder()
+                        .id(eventLogOB.getId())
+                        .czynnosc(eventLogOB.getCzynnosc())
+                        .uzytkownik(eventLogOB.getUzytkownik())
+                        .dataCzynnosci(eventLogOB.getData_czynnosci())
+                        .build();
+                eventLogList.add(eventLog);
+            });
         }
         return eventLogList;
     }
