@@ -41,7 +41,7 @@ public class EventLogPDFExport implements ExportPDF {
         for (EventLogDTO eventLogDTO : listEvent) {
             table.addCell(eventLogDTO.getCzynnosc());
             table.addCell(eventLogDTO.getUzytkownik());
-            table.addCell(eventLogDTO.getData_czynnosci().getTime().toString());
+            table.addCell(eventLogDTO.getDataCzynnosci().getTime().toString());
         }
     }
 

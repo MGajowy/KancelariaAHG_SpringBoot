@@ -14,11 +14,6 @@ import java.util.List;
 @RequestMapping(value =CategoryPublicRestApiUrl.SCIEZKA_KATEGORIE)
 public interface CategoryPublicRestApi {
 
-    //todo metoda testowa
-    @GET
-    @GetMapping(CategoryPublicRestApiUrl.TEST)
-    @Path(CategoryPublicRestApiUrl.TEST)
-    String getStr();
 
     @GET
     @GetMapping(CategoryPublicRestApiUrl.WSZYSTKIE_KATEGORIE)

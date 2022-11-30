@@ -12,7 +12,6 @@ import javax.ws.rs.*;
 
 @Path(value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
 @RequestMapping(value = CategorySecuredRestApiUrl.SCIEZKA_KATEGORIE)
-//@Secured()
 public interface CategorySecuredRestApi {
 
     @POST

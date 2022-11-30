@@ -20,11 +20,6 @@ public class CategoryPublicRestApi implements pl.kancelaria.AHG.shared.restapi.m
     }
 
     @Override
-    public String getStr() {
-        return "Test Michal";
-    }
-
-    @Override
     public CategoryListDTO getCategoryList() {
         return categoryListService.getCategoryList();
     }

@@ -31,9 +31,9 @@ public class UserListService {
         List<UserOB> userOBList = provideCriteriaList(term);
         if (!CollectionUtils.isEmpty(userOBList)) {
             List<UserDTO> users = new ArrayList<>();
-            userOBList.forEach(u -> {
+            userOBList.forEach(user -> {
                 UserDTO daneDTO = new UserDTO();
-                BeanUtils.copyProperties(u, daneDTO);
+                BeanUtils.copyProperties(user, daneDTO);
                 users.add(daneDTO);
             });
             response.setListaUzytkownikow(users);
