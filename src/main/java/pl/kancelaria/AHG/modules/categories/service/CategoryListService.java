@@ -29,6 +29,7 @@ public class CategoryListService {
     public CategoryListService(CategoriesRepository categoriesRepository, EntityManager entityManager) {
         this.categoriesRepository = categoriesRepository;
         this.entityManager = entityManager;
+
     }
 
     public CategoryListDTO getCategoryList() {
@@ -127,4 +128,4 @@ public class CategoryListService {
                 .filter(rodzajKategorii -> rodzajKategorii.equals(nazwaKategorii))
                 .collect(Collectors.toList());
     }
-    }
+}

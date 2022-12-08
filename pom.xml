@@ -15,6 +15,7 @@
     <description>Kancelaria</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <jackson.version>2.13.3</jackson.version>
         <jsonwebtoken.version>0.9.1</jsonwebtoken.version>
@@ -29,6 +30,7 @@
         <org.springfox-swagger>2.9.2</org.springfox-swagger>
         <assertj-core>3.22.0</assertj-core>
         <openpdf>1.3.29</openpdf>
+        <cxf.version>3.4.2</cxf.version>
     </properties>
 
     <dependencies>
@@ -138,6 +140,20 @@
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
             <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.3</version>
         </dependency>
     </dependencies>
     <build>
@@ -342,6 +358,31 @@
                             </resources>
                             <outputDirectory>AHG-Web/AHG-app/src/app/generated</outputDirectory>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <!--							<sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>-->
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/WSDL/Reputation.wsdl</wsdl>
+                                    <packagenames>
+                                        <packagename>pl.kancelaria.AHG.WebService.SOAP.wsdlReputation</packagename>
+                                    </packagenames>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
