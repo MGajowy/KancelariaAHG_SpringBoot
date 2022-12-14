@@ -1,5 +1,7 @@
 package pl.kancelaria.AHG.WebService.SOAP;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.WebService.SOAP.wsdlReputation.*;
 
@@ -20,6 +22,11 @@ public class ReputationClientService implements ReputationServiceConnect{
         GetAllReputation getAllReputation = new GetAllReputation();
         GetAllReputationResponse response = getReputationService().getAllReputation(getAllReputation);
         return response.getReputation();
+    }
+
+    public ResponseEntity<HttpStatus> addReputation(AddReputation reputation) throws MalformedURLException {
+        AddReputationResponse response = getReputationService().addReputation(reputation);
+        return response.getReputation() == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
