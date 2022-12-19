@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.WebService.SOAP;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Service
 public class ReputationClientService implements ReputationServiceConnect{
+
+    @Value("${reputationClientService.wsdl}")
+    private String endpointValueConfiguration;
 
     public Reputation getReputationById(GetReputation rep) throws MalformedURLException {
         GetResponse response = getReputationService().getReputation(rep);
@@ -31,7 +35,7 @@ public class ReputationClientService implements ReputationServiceConnect{
 
     @Override
     public ReputationInformationService getReputationService() throws MalformedURLException {
-        final String endpoint = "http://localhost:8040/ws/reputation.wsdl";
+        final String endpoint = endpointValueConfiguration;
         final URL url = URI.create(endpoint).toURL();
         final ReputationService service = new ReputationService(url);
         return service.getPort(ReputationInformationService.class);

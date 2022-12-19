@@ -7,8 +7,8 @@ services:
     ports:
       - "8020:8020"
     depends_on:
-      - ahgReputation
       - postgresqldb
+      - ahgReputation
       - ahgFrontend
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresqldb:5432/
