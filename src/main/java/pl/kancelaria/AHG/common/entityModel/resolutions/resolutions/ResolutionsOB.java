@@ -10,18 +10,18 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(schema = ModelConstants.SCHEMA_UCHWALY, name = ModelConstants.TABELA_uchwaly)
+@Table(schema = ModelConstants.SCHEMA_RESOLUTIONS, name = ModelConstants.TABLE_RESOLUTIONS)
 @Data
 public class ResolutionsOB {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
+    @Column(name = ModelConstants.COLUMN_ID, length = 36)
     private long id;
 
-    @Column (name = ModelConstants.KOLUMNA_opis, length = 300)
+    @Column (name = ModelConstants.COLUMN_DESCRIPTION_OPIS, length = 300)
     private String opis;
 
-    @Column (name = ModelConstants.KOLUMNA_tresc, length = 5000)
+    @Column (name = ModelConstants.COLUMN_CONTENTS, length = 5000)
     private String tresc;
 
     @NotNull

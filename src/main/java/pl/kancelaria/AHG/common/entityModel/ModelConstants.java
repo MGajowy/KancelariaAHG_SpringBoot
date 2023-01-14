@@ -2,54 +2,61 @@ package pl.kancelaria.AHG.common.entityModel;
 
 public class ModelConstants {
     //SCHEMATY
-    public static final String SCHEMA_ADMINISTRACJA = "administracja";
-    public  static final String SCHEMA_UCHWALY = "uchwaly";
-    public  static final String SCHEMA_UZYTKOWNIK = "uzytkownik";
-    public static final String SCHEMA_WSPOLNE = "wspolne";
-    public static final String SCHEMA_ROZPORZADZENIA = "rozporzadzenia";
+    public static final String SCHEMA_ADMINISTRATION = "administracja";
+    public static final String SCHEMA_RESOLUTIONS = "uchwaly";
+    public static final String SCHEMA_USER = "uzytkownik";
+    public static final String SCHEMA_SHARED = "wspolne";
+    public static final String SCHEMA_REGULATIONS = "rozporzadzenia";
+    public static final String SCHEMA_REPUTATIONS = "reputations";
 
     //TABELE
-    public static final String TABELA_uzytkownik = "uzytkownik";
-    public static final String TABELA_uchwaly = "uchwaly";
-    public static final String TABELA_Token = "token";
-    public static final String TABELA_kategorie = "kategorie";
-    public static final String TABELA_ROLE = "role";
-    public static final String TABELA_DZIENNIK_ZDARZEN = "dziennik_zdarzen";
-    public static final String TABELA_ROZPORZADZENIA = "rozporzadzenia";
-    //KOLUMNY
-    public static final String KOLUMNA_ID = "id";
-    public static final String KOLUMNA_stan = "stan";
-    //uzytkownik
-    public static final String KOLUMNA_imie = "imie";
-    public static final String KOLUMNA_nazwisko = "nazwisko";
-    public static final String KOLUMNA_username = "username";
-    public static final String KOLUMNA_password = "password";
-    public static final String KOLUMNA_email = "email";
-    public static final String KOLUMNA_czy_zaakceptowano_regulamin = "czy_zaakceptowano_regulamin";
-    public static final String KOLUMNA_typ_konta = "typ_konta";
-    public static final String KOLUMNA_telefon = "telefon";
-    public static final String KOLUMNA_fk_token = "fk_token";
-    public static final String KOLUMNA_zdjecie = "zdjecie_profilowe";
-    public static final String KOLUMNA_plec = "plec";
-    public static final String KOLUMNA_data_rejestracji = "data_rejestracji";
-    //token
-    public static final String KOLUMNA_token = "token";
-    public static final String KOLUMNA_fk_uzytkownik = "fk_uzytkownik";
-    //uchwały
-    public static final String KOLUMNA_kategoria = "fk_kategoria";
-    public static final String KOLUMNA_opis = "opis";
-    public static final String KOLUMNA_tresc = "tresc";
-    public static final String KOLUMNA_czy_publiczny = "czy_publiczny";
-    //kategorie uchwał
-    public static final String KOLUMNA_rodzaj_kategorii = "rodzaj_kategorii";
-    public static final String KOLUMNA_fk_uchwały = "fk_uchwały";
-    //role
-    public static final String KOLUMNA_ROLE_ID = "rola_id";
-    public static final String KOLUMNA_ROLA_NAZWA = "nazwa";
-    //dziennik zdarzen
-    public static final String KOLUMNA_CZYNNOSC = "czynnosc";
-    public static final String KOLUMNA_DATA_CZYNNOSCI = "data_czynnosci";
-    public static final String KOLUMNA_UZYTKOWNIK = "uzytkownik";
+    public static final String TABLE_USER = "uzytkownik";
+    public static final String TABLE_RESOLUTIONS = "uchwaly";
+    public static final String TABLE_TOKEN = "token";
+    public static final String TABLE_CATEGORY = "kategorie";
+    public static final String TABLE_ROLE = "role";
+    public static final String TABLE_EVENT_LOG = "dziennik_zdarzen";
+    public static final String TABLE_REGULATIONS = "rozporzadzenia";
+    public static final String TABLE_REPUTATION = "reputation";
 
+    //KOLUMNY
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_STATE = "stan";
+    //uzytkownik
+    public static final String COLUMN_NAME = "imie";
+    public static final String COLUMN_SURNAME = "nazwisko";
+    public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_PASSWORD = "password";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_ACCEPT_STATUE = "czy_zaakceptowano_regulamin";
+    public static final String COLUMN_TYPE_ACCOUNT = "typ_konta";
+    public static final String COLUMN_TELEPHONE = "telefon";
+    public static final String COLUMN_FK_TOKEN = "fk_token";
+    public static final String COLUMN_FOTO_PROFILE = "zdjecie_profilowe";
+    public static final String COLUMN_SEX = "plec";
+    public static final String COLUMN_DATE_OF_REGISTRATION = "data_rejestracji";
+    //token
+    public static final String COLUMN_TOKEN = "token";
+    public static final String COLUMN_FK_USER = "fk_uzytkownik";
+    //uchwały
+    public static final String COLUMN_FK_CATEGORY = "fk_kategoria";
+    public static final String COLUMN_DESCRIPTION_OPIS = "opis";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_CONTENTS = "tresc";
+    public static final String COLUMN_IS_PUBLIC = "czy_publiczny";
+    //kategorie uchwał
+    public static final String COLUMN_TYPE_OF_CATEGORY = "rodzaj_kategorii";
+    public static final String COLUMN_FK_RESOLUTION = "fk_uchwały";
+    //role
+    public static final String COLUMN_ROLE_ID = "rola_id";
+    public static final String COLUMN_ROLE_NAME = "nazwa";
+    //dziennik zdarzen
+    public static final String COLUMN_ACTION = "czynnosc";
+    public static final String COLUMN_DATE_ACTION = "data_czynnosci";
+    public static final String COLUMN_USER_ACTION = "uzytkownik";
+
+    //reputation
+    public static final String COLUMN_LIKE = "like_reputation";
+    public static final String COLUMN_NOT_LIKE = "notLike_reputation";
 
 }

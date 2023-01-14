@@ -10,20 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = ModelConstants.TABELA_kategorie,schema = ModelConstants.SCHEMA_ROZPORZADZENIA)
+@Table(name = ModelConstants.TABLE_CATEGORY,schema = ModelConstants.SCHEMA_REGULATIONS)
 @Data
 public class CategoryRegulationOB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
+    @Column(name = ModelConstants.COLUMN_ID, length = 36)
     private long id;
 
-    @Column(name = ModelConstants.KOLUMNA_rodzaj_kategorii, length = 255)
+    @Column(name = ModelConstants.COLUMN_TYPE_OF_CATEGORY, length = 255)
     private  String rodzajKategorii;
 
     @NotNull
-    @Column(name = ModelConstants.KOLUMNA_czy_publiczny)
+    @Column(name = ModelConstants.COLUMN_IS_PUBLIC)
     private Boolean czyPubliczny;
 
     @OneToMany(mappedBy="kategoria",cascade=CascadeType.ALL, fetch = FetchType.LAZY)

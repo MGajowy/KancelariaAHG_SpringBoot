@@ -11,17 +11,17 @@ import java.util.List;
 
 
 @Entity
-@Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_ROLE)
+@Table(schema = ModelConstants.SCHEMA_USER, name = ModelConstants.TABLE_ROLE)
 @Data
 @EqualsAndHashCode(exclude = "userOBSet")
 public class RolesOB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = ModelConstants.KOLUMNA_ROLE_ID, length = 36)
+    @Column (name = ModelConstants.COLUMN_ROLE_ID, length = 36)
     private long id;
 
     @Enumerated(EnumType.STRING)
-    @Column (name = ModelConstants.KOLUMNA_ROLA_NAZWA, length = 255)
+    @Column (name = ModelConstants.COLUMN_ROLE_NAME, length = 255)
     private RolesName nazwa;
 
 // ta encja musi być zapisana w 1 kolejności !! wazne!

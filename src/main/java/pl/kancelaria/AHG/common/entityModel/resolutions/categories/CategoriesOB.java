@@ -12,20 +12,20 @@ import java.util.List;
 
 
 @Entity
-@Table(schema = ModelConstants.SCHEMA_UCHWALY, name = ModelConstants.TABELA_kategorie)
+@Table(schema = ModelConstants.SCHEMA_RESOLUTIONS, name = ModelConstants.TABLE_CATEGORY)
 @Data
 public class CategoriesOB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
+    @Column(name = ModelConstants.COLUMN_ID, length = 36)
     private long id;
 
-    @Column(name = ModelConstants.KOLUMNA_rodzaj_kategorii, length = 255)
+    @Column(name = ModelConstants.COLUMN_TYPE_OF_CATEGORY, length = 255)
     private String rodzajKategorii;
 
     @NotNull
-    @Column(name = ModelConstants.KOLUMNA_czy_publiczny)
+    @Column(name = ModelConstants.COLUMN_IS_PUBLIC)
     //@Enumerated(value = EnumType.STRING)
     private Boolean czyPubliczny;
 

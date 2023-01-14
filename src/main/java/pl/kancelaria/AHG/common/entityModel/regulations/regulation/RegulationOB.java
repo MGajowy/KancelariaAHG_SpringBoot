@@ -9,23 +9,23 @@ import pl.kancelaria.AHG.common.entityModel.regulations.category.CategoryRegulat
 import javax.persistence.*;
 
 @Entity
-@Table(name = ModelConstants.TABELA_ROZPORZADZENIA, schema = ModelConstants.SCHEMA_ROZPORZADZENIA )
+@Table(name = ModelConstants.TABLE_REGULATIONS, schema = ModelConstants.SCHEMA_REGULATIONS)
 @Data
 @NoArgsConstructor
 public class RegulationOB {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ModelConstants.KOLUMNA_ID,  length =36)
+    @Column(name = ModelConstants.COLUMN_ID,  length =36)
     private Long id;
 
-    @Column (name = ModelConstants.KOLUMNA_ROLA_NAZWA, length = 300)
+    @Column (name = ModelConstants.COLUMN_ROLE_NAME, length = 300)
     private String nazwa;
 
-    @Column(name = ModelConstants.KOLUMNA_tresc, length = 5000)
+    @Column(name = ModelConstants.COLUMN_CONTENTS, length = 5000)
     private String tresc;
 
     @NonNull
-    @Column(name = ModelConstants.KOLUMNA_czy_publiczny)
+    @Column(name = ModelConstants.COLUMN_IS_PUBLIC)
     private Boolean czyPubliczny;
 
     @ManyToOne

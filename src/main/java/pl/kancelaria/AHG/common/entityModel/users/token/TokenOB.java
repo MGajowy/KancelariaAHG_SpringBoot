@@ -9,16 +9,16 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(schema = ModelConstants.SCHEMA_UZYTKOWNIK, name = ModelConstants.TABELA_Token)
+@Table(schema = ModelConstants.SCHEMA_USER, name = ModelConstants.TABLE_TOKEN)
 @Data
 public class TokenOB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
+    @Column(name = ModelConstants.COLUMN_ID, length = 36)
     private long id;
 
-    @Column(name = ModelConstants.KOLUMNA_token)
+    @Column(name = ModelConstants.COLUMN_TOKEN)
     private String token;
 
     @OneToOne(fetch = FetchType.LAZY)

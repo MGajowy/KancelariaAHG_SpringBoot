@@ -9,19 +9,19 @@ import java.util.Calendar;
 
 
 @Entity
-@Table(schema = ModelConstants.SCHEMA_ADMINISTRACJA, name = ModelConstants.TABELA_DZIENNIK_ZDARZEN)
+@Table(schema = ModelConstants.SCHEMA_ADMINISTRATION, name = ModelConstants.TABLE_EVENT_LOG)
 @Data
 public class EventLogOB {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ModelConstants.KOLUMNA_ID, length = 36)
+    @Column(name = ModelConstants.COLUMN_ID, length = 36)
     private long id;
 
     @NotNull
-    @Column(name = ModelConstants.KOLUMNA_CZYNNOSC, length = 255)
+    @Column(name = ModelConstants.COLUMN_ACTION, length = 255)
     private String czynnosc;
 
-    @Column(name = ModelConstants.KOLUMNA_DATA_CZYNNOSCI)
+    @Column(name = ModelConstants.COLUMN_DATE_ACTION)
     private Calendar data_czynnosci;
 
 //    @OneToOne(fetch = FetchType.LAZY)
