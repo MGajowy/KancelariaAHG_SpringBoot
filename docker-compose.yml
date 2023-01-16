@@ -24,6 +24,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
+      - POSTGRES_DB=reputation
   ahgFrontend:
     container_name: AHG_frontend
     image: ahg-frontend
@@ -34,3 +35,8 @@ services:
     image: ahg-reputation
     ports:
       - "8040:8040"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresqldb:5432/reputation
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create

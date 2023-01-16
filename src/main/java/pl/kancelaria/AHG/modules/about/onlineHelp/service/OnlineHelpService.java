@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.modules.about.onlineHelp.service;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import pl.kancelaria.AHG.user.services.UserService;
 import javax.mail.MessagingException;
 
 @Service
+@RequiredArgsConstructor
 public class OnlineHelpService {
 
     @Value("${onlineHelp.email}")
@@ -24,11 +26,6 @@ public class OnlineHelpService {
     private final MailSenderService mailSenderService;
     private final EventLogService eventLogService;
     Logger logger = LoggerFactory.getLogger(UserService.class);
-
-    public OnlineHelpService(MailSenderService mailSenderService, EventLogService eventLogService) {
-        this.mailSenderService = mailSenderService;
-        this.eventLogService = eventLogService;
-    }
 
     public ResponseEntity<HttpStatus> sendEmailNotification(OnlineHelpRequestDto request) {
         boolean resultValidation = validateMessage(request);

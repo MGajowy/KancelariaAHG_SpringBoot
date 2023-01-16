@@ -13,18 +13,27 @@
         1. Pobierz repozytowium backend:
         https://github.com/MGajowy/KancelariaAHG_SpringBoot.git
 
-        2. W terminalu (ścieżka rozpakowania: ...\KancelariaAHG_SpringBoot\ )wykonaj budowę poleceniem:
+        ### WAŻNE
+                 Ustawienie ścieżki wygenetownych plików TS dla aplikacji frontend AHG-app:
+                 Otwórz plik pom.xml i w properties ustaw zmienną:
+
+                 <generateTsFile>TU PODAJ SCIEZKĘ DO MIEJSCA REPOZYTORIUM AHG-app</generateTsFile>
+                 przykład:
+                 <generateTsFile>D:/Projekty_Michal/KancelariaAHG</generateTsFile>
+
+                 wskazując ścieżkę/katalog w którym aktualnie, lokalnie znajdzie się wypakowana aplikacja AHG-app.
+
+         W terminalu (ścieżka rozpakowania: ...\KancelariaAHG_SpringBoot\ )wykonaj budowę poleceniem:
                  mvn clean install -DskipTest
                  UWAGA: (do zbudowania aplikacji z testami jest niezbędne utworzenie lokalnej bazy danych zgodnie
                  z ustawieniami dla testów)
 
-        3. Pobierz repozytorium frontend:
+        2. Pobierz repozytorium frontend:
          https://github.com/MGajowy/KancelariaAHGApp.git
-         do katalogu:
-         ...\KancelariaAHG_SpringBoot\AHG-Web\AHG-app
-         Zbuduj aplikację za pomoca polecenia : ng build --prod
 
-         4. Pobierz repozytorium reputation
+         Zbuduj aplikację w terminalu za pomoca polecenia : ng build --prod
+
+         3. Pobierz repozytorium reputation
          https://github.com/MGajowy/KancelariaAHG_Reputation.git
          W terminalu (ścieżka rozpakowania: ... \Reputation) wykonaj budowę poleceniem:
          mvn clean install

@@ -27,7 +27,7 @@ public class DeleteRegulationService {
         try {
             RegulationOB regulationOB = regulationRepository.getOne(id);
             regulationRepository.deleteById(id);
-            logger.info("Rozporządzenie " + regulationOB.getNazwa() + " zostało usunięte");
+            logger.info("Rozporządzenie {} zostało usunięte", regulationOB.getNazwa());
             eventLogService.createLog(EventLogConstants.USUNIECIE_ROZPORZADZENIA, "");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {
