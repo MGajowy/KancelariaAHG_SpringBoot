@@ -1,4 +1,4 @@
-package pl.kancelaria.AHG.WebService.SOAP;
+package pl.kancelaria.AHG.WebService.SOAP.reputation.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.List;
 
 @Service
-public class ReputationClientService implements ReputationServiceConnect{
+public class ReputationClientService implements ReputationServiceConnect {
 
     @Value("${reputationClientService.wsdl}")
     private String endpointValueConfiguration;
@@ -30,7 +30,15 @@ public class ReputationClientService implements ReputationServiceConnect{
 
     public ResponseEntity<HttpStatus> addReputation(AddReputation reputation) throws MalformedURLException {
         AddReputationResponse response = getReputationService().addReputation(reputation);
-        return response.getReputation() == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(HttpStatus.CREATED);
+        return response == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    public Long addLikeReputation(Long request) throws MalformedURLException {
+        return getReputationService().addLikeReputation(request);
+    }
+
+    public Long addNotLikeReputation(Long request) throws MalformedURLException {
+        return getReputationService().addNotLikeReputation(request);
     }
 
     @Override

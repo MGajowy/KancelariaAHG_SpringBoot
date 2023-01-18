@@ -25,13 +25,4 @@ public interface IOnlineHelpPublicRestApi {
     @Path(OnlineHelpPublicRestApiUrl.WYSLIJ_POWIADOMIENIE)
     ResponseEntity<HttpStatus> sendEmailNotification(@RequestBody OnlineHelpRequestDto request);
 
-    @POST
-    @PostMapping(OnlineHelpPublicRestApiUrl.POBIERZ_OPINIE)
-    @Path(OnlineHelpPublicRestApiUrl.POBIERZ_OPINIE)
-    Reputation getReputationById(@RequestBody GetReputation id) throws MalformedURLException;
-
-    @GET
-    @GetMapping(OnlineHelpPublicRestApiUrl.POBIERZ_WSZYSTKIE_OPINIE)
-    @Path(OnlineHelpPublicRestApiUrl.POBIERZ_WSZYSTKIE_OPINIE)
-    List<Reputation> getAllReputation() throws MalformedURLException;
 }

@@ -1,4 +1,4 @@
-package pl.kancelaria.AHG.WebService.SOAP;
+package pl.kancelaria.AHG.WebService.SOAP.reputation.service;
 
 import pl.kancelaria.AHG.WebService.SOAP.wsdlReputation.ReputationInformationService;
 

@@ -12,6 +12,8 @@ import pl.kancelaria.AHG.shared.restapi.modules.regulations.restApi.pub.Regulati
 import pl.kancelaria.AHG.shared.restapi.modules.regulations.restApi.secured.RegulationSecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.pub.ResolutionPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.secured.ResolutionSecuredRestApi;
+import pl.kancelaria.AHG.shared.restapi.reputations.pub.ReputationPublicRestApi;
+import pl.kancelaria.AHG.shared.restapi.reputations.secured.ReputationSecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.users.restapi.pub.UserPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.users.restapi.secured.UserSecuredRestApi;
 
@@ -42,7 +44,9 @@ public class TSAllRestApi extends Application {
                 CategoryRegulationSecuredRestApi.class,
                 RegulationPublicRestApi.class,
                 RegulationSecuredRestApi.class,
-                IOnlineHelpPublicRestApi.class
+                IOnlineHelpPublicRestApi.class,
+                ReputationPublicRestApi.class,
+                ReputationSecuredRestApi.class
                 ));
     }
 }
