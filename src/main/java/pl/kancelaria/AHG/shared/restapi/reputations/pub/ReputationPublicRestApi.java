@@ -7,6 +7,7 @@ import pl.kancelaria.AHG.WebService.SOAP.wsdlReputation.AddReputation;
 import pl.kancelaria.AHG.WebService.SOAP.wsdlReputation.GetReputation;
 import pl.kancelaria.AHG.WebService.SOAP.wsdlReputation.Reputation;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

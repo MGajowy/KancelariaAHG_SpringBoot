@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
+import java.net.MalformedURLException;
 
 @Path(value = ReputationSecuredRestApiUrl.PATH_REPUTATION)
 @RequestMapping(value = ReputationSecuredRestApiUrl.PATH_REPUTATION)
@@ -16,5 +17,5 @@ public interface ReputationSecuredRestApi {
     @DELETE
     @Path(ReputationSecuredRestApiUrl.REPUTATION_DELETE)
     @DeleteMapping(ReputationSecuredRestApiUrl.REPUTATION_DELETE + "/{id}")
-    ResponseEntity<HttpStatus> deleteReputation(@PathVariable(value = "id") long id);
+    ResponseEntity<HttpStatus> deleteReputation(@PathVariable(value = "id") long id) throws MalformedURLException;
 }

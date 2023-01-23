@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ReputationClientService implements ReputationServiceConnect {
@@ -39,6 +40,11 @@ public class ReputationClientService implements ReputationServiceConnect {
 
     public Long addNotLikeReputation(Long request) throws MalformedURLException {
         return getReputationService().addNotLikeReputation(request);
+    }
+
+    public ResponseEntity<HttpStatus> deleteReputation(Long request) throws MalformedURLException {
+        String result = getReputationService().deleteReputation(request);
+        return Objects.equals(result, "ok") ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Override

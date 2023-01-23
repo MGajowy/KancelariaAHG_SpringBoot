@@ -11,4 +11,5 @@ public class ReputationPublicRestApiUrl {
     public static final String REPUTATION_ADD = "/addReputation";
     public static final String REPUTATION_ADD_LIKE = "/addLike";
     public static final String REPUTATION_ADD_NOT_LIKE = "/addNotLike";
+    public static final String REPUTATION_DELETE = "/delete";
 }
