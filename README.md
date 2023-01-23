@@ -2,14 +2,33 @@
 ---------------------------------------------------------------------------------------------------
 # INSTRUKCJA URUCHOMIENIA APLIKACJI "Kancelaria AHG"
 ---------------------------------------------------------------------------------------------------
-
-## 1. Informacje techniczne:
+##  Informacje techniczne:
 - Spring Boot
 - Docker
 - DB: PostgreSQL 9.6
 - Java 11
 
-## 2. Budowa paczek aplikacji:
+# 1. URUCHOMIENIE APLIKACJI Z GOTOWYCH OBRAZÓW DOCKER.
+## 1. Pobierz obrazy docker z platformy GitHub:
+ - docker pull ghcr.io/mgajowy/ahg-frontend:1.0
+ - docker pull ghcr.io/mgajowy/ahg-reputation:1.0
+ - docker pull ghcr.io/mgajowy/ahg-backend:1.0
+ ## 2. Pobierz repozytorium backend:
+     https://github.com/MGajowy/KancelariaAHG_SpringBoot.git
+ ## 3. W dowolnym edytorze IDE (np. IntelliJ) przejź do ścieżki : ...\KancelariaAHG_SpringBoot\docker-compose.yml,
+       następnie zmień nazwy obrazów docker dla:
+       image: ahg-backend  zmień na: image: ghcr.io/mgajowy/ahg-backend:1.0
+       image: ahg-frontend  zmień na: image: ghcr.io/mgajowy/ahg-frontend:1.0
+       image: ahg-reputation  zmień na: image: ghcr.io/mgajowy/ahg-reputation:1.0
+       Zapisz plik.
+ ## 4. Otwórz terminal w ścieżce ...\KancelariaAHG_SpringBoot\ i wpisz polecenie
+       docker compose up
+ ## 5. Po uruchomieniu aplikacji przejdź do przeglądarki pod adres http://localhost:8080
+
+
+# 2. URUCHOMIENIE APLIKACJI Z BUDOWĄ POSZCZEGÓLNYCH PACZEK JAR I OBRAZÓW DOCKER.
+
+## 1. Budowa paczek aplikacji:
         1. Pobierz repozytowium backend:
         https://github.com/MGajowy/KancelariaAHG_SpringBoot.git
 
@@ -38,7 +57,7 @@
          W terminalu (ścieżka rozpakowania: ... \Reputation) wykonaj budowę poleceniem:
          mvn clean install
 
-## 3. Budowa obrazów Docker i uruchomienie contenerów:
+## 2. Budowa obrazów Docker i uruchomienie contenerów:
 
 ### Sposób budowy 1 z poziomu terminala
 
@@ -67,8 +86,8 @@ WAŻNE => Jeśli posiadasz IntelliJ + plugin Docker, możesz wykonać kroki 1, 2
         Dla obrazu backend: ahg-backend
         Dla obrazu frontendu: ahg-frontend
         Dla obrazu reputation: ahg-reputation
+
 ---------------------------------------------------
 Użytkownik administracyjny aplikacji Kancelaria AHG
----------------------------------------------------
 login: admin
 password: adminadmin
