@@ -95,6 +95,7 @@ public class UserListService {
                 userStateEnum = UserStateEnum.USUNIETY;
                 break;
             default:
+                userStateEnum = UserStateEnum.AKTYWNY;
         }
         return userStateEnum;
     }

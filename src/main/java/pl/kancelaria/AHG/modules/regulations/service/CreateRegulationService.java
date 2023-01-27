@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.modules.regulations.service;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,10 @@ import pl.kancelaria.AHG.modules.regulations.dto.CreateRegulationDTO;
 import pl.kancelaria.AHG.user.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class CreateRegulationService {
 
     private final RegulationRepository regulationRepository;
@@ -24,16 +27,10 @@ public class CreateRegulationService {
     private final EventLogService eventLogService;
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public CreateRegulationService(RegulationRepository regulationRepository,
-                                   CategoryRegulationRepository categoryRegulationRepository, EventLogService eventLogService) {
-        this.regulationRepository = regulationRepository;
-        this.categoryRegulationRepository = categoryRegulationRepository;
-        this.eventLogService = eventLogService;
-    }
-
+    @Transactional
     public ResponseEntity<HttpStatus> addNewRegulation(CreateRegulationDTO regulationDTO, HttpServletRequest request) {
         CategoryRegulationOB categoryRegulationOB = categoryRegulationRepository.getOne(regulationDTO.getKategoria());
-        if (categoryRegulationOB != null) {
+        if (categoryRegulationOB != null && validationRequest(regulationDTO)) {
             RegulationOB regulationOB = new RegulationOB();
             regulationOB.setKategoria(categoryRegulationOB);
             regulationOB.setTresc(regulationDTO.getTresc());
@@ -45,5 +42,9 @@ public class CreateRegulationService {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private boolean validationRequest(CreateRegulationDTO regulationDTO) {
+        return regulationDTO.getNazwa() != null && regulationDTO.getCzyPubliczny() != null && regulationDTO.getTresc() != null;
     }
 }

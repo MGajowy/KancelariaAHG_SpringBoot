@@ -88,6 +88,11 @@ WAŻNE => Jeśli posiadasz IntelliJ + plugin Docker, możesz wykonać kroki 1, 2
         Dla obrazu reputation: ahg-reputation
 
 ---------------------------------------------------
-Użytkownik administracyjny aplikacji Kancelaria AHG
-login: admin
-password: adminadmin
+
+## Dostęp do części administracyjnej aplikacji, informacje dodatkowe
+* Użytkownik administracyjny aplikacji Kancelaria AHG:
+ - login: admin
+ - password: adminadmin
+* WAŻNE =>
+**Jeśli powiadomienia pomocy online nie są wysyłane, wyłącz chwilowo antywirus na potrzeby testowania aplikacji.**
+
