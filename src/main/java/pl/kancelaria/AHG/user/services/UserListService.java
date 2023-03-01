@@ -12,7 +12,9 @@ import pl.kancelaria.AHG.user.dto.UserListDTO;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -31,6 +33,17 @@ public class UserListService {
         List<UserOB> userOBList = provideCriteriaList(term);
         if (!CollectionUtils.isEmpty(userOBList)) {
             List<UserDTO> users = new ArrayList<>();
+
+//            List<UserDTO> collect = userOBList.stream()
+//                    .sorted(Comparator.comparing(UserOB::getNazwisko).thenComparing(UserOB::getImie))
+//                    .map(userOB -> {
+//                                UserDTO daneDTO = new UserDTO();
+//                                BeanUtils.copyProperties(userOB, daneDTO);
+//                                return daneDTO;
+//                            }
+//                    ).collect(Collectors.toList());
+//            response.setListaUzytkownikow(collect);
+
             userOBList.forEach(user -> {
                 UserDTO daneDTO = new UserDTO();
                 BeanUtils.copyProperties(user, daneDTO);
