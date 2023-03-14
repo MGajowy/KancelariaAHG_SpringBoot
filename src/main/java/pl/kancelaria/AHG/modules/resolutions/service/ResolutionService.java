@@ -1,11 +1,15 @@
 package pl.kancelaria.AHG.modules.resolutions.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.ResolutionsOB;
+import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionRepositoryPage;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionsRepository;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListDTO;
@@ -22,18 +26,14 @@ import java.util.stream.Collectors;
 
 
 @Service
+@RequiredArgsConstructor
 public class ResolutionService {
 
     private final ResolutionsRepository resolutionsRepository;
     private final CategoriesRepository categoriesRepository;
     private final EntityManager entityManager;
+    private final ResolutionRepositoryPage resolutionRepositoryPage;
 
-
-    public ResolutionService(ResolutionsRepository resolutionsRepository, CategoriesRepository categoriesRepository, EntityManager entityManager) {
-        this.resolutionsRepository = resolutionsRepository;
-        this.categoriesRepository = categoriesRepository;
-        this.entityManager = entityManager;
-    }
 
     public ResolutionListDTO getResolutionList() {
         ResolutionListDTO response = new ResolutionListDTO();
@@ -127,4 +127,24 @@ public class ResolutionService {
         return response;
     }
 
+    public ResolutionListDTO getResolutionListByDescriptionAndPages(String description, Integer pageNumber, Integer pageSize) {
+        final Pageable resolutionPageable = PageRequest.of(pageNumber, pageSize);
+        List<ResolutionsOB> allByDescription = resolutionRepositoryPage.findByOpisLike("%" + description + "%", resolutionPageable);
+        List<ResolutionDTO> resolutionDTOList = createResponseDTO(allByDescription);
+        ResolutionListDTO listDTO = new ResolutionListDTO();
+        listDTO.setListaUchwal(resolutionDTOList);
+        listDTO.setTotalRecords(resolutionRepositoryPage.countByOpisLike("%" + description + "%"));
+        return listDTO;
+    }
+
+    private List<ResolutionDTO> createResponseDTO(List<ResolutionsOB> allByDescription) {
+        List<ResolutionDTO> resolutionList = new ArrayList<>();
+        allByDescription.forEach(element -> {
+            ResolutionDTO dto = new ResolutionDTO();
+            BeanUtils.copyProperties(element, dto);
+            dto.setNazwaKategorii(element.getKategoria().getRodzajKategorii());
+            resolutionList.add(dto);
+        });
+        return resolutionList;
+    }
 }

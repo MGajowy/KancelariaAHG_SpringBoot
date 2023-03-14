@@ -1,6 +1,5 @@
 package pl.kancelaria.AHG.administration.services;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -12,8 +11,11 @@ import pl.kancelaria.AHG.common.entityModel.administration.eventLog.repository.E
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,9 +34,9 @@ public class EventLogService {
         EventLogOB logOB = new EventLogOB(czynnosc, user);
         logOB.setCzynnosc(czynnosc);
         logOB.setUzytkownik(user);
-        Calendar dateAdded = Calendar.getInstance();
+        Date dateAdded = new Date();
         dateAdded.getTime();
-        logOB.setData_czynnosci(dateAdded);
+        logOB.setDataCzynnosci(dateAdded);
         this.eventLogRepository.save(logOB);
         return true;
     }
@@ -48,7 +50,7 @@ public class EventLogService {
                 EventLogDTO eventLog = EventLogDTO.builder()
                         .id(eventLogOB.getId())
                         .czynnosc(eventLogOB.getCzynnosc())
-                        .dataCzynnosci(eventLogOB.getData_czynnosci())
+                        .dataCzynnosci(convertDateToString(eventLogOB.getDataCzynnosci()))
                         .uzytkownik(eventLogOB.getUzytkownik().isEmpty() || eventLogOB.getUzytkownik() == null ? "Administrator" : eventLogOB.getUzytkownik())
                         .build();
                 eventLogList.add(eventLog);
@@ -80,11 +82,17 @@ public class EventLogService {
                         .id(eventLogOB.getId())
                         .czynnosc(eventLogOB.getCzynnosc())
                         .uzytkownik(eventLogOB.getUzytkownik())
-                        .dataCzynnosci(eventLogOB.getData_czynnosci())
+                        .dataCzynnosci(convertDateToString(eventLogOB.getDataCzynnosci()))
                         .build();
                 eventLogList.add(eventLog);
             });
         }
         return eventLogList;
+    }
+
+    private String convertDateToString(Date date) {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        return localDateTime.format(timeFormatter);
     }
 }

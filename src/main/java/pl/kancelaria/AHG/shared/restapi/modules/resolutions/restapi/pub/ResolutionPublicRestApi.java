@@ -29,5 +29,11 @@ public interface ResolutionPublicRestApi {
     ResolutionListDTO getResolutionListCB();
 
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_OPISIE)
-    ResolutionListDTO getResolutionListByDescription(@QueryParam("opis") String opis);
+    ResolutionListDTO getResolutionListByDescription(@QueryParam("description") String description);
+
+    @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_OPISIE  + "/{pageNumber}" + "/{pageSize}")
+    ResolutionListDTO getResolutionListByDescriptionAndPages(
+            @QueryParam("description") String description,
+            @PathVariable("pageNumber") final Integer pageNumber,
+            @PathVariable("pageSize") final Integer pageSize);
 }
