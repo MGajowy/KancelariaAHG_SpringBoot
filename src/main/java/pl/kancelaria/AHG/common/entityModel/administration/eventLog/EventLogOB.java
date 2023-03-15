@@ -22,7 +22,6 @@ public class EventLogOB {
     @Column(name = ModelConstants.COLUMN_ACTION, length = 255)
     private String czynnosc;
 
-    @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = ModelConstants.COLUMN_DATE_ACTION)
     private Date dataCzynnosci;
 

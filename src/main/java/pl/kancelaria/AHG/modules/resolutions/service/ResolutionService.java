@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.ResolutionsOB;
-import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionRepositoryPage;
 import pl.kancelaria.AHG.common.entityModel.resolutions.resolutions.repository.ResolutionsRepository;
+import pl.kancelaria.AHG.common.service.DateConvertService;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListOfCategoryDTO;
@@ -32,7 +33,7 @@ public class ResolutionService {
     private final ResolutionsRepository resolutionsRepository;
     private final CategoriesRepository categoriesRepository;
     private final EntityManager entityManager;
-    private final ResolutionRepositoryPage resolutionRepositoryPage;
+    private final DateConvertService dateConvertService;
 
 
     public ResolutionListDTO getResolutionList() {
@@ -41,11 +42,12 @@ public class ResolutionService {
         if (!CollectionUtils.isEmpty(resolutionsOBS)) {
             List<ResolutionDTO> resolutionList= new ArrayList<>();
             resolutionsOBS.forEach(e -> {
-                ResolutionDTO daneDTO = new ResolutionDTO();
-                BeanUtils.copyProperties(e, daneDTO);
+                ResolutionDTO resolutionDTO = new ResolutionDTO();
+                BeanUtils.copyProperties(e, resolutionDTO);
                 CategoriesOB categoriesOB = this.categoriesRepository.getOne(e.getKategoria().getId());
-                daneDTO.setNazwaKategorii(categoriesOB.getRodzajKategorii());
-                resolutionList.add(daneDTO);
+                resolutionDTO.setNazwaKategorii(categoriesOB.getRodzajKategorii());
+                resolutionDTO.setDateAdded(dateConvertService.convertDateToString(e.getDateAdded()));
+                resolutionList.add(resolutionDTO);
             });
             response.setListaUchwal(resolutionList);
         } else {
@@ -115,10 +117,11 @@ public class ResolutionService {
 
         List<ResolutionsOB> resultList = query.getResultList();
         List<ResolutionDTO> resolutionList = new ArrayList<>();
-        resultList.forEach(r -> {
+        resultList.forEach(ob -> {
                     ResolutionDTO dto = new ResolutionDTO();
-                    BeanUtils.copyProperties(r, dto);
-                    dto.setNazwaKategorii(r.getKategoria().getRodzajKategorii());
+                    BeanUtils.copyProperties(ob, dto);
+                    dto.setNazwaKategorii(ob.getKategoria().getRodzajKategorii());
+                    dto.setDateAdded(dateConvertService.convertDateToString(ob.getDateAdded()));
             resolutionList.add(dto);
                 }
         );
@@ -128,12 +131,12 @@ public class ResolutionService {
     }
 
     public ResolutionListDTO getResolutionListByDescriptionAndPages(String description, Integer pageNumber, Integer pageSize) {
-        final Pageable resolutionPageable = PageRequest.of(pageNumber, pageSize);
-        List<ResolutionsOB> allByDescription = resolutionRepositoryPage.findByOpisLike("%" + description + "%", resolutionPageable);
+        final Pageable resolutionPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("opis")));
+        List<ResolutionsOB> allByDescription = resolutionsRepository.findByOpisLike("%" + description + "%", resolutionPageable);
         List<ResolutionDTO> resolutionDTOList = createResponseDTO(allByDescription);
         ResolutionListDTO listDTO = new ResolutionListDTO();
         listDTO.setListaUchwal(resolutionDTOList);
-        listDTO.setTotalRecords(resolutionRepositoryPage.countByOpisLike("%" + description + "%"));
+        listDTO.setTotalRecords(resolutionsRepository.countByOpisLike("%" + description + "%"));
         return listDTO;
     }
 
@@ -143,6 +146,7 @@ public class ResolutionService {
             ResolutionDTO dto = new ResolutionDTO();
             BeanUtils.copyProperties(element, dto);
             dto.setNazwaKategorii(element.getKategoria().getRodzajKategorii());
+            dto.setDateAdded(dateConvertService.convertDateToString(element.getDateAdded()));
             resolutionList.add(dto);
         });
         return resolutionList;

@@ -9,4 +9,5 @@ public class ResolutionDTO {
     private String tresc;
     private Boolean czyPubliczny;
     private String nazwaKategorii;
+    private String dateAdded;
 }
