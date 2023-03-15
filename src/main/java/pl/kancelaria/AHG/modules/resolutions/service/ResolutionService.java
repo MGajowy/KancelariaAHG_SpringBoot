@@ -134,10 +134,10 @@ public class ResolutionService {
         final Pageable resolutionPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("opis")));
         List<ResolutionsOB> allByDescription = resolutionsRepository.findByOpisLike("%" + description + "%", resolutionPageable);
         List<ResolutionDTO> resolutionDTOList = createResponseDTO(allByDescription);
-        ResolutionListDTO listDTO = new ResolutionListDTO();
-        listDTO.setListaUchwal(resolutionDTOList);
-        listDTO.setTotalRecords(resolutionsRepository.countByOpisLike("%" + description + "%"));
-        return listDTO;
+        ResolutionListDTO response = new ResolutionListDTO();
+        response.setListaUchwal(resolutionDTOList);
+        response.setTotalRecords(resolutionsRepository.countByOpisLike("%" + description + "%"));
+        return response;
     }
 
     private List<ResolutionDTO> createResponseDTO(List<ResolutionsOB> allByDescription) {

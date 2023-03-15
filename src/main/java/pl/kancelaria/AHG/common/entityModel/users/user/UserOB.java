@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.common.entityModel.users.user;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -62,6 +63,10 @@ public class UserOB implements UserDetails {
     @Column(name = ModelConstants.COLUMN_STATE, length = 32)
     @Enumerated(value = EnumType.STRING)
     private UserStateEnum stan;
+
+    @NotNull
+    @Column (name = ModelConstants.COLUMN_DATE_ADDDED)
+    private Date dateAdded;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(schema = ModelConstants.SCHEMA_USER, name = "roles_users",

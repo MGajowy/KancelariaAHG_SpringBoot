@@ -53,6 +53,8 @@ public class UserService {
         this.jwtTokenUtil = jwtTokenUtil;
         this.eventLogService = eventLogService;
 
+        Date date = new Date();
+        date.getTime();
         RolesOB roles_1 = new RolesOB();
         roles_1.setNazwa(RolesName.ADMIN);
         RolesOB roles_2 = new RolesOB();
@@ -70,6 +72,7 @@ public class UserService {
         userOB.setStan(UserStateEnum.AKTYWNY);
         userOB.setPlec(UserSexEnum.MEZCZYZNA);
         userOB.setTelefon("543434343");
+        userOB.setDateAdded(date);
         userOB.setRolesOBSet(list);
         List<UserOB> userOBS = new ArrayList<>();
         userOBS.add(userOB);
@@ -103,6 +106,8 @@ public class UserService {
 
     public ResponseEntity<HttpStatus> createNewUser(AddUserDTO user) {
         try {
+            Date date = new Date();
+            date.getTime();
             RolesOB role = rolesRepository.findAllByNazwa(user.getRola());
             List<RolesOB> list = new ArrayList<>();
             list.add(role);
@@ -114,6 +119,7 @@ public class UserService {
             userOB.setTelefon(user.getTelefon());
             userOB.setPlec(user.getPlec());
             userOB.setStan(UserStateEnum.NIEAKTYWNY);
+            userOB.setDateAdded(date);
             userOB.setRolesOBSet(list);
             List<UserOB> userRoles = new ArrayList<>();
             userRoles.add(userOB);
@@ -190,7 +196,6 @@ public class UserService {
             e.printStackTrace();
             return false;
         }
-
     }
 
     public List<RolesName> getRoles(String remoteUser) {
@@ -198,7 +203,7 @@ public class UserService {
         List<RolesOB> rolesOBSet = userOB.getRolesOBSet();
         List<RolesName> rolesNames = new ArrayList<>();
         for (RolesOB role : rolesOBSet) {
-         rolesNames.add(role.getNazwa());
+            rolesNames.add(role.getNazwa());
         }
         return rolesNames;
     }

@@ -20,6 +20,12 @@ public interface UserSecuredRestApi {
     @Path(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
     UserListDTO getUserList(@QueryParam("term") String term);
 
+    @GetMapping(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW  + "/{pageNumber}" + "/{pageSize}")
+    UserListDTO getUserListByNameAndPage(
+            @QueryParam("term") String term,
+            @PathVariable("pageNumber") final Integer pageNumber,
+            @PathVariable("pageSize") final Integer pageSize);
+
     @POST
     @PostMapping(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)
     @Path(UserSecuredRestApiUrl.DODAJ_UZYTKOWNIKA)

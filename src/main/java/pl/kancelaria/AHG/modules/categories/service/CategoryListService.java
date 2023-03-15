@@ -120,7 +120,7 @@ public class CategoryListService {
                 .collect(Collectors.toList());
     }
 
-    //todo metoda nieużywana
+    //todo metoda do usunięcia
     public List<String> getCategoryListByName(String nazwaKategorii) {
         List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesByRodzajKategoriiImpl(nazwaKategorii);
         return categoriesOB.stream()

@@ -1,52 +1,42 @@
 package pl.kancelaria.AHG.user.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
+import pl.kancelaria.AHG.common.service.DateConvertService;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.dto.UserListDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
+@RequiredArgsConstructor
 public class UserListService {
 
     public final EntityManager entityManager;
     public final UserRepository userRepository;
-
-    public UserListService(EntityManager entityManager, UserRepository userRepository) {
-        this.entityManager = entityManager;
-        this.userRepository = userRepository;
-    }
+    private final DateConvertService dateConvertService;
 
     public UserListDTO getUserList(String term) {
         UserListDTO response = new UserListDTO();
         List<UserOB> userOBList = provideCriteriaList(term);
         if (!CollectionUtils.isEmpty(userOBList)) {
             List<UserDTO> users = new ArrayList<>();
-
-//            List<UserDTO> collect = userOBList.stream()
-//                    .sorted(Comparator.comparing(UserOB::getNazwisko).thenComparing(UserOB::getImie))
-//                    .map(userOB -> {
-//                                UserDTO daneDTO = new UserDTO();
-//                                BeanUtils.copyProperties(userOB, daneDTO);
-//                                return daneDTO;
-//                            }
-//                    ).collect(Collectors.toList());
-//            response.setListaUzytkownikow(collect);
-
             userOBList.forEach(user -> {
                 UserDTO daneDTO = new UserDTO();
                 BeanUtils.copyProperties(user, daneDTO);
+                daneDTO.setDateAdded(dateConvertService.convertDateToString(user.getDateAdded()));
                 users.add(daneDTO);
             });
             response.setListaUzytkownikow(users);
@@ -82,6 +72,7 @@ public class UserListService {
             listOB.forEach(userOB -> {
                 UserDTO userDTO = new UserDTO();
                 BeanUtils.copyProperties(userOB, userDTO);
+                userDTO.setDateAdded(dateConvertService.convertDateToString(userOB.getDateAdded()));
                 dtoList.add(userDTO);
             });
             response.setListaUzytkownikow(dtoList);
@@ -111,5 +102,26 @@ public class UserListService {
                 userStateEnum = UserStateEnum.AKTYWNY;
         }
         return userStateEnum;
+    }
+
+    public UserListDTO getUserListByNameAndPage(String term, Integer pageNumber, Integer pageSize) {
+        final Pageable userPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("nazwisko")));
+        List<UserOB> userOBList = userRepository.searchByUserNameLike(term.toLowerCase(), userPageable);
+        List<UserDTO> userDTOList = createResponseDTO(userOBList);
+        UserListDTO response = new UserListDTO();
+        response.setListaUzytkownikow(userDTOList);
+        response.setTotalRecord(userRepository.countByUserNameLike("%" + term + "%"));
+        return response;
+    }
+
+    private List<UserDTO> createResponseDTO(List<UserOB> userOBList) {
+        List<UserDTO> list = new ArrayList<>();
+        userOBList.forEach(element -> {
+            UserDTO dto = new UserDTO();
+            BeanUtils.copyProperties(element, dto);
+            dto.setDateAdded(dateConvertService.convertDateToString(element.getDateAdded()));
+            list.add(dto);
+        });
+        return list;
     }
 }
