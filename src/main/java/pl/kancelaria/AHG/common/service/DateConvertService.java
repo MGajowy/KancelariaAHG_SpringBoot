@@ -13,7 +13,7 @@ import java.util.Date;
 public class DateConvertService {
 
     public String convertDateToString(Date date) {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         return localDateTime.format(timeFormatter);
     }
