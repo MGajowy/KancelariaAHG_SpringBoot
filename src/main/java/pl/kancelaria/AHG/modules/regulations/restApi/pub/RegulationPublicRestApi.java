@@ -14,7 +14,12 @@ public class RegulationPublicRestApi implements pl.kancelaria.AHG.shared.restapi
     }
 
     @Override
-    public RegulationListDTO getRegulationsListByName(String nazwa) {
-        return regulationService.getRegulationsListByName(nazwa);
+    public RegulationListDTO getRegulationsListByName(String name) {
+        return regulationService.getRegulationsListByName(name);
+    }
+
+    @Override
+    public RegulationListDTO getRegulationsListByNameAndPage(String name, Integer pageNumber, Integer pageSize) {
+        return regulationService.getRegulationsListByNameAndPage(name, pageNumber, pageSize);
     }
 }

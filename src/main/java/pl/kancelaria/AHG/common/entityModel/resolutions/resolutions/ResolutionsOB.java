@@ -7,6 +7,7 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionDTO;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -28,6 +29,10 @@ public class ResolutionsOB {
 //    @Column (name = ModelConstants.KOLUMNA_czy_publiczny, length = 9, nullable = false)
 //    @Enumerated(value = EnumType.STRING )
     private Boolean czyPubliczny;
+
+    @NotNull
+    @Column (name = ModelConstants.COLUMN_DATE_ADDDED)
+    private Date dateAdded;
 
     @ManyToOne
     @JoinColumn(name="fk_kategorii")

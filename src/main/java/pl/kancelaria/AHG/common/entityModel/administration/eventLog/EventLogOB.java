@@ -2,10 +2,11 @@ package pl.kancelaria.AHG.common.entityModel.administration.eventLog;
 
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.kancelaria.AHG.common.entityModel.ModelConstants;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.util.Date;
 
 
 @Entity
@@ -22,7 +23,7 @@ public class EventLogOB {
     private String czynnosc;
 
     @Column(name = ModelConstants.COLUMN_DATE_ACTION)
-    private Calendar data_czynnosci;
+    private Date dataCzynnosci;
 
 //    @OneToOne(fetch = FetchType.LAZY)
     private String uzytkownik;

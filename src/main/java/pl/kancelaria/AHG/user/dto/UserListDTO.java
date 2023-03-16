@@ -7,4 +7,5 @@ import java.util.List;
 @Data
 public class UserListDTO {
     List<UserDTO> listaUzytkownikow;
+    Long totalRecord;
 }

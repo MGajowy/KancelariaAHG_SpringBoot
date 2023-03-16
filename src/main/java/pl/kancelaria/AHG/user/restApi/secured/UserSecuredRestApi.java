@@ -43,6 +43,11 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     }
 
     @Override
+    public UserListDTO getUserListByNameAndPage(String term, Integer pageNumber, Integer pageSize) {
+        return userListService.getUserListByNameAndPage(term, pageNumber, pageSize);
+    }
+
+    @Override
     public ResponseEntity<HttpStatus> createNewUser(AddUserDTO addUserDTO, HttpServletRequest request) {
         return userService.createNewUser(addUserDTO);
     }

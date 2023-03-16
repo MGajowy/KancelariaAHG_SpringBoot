@@ -39,12 +39,14 @@ public class ModelConstants {
     public static final String COLUMN_TOKEN = "token";
     public static final String COLUMN_FK_USER = "fk_uzytkownik";
 
-    //uchwały
+    //uchwały, rozporzadzenia
     public static final String COLUMN_FK_CATEGORY = "fk_kategoria";
     public static final String COLUMN_DESCRIPTION_OPIS = "opis";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_CONTENTS = "tresc";
     public static final String COLUMN_IS_PUBLIC = "czy_publiczny";
+    public static final String COLUMN_DATE_ADDDED = "data_dodania";
+
 
     //kategorie uchwał
     public static final String COLUMN_TYPE_OF_CATEGORY = "rodzaj_kategorii";

@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.modules.resolutions.service;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,18 +18,13 @@ import pl.kancelaria.AHG.user.services.UserService;
 import javax.transaction.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class UpdateResolutionService {
 
     private final ResolutionsRepository resolutionsRepository;
     private final CategoriesRepository categoriesRepository;
     private final EventLogService eventLogService;
     Logger logger = LoggerFactory.getLogger(UserService.class);
-
-    public UpdateResolutionService(ResolutionsRepository resolutionsRepository, CategoriesRepository categoriesRepository, EventLogService eventLogService) {
-        this.resolutionsRepository = resolutionsRepository;
-        this.categoriesRepository = categoriesRepository;
-        this.eventLogService = eventLogService;
-    }
 
     @Transactional
     public ResponseEntity<HttpStatus> modifyResolution(long id, ResolutionRequestDTO request) {

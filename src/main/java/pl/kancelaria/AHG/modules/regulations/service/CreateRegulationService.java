@@ -17,6 +17,7 @@ import pl.kancelaria.AHG.user.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -30,12 +31,15 @@ public class CreateRegulationService {
     @Transactional
     public ResponseEntity<HttpStatus> addNewRegulation(CreateRegulationDTO regulationDTO, HttpServletRequest request) {
         CategoryRegulationOB categoryRegulationOB = categoryRegulationRepository.getOne(regulationDTO.getKategoria());
+        Date date = new Date();
+        date.getTime();
         if (categoryRegulationOB != null && validationRequest(regulationDTO)) {
             RegulationOB regulationOB = new RegulationOB();
             regulationOB.setKategoria(categoryRegulationOB);
             regulationOB.setTresc(regulationDTO.getTresc());
             regulationOB.setCzyPubliczny(regulationDTO.getCzyPubliczny());
             regulationOB.setNazwa(regulationDTO.getNazwa());
+            regulationOB.setDateAdded(date);
             this.regulationRepository.save(regulationOB);
             logger.info("Rozporzadzenie " + regulationDTO.getNazwa() + " zostało dodane do listy.");
             eventLogService.createLog(EventLogConstants.DODANIE_NOWEGO_ROZPORZADZENIA, request.getRemoteUser());

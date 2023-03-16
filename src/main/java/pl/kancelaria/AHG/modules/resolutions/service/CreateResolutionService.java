@@ -17,6 +17,7 @@ import pl.kancelaria.AHG.user.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.Date;
 
 
 @Service
@@ -31,12 +32,15 @@ public class CreateResolutionService {
     @Transactional
     public ResponseEntity<HttpStatus> addNewResolution(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
         CategoriesOB categoriesOB = categoriesRepository.getOne(resolutionDTO.getKategoria());
+        Date date = new Date();
+        date.getTime();
         if (categoriesOB != null && validationRequest(resolutionDTO)) {
             ResolutionsOB resolutionsOB =  new ResolutionsOB();
             resolutionsOB.setOpis(resolutionDTO.getOpis());
             resolutionsOB.setTresc(resolutionDTO.getTresc());
             resolutionsOB.setKategoria(categoriesOB);
             resolutionsOB.setCzyPubliczny(resolutionDTO.getCzyPubliczny());
+            resolutionsOB.setDateAdded(date);
             this.resolutionsRepository.save(resolutionsOB);
             logger.info("Uchwała " + resolutionsOB.getOpis() + " została dodana do listy.");
             eventLogService.createLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, request.getRemoteUser() );

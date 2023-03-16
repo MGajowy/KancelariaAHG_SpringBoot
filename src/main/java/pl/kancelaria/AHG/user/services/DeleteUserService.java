@@ -38,6 +38,7 @@ public class DeleteUserService {
             userOB.setTelefon(DELETED);
             userOB.setPassword(DELETED);
             userOB.setStan(null);
+            userOB.setDateAdded(null);
             logger.info("Uzytkowinik o id: " + id + " zostal usuniety.");
             eventLogService.createLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userName);
             return new ResponseEntity<>(HttpStatus.OK);

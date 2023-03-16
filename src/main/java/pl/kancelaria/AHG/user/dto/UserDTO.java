@@ -20,8 +20,8 @@ public class UserDTO {
     private String telefon;
     private UserSexEnum plec;
     private List<RolesName> role;
+    private String dateAdded;
     //private UserAccountType typ_konta;
     //private Boolean czy_zaakceptowano_regulamin;
     //private Byte[] zdjecie_profilowe;
-    //private LocalDate dataRejestracji;
 }

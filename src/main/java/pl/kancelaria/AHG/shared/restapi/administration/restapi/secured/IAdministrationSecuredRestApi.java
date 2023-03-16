@@ -1,13 +1,14 @@
 package pl.kancelaria.AHG.shared.restapi.administration.restapi.secured;
 
-//import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kancelaria.AHG.administration.dto.EventLogListDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import java.io.IOException;
 
 
@@ -19,6 +20,11 @@ public interface IAdministrationSecuredRestApi {
     @GetMapping(AdministrationSecuredRestApiUrl.DZIENNIK_ZDARZEN)
     @Path(AdministrationSecuredRestApiUrl.DZIENNIK_ZDARZEN)
     EventLogListDTO pobierzDziennikZdarzenDto();
+
+    @GetMapping(AdministrationSecuredRestApiUrl.DZIENNIK_ZDARZEN + "/{pageNumber}" + "/{pageSize}")
+    EventLogListDTO getEventLogListByNameAndPage(@QueryParam("name") String description,
+                                                 @PathVariable("pageNumber") final Integer pageNumber,
+                                                 @PathVariable("pageSize") final Integer pageSize);
 
     @GetMapping(AdministrationSecuredRestApiUrl.EXPORT_TO_PDF)
     void exportToPDF(HttpServletResponse response) throws IOException;

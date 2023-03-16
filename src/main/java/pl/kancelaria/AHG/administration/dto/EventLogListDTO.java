@@ -8,4 +8,5 @@ import java.util.List;
 @Data
 public class EventLogListDTO {
     List<EventLogDTO> listaLogow;
+    Long totalRecord;
 }
