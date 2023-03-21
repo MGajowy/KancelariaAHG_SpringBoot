@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class UserListDTO {
-    List<UserDTO> listaUzytkownikow;
+    List<UserDTO> usersList;
     Long totalRecord;
 }

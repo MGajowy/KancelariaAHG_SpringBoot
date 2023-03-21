@@ -74,9 +74,9 @@ public class AuthServices {
     }
 
     public Boolean verifyTokenAndSetPassword(UserPasswordDTO dto) {
-        UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
+        UserOB userOB = tokenRepository.findByToken(dto.getToken()).getUser();
         if (userOB != null) {
-            userOB.setStan(UserStateEnum.AKTYWNY);
+            userOB.setActivationState(UserStateEnum.AKTYWNY);
             userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
             userRepository.save(userOB);
             return true;
@@ -86,7 +86,7 @@ public class AuthServices {
     }
 
     public Boolean resetPassword(UserPasswordDTO dto) {
-        UserOB userOB = tokenRepository.findByToken(dto.getToken()).getFk_uzytkownik();
+        UserOB userOB = tokenRepository.findByToken(dto.getToken()).getUser();
         return userOB != null && extracted(dto, userOB);
     }
 

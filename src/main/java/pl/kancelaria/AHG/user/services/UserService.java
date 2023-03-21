@@ -56,22 +56,22 @@ public class UserService {
         Date date = new Date();
         date.getTime();
         RolesOB roles_1 = new RolesOB();
-        roles_1.setNazwa(RolesName.ADMIN);
+        roles_1.setRolesName(RolesName.ADMIN);
         RolesOB roles_2 = new RolesOB();
-        roles_2.setNazwa(RolesName.USER);
+        roles_2.setRolesName(RolesName.USER);
 
         List<RolesOB> list = new ArrayList<>();
         list.add(roles_1);
         list.add(roles_2);
         UserOB userOB = new UserOB();
-        userOB.setImie("admin");
+        userOB.setName("admin");
         userOB.setEmail("micgaj3@wp.pl");
         userOB.setPassword(passwordEncoder.encode("adminadmin"));
         userOB.setUserName("admin");
-        userOB.setNazwisko("administrator");
-        userOB.setStan(UserStateEnum.AKTYWNY);
-        userOB.setPlec(UserSexEnum.MEZCZYZNA);
-        userOB.setTelefon("543434343");
+        userOB.setSurname("administrator");
+        userOB.setActivationState(UserStateEnum.AKTYWNY);
+        userOB.setSex(UserSexEnum.MEZCZYZNA);
+        userOB.setPhoneNumber("543434343");
         userOB.setDateAdded(date);
         userOB.setRolesOBSet(list);
         List<UserOB> userOBS = new ArrayList<>();
@@ -108,17 +108,17 @@ public class UserService {
         try {
             Date date = new Date();
             date.getTime();
-            RolesOB role = rolesRepository.findAllByNazwa(user.getRola());
+            RolesOB role = rolesRepository.findAllByRolesName(user.getRolesName());
             List<RolesOB> list = new ArrayList<>();
             list.add(role);
             UserOB userOB = new UserOB();
-            userOB.setImie(user.getImie());
-            userOB.setNazwisko(user.getNazwisko());
+            userOB.setName(user.getName());
+            userOB.setSurname(user.getSurname());
             userOB.setUserName(user.getUsername());
             userOB.setEmail(user.getEmail());
-            userOB.setTelefon(user.getTelefon());
-            userOB.setPlec(user.getPlec());
-            userOB.setStan(UserStateEnum.NIEAKTYWNY);
+            userOB.setPhoneNumber(user.getPhoneNumber());
+            userOB.setSex(user.getSex());
+            userOB.setActivationState(UserStateEnum.NIEAKTYWNY);
             userOB.setDateAdded(date);
             userOB.setRolesOBSet(list);
             List<UserOB> userRoles = new ArrayList<>();
@@ -154,8 +154,8 @@ public class UserService {
 
     public boolean userDeactivation(long id) {
         UserOB userOB = userRepository.getOne(id);
-        if (userOB.getStan() == UserStateEnum.AKTYWNY) {
-            userOB.setStan(UserStateEnum.NIEAKTYWNY);
+        if (userOB.getActivationState() == UserStateEnum.AKTYWNY) {
+            userOB.setActivationState(UserStateEnum.NIEAKTYWNY);
             userRepository.save(userOB);
             logger.info("Uzytkownik o id: " + id + " zostal zdezaktywowany");
             eventLogService.createLog(EventLogConstants.DEZAKTYWACJA_UZYTKOWNIKA, userOB.getUsername());
@@ -170,8 +170,8 @@ public class UserService {
             return false;
         } else {
             TokenOB tokenOB = tokenRepository.findByToken(token);
-            UserOB userOB = tokenOB.getFk_uzytkownik();
-            userOB.setStan(UserStateEnum.AKTYWNY);
+            UserOB userOB = tokenOB.getUser();
+            userOB.setActivationState(UserStateEnum.AKTYWNY);
             return true;
         }
     }
@@ -203,7 +203,7 @@ public class UserService {
         List<RolesOB> rolesOBSet = userOB.getRolesOBSet();
         List<RolesName> rolesNames = new ArrayList<>();
         for (RolesOB role : rolesOBSet) {
-            rolesNames.add(role.getNazwa());
+            rolesNames.add(role.getRolesName());
         }
         return rolesNames;
     }

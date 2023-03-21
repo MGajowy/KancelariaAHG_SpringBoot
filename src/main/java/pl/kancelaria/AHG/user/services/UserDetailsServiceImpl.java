@@ -40,10 +40,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserDTO userDTO = new UserDTO();
         List<RolesName> rolesNameList = new ArrayList<>();
         for (RolesOB rola : rolesNames) {
-            RolesName nowaRola = rola.getNazwa();
+            RolesName nowaRola = rola.getRolesName();
             rolesNameList.add(nowaRola);
         }
-        userDTO.setRole(rolesNameList);
+        userDTO.setRoles(rolesNameList);
         BeanUtils.copyProperties(userOB, userDTO);
         userDTO.setDateAdded(dateConvertService.convertDateToString(userOB.getDateAdded()));
         return userDTO;

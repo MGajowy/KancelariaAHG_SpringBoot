@@ -36,20 +36,20 @@ public class ModifyUserService {
     }
 
     public UserDTO modifyUser(long id, UserDTO userDTO) {
-        List<RolesName> rolesNames = userDTO.getRole();
+        List<RolesName> rolesNames = userDTO.getRoles();
         List<RolesOB> role = new ArrayList<>();
         for (RolesName rola : rolesNames) {
-            RolesOB rolesOB = rolesRepository.findAllByNazwa(rola);
+            RolesOB rolesOB = rolesRepository.findAllByRolesName(rola);
             role.add(rolesOB);
         }
         UserOB userOB = userRepository.getOne(id);
         userOB.setUserName(userDTO.getUsername());
         if (userDTO.getPassword() != null)
         userOB.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        userOB.setImie(userDTO.getImie());
-        userOB.setNazwisko(userDTO.getNazwisko());
-        userOB.setPlec(userDTO.getPlec());
-        userOB.setTelefon(userDTO.getTelefon());
+        userOB.setName(userDTO.getName());
+        userOB.setSurname(userDTO.getSurname());
+        userOB.setSex(userDTO.getSex());
+        userOB.setPhoneNumber(userDTO.getPhoneNumber());
         userOB.setEmail(userDTO.getEmail());
         userOB.setRolesOBSet(role);
 

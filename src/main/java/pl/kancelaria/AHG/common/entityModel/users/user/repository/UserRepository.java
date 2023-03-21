@@ -15,11 +15,11 @@ public interface UserRepository extends JpaRepository<UserOB, Long> {
 
     UserOB findAllByUserName(String username);
 
-    List<UserOB> findUserobsByStan(UserStateEnum stan);
+    List<UserOB> findUserobsByActivationState(UserStateEnum activationState);
 
     List<UserOB> findByUserNameLike(String userName, Pageable pageable);
 
-    @Query("SELECT u FROM UserOB u WHERE u.userName != 'deleted' AND LOWER(u.userName) LIKE %:userName% OR LOWER(u.nazwisko) LIKE %:userName%")
+    @Query("SELECT u FROM UserOB u WHERE u.userName != 'deleted' AND LOWER(u.userName) LIKE %:userName% OR LOWER(u.surname) LIKE %:userName%")
     List<UserOB> searchByUserNameLike(@Param("userName") String userName, Pageable pageable);
 
     long countByUserNameLike(String userName);

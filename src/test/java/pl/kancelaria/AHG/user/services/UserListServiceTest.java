@@ -44,17 +44,17 @@ class UserListServiceTest {
         UserListDTO userListDTO = userListService.getUserList("adam");
 
         // then
-        assertThat(userListDTO.getListaUzytkownikow().get(0).getUsername()).isEqualTo("adam");
+        assertThat(userListDTO.getUsersList().get(0).getUsername()).isEqualTo("adam");
     }
 
     private UserDTO createUser() {
         UserDTO userDTO = new UserDTO();
-        userDTO.setImie("Adam");
-        userDTO.setNazwisko("Adamowicz");
+        userDTO.setName("Adam");
+        userDTO.setSurname("Adamowicz");
         userDTO.setUsername("adam");
-        userDTO.setTelefon("1111111111");
+        userDTO.setPhoneNumber("1111111111");
         userDTO.setEmail("m@hhh.pl");
-        userDTO.setPlec(UserSexEnum.MEZCZYZNA);
+        userDTO.setSex(UserSexEnum.MEZCZYZNA);
         return userDTO;
     }
 
@@ -63,18 +63,18 @@ class UserListServiceTest {
         UserOB userOB = new UserOB();
         RolesOB rolesOB = new RolesOB();
         rolesOB.setId(1L);
-        rolesOB.setNazwa(RolesName.USER);
+        rolesOB.setRolesName(RolesName.USER);
         List<RolesOB> roles = new ArrayList<>();
         roles.add(rolesOB);
         userOB.setId(1L);
-        userOB.setImie("Adam");
-        userOB.setNazwisko("Adamowicz");
+        userOB.setName("Adam");
+        userOB.setSurname("Adamowicz");
         userOB.setUserName("adam");
-        userOB.setTelefon("1111111111");
-        userOB.setStan(UserStateEnum.AKTYWNY);
+        userOB.setPhoneNumber("1111111111");
+        userOB.setActivationState(UserStateEnum.AKTYWNY);
         userOB.setRolesOBSet(roles);
         userOB.setEmail("m@hhh.pl");
-        userOB.setPlec(UserSexEnum.MEZCZYZNA);
+        userOB.setSex(UserSexEnum.MEZCZYZNA);
         return userOB;
     }
 

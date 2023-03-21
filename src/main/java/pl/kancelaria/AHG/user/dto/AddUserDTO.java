@@ -5,20 +5,17 @@ import pl.kancelaria.AHG.common.entityModel.users.user.UserSexEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 import pl.kancelaria.AHG.user.role.RolesName;
 
-
 @Data
 public class AddUserDTO {
-    private String imie;
-    private String nazwisko;
+
+    private String name;
+    private String surname;
     private String username;
-    //private  String password;
-    private UserStateEnum stan;
-    //private UserAccountType typ_konta;
+    private UserStateEnum activationState;
     private String email;
-    //private Boolean czy_zaakceptowano_regulamin;
-    private String telefon;
-    private UserSexEnum plec;
-    private RolesName rola;
+    private String phoneNumber;
+    private UserSexEnum sex;
+    private RolesName rolesName;
     //private Byte[] zdjecie_profilowe;
-    //private LocalDate dataRejestracji;
+    // private Boolean czy_zaakceptowano_regulamin;
 }
