@@ -30,7 +30,7 @@ public class CategoryRegulationSecuredRestApi implements pl.kancelaria.AHG.share
 
     @Override
     public ResponseEntity<HttpStatus> addNewCategories(CategoryDTO categoryDTO) {
-        return createCategoryRegulationService.addNewCategories(categoryDTO);
+        return createCategoryRegulationService.addNewCategory(categoryDTO);
     }
 
     @Override

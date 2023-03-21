@@ -87,7 +87,7 @@ class CategorySecuredRestApiTest {
                 .andReturn();
         // then
         CategoryDTOrequest response = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), CategoryDTOrequest.class);
-        assertThat(response.getRodzajKategorii()).isEqualTo(category.getRodzajKategorii());
+        assertThat(response.getCategoryName()).isEqualTo(category.getCategoryName());
     }
 
     public static String asJsonString(final Object obj) {
@@ -100,8 +100,8 @@ class CategorySecuredRestApiTest {
 
     private CategoriesOB createCategory() {
         CategoriesOB categoriesOB = new CategoriesOB();
-        categoriesOB.setCzyPubliczny(Boolean.FALSE);
-        categoriesOB.setRodzajKategorii("DOTO");
+        categoriesOB.setIsPublic(Boolean.FALSE);
+        categoriesOB.setCategoryName("DOTO");
         return entityManager.merge(categoriesOB);
     }
 }

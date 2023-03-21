@@ -29,14 +29,14 @@ public class UpdateResolutionService {
     @Transactional
     public ResponseEntity<HttpStatus> modifyResolution(long id, ResolutionRequestDTO request) {
         if (validation(request)) {
-            CategoriesOB categoriesOB = categoriesRepository.getOne(request.getIdKategorii());
+            CategoriesOB categoriesOB = categoriesRepository.getOne(request.getCategoryId());
             ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
-            resolutionsOB.setOpis(request.getOpis());
-            resolutionsOB.setTresc(request.getTresc());
-            resolutionsOB.setCzyPubliczny(request.getCzyPubliczny());
-            resolutionsOB.setKategoria(categoriesOB);
+            resolutionsOB.setResolutionName(request.getResolutionName());
+            resolutionsOB.setContents(request.getContents());
+            resolutionsOB.setIsPublic(request.getIsPublic());
+            resolutionsOB.setCategory(categoriesOB);
             resolutionsRepository.save(resolutionsOB);
-            logger.info("Zmodyfikowano uchwałę " + request.getOpis());
+            logger.info("Zmodyfikowano uchwałę " + request.getResolutionName());
             eventLogService.createLog(EventLogConstants.MODYFIKACJA_UCHWALY, "");
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -46,6 +46,6 @@ public class UpdateResolutionService {
     }
 
     private boolean validation(ResolutionRequestDTO requestDTO) {
-        return !requestDTO.getOpis().isEmpty() && requestDTO.getIdKategorii() != null;
+        return !requestDTO.getResolutionName().isEmpty() && requestDTO.getCategoryId() != null;
     }
 }

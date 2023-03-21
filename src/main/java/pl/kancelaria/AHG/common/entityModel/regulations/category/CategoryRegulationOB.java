@@ -20,12 +20,12 @@ public class CategoryRegulationOB {
     private long id;
 
     @Column(name = ModelConstants.COLUMN_TYPE_OF_CATEGORY, length = 255)
-    private  String rodzajKategorii;
+    private  String categoryName;
 
     @NotNull
     @Column(name = ModelConstants.COLUMN_IS_PUBLIC)
-    private Boolean czyPubliczny;
+    private Boolean isPublic;
 
     @OneToMany(mappedBy= "category",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RegulationOB> rozporzadzenie = new ArrayList<>();
+    private List<RegulationOB> regulations = new ArrayList<>();
 }

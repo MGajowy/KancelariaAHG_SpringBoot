@@ -44,38 +44,38 @@ public class ResolutionService {
             resolutionsOBS.forEach(e -> {
                 ResolutionDTO resolutionDTO = new ResolutionDTO();
                 BeanUtils.copyProperties(e, resolutionDTO);
-                CategoriesOB categoriesOB = this.categoriesRepository.getOne(e.getKategoria().getId());
-                resolutionDTO.setNazwaKategorii(categoriesOB.getRodzajKategorii());
+                CategoriesOB categoriesOB = this.categoriesRepository.getOne(e.getCategory().getId());
+                resolutionDTO.setCategoryName(categoriesOB.getCategoryName());
                 resolutionDTO.setDateAdded(dateConvertService.convertDateToString(e.getDateAdded()));
                 resolutionList.add(resolutionDTO);
             });
-            response.setListaUchwal(resolutionList);
+            response.setResolutionsList(resolutionList);
         } else {
-            response.setListaUchwal(new ArrayList<>());
+            response.setResolutionsList(new ArrayList<>());
         }
         return response;
     }
 
-    public ResolutionListOfCategoryDTO getResolutionListByCategories(Long idKategorii) {
-        List<ResolutionsOB> resolutionsOBS = getListByCategory(idKategorii);
-        CategoriesOB categoriesOB = categoriesRepository.getOne(idKategorii);
+    public ResolutionListOfCategoryDTO getResolutionListByCategories(Long categoryId) {
+        List<ResolutionsOB> resolutionsOBS = getListByCategory(categoryId);
+        CategoriesOB categoriesOB = categoriesRepository.getOne(categoryId);
 
         return ResolutionListOfCategoryDTO.builder()
-                .nazwaKategorii(categoriesOB.getRodzajKategorii())
-                .listaUchwal(resolutionsOBS.stream().map(ResolutionsOB::getResolutionDTO).collect(Collectors.toList()))
+                .categoryName(categoriesOB.getCategoryName())
+                .resolutionsList(resolutionsOBS.stream().map(ResolutionsOB::getResolutionDTO).collect(Collectors.toList()))
                 .build();
     }
 
-    private List<ResolutionsOB> getListByCategory(Long idKategorii) {
-        TypedQuery<ResolutionsOB> query = entityManager.createQuery(prepareResolutionListInquiry(idKategorii), ResolutionsOB.class);
-        query.setParameter("idKategoria", idKategorii);
+    private List<ResolutionsOB> getListByCategory(Long categoryId) {
+        TypedQuery<ResolutionsOB> query = entityManager.createQuery(prepareResolutionListInquiry(categoryId), ResolutionsOB.class);
+        query.setParameter("categoryId", categoryId);
         return query.getResultList();
     }
 
-    private String prepareResolutionListInquiry(Long idKategorii) {
+    private String prepareResolutionListInquiry(Long categoryId) {
         StringBuilder query = new StringBuilder("SELECT r FROM ResolutionsOB r");
-        query.append(" WHERE r.kategoria.id = :idKategoria");
-        query.append(" ORDER BY r.opis DESC");
+        query.append(" WHERE r.category.id = :categoryId");
+        query.append(" ORDER BY r.resolutionName DESC");
         return query.toString();
     }
 
@@ -84,9 +84,9 @@ public class ResolutionService {
         CriteriaQuery<ResolutionsOB> cq = cb.createQuery(ResolutionsOB.class);
 
         Root<ResolutionsOB> resolutionsOBRoot = cq.from(ResolutionsOB.class);
-        cq.select(resolutionsOBRoot.get("tresc"));
+        cq.select(resolutionsOBRoot.get("contents"));
         cq.distinct(true);
-        cq.orderBy(cb.asc(resolutionsOBRoot.get("tresc")));
+        cq.orderBy(cb.asc(resolutionsOBRoot.get("contents")));
         CriteriaQuery<ResolutionsOB> select = cq.select(resolutionsOBRoot);
 
         TypedQuery<ResolutionsOB> query = entityManager.createQuery(select);
@@ -100,52 +100,52 @@ public class ResolutionService {
                 }
         );
         ResolutionListDTO response = new ResolutionListDTO();
-        response.setListaUchwal(resolutionList);
+        response.setResolutionsList(resolutionList);
         return response;
     }
 
-    public ResolutionListDTO getResolutionListByDescription(String opis) {
+    public ResolutionListDTO getResolutionListByDescription(String resolutionName) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ResolutionsOB> cq = cb.createQuery(ResolutionsOB.class);
 
         Root<ResolutionsOB> resolutionsOBRoot = cq.from(ResolutionsOB.class);
         ParameterExpression<String> parameter = cb.parameter(String.class);
-        cq.where(cb.like(cb.lower(resolutionsOBRoot.get("opis")), parameter));
+        cq.where(cb.like(cb.lower(resolutionsOBRoot.get("resolutionName")), parameter));
 
         TypedQuery<ResolutionsOB> query = entityManager.createQuery(cq);
-        query.setParameter(parameter, "%" + opis.toLowerCase() + "%");
+        query.setParameter(parameter, "%" + resolutionName.toLowerCase() + "%");
 
         List<ResolutionsOB> resultList = query.getResultList();
         List<ResolutionDTO> resolutionList = new ArrayList<>();
         resultList.forEach(ob -> {
                     ResolutionDTO dto = new ResolutionDTO();
                     BeanUtils.copyProperties(ob, dto);
-                    dto.setNazwaKategorii(ob.getKategoria().getRodzajKategorii());
+                    dto.setCategoryName(ob.getCategory().getCategoryName());
                     dto.setDateAdded(dateConvertService.convertDateToString(ob.getDateAdded()));
             resolutionList.add(dto);
                 }
         );
         ResolutionListDTO response = new ResolutionListDTO();
-        response.setListaUchwal(resolutionList);
+        response.setResolutionsList(resolutionList);
         return response;
     }
 
-    public ResolutionListDTO getResolutionListByDescriptionAndPages(String description, Integer pageNumber, Integer pageSize) {
-        final Pageable resolutionPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("opis")));
-        List<ResolutionsOB> allByDescription = resolutionsRepository.findByOpisLike("%" + description + "%", resolutionPageable);
-        List<ResolutionDTO> resolutionDTOList = createResponseDTO(allByDescription);
+    public ResolutionListDTO getResolutionListByDescriptionAndPages(String term, Integer pageNumber, Integer pageSize) {
+        final Pageable resolutionPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("resolutionName")));
+        List<ResolutionsOB> listOB = resolutionsRepository.findByResolutionNameLike("%" + term + "%", resolutionPageable);
+        List<ResolutionDTO> resolutionDTOList = createResponseDTO(listOB);
         ResolutionListDTO response = new ResolutionListDTO();
-        response.setListaUchwal(resolutionDTOList);
-        response.setTotalRecords(resolutionsRepository.countByOpisLike("%" + description + "%"));
+        response.setResolutionsList(resolutionDTOList);
+        response.setTotalRecords(resolutionsRepository.countByResolutionNameLike("%" + term + "%"));
         return response;
     }
 
-    private List<ResolutionDTO> createResponseDTO(List<ResolutionsOB> allByDescription) {
+    private List<ResolutionDTO> createResponseDTO(List<ResolutionsOB> listOB) {
         List<ResolutionDTO> resolutionList = new ArrayList<>();
-        allByDescription.forEach(element -> {
+        listOB.forEach(element -> {
             ResolutionDTO dto = new ResolutionDTO();
             BeanUtils.copyProperties(element, dto);
-            dto.setNazwaKategorii(element.getKategoria().getRodzajKategorii());
+            dto.setCategoryName(element.getCategory().getCategoryName());
             dto.setDateAdded(dateConvertService.convertDateToString(element.getDateAdded()));
             resolutionList.add(dto);
         });

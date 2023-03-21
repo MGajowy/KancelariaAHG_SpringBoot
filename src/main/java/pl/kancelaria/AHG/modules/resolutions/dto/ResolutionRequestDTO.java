@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class ResolutionRequestDTO {
-    private String opis;
-    private String tresc;
-    private Boolean czyPubliczny;
-    private Long idKategorii;
+    private String resolutionName;
+    private String contents;
+    private Boolean isPublic;
+    private Long categoryId;
 }

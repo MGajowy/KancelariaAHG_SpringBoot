@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class ResolutionListDTO {
-    List<ResolutionDTO> listaUchwal;
+    List<ResolutionDTO> resolutionsList;
     Long totalRecords;
 }

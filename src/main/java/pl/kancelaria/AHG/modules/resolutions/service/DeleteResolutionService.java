@@ -28,7 +28,7 @@ public class DeleteResolutionService {
         try {
             ResolutionsOB resolutionsOB = resolutionsRepository.getOne(id);
             resolutionsRepository.deleteById(id);
-            logger.info("Uchwala " + resolutionsOB.getOpis() + "została usunięta.");
+            logger.info("Uchwala " + resolutionsOB.getResolutionName() + "została usunięta.");
             eventLogService.createLog(EventLogConstants.USUNIECIE_UCHWALY,"");
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception ex) {

@@ -52,7 +52,7 @@ public class RegulationService {
         resultList.forEach(ob -> {
                     RegulationDTO dto = new RegulationDTO();
                     BeanUtils.copyProperties(ob, dto);
-                    dto.setCategoryName(ob.getCategory().getRodzajKategorii());
+                    dto.setCategoryName(ob.getCategory().getCategoryName());
                     dto.setDateAdded(dateConvertService.convertDateToString(ob.getDateAdded()));
                     regulationList.add(dto);
                 }
@@ -78,7 +78,7 @@ public class RegulationService {
         allByNazwa.forEach(ob -> {
             RegulationDTO dto = new RegulationDTO();
             BeanUtils.copyProperties(ob, dto);
-            dto.setCategoryName(ob.getCategory().getRodzajKategorii());
+            dto.setCategoryName(ob.getCategory().getCategoryName());
             dto.setDateAdded(dateConvertService.convertDateToString(ob.getDateAdded()));
             regulationList.add(dto);
         });

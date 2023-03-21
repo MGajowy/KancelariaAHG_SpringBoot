@@ -9,8 +9,6 @@ import pl.kancelaria.AHG.common.entityModel.resolutions.categories.CategoriesOB;
 import pl.kancelaria.AHG.common.entityModel.resolutions.categories.repository.CategoriesRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 
-import java.util.Optional;
-
 
 @Service
 public class CreateCategoryService {
@@ -23,11 +21,11 @@ public class CreateCategoryService {
     }
 
     public ResponseEntity <HttpStatus> addNewCategories(CategoryDTO categoryDTO) {
-        if (categoryDTO.getRodzajKategorii() != null) {
+        if (categoryDTO.getCategoryName() != null) {
             CategoriesOB categoriesOB = new CategoriesOB();
             BeanUtils.copyProperties(categoryDTO, categoriesOB);
-            if (categoryDTO.getCzyPubliczny() == null)
-                categoriesOB.setCzyPubliczny(false);
+            if (categoryDTO.getIsPublic() == null)
+                categoriesOB.setIsPublic(false);
             categoriesRepository.save(categoriesOB);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

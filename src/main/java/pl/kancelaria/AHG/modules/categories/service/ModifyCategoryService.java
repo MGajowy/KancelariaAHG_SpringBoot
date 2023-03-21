@@ -18,8 +18,8 @@ public class ModifyCategoryService {
 
     public CategoryDTOrequest modifyCategories(long id, CategoryDTOrequest request) {
         CategoriesOB categoriesOB = this.categoriesRepository.getOne(id);
-        categoriesOB.setCzyPubliczny(request.getCzyPubliczny());
-        categoriesOB.setRodzajKategorii(request.getRodzajKategorii());
+        categoriesOB.setIsPublic(request.getIsPublic());
+        categoriesOB.setCategoryName(request.getCategoryName());
         this.categoriesRepository.save(categoriesOB);
         BeanUtils.copyProperties(categoriesOB, request);
         return request;

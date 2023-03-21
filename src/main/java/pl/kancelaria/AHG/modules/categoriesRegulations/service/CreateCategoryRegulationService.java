@@ -8,6 +8,8 @@ import pl.kancelaria.AHG.common.entityModel.regulations.category.CategoryRegulat
 import pl.kancelaria.AHG.common.entityModel.regulations.category.repository.CategoryRegulationRepository;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 
+import javax.transaction.Transactional;
+
 @Service
 public class CreateCategoryRegulationService {
 
@@ -17,12 +19,13 @@ public class CreateCategoryRegulationService {
         this.categoryRegulationRepository = categoryRegulationRepository;
     }
 
-    public ResponseEntity<HttpStatus> addNewCategories(CategoryDTO categoryDTO) {
-        if (categoryDTO.getRodzajKategorii() != null) {
+    @Transactional
+    public ResponseEntity<HttpStatus> addNewCategory(CategoryDTO categoryDTO) {
+        if (categoryDTO.getCategoryName() != null) {
             CategoryRegulationOB categoryRegulationOB = new CategoryRegulationOB();
             BeanUtils.copyProperties(categoryDTO, categoryRegulationOB);
-            if (categoryDTO.getCzyPubliczny() == null)
-                categoryRegulationOB.setCzyPubliczny(false);
+            if (categoryDTO.getIsPublic() == null)
+                categoryRegulationOB.setIsPublic(false);
             categoryRegulationRepository.save(categoryRegulationOB);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }

@@ -36,33 +36,22 @@ class CategoryListServiceTest {
         when(categoriesRepository.findAll()).thenReturn(createCategoryList());
         // when
         CategoryListDTO categoryListDTO = categoryListService.getCategoryList();
-        List<CategoryDTO> listaKategorii = categoryListDTO.getListaKategorii();
+        List<CategoryDTO> listDTO = categoryListDTO.getCategoryList();
         // then
-        assertThat(categoryListDTO.getListaKategorii()).isNotNull();
-        assertThat(categoryListDTO.getListaKategorii()).hasSize(4);
-        assertThat(listaKategorii).extracting("czyPubliczny").contains(true);
+        assertThat(categoryListDTO.getCategoryList()).isNotNull();
+        assertThat(categoryListDTO.getCategoryList()).hasSize(4);
+        assertThat(listDTO).extracting("isPublic").contains(true);
     }
 
     @Test
     void shouldReturnCategoriesListById() {
         // given
-       when(categoriesRepository.getOne(ID)).thenReturn(createCategoryList().get(0));
+        when(categoriesRepository.getOne(ID)).thenReturn(createCategoryList().get(0));
         // when
         CategoryDTOrequest categoryDTOrequest = categoryListService.getCategoriesById(ID);
         // then
         assertThat(categoryDTOrequest).isNotNull();
         assertThat(categoryDTOrequest.getId()).isEqualTo(ID);
-    }
-
-    @Test
-    void shouldReturnCategoriesByName() {
-        // given
-        when(categoriesRepository.findCategoriesByRodzajKategoriiImpl("NOWA")).thenReturn(createCategoryList());
-        // when
-        List<String> actual = categoryListService.getCategoryListByName("NOWA");
-        // then
-        assertThat(actual.get(0)).isEqualTo("NOWA");
-        assertThat(actual).hasSize(2);
     }
 
     private List<CategoriesOB> createCategoryList() {

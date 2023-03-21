@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import pl.kancelaria.AHG.common.entityModel.regulations.category.CategoryRegulationOB;
 import pl.kancelaria.AHG.common.entityModel.regulations.category.repository.CategoryRegulationRepository;
-import pl.kancelaria.AHG.common.entityModel.regulations.regulation.RegulationOB;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTO;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryDTOrequest;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
@@ -49,12 +48,12 @@ public class CategoryRegulationListService {
                 BeanUtils.copyProperties(category, categoryDTO);
                 categoryList.add(categoryDTO);
             });
-            categoryList.sort(Comparator.comparing(CategoryDTO::getRodzajKategorii)
-                    .thenComparing(Comparator.comparing(CategoryDTO::getCzyPubliczny))
+            categoryList.sort(Comparator.comparing(CategoryDTO::getCategoryName)
+                    .thenComparing(Comparator.comparing(CategoryDTO::getIsPublic))
                     .reversed());
-            response.setListaKategorii(categoryList);
+            response.setCategoryList(categoryList);
         } else {
-            response.setListaKategorii(new ArrayList<>());
+            response.setCategoryList(new ArrayList<>());
         }
         return response;
     }
@@ -66,7 +65,7 @@ public class CategoryRegulationListService {
 
         Root<CategoryRegulationOB> categoryRegulationOBRoot = cq.from(CategoryRegulationOB.class);
         ParameterExpression<String> parameter = cb.parameter(String.class);
-        cq.where(cb.like(cb.lower(categoryRegulationOBRoot.get("rodzajKategorii")), parameter));
+        cq.where(cb.like(cb.lower(categoryRegulationOBRoot.get("categoryName")), parameter));
 
         TypedQuery<CategoryRegulationOB> query = entityManager.createQuery(cq);
         query.setParameter(parameter, "%" + term.toLowerCase() + "%");
@@ -79,7 +78,7 @@ public class CategoryRegulationListService {
                     categoryDTOList.add(categoryDTO);
                 }
         );
-        response.setListaKategorii(categoryDTOList);
+        response.setCategoryList(categoryDTOList);
         return response;
     }
 }
