@@ -26,6 +26,6 @@ public class CategoryRegulationOB {
     @Column(name = ModelConstants.COLUMN_IS_PUBLIC)
     private Boolean czyPubliczny;
 
-    @OneToMany(mappedBy="kategoria",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy= "category",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RegulationOB> rozporzadzenie = new ArrayList<>();
 }

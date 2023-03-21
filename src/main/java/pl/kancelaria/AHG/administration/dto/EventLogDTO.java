@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class EventLogDTO {
     private long id;
-    private String czynnosc;
-    private String dataCzynnosci;
-    private String uzytkownik;
+    private String action;
+    private String dateAction;
+    private String userName;
 }

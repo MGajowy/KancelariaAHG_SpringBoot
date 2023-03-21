@@ -2,7 +2,7 @@ version: '3.8'
 services:
   ahgBackend:
     container_name: AHG_backend
-    image: ghcr.io/mgajowy/ahg-backend:1.1
+    image: ghcr.io/mgajowy/ahg-backend:1.2
     build: ./
     ports:
       - "8020:8020"
@@ -27,12 +27,12 @@ services:
       - POSTGRES_DB=reputation
   ahgFrontend:
     container_name: AHG_frontend
-    image: ghcr.io/mgajowy/ahg-frontend:1.1
+    image: ghcr.io/mgajowy/ahg-frontend:1.2
     ports:
       - "8080:80"
   ahgReputation:
     container_name: AHG-reputation
-    image: ghcr.io/mgajowy/ahg-reputation:1.1
+    image: ghcr.io/mgajowy/ahg-reputation:1.2
     ports:
       - "8040:8040"
     environment:

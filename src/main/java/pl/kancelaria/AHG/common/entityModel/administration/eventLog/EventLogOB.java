@@ -2,7 +2,6 @@ package pl.kancelaria.AHG.common.entityModel.administration.eventLog;
 
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.format.annotation.DateTimeFormat;
 import pl.kancelaria.AHG.common.entityModel.ModelConstants;
 
 import javax.persistence.*;
@@ -20,22 +19,22 @@ public class EventLogOB {
 
     @NotNull
     @Column(name = ModelConstants.COLUMN_ACTION, length = 255)
-    private String czynnosc;
+    private String action;
 
     @Column(name = ModelConstants.COLUMN_DATE_ACTION)
-    private Date dataCzynnosci;
+    private Date dateAction;
 
 //    @OneToOne(fetch = FetchType.LAZY)
-    private String uzytkownik;
+    private String userName;
 
     public EventLogOB() {
     }
 
-    public EventLogOB(@NotNull String czynnosc, String uzytkownik) {
-        this.czynnosc = czynnosc;
-        this.uzytkownik = uzytkownik;
+    public EventLogOB(@NotNull String action, String userName) {
+        this.action = action;
+        this.userName = userName;
     }
-    public String getUzytkownik() {
-        return uzytkownik;
+    public String getUserName() {
+        return userName;
     }
 }

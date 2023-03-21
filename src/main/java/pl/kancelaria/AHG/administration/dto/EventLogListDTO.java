@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class EventLogListDTO {
-    List<EventLogDTO> listaLogow;
+    List<EventLogDTO> logList;
     Long totalRecord;
 }
