@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface EventLogRepository extends JpaRepository<EventLogOB, Long> {
 
-    List<EventLogOB> findByCzynnoscLike(String czynnosc, Pageable pageable);
+    List<EventLogOB> findByActionLike(String action, Pageable pageable);
 
-    long countByCzynnoscLike(String czynnosc);
+    long countByActionLike(String action);
 }

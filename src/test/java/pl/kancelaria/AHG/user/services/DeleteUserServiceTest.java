@@ -61,17 +61,17 @@ class DeleteUserServiceTest {
         UserOB userOB = new UserOB();
         RolesOB rolesOB = new RolesOB();
         rolesOB.setId(1);
-        rolesOB.setNazwa(RolesName.USER);
+        rolesOB.setRolesName(RolesName.USER);
         List<RolesOB> roles = new ArrayList<>();
         roles.add(rolesOB);
-        userOB.setImie("Adam");
-        userOB.setNazwisko("Adamowicz");
+        userOB.setName("Adam");
+        userOB.setSurname("Adamowicz");
         userOB.setUserName("adam");
-        userOB.setTelefon("1111111111");
-        userOB.setStan(UserStateEnum.AKTYWNY);
+        userOB.setPhoneNumber("1111111111");
+        userOB.setActivationState(UserStateEnum.AKTYWNY);
         userOB.setRolesOBSet(roles);
         userOB.setEmail("m@hhh.pl");
-        userOB.setPlec(UserSexEnum.MEZCZYZNA);
+        userOB.setSex(UserSexEnum.MEZCZYZNA);
         return userOB;
     }
 }

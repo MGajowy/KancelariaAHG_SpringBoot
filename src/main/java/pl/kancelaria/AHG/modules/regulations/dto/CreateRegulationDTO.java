@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class CreateRegulationDTO {
     private long id;
-    private String nazwa;
-    private String tresc;
-    private Boolean czyPubliczny;
-    private Long kategoria;
+    private String regulationName;
+    private String contents;
+    private Boolean isPublic;
+    private Long category;
 }

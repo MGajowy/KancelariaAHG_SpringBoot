@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @Builder
 public class ResolutionListOfCategoryDTO {
-    String nazwaKategorii;
-    List<ResolutionDTO> listaUchwal;
+    String categoryName;
+    List<ResolutionDTO> resolutionsList;
 }

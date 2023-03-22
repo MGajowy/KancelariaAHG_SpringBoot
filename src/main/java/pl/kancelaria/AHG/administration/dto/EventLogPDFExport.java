@@ -39,9 +39,9 @@ public class EventLogPDFExport implements ExportPDF {
     @Override
     public void writeTableData(PdfPTable table) {
         for (EventLogDTO eventLogDTO : listEvent) {
-            table.addCell(eventLogDTO.getCzynnosc());
-            table.addCell(eventLogDTO.getUzytkownik());
-            table.addCell(eventLogDTO.getDataCzynnosci().toString());
+            table.addCell(eventLogDTO.getAction());
+            table.addCell(eventLogDTO.getUserName());
+            table.addCell(eventLogDTO.getDateAction().toString());
         }
     }
 

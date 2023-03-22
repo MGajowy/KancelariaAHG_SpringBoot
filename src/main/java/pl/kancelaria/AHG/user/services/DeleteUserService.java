@@ -33,11 +33,11 @@ public class DeleteUserService {
             String userName = userOB.getUsername();
             userOB.setUserName(DELETED);
             userOB.setEmail(null);
-            userOB.setImie(DELETED);
-            userOB.setNazwisko(DELETED);
-            userOB.setTelefon(DELETED);
+            userOB.setName(DELETED);
+            userOB.setSurname(DELETED);
+            userOB.setPhoneNumber(DELETED);
             userOB.setPassword(DELETED);
-            userOB.setStan(null);
+            userOB.setActivationState(null);
             userOB.setDateAdded(null);
             logger.info("Uzytkowinik o id: " + id + " zostal usuniety.");
             eventLogService.createLog(EventLogConstants.USUNIECIE_UZYTKOWNIKA, userName);

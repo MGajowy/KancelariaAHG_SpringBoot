@@ -55,7 +55,7 @@ class UserServiceTest {
         // given
         AddUserDTO userDTO = createUser();
         RolesOB rolesOB = new RolesOB();
-        when(rolesRepository.findAllByNazwa(RolesName.USER)).thenReturn(rolesOB);
+        when(rolesRepository.findAllByRolesName(RolesName.USER)).thenReturn(rolesOB);
 
         // when
         ResponseEntity<HttpStatus> actual = userService.createNewUser(userDTO);
@@ -63,8 +63,8 @@ class UserServiceTest {
         // then
         assertThat(actual.getStatusCodeValue()).isEqualTo(201);
         assertThat(userDTO.getUsername()).isNotEmpty();
-        assertThat(userDTO.getImie()).isEqualTo("Adam");
-        assertThat(userDTO.getNazwisko()).isEqualTo("Adamowicz");
+        assertThat(userDTO.getName()).isEqualTo("Adam");
+        assertThat(userDTO.getSurname()).isEqualTo("Adamowicz");
     }
 
     @Test
@@ -81,7 +81,7 @@ class UserServiceTest {
         boolean actual = userService.userActivation(locationDTO);
         // then
         assertThat(actual).isTrue();
-        assertThat(userOB.getStan()).isEqualTo(UserStateEnum.AKTYWNY);
+        assertThat(userOB.getActivationState()).isEqualTo(UserStateEnum.AKTYWNY);
     }
 
     @Test
@@ -95,7 +95,7 @@ class UserServiceTest {
 
         // then
         assertThat(actual).isTrue();
-        assertThat(userOB.getStan()).isEqualTo(UserStateEnum.NIEAKTYWNY);
+        assertThat(userOB.getActivationState()).isEqualTo(UserStateEnum.NIEAKTYWNY);
     }
 
     @Test
@@ -114,13 +114,13 @@ class UserServiceTest {
 
     private AddUserDTO createUser() {
         AddUserDTO userDTO = new AddUserDTO();
-        userDTO.setImie("Adam");
-        userDTO.setNazwisko("Adamowicz");
+        userDTO.setName("Adam");
+        userDTO.setSurname("Adamowicz");
         userDTO.setUsername("adam");
-        userDTO.setTelefon("1111111111");
-        userDTO.setRola(RolesName.USER);
+        userDTO.setPhoneNumber("1111111111");
+        userDTO.setRolesName(RolesName.USER);
         userDTO.setEmail("m@hhh.pl");
-        userDTO.setPlec(UserSexEnum.MEZCZYZNA);
+        userDTO.setSex(UserSexEnum.MEZCZYZNA);
         return userDTO;
     }
 
@@ -128,18 +128,18 @@ class UserServiceTest {
         UserOB userOB = new UserOB();
         RolesOB rolesOB = new RolesOB();
         rolesOB.setId(1L);
-        rolesOB.setNazwa(RolesName.USER);
+        rolesOB.setRolesName(RolesName.USER);
         List<RolesOB> roles = new ArrayList<>();
         roles.add(rolesOB);
         userOB.setId(1L);
-        userOB.setImie("Adam");
-        userOB.setNazwisko("Adamowicz");
+        userOB.setName("Adam");
+        userOB.setSurname("Adamowicz");
         userOB.setUserName("adam");
-        userOB.setTelefon("1111111111");
-        userOB.setStan(UserStateEnum.AKTYWNY);
+        userOB.setPhoneNumber("1111111111");
+        userOB.setActivationState(UserStateEnum.AKTYWNY);
         userOB.setRolesOBSet(roles);
         userOB.setEmail("m@hhh.pl");
-        userOB.setPlec(UserSexEnum.MEZCZYZNA);
+        userOB.setSex(UserSexEnum.MEZCZYZNA);
         return userOB;
     }
 
@@ -147,7 +147,7 @@ class UserServiceTest {
         TokenOB tokenOB = new TokenOB();
         tokenOB.setId(1L);
         tokenOB.setToken("1234");
-        tokenOB.setFk_uzytkownik(userOB);
+        tokenOB.setUser(userOB);
         return tokenOB;
     }
 

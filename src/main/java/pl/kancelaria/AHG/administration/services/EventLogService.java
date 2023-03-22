@@ -29,13 +29,13 @@ public class EventLogService {
     private final EventLogRepository eventLogRepository;
     private final DateConvertService dateConvertService;
 
-    public Boolean createLog(String czynnosc, String user) {
-        EventLogOB logOB = new EventLogOB(czynnosc, user);
-        logOB.setCzynnosc(czynnosc);
-        logOB.setUzytkownik(user);
+    public Boolean createLog(String action, String user) {
+        EventLogOB logOB = new EventLogOB(action, user);
+        logOB.setAction(action);
+        logOB.setUserName(user);
         Date dateAdded = new Date();
         dateAdded.getTime();
-        logOB.setDataCzynnosci(dateAdded);
+        logOB.setDateAction(dateAdded);
         this.eventLogRepository.save(logOB);
         return true;
     }
@@ -48,15 +48,15 @@ public class EventLogService {
             eventLogListOB.forEach(eventLogOB -> {
                 EventLogDTO eventLog = EventLogDTO.builder()
                         .id(eventLogOB.getId())
-                        .czynnosc(eventLogOB.getCzynnosc())
-                        .dataCzynnosci(dateConvertService.convertDateToString(eventLogOB.getDataCzynnosci()))
-                        .uzytkownik(eventLogOB.getUzytkownik().isEmpty() || eventLogOB.getUzytkownik() == null ? "Administrator" : eventLogOB.getUzytkownik())
+                        .action(eventLogOB.getAction())
+                        .dateAction(dateConvertService.convertDateToString(eventLogOB.getDateAction()))
+                        .userName(eventLogOB.getUserName().isEmpty() || eventLogOB.getUserName() == null ? "Administrator" : eventLogOB.getUserName())
                         .build();
                 eventLogList.add(eventLog);
             });
-            listDTO.setListaLogow(eventLogList);
+            listDTO.setLogList(eventLogList);
         } else {
-            listDTO.setListaLogow(new ArrayList<>());
+            listDTO.setLogList(new ArrayList<>());
         }
         return listDTO;
     }
@@ -79,9 +79,9 @@ public class EventLogService {
             eventLogListOB.forEach(eventLogOB -> {
                 EventLogDTO eventLog = EventLogDTO.builder()
                         .id(eventLogOB.getId())
-                        .czynnosc(eventLogOB.getCzynnosc())
-                        .uzytkownik(eventLogOB.getUzytkownik())
-                        .dataCzynnosci(dateConvertService.convertDateToString(eventLogOB.getDataCzynnosci()))
+                        .action(eventLogOB.getAction())
+                        .userName(eventLogOB.getUserName())
+                        .dateAction(dateConvertService.convertDateToString(eventLogOB.getDateAction()))
                         .build();
                 eventLogList.add(eventLog);
             });
@@ -90,12 +90,12 @@ public class EventLogService {
     }
 
     public EventLogListDTO getEventLogListByNameAndPage(String name, Integer pageNumber, Integer pageSize) {
-        final Pageable eventLogPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dataCzynnosci").descending().and(Sort.by("czynnosc")));
-        List<EventLogOB> logOBList = eventLogRepository.findByCzynnoscLike("%" + name + "%", eventLogPageable);
+        final Pageable eventLogPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAction").descending().and(Sort.by("action")));
+        List<EventLogOB> logOBList = eventLogRepository.findByActionLike("%" + name + "%", eventLogPageable);
         List<EventLogDTO> dtoList = createResponseDTO(logOBList);
         EventLogListDTO eventLogListDTO = new EventLogListDTO();
-        eventLogListDTO.setListaLogow(dtoList);
-        eventLogListDTO.setTotalRecord(eventLogRepository.countByCzynnoscLike("%" + name + "%"));
+        eventLogListDTO.setLogList(dtoList);
+        eventLogListDTO.setTotalRecord(eventLogRepository.countByActionLike("%" + name + "%"));
         return eventLogListDTO;
     }
 
@@ -104,9 +104,9 @@ public class EventLogService {
         logOBList.forEach(element -> {
             list.add(
                     EventLogDTO.builder()
-                            .uzytkownik(element.getUzytkownik())
-                            .czynnosc(element.getCzynnosc())
-                            .dataCzynnosci(dateConvertService.convertDateToString(element.getDataCzynnosci()))
+                            .userName(element.getUserName())
+                            .action(element.getAction())
+                            .dateAction(dateConvertService.convertDateToString(element.getDateAction()))
                             .build()
             );
         });

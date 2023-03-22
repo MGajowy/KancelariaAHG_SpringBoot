@@ -28,12 +28,12 @@ public interface ResolutionPublicRestApi {
     @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_CB)
     ResolutionListDTO getResolutionListCB();
 
-    @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_OPISIE)
-    ResolutionListDTO getResolutionListByDescription(@QueryParam("description") String description);
+    @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_NAZWA)
+    ResolutionListDTO getResolutionListByDescription(@QueryParam("term") String term);
 
-    @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_OPISIE  + "/{pageNumber}" + "/{pageSize}")
+    @GetMapping(ResolutionPublicRestApiUrl.UCHWALY_LISTA_PO_NAZWA + "/{pageNumber}" + "/{pageSize}")
     ResolutionListDTO getResolutionListByDescriptionAndPages(
-            @QueryParam("description") String description,
+            @QueryParam("term") String term,
             @PathVariable("pageNumber") final Integer pageNumber,
             @PathVariable("pageSize") final Integer pageSize);
 }

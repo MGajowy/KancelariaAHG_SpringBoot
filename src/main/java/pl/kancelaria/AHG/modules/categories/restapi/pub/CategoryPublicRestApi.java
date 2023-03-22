@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.categories.dto.CategoryListDTO;
 import pl.kancelaria.AHG.modules.categories.service.CategoryListService;
 
-import java.util.List;
-
 
 @RestController
 public class CategoryPublicRestApi implements pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.pub.CategoryPublicRestApi {
@@ -29,8 +27,4 @@ public class CategoryPublicRestApi implements pl.kancelaria.AHG.shared.restapi.m
         return categoryListService.searchCategories(term);
     }
 
-    @Override
-    public List<String> getCategoryListByName2(String rodzajKategorii) {
-        return categoryListService.getCategoryListByName2(rodzajKategorii);
-    }
 }

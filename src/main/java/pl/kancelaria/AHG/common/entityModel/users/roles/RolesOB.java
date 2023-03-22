@@ -22,16 +22,16 @@ public class RolesOB {
 
     @Enumerated(EnumType.STRING)
     @Column (name = ModelConstants.COLUMN_ROLE_NAME, length = 255)
-    private RolesName nazwa;
+    private RolesName rolesName;
 
-// ta encja musi być zapisana w 1 kolejności !! wazne!
+    // ta encja musi być zapisana w 1 kolejności !! wazne!
     @ManyToMany(mappedBy = "rolesOBSet")
     private List<UserOB> userOBSet;
 
     @Override
     public String toString() {
         return "RolesOB{" +
-                "nazwa=" + nazwa +
+                "nazwa=" + rolesName +
                 '}';
 
 }

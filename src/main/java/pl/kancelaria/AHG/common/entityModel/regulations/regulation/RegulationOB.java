@@ -20,14 +20,14 @@ public class RegulationOB {
     private Long id;
 
     @Column (name = ModelConstants.COLUMN_ROLE_NAME, length = 300)
-    private String nazwa;
+    private String regulationName;
 
     @Column(name = ModelConstants.COLUMN_CONTENTS, length = 5000)
-    private String tresc;
+    private String contents;
 
     @NotNull
     @Column(name = ModelConstants.COLUMN_IS_PUBLIC)
-    private Boolean czyPubliczny;
+    private Boolean isPublic;
 
     @NotNull
     @Column (name = ModelConstants.COLUMN_DATE_ADDDED)
@@ -35,5 +35,5 @@ public class RegulationOB {
 
     @ManyToOne
     @JoinColumn(name = "kategoria_fk")
-    private CategoryRegulationOB kategoria;
+    private CategoryRegulationOB category;
 }

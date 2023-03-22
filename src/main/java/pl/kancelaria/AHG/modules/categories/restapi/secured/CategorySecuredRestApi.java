@@ -35,7 +35,7 @@ public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
 
     @Override
     public ResponseEntity<HttpStatus> addNewCategories(CategoryDTO categoryDTO) {
-       return createCategoryService.addNewCategories(categoryDTO);
+        return createCategoryService.addNewCategories(categoryDTO);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CategorySecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
 
     @Override
     public ResponseEntity<HttpStatus> deleteCategories(@PathVariable("id") long id) {
-       return deleteCategoryService.deleteCategories(id);
+        return deleteCategoryService.deleteCategories(id);
     }
 
     @Override

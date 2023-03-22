@@ -1,7 +1,6 @@
 package pl.kancelaria.AHG.modules.resolutions.restapi.pub;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListDTO;
 import pl.kancelaria.AHG.modules.resolutions.dto.ResolutionListOfCategoryDTO;
@@ -30,12 +29,12 @@ public class ResolutionPublicRestApi implements pl.kancelaria.AHG.shared.restapi
     }
 
     @Override
-    public ResolutionListDTO getResolutionListByDescription(String opis) {
-        return resolutionService.getResolutionListByDescription(opis);
+    public ResolutionListDTO getResolutionListByDescription(String resolutionName) {
+        return resolutionService.getResolutionListByDescription(resolutionName);
     }
 
     @Override
-    public ResolutionListDTO getResolutionListByDescriptionAndPages(String description, Integer pageNumber, Integer pageSize) {
-        return resolutionService.getResolutionListByDescriptionAndPages(description, pageNumber, pageSize);
+    public ResolutionListDTO getResolutionListByDescriptionAndPages(String term, Integer pageNumber, Integer pageSize) {
+        return resolutionService.getResolutionListByDescriptionAndPages(term, pageNumber, pageSize);
     }
 }

@@ -22,22 +22,22 @@ public class TokenOB {
     private String token;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private UserOB fk_uzytkownik;
+    private UserOB user;
 
     public TokenOB() {
     }
 
-    public TokenOB(long id, String token, UserOB fk_uzytkownik) {
+    public TokenOB(long id, String token, UserOB user) {
         this.id = id;
         this.token = token;
-        this.fk_uzytkownik = fk_uzytkownik;
+        this.user = user;
     }
 
     public TokenOB(UserOB user, String token) {
-        this.fk_uzytkownik = user;
+        this.user = user;
         this.token = token;}
 
-    public UserOB getFk_uzytkownik() {
-        return fk_uzytkownik;
+    public UserOB getUser() {
+        return user;
     }
 }

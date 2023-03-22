@@ -2,6 +2,7 @@ package pl.kancelaria.AHG.common.entityModel.users.user;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,10 +16,8 @@ import java.util.*;
 @Entity
 @Table(schema = ModelConstants.SCHEMA_USER, name = ModelConstants.TABLE_USER)
 @Data
+@NoArgsConstructor
 public class UserOB implements UserDetails {
-
-    public UserOB() {
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,10 +25,10 @@ public class UserOB implements UserDetails {
     private long id;
 
     @Column(name = ModelConstants.COLUMN_NAME, length = 120)
-    private String imie;
+    private String name;
 
     @Column(name = ModelConstants.COLUMN_SURNAME, length = 250)
-    private String nazwisko;
+    private String surname;
 
     @Column(name = ModelConstants.COLUMN_USERNAME, length = 255)
     private String userName;
@@ -37,36 +36,34 @@ public class UserOB implements UserDetails {
     @Column(name = ModelConstants.COLUMN_PASSWORD, length = 255)
     private String password;
 
-
     @Column(name = ModelConstants.COLUMN_EMAIL)
     private String email;
 
-    //    @Column (name = ModelConstants.KOLUMNA_czy_zaakceptowano_regulamin)
-//    private Boolean czy_zaakceptowano_regulamin;
-//
-//    @Nullable
-//    @Column(name = ModelConstants.KOLUMNA_typ_konta, length = 32, nullable = false)
-//    @Enumerated(value = EnumType.STRING)
-//    private UserAccountType typ_konta;
-//
     @Column(name = ModelConstants.COLUMN_TELEPHONE, length = 50)
-    private String telefon;
+    private String phoneNumber;
 
     @Column(name = ModelConstants.COLUMN_SEX, length = 9)
     @Enumerated(value = EnumType.STRING)
-    private UserSexEnum plec;
-
-//    @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
-//    private Byte[] zdjecie_profilowe;
-
+    private UserSexEnum sex;
 
     @Column(name = ModelConstants.COLUMN_STATE, length = 32)
     @Enumerated(value = EnumType.STRING)
-    private UserStateEnum stan;
+    private UserStateEnum activationState;
 
     @NotNull
-    @Column (name = ModelConstants.COLUMN_DATE_ADDDED)
+    @Column(name = ModelConstants.COLUMN_DATE_ADDDED)
     private Date dateAdded;
+
+    //    @Column (name = ModelConstants.KOLUMNA_czy_zaakceptowano_regulamin)
+    //    private Boolean czy_zaakceptowano_regulamin;
+
+    //    @Nullable
+    //    @Column(name = ModelConstants.KOLUMNA_typ_konta, length = 32, nullable = false)
+    //    @Enumerated(value = EnumType.STRING)
+    //    private UserAccountType typ_konta;
+
+    //    @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
+    //    private Byte[] zdjecie_profilowe;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(schema = ModelConstants.SCHEMA_USER, name = "roles_users",
@@ -110,9 +107,6 @@ public class UserOB implements UserDetails {
         return true;
     }
 
-//    @Nullable
-//    @Column (name = ModelConstants.KOLUMNA_data_rejestracji, nullable = false)
-//    private LocalDate dataRejestracji;
 
 //    @OneToOne(fetch = FetchType.LAZY)
 //    private TokenOB fk_token;

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface RegulationRepository extends JpaRepository<RegulationOB, Long> {
 
-    List<RegulationOB> findByNazwaLike(String nazwa, Pageable pageable);
+    List<RegulationOB> findByRegulationNameLike(String regulationName, Pageable pageable);
 
-    long countByNazwaLike(String nazwa);
+    long countByRegulationNameLike(String regulationName);
 }

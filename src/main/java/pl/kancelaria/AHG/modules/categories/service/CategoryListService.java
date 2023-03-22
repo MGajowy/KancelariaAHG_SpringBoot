@@ -42,10 +42,10 @@ public class CategoryListService {
                 BeanUtils.copyProperties(e, daneDTO);
                 categoryList.add(daneDTO);
             });
-            categoryList.sort(Comparator.comparing(CategoryDTO::getRodzajKategorii).reversed());
-            response.setListaKategorii(categoryList);
+            categoryList.sort(Comparator.comparing(CategoryDTO::getCategoryName).reversed());
+            response.setCategoryList(categoryList);
         } else {
-            response.setListaKategorii(new ArrayList<>());
+            response.setCategoryList(new ArrayList<>());
         }
         return response;
     }
@@ -68,9 +68,9 @@ public class CategoryListService {
                 BeanUtils.copyProperties(categoriesOB, categoryDTO);
                 listCategory.add(categoryDTO);
             });
-            response.setListaKategorii(listCategory);
+            response.setCategoryList(listCategory);
         } else {
-            response.setListaKategorii(new ArrayList<>());
+            response.setCategoryList(new ArrayList<>());
         }
         return response;
     }
@@ -85,9 +85,9 @@ public class CategoryListService {
     private String prepareAnInquiry(String term) {
         StringBuilder query = new StringBuilder("SELECT c FROM CategoriesOB c");
         if (!term.isEmpty()) {
-            query.append(" WHERE LOWER(c.rodzajKategorii) like :term");
+            query.append(" WHERE LOWER(c.categoryName) like :term");
         }
-        query.append(" ORDER BY c.rodzajKategorii DESC");
+        query.append(" ORDER BY c.categoryName DESC");
         return query.toString();
     }
 
@@ -95,7 +95,7 @@ public class CategoryListService {
         CategoryListDTO categoryListDTO = new CategoryListDTO();
         List<CategoriesOB> listCategoryOB = getListCategoriesByStatus(status);
         List<CategoryDTO> collect = listCategoryOB.stream().map(CategoriesOB::categoryListByStatus).collect(Collectors.toList());
-        categoryListDTO.setListaKategorii(collect);
+        categoryListDTO.setCategoryList(collect);
         return categoryListDTO;
     }
 
@@ -107,25 +107,9 @@ public class CategoryListService {
 
     private String prepareInquiryForStatus(Boolean status) {
         StringBuilder query = new StringBuilder("SELECT c FROM CategoriesOB c");
-        query.append(" WHERE c.czyPubliczny = :status");
-        query.append(" ORDER BY c.rodzajKategorii DESC");
+        query.append(" WHERE c.isPublic = :status");
+        query.append(" ORDER BY c.categoryName DESC");
         return query.toString();
     }
 
-    //todo metoda nieużywana - niepodłączona
-    public List<String> getCategoryListByName2(String nazwaKaregorii) {
-        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesOBsByRodzajKategorii(nazwaKaregorii);
-        return categoriesOB.stream()
-                .map(CategoriesOB::getRodzajKategorii)
-                .collect(Collectors.toList());
-    }
-
-    //todo metoda do usunięcia
-    public List<String> getCategoryListByName(String nazwaKategorii) {
-        List<CategoriesOB> categoriesOB = categoriesRepository.findCategoriesByRodzajKategoriiImpl(nazwaKategorii);
-        return categoriesOB.stream()
-                .map(CategoriesOB::getRodzajKategorii)
-                .filter(rodzajKategorii -> rodzajKategorii.equals(nazwaKategorii))
-                .collect(Collectors.toList());
-    }
 }

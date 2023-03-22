@@ -31,18 +31,18 @@ public class CreateResolutionService {
 
     @Transactional
     public ResponseEntity<HttpStatus> addNewResolution(CreateResotutionDTO resolutionDTO, HttpServletRequest request) {
-        CategoriesOB categoriesOB = categoriesRepository.getOne(resolutionDTO.getKategoria());
+        CategoriesOB categoriesOB = categoriesRepository.getOne(resolutionDTO.getCategoryId());
         Date date = new Date();
         date.getTime();
         if (categoriesOB != null && validationRequest(resolutionDTO)) {
             ResolutionsOB resolutionsOB =  new ResolutionsOB();
-            resolutionsOB.setOpis(resolutionDTO.getOpis());
-            resolutionsOB.setTresc(resolutionDTO.getTresc());
-            resolutionsOB.setKategoria(categoriesOB);
-            resolutionsOB.setCzyPubliczny(resolutionDTO.getCzyPubliczny());
+            resolutionsOB.setResolutionName(resolutionDTO.getResolutionName());
+            resolutionsOB.setContents(resolutionDTO.getContents());
+            resolutionsOB.setCategory(categoriesOB);
+            resolutionsOB.setIsPublic(resolutionDTO.getIsPublic());
             resolutionsOB.setDateAdded(date);
             this.resolutionsRepository.save(resolutionsOB);
-            logger.info("Uchwała " + resolutionsOB.getOpis() + " została dodana do listy.");
+            logger.info("Uchwała " + resolutionsOB.getResolutionName() + " została dodana do listy.");
             eventLogService.createLog(EventLogConstants.DODANIE_NOWEJ_UCHWALY, request.getRemoteUser() );
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -50,7 +50,7 @@ public class CreateResolutionService {
     }
 
     private boolean validationRequest(CreateResotutionDTO resolutionDTO) {
-        return resolutionDTO.getCzyPubliczny() != null && resolutionDTO.getOpis() != null && resolutionDTO.getTresc() != null;
+        return resolutionDTO.getIsPublic() != null && resolutionDTO.getResolutionName() != null && resolutionDTO.getContents() != null;
     }
 
 }

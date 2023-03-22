@@ -39,9 +39,9 @@ public class UserListService {
                 daneDTO.setDateAdded(dateConvertService.convertDateToString(user.getDateAdded()));
                 users.add(daneDTO);
             });
-            response.setListaUzytkownikow(users);
+            response.setUsersList(users);
         } else {
-            response.setListaUzytkownikow(new ArrayList<>());
+            response.setUsersList(new ArrayList<>());
         }
         return response;
     }
@@ -64,9 +64,9 @@ public class UserListService {
         return query.toString();
     }
 
-    public UserListDTO getUserListOfStatus(String stan) {
+    public UserListDTO getUserListOfStatus(String activationState) {
         UserListDTO response = new UserListDTO();
-        List<UserOB> listOB = userRepository.findUserobsByStan(checkStatus(stan));
+        List<UserOB> listOB = userRepository.findUserobsByActivationState(checkStatus(activationState));
         if (!CollectionUtils.isEmpty(listOB)) {
             List<UserDTO> dtoList = new ArrayList<>();
             listOB.forEach(userOB -> {
@@ -75,17 +75,17 @@ public class UserListService {
                 userDTO.setDateAdded(dateConvertService.convertDateToString(userOB.getDateAdded()));
                 dtoList.add(userDTO);
             });
-            response.setListaUzytkownikow(dtoList);
+            response.setUsersList(dtoList);
         } else {
-            response.setListaUzytkownikow(new ArrayList<>());
+            response.setUsersList(new ArrayList<>());
         }
         return response;
     }
 
-    private UserStateEnum checkStatus(String stan) {
+    private UserStateEnum checkStatus(String activationState) {
         UserStateEnum userStateEnum = null;
 
-        switch (stan) {
+        switch (activationState) {
             case "AKTYWNY":
                 userStateEnum = UserStateEnum.AKTYWNY;
                 break;
@@ -105,11 +105,11 @@ public class UserListService {
     }
 
     public UserListDTO getUserListByNameAndPage(String term, Integer pageNumber, Integer pageSize) {
-        final Pageable userPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("nazwisko")));
+        final Pageable userPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("surname")));
         List<UserOB> userOBList = userRepository.searchByUserNameLike(term.toLowerCase(), userPageable);
         List<UserDTO> userDTOList = createResponseDTO(userOBList);
         UserListDTO response = new UserListDTO();
-        response.setListaUzytkownikow(userDTOList);
+        response.setUsersList(userDTOList);
         response.setTotalRecord(userRepository.countByUserNameLike("%" + term + "%"));
         return response;
     }

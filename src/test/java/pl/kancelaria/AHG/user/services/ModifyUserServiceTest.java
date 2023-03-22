@@ -56,7 +56,7 @@ class ModifyUserServiceTest {
         // then
         assertThat(userDTO.getUsername()).isEqualTo(USERNAME);
         assertThat(userDTO).isNotNull();
-        assertThat(userDTO.getImie()).isEqualTo(IMIE);
+        assertThat(userDTO.getName()).isEqualTo(IMIE);
 
     }
 
@@ -64,12 +64,12 @@ class ModifyUserServiceTest {
         UserDTO userDTO = new UserDTO();
         List<RolesName> rolesNames = Arrays.asList(RolesName.USER);
         userDTO.setUsername("Kornel");
-        userDTO.setTelefon("123456789");
-        userDTO.setPlec(UserSexEnum.MEZCZYZNA);
-        userDTO.setNazwisko("Gajowy");
-        userDTO.setImie("Piotr");
-        userDTO.setStan(UserStateEnum.AKTYWNY);
-        userDTO.setRole(rolesNames);
+        userDTO.setPhoneNumber("123456789");
+        userDTO.setSex(UserSexEnum.MEZCZYZNA);
+        userDTO.setSurname("Gajowy");
+        userDTO.setName("Piotr");
+        userDTO.setActivationState(UserStateEnum.AKTYWNY);
+        userDTO.setRoles(rolesNames);
         userDTO.setPassword("adsad");
         return userDTO;
     }
@@ -78,36 +78,36 @@ class ModifyUserServiceTest {
         UserOB userOB = new UserOB();
         RolesOB rolesOB = new RolesOB();
         rolesOB.setId(1L);
-        rolesOB.setNazwa(RolesName.USER);
+        rolesOB.setRolesName(RolesName.USER);
         List<RolesOB> roles = new ArrayList<>();
         roles.add(rolesOB);
         userOB.setId(1L);
-        userOB.setImie("Adam");
-        userOB.setNazwisko("Adamowicz");
+        userOB.setName("Adam");
+        userOB.setSurname("Adamowicz");
         userOB.setUserName("adam");
-        userOB.setTelefon("1111111111");
-        userOB.setStan(UserStateEnum.AKTYWNY);
+        userOB.setPhoneNumber("1111111111");
+        userOB.setActivationState(UserStateEnum.AKTYWNY);
         userOB.setRolesOBSet(roles);
         userOB.setEmail("m@hhh.pl");
-        userOB.setPlec(UserSexEnum.MEZCZYZNA);
+        userOB.setSex(UserSexEnum.MEZCZYZNA);
         return userOB;
     }
     private UserOB modifyUserOB() {
         UserOB userOB = new UserOB();
         RolesOB rolesOB = new RolesOB();
         rolesOB.setId(1L);
-        rolesOB.setNazwa(RolesName.USER);
+        rolesOB.setRolesName(RolesName.USER);
         List<RolesOB> roles = new ArrayList<>();
         roles.add(rolesOB);
         userOB.setId(1L);
-        userOB.setImie("Piotr");
-        userOB.setNazwisko("Gajowy");
+        userOB.setName("Piotr");
+        userOB.setSurname("Gajowy");
         userOB.setUserName("Kornel");
-        userOB.setTelefon("123456789");
-        userOB.setStan(UserStateEnum.AKTYWNY);
+        userOB.setPhoneNumber("123456789");
+        userOB.setActivationState(UserStateEnum.AKTYWNY);
         userOB.setRolesOBSet(roles);
         userOB.setEmail("m@hhh.pl");
-        userOB.setPlec(UserSexEnum.MEZCZYZNA);
+        userOB.setSex(UserSexEnum.MEZCZYZNA);
         return userOB;
     }
 }

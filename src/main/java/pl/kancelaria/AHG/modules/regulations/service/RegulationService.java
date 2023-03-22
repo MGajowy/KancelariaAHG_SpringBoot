@@ -52,24 +52,24 @@ public class RegulationService {
         resultList.forEach(ob -> {
                     RegulationDTO dto = new RegulationDTO();
                     BeanUtils.copyProperties(ob, dto);
-                    dto.setNazwaKategorii(ob.getKategoria().getRodzajKategorii());
+                    dto.setCategoryName(ob.getCategory().getCategoryName());
                     dto.setDateAdded(dateConvertService.convertDateToString(ob.getDateAdded()));
                     regulationList.add(dto);
                 }
         );
         RegulationListDTO regulationListDTO = new RegulationListDTO();
-        regulationListDTO.setListaRozporzadzen(regulationList);
-        regulationListDTO.setTotalRecords(regulationRepository.countByNazwaLike("%" + nazwa + "%"));
+        regulationListDTO.setRegulationList(regulationList);
+        regulationListDTO.setTotalRecords(regulationRepository.countByRegulationNameLike("%" + nazwa + "%"));
         return regulationListDTO;
     }
 
     public RegulationListDTO getRegulationsListByNameAndPage(String term, Integer pageNumber, Integer pageSize) {
-        final Pageable regulationPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("nazwa")));
-        List<RegulationOB> allByNazwa = regulationRepository.findByNazwaLike("%" + term + "%", regulationPageable);
+        final Pageable regulationPageable = PageRequest.of(pageNumber, pageSize, Sort.by("dateAdded").descending().and(Sort.by("regulationName")));
+        List<RegulationOB> allByNazwa = regulationRepository.findByRegulationNameLike("%" + term + "%", regulationPageable);
         List<RegulationDTO> regulationDTOList = createResponseDTO(allByNazwa);
         RegulationListDTO regulationListDTO = new RegulationListDTO();
-        regulationListDTO.setListaRozporzadzen(regulationDTOList);
-        regulationListDTO.setTotalRecords(regulationRepository.countByNazwaLike("%" + term + "%"));
+        regulationListDTO.setRegulationList(regulationDTOList);
+        regulationListDTO.setTotalRecords(regulationRepository.countByRegulationNameLike("%" + term + "%"));
         return regulationListDTO;
     }
 
@@ -78,7 +78,7 @@ public class RegulationService {
         allByNazwa.forEach(ob -> {
             RegulationDTO dto = new RegulationDTO();
             BeanUtils.copyProperties(ob, dto);
-            dto.setNazwaKategorii(ob.getKategoria().getRodzajKategorii());
+            dto.setCategoryName(ob.getCategory().getCategoryName());
             dto.setDateAdded(dateConvertService.convertDateToString(ob.getDateAdded()));
             regulationList.add(dto);
         });

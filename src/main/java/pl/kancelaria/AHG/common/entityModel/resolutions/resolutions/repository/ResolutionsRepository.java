@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ResolutionsRepository extends JpaRepository<ResolutionsOB, Long> {
-    List<ResolutionsOB> findByOpisLike(String opis, Pageable pageable);
+    List<ResolutionsOB> findByResolutionNameLike(String resolutionName, Pageable pageable);
 
-    long countByOpisLike(String opis);
+    long countByResolutionNameLike(String resolutionName);
 }

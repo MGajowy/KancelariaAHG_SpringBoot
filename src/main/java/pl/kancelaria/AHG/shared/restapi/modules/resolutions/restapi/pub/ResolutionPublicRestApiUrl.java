@@ -9,5 +9,5 @@ public class ResolutionPublicRestApiUrl {
     public static final String UCHWALY_LISTA_CB = "/listaUchwalCB";
 
     public static final String UCHWALY_LISTA_PO_KATEGORII = "/listaUchwalKategoria" ;
-    public static final String UCHWALY_LISTA_PO_OPISIE = "/listaUchwalWgOpis" ;
+    public static final String UCHWALY_LISTA_PO_NAZWA = "/listaUchwalWgNazwa" ;
 }

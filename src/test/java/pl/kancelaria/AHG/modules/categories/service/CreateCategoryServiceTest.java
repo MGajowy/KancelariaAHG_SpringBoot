@@ -25,9 +25,9 @@ class CreateCategoryServiceTest {
     void shouldAddCategory() {
         // given
         CategoryDTO category = new CategoryDTO();
-        category.setCzyPubliczny(true);
+        category.setIsPublic(true);
         category.setId(1L);
-        category.setRodzajKategorii("nowa");
+        category.setCategoryName("nowa");
 
         // when
         ResponseEntity<HttpStatus> actual = createCategoryService.addNewCategories(category);

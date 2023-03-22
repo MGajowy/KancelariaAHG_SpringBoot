@@ -8,6 +8,6 @@ import pl.kancelaria.AHG.user.role.RolesName;
 
 @Repository
 public interface RolesRepository extends JpaRepository<RolesOB, Long> {
-    RolesOB findAllByNazwa(RolesName nazwa);
+    RolesOB findAllByRolesName(RolesName rolesName);
 
 }

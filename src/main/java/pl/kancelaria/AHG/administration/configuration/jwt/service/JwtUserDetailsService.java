@@ -36,7 +36,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserOB user = userRepository.findAllByUserName(username);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
@@ -44,19 +44,22 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public UserOB save(RegistrationDTO user) {
-        RolesOB role=  rolesRepository.findAllByNazwa(RolesName.USER);
+        Date date = new Date();
+        date.getTime();
+        RolesOB role=  rolesRepository.findAllByRolesName(RolesName.USER);
         List<RolesOB> lista = new ArrayList<>();
         lista.add(role);
         UserOB newUser = new UserOB();
-        newUser.setImie(user.getImie());
-        newUser.setNazwisko(user.getNazwisko());
-        newUser.setStan(UserStateEnum.NIEAKTYWNY);
+        newUser.setName(user.getName());
+        newUser.setSurname(user.getSurname());
+        newUser.setActivationState(UserStateEnum.NIEAKTYWNY);
         newUser.setUserName(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());
-        newUser.setTelefon(user.getTelefon());
-        newUser.setPlec(user.getPlec());
+        newUser.setPhoneNumber(user.getPhoneNumber());
+        newUser.setSex(user.getSex());
         newUser.setRolesOBSet(lista);
+        newUser.setDateAdded(date);
         List<UserOB> userRoles = new ArrayList<>();
         userRoles.add(newUser);
         role.setUserOBSet(userRoles);

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class CategoryDTO {
 
     private long id;
-    private Boolean czyPubliczny;
-    private String rodzajKategorii;
+    private Boolean isPublic;
+    private String categoryName;
 
 }

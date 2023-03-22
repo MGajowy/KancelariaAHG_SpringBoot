@@ -33,14 +33,14 @@ public class UpdateRegulationService {
     @Transactional
     public ResponseEntity<HttpStatus> modifyRegulation(long id, UpdateRegulationDTO request) {
         if (validation(request)) {
-            CategoryRegulationOB categoryRegulationOB = categoryRegulationRepository.getOne(request.getIdKategorii());
+            CategoryRegulationOB categoryRegulationOB = categoryRegulationRepository.getOne(request.getCategoryId());
             RegulationOB regulationOB = regulationRepository.getOne(id);
-            regulationOB.setNazwa(request.getNazwa());
-            regulationOB.setTresc(request.getTresc());
-            regulationOB.setCzyPubliczny(request.getCzyPubliczny());
-            regulationOB.setKategoria(categoryRegulationOB);
+            regulationOB.setRegulationName(request.getRegulationName());
+            regulationOB.setContents(request.getContents());
+            regulationOB.setIsPublic(request.getIsPublic());
+            regulationOB.setCategory(categoryRegulationOB);
             regulationRepository.save(regulationOB);
-            logger.info("Zmodyfikowano rozporządzenie " + regulationOB.getNazwa());
+            logger.info("Zmodyfikowano rozporządzenie " + regulationOB.getRegulationName());
             eventLogService.createLog(EventLogConstants.MODYFIKACJA_ROZPORZADZENIA, "");
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -50,6 +50,6 @@ public class UpdateRegulationService {
     }
 
     private boolean validation(UpdateRegulationDTO request) {
-        return request.getIdKategorii() != null && request.getNazwa().isEmpty();
+        return request.getCategoryId() != null && request.getRegulationName().isEmpty();
     }
 }

@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class RegulationListDTO {
-    List<RegulationDTO> listaRozporzadzen;
+    List<RegulationDTO> regulationList;
     Long totalRecords;
 }
