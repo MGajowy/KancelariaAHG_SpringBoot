@@ -28,9 +28,9 @@ Logując się jako administrator (dane do logowania znajdują się na samym dole
 
 # 1. URUCHOMIENIE APLIKACJI Z GOTOWYCH OBRAZÓW DOCKER.
 ## 1. Pobierz obrazy docker z platformy GitHub:
- - docker pull ghcr.io/mgajowy/ahg-frontend:1.1
- - docker pull ghcr.io/mgajowy/ahg-reputation:1.1
- - docker pull ghcr.io/mgajowy/ahg-backend:1.1
+ - docker pull ghcr.io/mgajowy/ahg-frontend:1.2
+ - docker pull ghcr.io/mgajowy/ahg-reputation:1.2
+ - docker pull ghcr.io/mgajowy/ahg-backend:1.2
  ## 2. Pobierz repozytorium backend:
      https://github.com/MGajowy/KancelariaAHG_SpringBoot.git
  ## 3. W dowolnym edytorze IDE (np. IntelliJ) przejź do ścieżki : ...\KancelariaAHG_SpringBoot\docker-compose.yml,
