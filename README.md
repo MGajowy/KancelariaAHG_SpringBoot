@@ -35,9 +35,9 @@ Logując się jako administrator (dane do logowania znajdują się na samym dole
      https://github.com/MGajowy/KancelariaAHG_SpringBoot.git
  ## 3. W dowolnym edytorze IDE (np. IntelliJ) przejź do ścieżki : ...\KancelariaAHG_SpringBoot\docker-compose.yml,
        następnie zmień nazwy obrazów docker dla:
-       image: ahg-backend  zmień na: image: ghcr.io/mgajowy/ahg-backend:1.1
-       image: ahg-frontend  zmień na: image: ghcr.io/mgajowy/ahg-frontend:1.1
-       image: ahg-reputation  zmień na: image: ghcr.io/mgajowy/ahg-reputation:1.1
+       image: ahg-backend  zmień na: image: ghcr.io/mgajowy/ahg-backend:1.2
+       image: ahg-frontend  zmień na: image: ghcr.io/mgajowy/ahg-frontend:1.2
+       image: ahg-reputation  zmień na: image: ghcr.io/mgajowy/ahg-reputation:1.2
        Zapisz plik.
  ## 4. Otwórz terminal w ścieżce ...\KancelariaAHG_SpringBoot\ i wpisz polecenie
        docker compose up
