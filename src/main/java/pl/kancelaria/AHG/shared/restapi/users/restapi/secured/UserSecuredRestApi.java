@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pl.kancelaria.AHG.shared.restapi.modules.document.restApi.user.dto.UserListDocumentDTO;
 import pl.kancelaria.AHG.user.dto.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,11 @@ public interface UserSecuredRestApi {
     @GetMapping(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
     @Path(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW)
     UserListDTO getUserList(@QueryParam("term") String term);
+
+    @GET
+    @GetMapping(UserSecuredRestApiUrl.UZYTKOWNICY_DOKUMENTY)
+    @Path(UserSecuredRestApiUrl.UZYTKOWNICY_DOKUMENTY)
+    UserListDocumentDTO getAllUsers();
 
     @GetMapping(UserSecuredRestApiUrl.LISTA_UZYTWONIKOW  + "/{pageNumber}" + "/{pageSize}")
     UserListDTO getUserListByNameAndPage(

@@ -3,16 +3,18 @@
 # INSTRUKCJA URUCHOMIENIA APLIKACJI "Kancelaria AHG"
 ---------------------------------------------------------------------------------------------------
 ##  Opis aplikacji:
-Aplikacja KancelariaAHG to niewielki portal skadający się z części dla klienta (zalogowany/niezalogowany), oraz administratora.
-Klient (użytkownik) posiada możliwość zalogowania się do portalu (logowanie z JWT),
-ma także możliwość wyświetlania list uchwał i rozporządzeń, jak i wysyłki wiadomości email pomocy online.
-Ponadto klient może dodawać opinie.
+Aplikacja KancelariaAHG to niewielki portal skadający się z części dla użytkownika (zalogowany/niezalogowany), oraz administratora.
+Użytkownik posiada możliwość zalogowania się do portalu (logowanie z JWT),
+ma także możliwość wyświetlania list uchwał, rozporządzeń, wysyłki wiadomości email pomocy online,
+pobieranie dokumentów kancelaryjnych dodanych przez administratora.
+Użytkownik ma możliwość dodawania opinii o kancelarii.
 Logując się jako administrator (dane do logowania znajdują się na samym dole instrukcji), otrzymujemy możliwości:
  - CRUD uchwał
  - CRUD rozporządzeń
  - CRUD użytkowników aplikacji
- - wysyłka wiadomości email - aktywacja użytkownika
- - pobieranie dziennika zdarzeń
+ - aktywacja i dezaktywacja użytkowników z wysyłką wiadomości email
+ - dodawanie dokumentów dla konkretnego użytkownika, wraz z wysyłką informacji email o nowym dokumencie
+ - podgląd i pobieranie dziennika zdarzeń
  - zarządzanie opiniami
 
  Aplikacja skłąda się z bazy danych opartej na PostgreSQL, cześci frontend (KancelariaAHGApp) Angular 10,

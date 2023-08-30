@@ -16,4 +16,6 @@ public class EventLogConstants {
     public static final String ZAPYTANIE_EMAIL_OD_PETENTA = "Wysłano zapytanie email od petenta";
     public static final String USUNIECIE_ROZPORZADZENIA = "Usunięto rozporządzenie";
     public static final String MODYFIKACJA_ROZPORZADZENIA = "Zmodyfikowano rozporządzenie";
+    public static final String UPLOAD_NEW_FILE = "Dodano nowy plik/pliki dla użytkownika";
+    public static final String DOWNLOAD_FILE = "Pobrano plik ";
 }

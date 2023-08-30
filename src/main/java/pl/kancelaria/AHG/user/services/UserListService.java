@@ -11,6 +11,8 @@ import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository;
 import pl.kancelaria.AHG.common.service.DateConvertService;
+import pl.kancelaria.AHG.shared.restapi.modules.document.restApi.user.dto.UserDocumentDTO;
+import pl.kancelaria.AHG.shared.restapi.modules.document.restApi.user.dto.UserListDocumentDTO;
 import pl.kancelaria.AHG.user.dto.UserDTO;
 import pl.kancelaria.AHG.user.dto.UserListDTO;
 
@@ -123,5 +125,23 @@ public class UserListService {
             list.add(dto);
         });
         return list;
+    }
+
+    public UserListDocumentDTO getAllUsers() {
+        UserListDocumentDTO response = new UserListDocumentDTO();
+        List<UserOB> userOBList = userRepository.searchAllUsers();
+        if (!CollectionUtils.isEmpty(userOBList)) {
+            List<UserDocumentDTO> users = new ArrayList<>();
+            userOBList.forEach(user -> {
+                users.add(UserDocumentDTO.builder()
+                        .id(user.getId())
+                        .name(user.getSurname() + " " + user.getName())
+                        .build());
+            });
+            response.setUserDocument(users);
+        } else {
+            response.setUserDocument(new ArrayList<>());
+        }
+        return response;
     }
 }

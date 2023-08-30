@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.kancelaria.AHG.common.entityModel.ModelConstants;
+import pl.kancelaria.AHG.common.entityModel.document.DocumentOB;
 import pl.kancelaria.AHG.common.entityModel.users.roles.RolesOB;
 
 import javax.persistence.*;
@@ -53,6 +54,9 @@ public class UserOB implements UserDetails {
     @NotNull
     @Column(name = ModelConstants.COLUMN_DATE_ADDDED)
     private Date dateAdded;
+
+    @OneToMany(mappedBy= "userid",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DocumentOB> documents = new ArrayList<>();
 
     //    @Column (name = ModelConstants.KOLUMNA_czy_zaakceptowano_regulamin)
     //    private Boolean czy_zaakceptowano_regulamin;
@@ -105,6 +109,10 @@ public class UserOB implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setDocuments(List<DocumentOB> documents) {
+        this.documents = documents;
     }
 
 

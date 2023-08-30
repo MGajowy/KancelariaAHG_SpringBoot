@@ -7,6 +7,7 @@ public class ModelConstants {
     public static final String SCHEMA_USER = "uzytkownik";
     public static final String SCHEMA_SHARED = "wspolne";
     public static final String SCHEMA_REGULATIONS = "rozporzadzenia";
+    public static final String SCHEMA_DOCKUMENTS= "dokumenty";
 
     //TABELE
     public static final String TABLE_USER = "uzytkownik";
@@ -16,6 +17,7 @@ public class ModelConstants {
     public static final String TABLE_ROLE = "role";
     public static final String TABLE_EVENT_LOG = "dziennik_zdarzen";
     public static final String TABLE_REGULATIONS = "rozporzadzenia";
+    public static final String TABLE_DOCKUMENT = "dokument";
 
     //KOLUMNY
     public static final String COLUMN_ID = "id";
