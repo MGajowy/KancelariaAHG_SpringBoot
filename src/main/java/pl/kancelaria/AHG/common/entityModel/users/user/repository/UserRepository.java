@@ -23,4 +23,11 @@ public interface UserRepository extends JpaRepository<UserOB, Long> {
     List<UserOB> searchByUserNameLike(@Param("userName") String userName, Pageable pageable);
 
     long countByUserNameLike(String userName);
+    UserOB findByUserName(String userName);
+
+    @Query("SELECT u FROM UserOB u WHERE u.userName != 'deleted' AND LOWER(u.userName) LIKE :userName")
+    UserOB searchUserName(String userName);
+
+    @Query("SELECT u FROM UserOB u WHERE u.userName != 'deleted' order by u.surname desc")
+    List<UserOB> searchAllUsers();
 }

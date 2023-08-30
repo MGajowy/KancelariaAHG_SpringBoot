@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import pl.kancelaria.AHG.shared.restapi.modules.document.restApi.user.dto.UserListDocumentDTO;
 import pl.kancelaria.AHG.user.dto.*;
 import pl.kancelaria.AHG.user.services.*;
 
@@ -40,6 +41,11 @@ public class UserSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.user
     @Override
     public UserListDTO getUserList(String term) {
         return userListService.getUserList(term);
+    }
+
+    @Override
+    public UserListDocumentDTO getAllUsers() {
+        return userListService.getAllUsers();
     }
 
     @Override

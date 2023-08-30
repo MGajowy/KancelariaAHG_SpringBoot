@@ -8,6 +8,8 @@ import pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.pub.CategoryP
 import pl.kancelaria.AHG.shared.restapi.modules.categories.restapi.secured.CategorySecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.pub.CategoryRegulationPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.categoriesRegulations.restApi.secured.CategoryRegulationSecuredRestApi;
+import pl.kancelaria.AHG.shared.restapi.modules.document.restApi.pub.DocumentPublicRestApi;
+import pl.kancelaria.AHG.shared.restapi.modules.document.restApi.secured.DocumentSecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.regulations.restApi.pub.RegulationPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.regulations.restApi.secured.RegulationSecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.modules.resolutions.restapi.pub.ResolutionPublicRestApi;
@@ -46,7 +48,9 @@ public class TSAllRestApi extends Application {
                 RegulationSecuredRestApi.class,
                 IOnlineHelpPublicRestApi.class,
                 ReputationPublicRestApi.class,
-                ReputationSecuredRestApi.class
+                ReputationSecuredRestApi.class,
+                DocumentPublicRestApi.class,
+                DocumentSecuredRestApi.class
                 ));
     }
 }
