@@ -1,6 +1,5 @@
 package pl.kancelaria.AHG.externalApi.saosApi.shared;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,5 +15,5 @@ public interface SaosPublicRestApi {
     @GET
     @GetMapping(SaosPublicRestApiUrl.JUDGMENTS_GET10)
     @Path(SaosPublicRestApiUrl.JUDGMENTS_GET10)
-    ResponseEntity<String> getJudgments() throws IOException, URISyntaxException, InterruptedException;
+    String getJudgments() throws IOException, URISyntaxException, InterruptedException;
 }

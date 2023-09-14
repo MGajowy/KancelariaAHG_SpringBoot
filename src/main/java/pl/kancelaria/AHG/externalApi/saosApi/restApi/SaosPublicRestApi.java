@@ -8,6 +8,7 @@ import pl.kancelaria.AHG.externalApi.saosApi.service.SaosService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.http.HttpResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,10 +17,10 @@ public class SaosPublicRestApi implements pl.kancelaria.AHG.externalApi.saosApi.
     private final SaosService saosService;
 
     @Override
-    public ResponseEntity<String> getJudgments() throws IOException, URISyntaxException, InterruptedException {
-        ResponseEntity<String> response = saosService.getTenJudgments();
-        if (response.getStatusCode().value() == 200)
-            return response;
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public String getJudgments() throws IOException, URISyntaxException, InterruptedException {
+        HttpResponse<String> response = saosService.getTenJudgments();
+        if (response.statusCode() == 200)
+            return response.body();
+        return String.valueOf(new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }
 }
