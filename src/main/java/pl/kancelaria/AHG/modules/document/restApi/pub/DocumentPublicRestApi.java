@@ -30,7 +30,8 @@ public class DocumentPublicRestApi implements pl.kancelaria.AHG.shared.restapi.m
         if (documentDTO != null) {
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(documentDTO.getDocType()))
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + documentDTO.getDocName() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + documentDTO.getDocName() + "\"")
+                    .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION)
                     .body(new ByteArrayResource(documentDTO.getData()));
         }
         return ResponseEntity.noContent().build();
