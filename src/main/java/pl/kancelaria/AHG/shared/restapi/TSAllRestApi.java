@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.shared.restapi;
 
+import pl.kancelaria.AHG.externalApi.saosApi.shared.SaosPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.administration.restapi.pub.IAdministrationPublicRestApi;
 import pl.kancelaria.AHG.shared.restapi.administration.restapi.secured.IAdministrationSecuredRestApi;
 import pl.kancelaria.AHG.shared.restapi.auth.restApi.pub.IAuthPublicRestApi;
@@ -50,7 +51,8 @@ public class TSAllRestApi extends Application {
                 ReputationPublicRestApi.class,
                 ReputationSecuredRestApi.class,
                 DocumentPublicRestApi.class,
-                DocumentSecuredRestApi.class
+                DocumentSecuredRestApi.class,
+                SaosPublicRestApi.class
                 ));
     }
 }
