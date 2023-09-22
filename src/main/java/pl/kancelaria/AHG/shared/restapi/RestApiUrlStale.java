@@ -23,4 +23,5 @@ public class RestApiUrlStale {
     public static final String REPUTATION = REST_PATH + "/reputation";
     public static final String DOCUMENT = REST_PATH + "/document";
     public static final String SAOS = REST_PATH + "/saos";
+    public static final String CHECK_LOGIN = "/checkLogin";
 }

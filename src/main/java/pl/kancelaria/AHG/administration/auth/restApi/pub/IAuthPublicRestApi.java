@@ -40,4 +40,9 @@ public class IAuthPublicRestApi implements pl.kancelaria.AHG.shared.restapi.auth
     public Boolean resetPassword(UserPasswordDTO dto) {
         return authServices.resetPassword(dto);
     }
+
+    @Override
+    public Boolean checkLogin(String login) {
+        return authServices.checkLogin(login);
+    }
 }

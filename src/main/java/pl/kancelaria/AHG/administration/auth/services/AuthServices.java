@@ -21,6 +21,8 @@ import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
+import java.util.Optional;
+
 @Service
 public class AuthServices {
 
@@ -94,5 +96,18 @@ public class AuthServices {
         userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(userOB);
         return true;
+    }
+
+    public Boolean checkLogin(String login) {
+        if (verifyLogin(login))
+            return false;
+
+        Optional<UserOB> user = userRepository.findByUserName(login);
+        return !user.isPresent();
+    }
+
+    private boolean verifyLogin(String login) {
+        return login.equalsIgnoreCase("admin") || login.contains("admin") ||
+                login.equalsIgnoreCase("undefind") || login.equalsIgnoreCase("null");
     }
 }

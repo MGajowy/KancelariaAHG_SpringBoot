@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/rest/authenticate", "/rest/register", "/rest/ustaw-haslo", "/rest/reset-hasla").permitAll()
+                .antMatchers("/rest/authenticate", "/rest/register", "/rest/ustaw-haslo", "/rest/reset-hasla", "/rest/checkLogin").permitAll()
                 .antMatchers("/rest/uzytkownicy/pub/", "/rest/kategorie/pub/").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/rest/uzytkownicy/secured/", "/rest/kategorie/secured/").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.OPTIONS, "/**", "/swagger-ui.html").permitAll()

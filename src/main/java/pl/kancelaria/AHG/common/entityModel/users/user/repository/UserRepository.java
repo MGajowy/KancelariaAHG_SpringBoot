@@ -9,6 +9,7 @@ import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserOB, Long> {
@@ -23,7 +24,7 @@ public interface UserRepository extends JpaRepository<UserOB, Long> {
     List<UserOB> searchByUserNameLike(@Param("userName") String userName, Pageable pageable);
 
     long countByUserNameLike(String userName);
-    UserOB findByUserName(String userName);
+    Optional<UserOB> findByUserName(String userName);
 
     @Query("SELECT u FROM UserOB u WHERE u.userName != 'deleted' AND LOWER(u.userName) LIKE :userName")
     UserOB searchUserName(String userName);

@@ -52,7 +52,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         UserOB newUser = new UserOB();
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());
-        newUser.setActivationState(UserStateEnum.NIEAKTYWNY);
+        newUser.setActivationState(UserStateEnum.AKTYWNY);
         newUser.setUserName(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());
