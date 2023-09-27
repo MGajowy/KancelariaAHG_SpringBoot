@@ -8,14 +8,14 @@ Użytkownik posiada możliwość zalogowania się do portalu (logowanie z JWT),
 ma także możliwość wyświetlania list uchwał, rozporządzeń, wysyłki wiadomości email pomocy online,
 pobieranie dokumentów kancelaryjnych dodanych przez administratora.
 Użytkownik ma możliwość dodawania opinii o kancelarii.
-Logując się jako administrator (dane do logowania znajdują się na samym dole instrukcji), otrzymujemy możliwości:
+Logując się jako administrator (dane do logowania znajdują się na końcu instrukcji), otrzymujemy możliwości:
  - CRUD uchwał
  - CRUD rozporządzeń
  - CRUD użytkowników aplikacji
  - aktywacja i dezaktywacja użytkowników z wysyłką wiadomości email
  - dodawanie dokumentów dla konkretnego użytkownika, wraz z wysyłką informacji email o nowym dokumencie
- - podgląd i pobieranie dziennika zdarzeń
- - zarządzanie opiniami
+ - podgląd i pobieranie dziennika zdarzeń (admin)
+ - zarządzanie opiniami (admin)
 
  Aplikacja skłąda się z bazy danych opartej na PostgreSQL, cześci frontend (KancelariaAHGApp) Angular 10,
  części backend (KancelariaAHG_SpringBoot) Spring Boot REST API,
@@ -30,16 +30,16 @@ Logując się jako administrator (dane do logowania znajdują się na samym dole
 
 # 1. URUCHOMIENIE APLIKACJI Z GOTOWYCH OBRAZÓW DOCKER.
 ## 1. Pobierz obrazy docker z platformy GitHub:
- - docker pull ghcr.io/mgajowy/ahg-frontend:1.4
- - docker pull ghcr.io/mgajowy/ahg-reputation:1.4
- - docker pull ghcr.io/mgajowy/ahg-backend:1.4
+ - docker pull ghcr.io/mgajowy/ahg-frontend:1.5
+ - docker pull ghcr.io/mgajowy/ahg-reputation:1.5
+ - docker pull ghcr.io/mgajowy/ahg-backend:1.5
  ## 2. Pobierz repozytorium backend:
      https://github.com/MGajowy/KancelariaAHG_SpringBoot.git
  ## 3. W dowolnym edytorze IDE (np. IntelliJ) przejź do ścieżki : ...\KancelariaAHG_SpringBoot\docker-compose.yml,
        następnie zmień nazwy obrazów docker dla:
-       image: ahg-backend  zmień na: image: ghcr.io/mgajowy/ahg-backend:1.4
-       image: ahg-frontend  zmień na: image: ghcr.io/mgajowy/ahg-frontend:1.4
-       image: ahg-reputation  zmień na: image: ghcr.io/mgajowy/ahg-reputation:1.4
+       image: ahg-backend  zmień na: image: ghcr.io/mgajowy/ahg-backend:1.5
+       image: ahg-frontend  zmień na: image: ghcr.io/mgajowy/ahg-frontend:1.5
+       image: ahg-reputation  zmień na: image: ghcr.io/mgajowy/ahg-reputation:1.5
        Zapisz plik.
  ## 4. Otwórz terminal w ścieżce ...\KancelariaAHG_SpringBoot\ i wpisz polecenie
        docker compose up
