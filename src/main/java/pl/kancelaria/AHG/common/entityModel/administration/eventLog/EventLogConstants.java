@@ -4,6 +4,7 @@ package pl.kancelaria.AHG.common.entityModel.administration.eventLog;
 public class EventLogConstants {
 
     public static final String DODANO_NOWEGO_UZYTKOWNIKA = "Dodano nowego użytkownika do portalu";
+    public static final String REJESTARCJA_NOWEGO_UZYTKOWNIKA = "Zarejestrowano nowego użytkownika";
     public static final String USUNIECIE_UZYTKOWNIKA = "Usunięto użytkownika z portalu";
     public static final String MODYFIAKCJA_UZYTKOWNIKA = "Zmodyfikowano użytkownika";
     public static final String WYSLANO_EMAIL_RESETU_HASLA = "Wysłano email z resetem hasła";
@@ -18,4 +19,5 @@ public class EventLogConstants {
     public static final String MODYFIKACJA_ROZPORZADZENIA = "Zmodyfikowano rozporządzenie";
     public static final String UPLOAD_NEW_FILE = "Dodano nowy plik/pliki dla użytkownika";
     public static final String DOWNLOAD_FILE = "Pobrano plik ";
+    public static final String LOG_IN = "Użytkownik zalogował się do portalu";
 }

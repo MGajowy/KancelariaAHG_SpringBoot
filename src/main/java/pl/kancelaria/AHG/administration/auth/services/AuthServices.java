@@ -1,7 +1,7 @@
 package pl.kancelaria.AHG.administration.auth.services;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import pl.kancelaria.AHG.administration.configuration.jwt.config.JwtTokenUtil;
 import pl.kancelaria.AHG.administration.configuration.jwt.model.JwtRequest;
 import pl.kancelaria.AHG.administration.configuration.jwt.service.JwtUserDetailsService;
+import pl.kancelaria.AHG.administration.services.EventLogService;
+import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
 import pl.kancelaria.AHG.common.entityModel.users.token.repository.TokenRepository;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserOB;
 import pl.kancelaria.AHG.common.entityModel.users.user.UserStateEnum;
@@ -24,6 +26,8 @@ import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
+@Log4j2
 public class AuthServices {
 
     private final AuthenticationManager authenticationManager;
@@ -32,16 +36,7 @@ public class AuthServices {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    Logger logger = LoggerFactory.getLogger(AuthServices.class);
-
-    public AuthServices(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenUtil = jwtTokenUtil;
-        this.userDetailsService = userDetailsService;
-        this.tokenRepository = tokenRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-    }
+    private final EventLogService eventLogService;
 
     public String createAuthenticationToken(JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -49,16 +44,16 @@ public class AuthServices {
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return token;
-
     }
 
     public ResponseEntity<HttpStatus> saveNewUser(RegistrationDTO user) {
         try {
             userDetailsService.save(user);
-            logger.info("Rejestracja użytkownika o adresie email: " + user.getEmail());
+            log.info("Rejestracja użytkownika o adresie email: " + user.getEmail());
+            eventLogService.createLog(EventLogConstants.REJESTARCJA_NOWEGO_UZYTKOWNIKA, user.getUsername());
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
-            logger.error("Bład podczas rejestarcji. " + e.getMessage());
+            log.error("Bład podczas rejestarcji. " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 //        return user.getUsername();
@@ -67,7 +62,8 @@ public class AuthServices {
     private void authenticate(String username, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-            logger.info("Uzytkownik o loginie: " + username + " zostal zalogowany do aplikacji.");
+            log.info("Uzytkownik o loginie: " + username + " zostal zalogowany do aplikacji.");
+            eventLogService.createLog(EventLogConstants.LOG_IN, username);
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {

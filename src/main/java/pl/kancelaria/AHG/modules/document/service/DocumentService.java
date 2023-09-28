@@ -5,7 +5,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,9 +26,10 @@ import pl.kancelaria.AHG.modules.document.dto.DocumentListDTO;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,23 +44,31 @@ public class DocumentService {
     public final EntityManager entityManager;
 
     @Transactional
-    public Long saveFile(MultipartFile file, Long userId) throws IOException {
-        Optional<UserOB> user = userRepository.findById(userId);
+    public Long saveFile(MultipartFile file, Long userId) {
+        Optional<UserOB> user;
         DocumentOB documentOB = new DocumentOB();
-        documentOB.setDocName(file.getOriginalFilename());
-        documentOB.setDocType(file.getContentType());
-        documentOB.setData(file.getBytes());
-        documentOB.setCreateDate(LocalDate.now());
-        documentOB.setDeleteDate(null);
-        documentOB.setStatus(StatusFile.PUBLIC.toString());
-        documentOB.setUserid(user.get());
+
         try {
-            documentRepository.save(documentOB);
-            eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
-            mailSenderService.sendMail(user.get().getEmail(), DocumentConstant.TOPIC_EMAIL_FILE, DocumentConstant.MESSAGE_EMAIL_FILE, false);
-        } catch (Exception e) {
-            log.error("Wystąpił błąd podczas zapisu pliku: {} ", file.getOriginalFilename());
-            e.printStackTrace();
+            user = userRepository.findById(userId);
+            documentOB.setDocName(file.getOriginalFilename());
+            documentOB.setDocType(file.getContentType());
+            documentOB.setData(file.getBytes());
+            documentOB.setCreateDate(LocalDate.now());
+            documentOB.setDeleteDate(null);
+            documentOB.setStatus(StatusFile.PUBLIC.toString());
+            documentOB.setUserid(user.get());
+
+            try {
+                documentRepository.save(documentOB);
+                eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
+                mailSenderService.sendMail(user.get().getEmail(), DocumentConstant.TOPIC_EMAIL_FILE, DocumentConstant.MESSAGE_EMAIL_FILE, false);
+            } catch (Exception e) {
+                log.error("Wystąpił błąd podczas zapisu pliku: {} ", file.getOriginalFilename());
+                e.printStackTrace();
+            }
+
+        } catch (Exception exception) {
+            log.error("Zapis dokumentu: Nie znaleziono użytkownika o podanym id");
         }
         return documentOB.getId();
     }
