@@ -19,4 +19,6 @@ public interface DocumentRepository extends JpaRepository<DocumentOB, Long> {
     Page<DocumentOB> findAll(Pageable pageable);
     List<DocumentOB> findByStatusLike(String status);
     long countByStatusLike(String docName);
+    @Query(value = "SELECT count(*) FROM DocumentOB d WHERE d.userid.id = ?1 AND d.status = 'PUBLIC' ")
+    long totalRecordsSize(Long id);
 }

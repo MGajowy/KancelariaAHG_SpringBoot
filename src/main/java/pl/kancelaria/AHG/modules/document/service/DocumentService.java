@@ -57,18 +57,13 @@ public class DocumentService {
             documentOB.setDeleteDate(null);
             documentOB.setStatus(StatusFile.PUBLIC.toString());
             documentOB.setUserid(user.get());
-
-            try {
-                documentRepository.save(documentOB);
-                eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
-                mailSenderService.sendMail(user.get().getEmail(), DocumentConstant.TOPIC_EMAIL_FILE, DocumentConstant.MESSAGE_EMAIL_FILE, false);
-            } catch (Exception e) {
-                log.error("Wystąpił błąd podczas zapisu pliku: {} ", file.getOriginalFilename());
-                e.printStackTrace();
-            }
-
+            documentRepository.save(documentOB);
+            eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
+            mailSenderService.sendMail(user.get().getEmail(), DocumentConstant.TOPIC_EMAIL_FILE, DocumentConstant.MESSAGE_EMAIL_FILE, false);
+            log.info("Nowy plik został dodany do DB: {} ", file.getOriginalFilename());
+            //todo - tu coś nie gra !!
         } catch (Exception exception) {
-            log.error("Zapis dokumentu: Nie znaleziono użytkownika o podanym id");
+            log.error("Wystąpił błąd podczas zapisu pliku: {}", file.getOriginalFilename());
         }
         return documentOB.getId();
     }
@@ -123,7 +118,7 @@ public class DocumentService {
         if (user != null) {
             List<DocumentOB> documents = documentRepository.searchByUserIdAndTerm(user.getId(), term, StatusFile.PUBLIC.toString(), documentPageable);
             if (!CollectionUtils.isEmpty(documents)) {
-                long totalRecords = documents.size();
+                long totalRecords = documentRepository.totalRecordsSize(user.getId());
                 if (validateDocumentOB(documents)) {
                     List<DocumentDTO> collect = documents.stream()
                             .map(documentOB -> DocumentDTO.builder()
@@ -168,7 +163,7 @@ public class DocumentService {
             UserOB userOB = user.get();
             List<DocumentOB> documents = documentRepository.searchByUserIdAndTerm(id, term, status, documentPageable);
             if (!CollectionUtils.isEmpty(documents)) {
-                long totalRecords = documents.size();
+                long totalRecords = documentRepository.totalRecordsSize(userOB.getId());
                 if (validateDocumentOB(documents)) {
                     List<DocumentDTO> collect = documents.stream()
                             .map(documentOB -> DocumentDTO.builder()

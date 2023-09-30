@@ -104,7 +104,7 @@ class DocumentServiceTest {
 
         //then
         List<ILoggingEvent> logsList = listAppender.list;
-        assertEquals("Zapis dokumentu: Nie znaleziono użytkownika o podanym id", logsList.get(0).getMessage());
+        assertEquals("Wystąpił błąd podczas zapisu pliku: " + file.getOriginalFilename(), logsList.get(0).getMessage());
 
     }
 
