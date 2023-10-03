@@ -10,7 +10,6 @@ import pl.kancelaria.AHG.modules.document.dto.DocumentListDTO;
 import pl.kancelaria.AHG.modules.document.service.DocumentService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 @RestController
 @AllArgsConstructor
@@ -19,8 +18,8 @@ public class DocumentSecuredRestApi implements pl.kancelaria.AHG.shared.restapi.
     private final DocumentService documentService;
 
     @Override
-    public ResponseEntity<HttpStatus> uploadMultipatrFiles(MultipartFile multipartFile, Long userId) throws IOException {
-        Long documentOB = documentService.saveFile(multipartFile, userId);
+    public ResponseEntity<HttpStatus> uploadMultipatrFiles(MultipartFile[] multipartFile, Long userId) throws Exception {
+        Boolean documentOB = documentService.saveFile(multipartFile, userId);
         return documentOB != null ? new ResponseEntity<>(HttpStatus.CREATED) : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

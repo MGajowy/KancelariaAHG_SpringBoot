@@ -9,7 +9,6 @@ import pl.kancelaria.AHG.modules.document.dto.DocumentListDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
-import java.io.IOException;
 
 @Path(value = DocumentSecuredRestApiUrl.PATH_DOCUMENT)
 @RequestMapping(value = DocumentSecuredRestApiUrl.PATH_DOCUMENT)
@@ -18,8 +17,8 @@ public interface DocumentSecuredRestApi {
     @POST
     @PostMapping(DocumentSecuredRestApiUrl.UPLOAD_DOCUMENT)
     @Path(DocumentSecuredRestApiUrl.UPLOAD_DOCUMENT)
-    ResponseEntity<HttpStatus> uploadMultipatrFiles(@RequestParam("file") MultipartFile multipartFile,
-                                                    @RequestParam("userId") Long userId) throws IOException;
+    ResponseEntity<HttpStatus> uploadMultipatrFiles(@RequestParam("file") MultipartFile[] multipartFile,
+                                                    @RequestParam("userId") Long userId) throws Exception;
     @DELETE
     @DeleteMapping(DocumentSecuredRestApiUrl.DELETE_DOCUMENT + "/{id}")
     @Path(DocumentSecuredRestApiUrl.DELETE_DOCUMENT)

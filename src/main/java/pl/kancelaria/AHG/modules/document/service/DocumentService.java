@@ -26,6 +26,7 @@ import pl.kancelaria.AHG.modules.document.dto.DocumentListDTO;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -43,29 +44,47 @@ public class DocumentService {
     private final MailSenderService mailSenderService;
     public final EntityManager entityManager;
 
-    @Transactional
-    public Long saveFile(MultipartFile file, Long userId) {
+
+    public Boolean saveFile(MultipartFile[] files, Long userId) throws Exception {
         Optional<UserOB> user;
-        DocumentOB documentOB = new DocumentOB();
+        user = userRepository.findById(userId);
+
+        if (user.isEmpty()) {
+            throw new Exception("Nie znaleziono użytkownika o podanym ID");
+        }
+
+        for (MultipartFile file : files) {
+            try {
+                saveDocument(user, file);
+            } catch (Exception exception) {
+                log.error("Wystąpił błąd podczas zapisu pliku: {}", file.getOriginalFilename());
+                return false;
+            }
+        }
 
         try {
-            user = userRepository.findById(userId);
-            documentOB.setDocName(file.getOriginalFilename());
-            documentOB.setDocType(file.getContentType());
-            documentOB.setData(file.getBytes());
-            documentOB.setCreateDate(LocalDate.now());
-            documentOB.setDeleteDate(null);
-            documentOB.setStatus(StatusFile.PUBLIC.toString());
-            documentOB.setUserid(user.get());
-            documentRepository.save(documentOB);
-            Boolean logServiceLog = eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
-            if (logServiceLog)
-                log.info("Nowy plik został dodany do DB: {} ", file.getOriginalFilename());
             mailSenderService.sendMail(user.get().getEmail(), DocumentConstant.TOPIC_EMAIL_FILE, DocumentConstant.MESSAGE_EMAIL_FILE, false);
-        } catch (Exception exception) {
-            log.error("Wystąpił błąd podczas zapisu lub wysyłki powiadomienia o nowym pliku: {}", file.getOriginalFilename());
+        } catch (Exception ex) {
+            log.error("Pliki - Wystąpił błąd podczas wysyłki powiadomienia email dla użytkownika: {} {}", user.get().getEmail(), ex);
         }
-        return documentOB.getId();
+
+        return true;
+    }
+
+    @Transactional
+    private void saveDocument(Optional<UserOB> user, MultipartFile file) throws IOException {
+        DocumentOB documentOB = new DocumentOB();
+        documentOB.setDocName(file.getOriginalFilename());
+        documentOB.setDocType(file.getContentType());
+        documentOB.setData(file.getBytes());
+        documentOB.setCreateDate(LocalDate.now());
+        documentOB.setDeleteDate(null);
+        documentOB.setStatus(StatusFile.PUBLIC.toString());
+        documentOB.setUserid(user.get());
+        documentRepository.save(documentOB);
+        Boolean logServiceLog = eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
+        if (logServiceLog)
+            log.info("Nowy plik został dodany do DB: {} ", file.getOriginalFilename());
     }
 
     public DocumentDTO downloadFile(Long idFile) {

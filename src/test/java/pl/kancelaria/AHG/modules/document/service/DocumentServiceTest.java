@@ -26,15 +26,13 @@ import pl.kancelaria.AHG.common.service.MailSenderService;
 import pl.kancelaria.AHG.modules.document.dto.DocumentListDTO;
 import pl.kancelaria.AHG.user.role.RolesName;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -70,25 +68,26 @@ class DocumentServiceTest {
     }
 
     @Test
-    void sholudSaveDocument() throws IOException {
+    void sholudSaveDocument() throws Exception {
 
         //given
         Optional<UserOB> userOB = createUserOB();
+
         MultipartFile file = new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
 
         when(userRepository.findById(any())).thenReturn(userOB);
         when(eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, userOB.get().getUsername())).thenReturn(true);
 
         //when
-        Long actual = documentService.saveFile(file, 1L);
+        Boolean actual = documentService.saveFile(new MultipartFile[]{file}, 1L);
 
         //then
-        assertThat(actual).isEqualTo(0L);
+        assertTrue(actual);
         assertNotNull(actual);
     }
 
     @Test
-    void sholudUserIsNotNullSaveDocument() throws IOException {
+    void sholudUserIsNotNullSaveDocument() throws Exception {
 
         //given
         Logger docLogger = (Logger) LoggerFactory.getLogger(DocumentService.class);
@@ -96,15 +95,15 @@ class DocumentServiceTest {
         listAppender.start();
         docLogger.addAppender(listAppender);
 
-        when(userRepository.findById(any())).thenReturn(null);
+        when(userRepository.findById(any())).thenReturn(Optional.empty());
         MultipartFile file = new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
 
         //when
-        documentService.saveFile(file, 1L);
-
         //then
-        List<ILoggingEvent> logsList = listAppender.list;
-        assertEquals("Wystąpił błąd podczas zapisu lub wysyłki powiadomienia o nowym pliku: " + file.getOriginalFilename(), logsList.get(0).getMessage());
+        Exception ex = assertThrows(Exception.class, () -> {documentService.saveFile(new MultipartFile[]{file}, 1L);});
+
+//        List<ILoggingEvent> logsList = listAppender.list;
+//        assertEquals("Wystąpił błąd podczas zapisu lub wysyłki powiadomienia o nowym pliku: " + file.getOriginalFilename(), logsList.get(0).getMessage());
 
     }
 
