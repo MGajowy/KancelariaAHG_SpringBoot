@@ -58,12 +58,12 @@ public class DocumentService {
             documentOB.setStatus(StatusFile.PUBLIC.toString());
             documentOB.setUserid(user.get());
             documentRepository.save(documentOB);
-            eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
+            Boolean logServiceLog = eventLogService.createLog(EventLogConstants.UPLOAD_NEW_FILE, user.get().getUsername());
+            if (logServiceLog)
+                log.info("Nowy plik został dodany do DB: {} ", file.getOriginalFilename());
             mailSenderService.sendMail(user.get().getEmail(), DocumentConstant.TOPIC_EMAIL_FILE, DocumentConstant.MESSAGE_EMAIL_FILE, false);
-            log.info("Nowy plik został dodany do DB: {} ", file.getOriginalFilename());
-            //todo - tu coś nie gra !!
         } catch (Exception exception) {
-            log.error("Wystąpił błąd podczas zapisu pliku: {}", file.getOriginalFilename());
+            log.error("Wystąpił błąd podczas zapisu lub wysyłki powiadomienia o nowym pliku: {}", file.getOriginalFilename());
         }
         return documentOB.getId();
     }

@@ -104,7 +104,7 @@ class DocumentServiceTest {
 
         //then
         List<ILoggingEvent> logsList = listAppender.list;
-        assertEquals("Wystąpił błąd podczas zapisu pliku: " + file.getOriginalFilename(), logsList.get(0).getMessage());
+        assertEquals("Wystąpił błąd podczas zapisu lub wysyłki powiadomienia o nowym pliku: " + file.getOriginalFilename(), logsList.get(0).getMessage());
 
     }
 
