@@ -58,7 +58,7 @@ public class EventLogPDFExport implements ExportPDF {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String currentDateTime = dateFormat.format(new Date());
-        Paragraph title = new Paragraph("Dziennik zdarzen aplikacji AHG", font);
+        Paragraph title = new Paragraph("Dziennik zdarzeń dla aplikacji AHG", font);
         Paragraph date = new Paragraph(currentDateTime, font);
         title.setAlignment(Paragraph.ALIGN_CENTER);
         date.setAlignment(Paragraph.ALIGN_CENTER);

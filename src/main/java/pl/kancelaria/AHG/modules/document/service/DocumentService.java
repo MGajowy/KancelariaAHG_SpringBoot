@@ -92,7 +92,8 @@ public class DocumentService {
             Optional<DocumentOB> doc = documentRepository.findById(idFile);
             if (doc.isPresent()) {
                 DocumentDTO documentDTO = mapToDTO(doc);
-                eventLogService.createLog(EventLogConstants.DOWNLOAD_FILE + doc.get().getDocName(), userRepository.findById(doc.get().getUserid().getId()).get().getName());
+                eventLogService.createLog(EventLogConstants.DOWNLOAD_FILE + doc.get().getDocName(),
+                        userRepository.findById(doc.get().getUserid().getId()).get().getUsername());
                 return mapToDTO(doc);
             }
         } catch (Exception ex) {
