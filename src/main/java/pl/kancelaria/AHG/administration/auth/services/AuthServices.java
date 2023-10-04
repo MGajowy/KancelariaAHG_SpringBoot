@@ -23,6 +23,7 @@ import pl.kancelaria.AHG.common.entityModel.users.user.repository.UserRepository
 import pl.kancelaria.AHG.user.dto.RegistrationDTO;
 import pl.kancelaria.AHG.user.dto.UserPasswordDTO;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -88,6 +89,7 @@ public class AuthServices {
         return userOB != null && extracted(dto, userOB);
     }
 
+    @Transactional
     private boolean extracted(UserPasswordDTO dto, UserOB userOB) {
         userOB.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(userOB);

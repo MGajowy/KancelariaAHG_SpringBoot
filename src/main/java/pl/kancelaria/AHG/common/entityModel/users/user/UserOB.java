@@ -58,17 +58,6 @@ public class UserOB implements UserDetails {
     @OneToMany(mappedBy= "userid",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DocumentOB> documents = new ArrayList<>();
 
-    //    @Column (name = ModelConstants.KOLUMNA_czy_zaakceptowano_regulamin)
-    //    private Boolean czy_zaakceptowano_regulamin;
-
-    //    @Nullable
-    //    @Column(name = ModelConstants.KOLUMNA_typ_konta, length = 32, nullable = false)
-    //    @Enumerated(value = EnumType.STRING)
-    //    private UserAccountType typ_konta;
-
-    //    @Column(name = ModelConstants.KOLUMNA_zdjecie, length = 36)
-    //    private Byte[] zdjecie_profilowe;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(schema = ModelConstants.SCHEMA_USER, name = "roles_users",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -110,13 +99,4 @@ public class UserOB implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public void setDocuments(List<DocumentOB> documents) {
-        this.documents = documents;
-    }
-
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    private TokenOB fk_token;
-
 }

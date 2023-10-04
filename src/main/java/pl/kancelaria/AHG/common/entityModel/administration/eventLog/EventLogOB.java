@@ -24,7 +24,6 @@ public class EventLogOB {
     @Column(name = ModelConstants.COLUMN_DATE_ACTION)
     private Date dateAction;
 
-//    @OneToOne(fetch = FetchType.LAZY)
     private String userName;
 
     public EventLogOB() {

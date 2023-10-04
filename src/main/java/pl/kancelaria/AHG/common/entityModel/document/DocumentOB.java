@@ -19,7 +19,6 @@ public class DocumentOB {
     private long id;
     private String docName;
     private String docType;
-//    @Lob
     private byte[] data;
     private LocalDate createDate;
     private LocalDate deleteDate;

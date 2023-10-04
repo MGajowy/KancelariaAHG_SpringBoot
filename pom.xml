@@ -22,13 +22,12 @@
         <jwt.version>3.10.3</jwt.version>
         <starterMail.version>2.3.3.RELEASE</starterMail.version>
         <typeScriptGenerator.version>2.25.695</typeScriptGenerator.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <org.jetbrains.version>16.0.2</org.jetbrains.version>
         <org.junit.jupiter.version>5.8.2</org.junit.jupiter.version>
         <org.mockito.version>4.6.1</org.mockito.version>
         <org.springfox-swagger>2.9.2</org.springfox-swagger>
-        <assertj-core>3.22.0</assertj-core>
         <openpdf>1.3.29</openpdf>
         <cxf.version>3.4.2</cxf.version>
         <generateTsFile>D:/Projekty_Michal/KancelariaAHG</generateTsFile>
@@ -109,12 +108,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>${starterMail.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj-core}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -351,7 +344,7 @@
                                     </includes>
                                 </resource>
                             </resources>
-                            <outputDirectory>${generateTsFile}/AHG-app/src/app/generated</outputDirectory>
+                            <outputDirectory>${generateTsFile}/src/app/generated</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

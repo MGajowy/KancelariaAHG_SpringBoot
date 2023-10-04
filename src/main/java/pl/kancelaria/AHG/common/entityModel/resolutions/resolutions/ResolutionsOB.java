@@ -28,8 +28,6 @@ public class ResolutionsOB {
     private String contents;
 
     @NotNull
-//    @Column (name = ModelConstants.KOLUMNA_czy_publiczny, length = 9, nullable = false)
-//    @Enumerated(value = EnumType.STRING )
     private Boolean isPublic;
 
     @NotNull
