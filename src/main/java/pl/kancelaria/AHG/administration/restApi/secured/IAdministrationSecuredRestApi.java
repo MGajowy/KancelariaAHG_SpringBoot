@@ -48,6 +48,11 @@ public class IAdministrationSecuredRestApi implements pl.kancelaria.AHG.shared.r
     }
 
     @Override
+    public OrderDTO detailsOrder(long id) {
+        return orderService.detailsOrder(id);
+    }
+
+    @Override
     public ResponseEntity<HttpStatus> addOrder(OrderDTO orderDTO) {
         return orderService.addOrder(orderDTO);
     }

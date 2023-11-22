@@ -61,8 +61,8 @@ public class OrderService {
                         .sum(orderOB.getSum())
                         .numberOfInstallments(orderOB.getNumberOfInstallments())
                         .orInstallments(orderOB.getOrInstallments())
-                        .dateOfAdmission(orderOB.getDateOfAdmission().toString())
-                        .endDate(orderOB.getEndDate() != null ? orderOB.getEndDate().toString() : null)
+                        .dateOfAdmission(orderOB.getDateOfAdmission())
+                        .endDate(orderOB.getEndDate() != null ? orderOB.getEndDate() : null)
                         .caseType(orderOB.getCaseType())
                         .build())
                 .sorted(Comparator.comparing(OrderDTO::getDateOfAdmission).reversed())
@@ -100,8 +100,8 @@ public class OrderService {
             order.setSurname(orderDTO.getSurname());
             order.setEmail(orderDTO.getEmail());
             order.setPhoneNumber(orderDTO.getPhoneNumber());
-            order.setDateOfAdmission(LocalDate.parse(orderDTO.getDateOfAdmission()));
-            order.setEndDate(LocalDate.parse(orderDTO.getEndDate()));
+            order.setDateOfAdmission(orderDTO.getDateOfAdmission());
+            order.setEndDate(orderDTO.getEndDate());
             order.setOrInstallments(orderDTO.getOrInstallments());
             order.setNumberOfInstallments(orderDTO.getNumberOfInstallments());
             order.setSum(orderDTO.getSum());
@@ -120,6 +120,7 @@ public class OrderService {
         Optional<OrderOB> orderOB = orderRepository.findById(id);
         if (orderOB.isPresent()) {
             orderRepository.deleteById(id);
+            log.info("Zlecenie o id: {} zostało usunięte", id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
@@ -142,5 +143,25 @@ public class OrderService {
             log.error("Wystąpił błąd podczas zakończania zlecenia o id: {}", orderFinishDTO.getId());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+    }
+
+    public OrderDTO detailsOrder(long id) {
+        Optional<OrderOB> order = orderRepository.findById(id);
+        if (order.isPresent()) {
+            OrderOB orderOB = order.get();
+            return OrderDTO.builder()
+                    .id(orderOB.getId())
+                    .name(orderOB.getName())
+                    .surname(orderOB.getSurname())
+                    .email(orderOB.getEmail())
+                    .phoneNumber(orderOB.getPhoneNumber())
+                    .caseType(orderOB.getCaseType())
+                    .numberOfInstallments(orderOB.getNumberOfInstallments())
+                    .dateOfAdmission(orderOB.getDateOfAdmission())
+                    .endDate(orderOB.getEndDate())
+                    .sum(orderOB.getSum())
+                    .build();
+        }
+        return OrderDTO.builder().build();
     }
 }

@@ -32,7 +32,7 @@ public class EventLogService {
     public Boolean createLog(String action, String user) {
         EventLogOB logOB = new EventLogOB(action, user);
         logOB.setAction(action);
-        logOB.setUserName(user);
+        logOB.setUserName(user.isEmpty() ? "admin" : user);
         Date dateAdded = new Date();
         dateAdded.getTime();
         logOB.setDateAction(dateAdded);

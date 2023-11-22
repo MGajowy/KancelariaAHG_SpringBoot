@@ -1,5 +1,6 @@
 package pl.kancelaria.AHG.shared.restapi.administration.restapi.secured;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,11 @@ public interface IAdministrationSecuredRestApi {
     OrdersListDTO getOrders(@QueryParam("term") String term,
                             @PathVariable("pageNumber") final Integer pageNumber,
                             @PathVariable("pageSize") final Integer pageSize);
+
+    @GET
+    @GetMapping(AdministrationSecuredRestApiUrl.ORDER + "/{id}")
+    @Path(AdministrationSecuredRestApiUrl.ORDER)
+    OrderDTO detailsOrder(@PathVariable(value = "id") long id);
 
     @POST
     @PostMapping(AdministrationSecuredRestApiUrl.ORDER)
