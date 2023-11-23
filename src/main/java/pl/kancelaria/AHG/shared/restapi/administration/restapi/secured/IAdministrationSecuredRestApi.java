@@ -1,14 +1,15 @@
 package pl.kancelaria.AHG.shared.restapi.administration.restapi.secured;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import pl.kancelaria.AHG.administration.dto.EventLogListDTO;
+import pl.kancelaria.AHG.administration.dto.order.OrderDTO;
+import pl.kancelaria.AHG.administration.dto.order.OrderFinishDTO;
+import pl.kancelaria.AHG.administration.dto.order.OrdersListDTO;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import java.io.IOException;
 
 
@@ -19,7 +20,7 @@ public interface IAdministrationSecuredRestApi {
     @GET
     @GetMapping(AdministrationSecuredRestApiUrl.DZIENNIK_ZDARZEN)
     @Path(AdministrationSecuredRestApiUrl.DZIENNIK_ZDARZEN)
-    EventLogListDTO pobierzDziennikZdarzenDto();
+    EventLogListDTO getEventLogsDTO();
 
     @GetMapping(AdministrationSecuredRestApiUrl.DZIENNIK_ZDARZEN + "/{pageNumber}" + "/{pageSize}")
     EventLogListDTO getEventLogListByNameAndPage(@QueryParam("name") String description,
@@ -28,4 +29,40 @@ public interface IAdministrationSecuredRestApi {
 
     @GetMapping(AdministrationSecuredRestApiUrl.EXPORT_TO_PDF)
     void exportToPDF(HttpServletResponse response) throws IOException;
+
+    @GET
+    @GetMapping(AdministrationSecuredRestApiUrl.ORDER + "/{pageNumber}" + "/{pageSize}")
+    @Path(AdministrationSecuredRestApiUrl.ORDER)
+    OrdersListDTO getOrders(@QueryParam("term") String term,
+                            @PathVariable("pageNumber") final Integer pageNumber,
+                            @PathVariable("pageSize") final Integer pageSize);
+
+    @GET
+    @GetMapping(AdministrationSecuredRestApiUrl.ORDER + "/{id}")
+    @Path(AdministrationSecuredRestApiUrl.ORDER)
+    OrderDTO detailsOrder(@PathVariable(value = "id") long id);
+
+    @POST
+    @PostMapping(AdministrationSecuredRestApiUrl.ORDER)
+    @Path(AdministrationSecuredRestApiUrl.ORDER)
+    ResponseEntity<HttpStatus> addOrder(@RequestBody OrderDTO orderDTO);
+
+    @PUT
+    @PutMapping(AdministrationSecuredRestApiUrl.ORDER + "/{id}")
+    @Path(AdministrationSecuredRestApiUrl.ORDER)
+    ResponseEntity<HttpStatus> modifyOrder(@PathVariable(value = "id") long id, @RequestBody OrderDTO orderDTO);
+
+    @DELETE
+    @DeleteMapping(AdministrationSecuredRestApiUrl.ORDER + "/{id}")
+    @Path(AdministrationSecuredRestApiUrl.ORDER)
+    ResponseEntity<HttpStatus> deleteOrder(@PathVariable(value = "id") long id);
+
+    @POST
+    @PostMapping(AdministrationSecuredRestApiUrl.ORDER_DATE_END)
+    @Path(AdministrationSecuredRestApiUrl.ORDER_DATE_END)
+    ResponseEntity<HttpStatus> finishOrder(@RequestBody OrderFinishDTO orderFinishDTO);
+
+    @GetMapping(AdministrationSecuredRestApiUrl.EXPORT_ORDERS_TO_PDF)
+    void exportOrdersToPDF(HttpServletResponse response) throws IOException;
+
 }

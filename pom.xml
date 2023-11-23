@@ -344,7 +344,7 @@
                                     </includes>
                                 </resource>
                             </resources>
-                            <outputDirectory>${generateTsFile}/src/app/generated</outputDirectory>
+                            <outputDirectory>${generateTsFile}/AHG-app/src/app/generated</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

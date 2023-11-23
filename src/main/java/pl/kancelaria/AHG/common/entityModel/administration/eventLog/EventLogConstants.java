@@ -20,4 +20,6 @@ public class EventLogConstants {
     public static final String UPLOAD_NEW_FILE = "Dodano nowy plik/pliki dla użytkownika";
     public static final String DOWNLOAD_FILE = "Pobrano plik ";
     public static final String LOG_IN = "Użytkownik zalogował się do portalu";
+    public static final String CREATE_ORDER = "Utworzenie nowego zamówienia";
+    public static final String MODIFY_ORDER = "Zmodyfikowano zamówienie";
 }
