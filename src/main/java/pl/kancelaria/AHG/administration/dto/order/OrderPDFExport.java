@@ -1,8 +1,11 @@
-package pl.kancelaria.AHG.administration.dto;
+package pl.kancelaria.AHG.administration.dto.order;
 
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
-import com.lowagie.text.pdf.*;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import pl.kancelaria.AHG.administration.dto.ExportPDF;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
@@ -12,11 +15,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class EventLogPDFExport implements ExportPDF {
-    private List<EventLogDTO> listEvent;
+public class OrderPDFExport implements ExportPDF {
 
-    public EventLogPDFExport(List<EventLogDTO> listEvent) {
-        this.listEvent = listEvent;
+    private final List<OrderDTO> listOrders;
+
+    public OrderPDFExport(List<OrderDTO> listOrders) {
+        this.listOrders = listOrders;
     }
 
     @Override
@@ -28,20 +32,29 @@ public class EventLogPDFExport implements ExportPDF {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
-        pdfPCell.setPhrase(new Phrase("Nazwa czynnosci", font));
+        pdfPCell.setPhrase(new Phrase("Nazwisko", font));
         table.addCell(pdfPCell);
-        pdfPCell.setPhrase(new Phrase("Uzytkownik", font));
+        pdfPCell.setPhrase(new Phrase("Imie", font));
         table.addCell(pdfPCell);
-        pdfPCell.setPhrase(new Phrase("Data logu", font));
+        pdfPCell.setPhrase(new Phrase("Typ sprawy", font));
+        table.addCell(pdfPCell);
+        pdfPCell.setPhrase(new Phrase("Data przyjecia", font));
+        table.addCell(pdfPCell);
+        pdfPCell.setPhrase(new Phrase("Data zakonczenia", font));
+        table.addCell(pdfPCell);
+        pdfPCell.setPhrase(new Phrase("Telefon", font));
         table.addCell(pdfPCell);
     }
 
     @Override
     public void writeTableData(PdfPTable table) {
-        for (EventLogDTO eventLogDTO : listEvent) {
-            table.addCell(eventLogDTO.getAction());
-            table.addCell(eventLogDTO.getUserName());
-            table.addCell(eventLogDTO.getDateAction().toString());
+        for (OrderDTO orderDTO : listOrders) {
+            table.addCell(orderDTO.getSurname());
+            table.addCell(orderDTO.getName());
+            table.addCell(orderDTO.getCaseType());
+            table.addCell(orderDTO.getDateOfAdmission().toString());
+            table.addCell(orderDTO.getEndDate() != null ? orderDTO.getEndDate().toString() : "W toku");
+            table.addCell(orderDTO.getPhoneNumber());
         }
     }
 
@@ -60,19 +73,20 @@ public class EventLogPDFExport implements ExportPDF {
         font.setColor(Color.BLACK);
         font.setSize(18);
 
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String currentDateTime = dateFormat.format(new Date());
-        Paragraph title = new Paragraph("Dziennik zdarzeń dla aplikacji AHG", fontTitle);
+        Paragraph title = new Paragraph("Zlecenia klientów", fontTitle);
         Paragraph date = new Paragraph(currentDateTime, fontTitle);
         title.setAlignment(Paragraph.ALIGN_CENTER);
         date.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(title);
         document.add(date);
 
-        PdfPTable table = new PdfPTable(3);
+        PdfPTable table = new PdfPTable(6);
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
-        table.setWidths(new float[]{6.0f, 2.0f, 4.0f});
+        table.setWidths(new float[]{4.0f, 4.0f, 4.0f, 4.0f, 4.0f, 4.0f});
         writeTableHeader(table);
         writeTableData(table);
         document.add(table);

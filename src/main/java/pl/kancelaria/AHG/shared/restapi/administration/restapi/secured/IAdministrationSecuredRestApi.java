@@ -1,6 +1,5 @@
 package pl.kancelaria.AHG.shared.restapi.administration.restapi.secured;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

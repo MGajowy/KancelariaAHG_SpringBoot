@@ -9,8 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import pl.kancelaria.AHG.administration.dto.EventLogDTO;
+import pl.kancelaria.AHG.administration.dto.EventLogPDFExport;
 import pl.kancelaria.AHG.administration.dto.order.OrderDTO;
 import pl.kancelaria.AHG.administration.dto.order.OrderFinishDTO;
+import pl.kancelaria.AHG.administration.dto.order.OrderPDFExport;
 import pl.kancelaria.AHG.administration.dto.order.OrdersListDTO;
 import pl.kancelaria.AHG.common.entityModel.administration.eventLog.EventLogConstants;
 import pl.kancelaria.AHG.common.entityModel.administration.orders.OrderOB;
@@ -18,7 +21,9 @@ import pl.kancelaria.AHG.common.entityModel.administration.orders.repository.Ord
 
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -126,8 +131,38 @@ public class OrderService {
         return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
     }
 
-    public void exportOrdersToPDF(HttpServletResponse response) {
-        //todo do zaimplementowania eksport do pliku z danymi zleceń
+    public void exportOrdersToPDF(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=eventLog.pdf";
+
+        response.setHeader(headerKey, headerValue);
+        List<OrderDTO> orderListDTO = getOrderListDTO();
+        OrderPDFExport orderPDFExport = new OrderPDFExport(orderListDTO);
+        orderPDFExport.export(response);
+        log.info("Pobrano listę zleceń klientów");
+    }
+
+    private List<OrderDTO> getOrderListDTO() {
+        List<OrderOB> orderOBList = orderRepository.findAll();
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(orderOBList)) {
+            List<OrderDTO> result = orderOBList.stream().map(orderOB -> OrderDTO.builder()
+                    .name(orderOB.getName())
+                    .surname(orderOB.getSurname())
+                    .email(orderOB.getEmail())
+                    .phoneNumber(orderOB.getPhoneNumber())
+                    .caseType(orderOB.getCaseType())
+                    .dateOfAdmission(orderOB.getDateOfAdmission())
+                    .endDate(orderOB.getEndDate())
+                    .numberOfInstallments(orderOB.getNumberOfInstallments())
+                    .sum(orderOB.getSum())
+                    .build()
+            ).collect(Collectors.toList());
+            return result;
+        }
+        return orderDTOList;
+
     }
 
     @Transactional
